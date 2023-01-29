@@ -4,18 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "turbo run start",
+    "start:dev": "turbo run start:dev",
+    "db": "turbo run db",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ShaimaaAliECE/se3350_groupproject-se3350-team-34.git"
   },
+  "workspaces": [
+    "packages/frontend",
+    "packages/backend"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ShaimaaAliECE/se3350_groupproject-se3350-team-34/issues"
   },
-  "homepage": "https://github.com/ShaimaaAliECE/se3350_groupproject-se3350-team-34#readme",
-  "packageManager": "npm@9.1.2"
+  "homepage": "https://github.com/ShaimaaAliECE/se3350_groupproject-se3350-team-34#readme"
 }
