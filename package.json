@@ -16,5 +16,6 @@
   "bugs": {
     "url": "https://github.com/ShaimaaAliECE/se3350_groupproject-se3350-team-34/issues"
   },
-  "homepage": "https://github.com/ShaimaaAliECE/se3350_groupproject-se3350-team-34#readme"
+  "homepage": "https://github.com/ShaimaaAliECE/se3350_groupproject-se3350-team-34#readme",
+  "packageManager": "npm@9.1.2"
 }
