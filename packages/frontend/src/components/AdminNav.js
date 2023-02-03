@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Nav, Navbar, NavLink } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import axios from "axios";
+
 import InstructorHome from "./InstructorHome";
 
 export default function AdminNav() {
@@ -16,7 +16,7 @@ export default function AdminNav() {
         <Nav>
           <NavLink eventKey="1" as={Link} to="/homepage">
             Homepage
-            <InstructorHome />
+            
           </NavLink>
 
           <NavLink eventKey="2" as={Link} to="/prev-outlines">
