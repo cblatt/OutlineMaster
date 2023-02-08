@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { Input, Button } from "@chakra-ui/react";
 import useAuth from "../hooks/useAuth";
