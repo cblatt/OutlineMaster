@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Input } from "@chakra-ui/react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const {
@@ -8,6 +9,28 @@ export default function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const history = useNavigate();
+
+  /*
+  useEffect(() => {
+    if (currentUser != null) {
+      if (user.emailVerified === false) {
+        fetch(`/api/users/adduser/${currentUser.uid}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Content-length": 1,
+          },
+          body: JSON.stringify({ email: emailRef.current.value }),
+        });
+        history("/verifyemail");
+      } else {
+        history("/userdash");
+      }
+      console.log(currentUser.uid);
+    }
+  }, [currentUser]);
+  */
 
   async function onSubmit(data) {
     fetch("/users/login", {
@@ -17,6 +40,12 @@ export default function Login() {
         "Content-length": 7,
       },
       body: JSON.stringify(data),
+    }).then((res) => {
+      if (res.status == 201) {
+        localStorage.setItem("user", res.data);
+        console.log(res);
+      }
+      console.log(localStorage.getItem("user"));
     });
   }
 
