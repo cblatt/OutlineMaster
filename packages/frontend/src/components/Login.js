@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Input, Button } from "@chakra-ui/react";
+import useAuth from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const {
@@ -8,16 +10,8 @@ export default function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [user, setUser] = useState();
-
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem("user");
-    console.log(loggedInUser);
-    if (loggedInUser) {
-      const foundUser = JSON.parse(loggedInUser);
-      setUser(foundUser);
-    }
-  }, []);
+  const navigate = useNavigate();
+  const { user, setUser } = useAuth();
 
   async function onSubmit(data) {
     fetch("/users/login", {
@@ -35,14 +29,17 @@ export default function Login() {
       })
       .then((user) => {
         if (user) {
+          setUser(user);
           localStorage.setItem("user", JSON.stringify(user));
-          console.log(user);
+          if (user.role === "ADMINISTRATOR")
+            navigate("/admin-home", { replace: true });
+          else navigate("/home", { replace: true });
         }
       });
   }
 
   const logOut = () => {
-    setUser({});
+    setUser();
     localStorage.clear();
   };
 
