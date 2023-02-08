@@ -9,7 +9,17 @@ export default function Login() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  async function onSubmit(data) {
+    fetch("/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Content-length": 7,
+      },
+      body: JSON.stringify(data),
+    });
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-r from-purple-500 to-purple-300 ... text-gray-500 py-6 flex flex-col justify-center sm:py-12">
       <h4 className="text-5xl text-center pb-24 text-white font-semibold uppercase tracking-[5px]">
