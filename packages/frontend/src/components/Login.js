@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Input } from "@chakra-ui/react";
-import { Link, useNavigate } from "react-router-dom";
+import { Input, Button } from "@chakra-ui/react";
 
 export default function Login() {
   const {
@@ -9,28 +8,16 @@ export default function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const history = useNavigate();
+  const [user, setUser] = useState();
 
-  /*
   useEffect(() => {
-    if (currentUser != null) {
-      if (user.emailVerified === false) {
-        fetch(`/api/users/adduser/${currentUser.uid}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Content-length": 1,
-          },
-          body: JSON.stringify({ email: emailRef.current.value }),
-        });
-        history("/verifyemail");
-      } else {
-        history("/userdash");
-      }
-      console.log(currentUser.uid);
+    const loggedInUser = localStorage.getItem("user");
+    console.log(loggedInUser);
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUser(foundUser);
     }
-  }, [currentUser]);
-  */
+  }, []);
 
   async function onSubmit(data) {
     fetch("/users/login", {
@@ -40,13 +27,32 @@ export default function Login() {
         "Content-length": 7,
       },
       body: JSON.stringify(data),
-    }).then((res) => {
-      if (res.status == 201) {
-        localStorage.setItem("user", res.data);
-        console.log(res);
-      }
-      console.log(localStorage.getItem("user"));
-    });
+    })
+      .then((res) => {
+        if (res.status === 201) {
+          return res.json();
+        }
+      })
+      .then((user) => {
+        if (user) {
+          localStorage.setItem("user", JSON.stringify(user));
+          console.log(user);
+        }
+      });
+  }
+
+  const logOut = () => {
+    setUser({});
+    localStorage.clear();
+  };
+
+  if (user) {
+    return (
+      <div>
+        <div>{user.uwoId} is logged in</div>
+        <Button onClick={logOut}>Log Out</Button>
+      </div>
+    );
   }
 
   return (
