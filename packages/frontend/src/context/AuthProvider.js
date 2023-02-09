@@ -6,8 +6,11 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     // getting stored value
     const saved = localStorage.getItem("user");
-    const initialValue = JSON.parse(saved);
-    return initialValue || "";
+    if (saved !== "undefined") {
+      const initialValue = JSON.parse(saved);
+      return initialValue;
+    }
+    return "";
   });
 
   return (
