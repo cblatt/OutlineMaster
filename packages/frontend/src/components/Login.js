@@ -1,6 +1,57 @@
 import React from "react";
+import { useForm } from "react-hook-form";
+import { Input, Button } from "@chakra-ui/react";
+import useAuth from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const navigate = useNavigate();
+  const { user, setUser } = useAuth();
+
+  async function onSubmit(data) {
+    fetch("/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Content-length": 7,
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => {
+        if (res.status === 201) {
+          return res.json();
+        }
+      })
+      .then((user) => {
+        if (user) {
+          setUser(user);
+          localStorage.setItem("user", JSON.stringify(user));
+          if (user.role === "ADMINISTRATOR")
+            navigate("/admin-home", { replace: true });
+          else navigate("/home", { replace: true });
+        }
+      });
+  }
+
+  const logOut = () => {
+    setUser();
+    localStorage.clear();
+  };
+
+  if (user) {
+    return (
+      <div>
+        <div>{user.uwoId} is logged in</div>
+        <Button onClick={logOut}>Log Out</Button>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-r from-purple-500 to-purple-300 ... text-gray-500 py-6 flex flex-col justify-center sm:py-12">
       <h4 className="text-5xl text-center pb-24 text-white font-semibold uppercase tracking-[5px]">
@@ -12,21 +63,24 @@ export default function Login() {
         <div className="mt-4 bg-white shadow-md rounded-lg text-left">
           <div className="px-8 py-6">
             <label className="block font-semibold">Email</label>
-            <input
+            <Input
               type="text"
               placeholder="Email"
-              className="border w-full h-8 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-purple-500 rounded-md"
-            ></input>
+              {...register("uwoId", { required: true })}
+            ></Input>
+            {errors.uwoId && <span>This field is required</span>}
             <label className="block font-semibold mt-10">Password</label>
-            <input
+            <Input
               type="password"
               placeholder="Password"
-              className="border w-full h-8 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-purple-500 rounded-md"
-            ></input>
+              {...register("password", { required: true })}
+            ></Input>
+            {errors.password && <span>This field is required</span>}
             <div className="flex justify-center items-baseline">
               <button
                 type="submit"
                 className="mt-4 bg-purple-500 text-white py-2 px-6 rounded-md hover:opacity-50 hover:purple-600"
+                onClick={handleSubmit(onSubmit)}
               >
                 Login
               </button>

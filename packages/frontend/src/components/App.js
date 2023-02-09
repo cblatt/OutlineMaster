@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import InstructorHome from "./InstructorHome";
 import Login from "./Login";
 import AdminHome from "./AdminHome";
+import { AdminGuard } from "../guards/AdminGuard";
 
 function App() {
   return (
@@ -10,13 +11,19 @@ function App() {
       <div>
         <Router>
           <Routes>
-            <Route exact path="/login" element={<Login></Login>} />
+            <Route exact path="/" element={<Login></Login>} />
             <Route
               exact
               path="/home"
               element={<InstructorHome></InstructorHome>}
             />
-            <Route exact path="/admin-home" element={<AdminHome></AdminHome>} />
+            <Route element={<AdminGuard />}>
+              <Route
+                exact
+                path="/admin-home"
+                element={<AdminHome></AdminHome>}
+              />
+            </Route>
           </Routes>
         </Router>
       </div>
