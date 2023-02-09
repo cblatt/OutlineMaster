@@ -42,7 +42,13 @@ export class UsersService {
 
     if (!passwordMatches) throw new ForbiddenException('Access Denied');
 
-    return user;
+    return {
+      uwoId: user.uwoId,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      role: user.role,
+    };
   }
 
   update(id: string, updateUserDto: UpdateUserDto) {
