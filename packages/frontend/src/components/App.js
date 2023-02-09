@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import InstructorHome from "./InstructorHome";
 import Login from "./Login";
 import AdminHome from "./AdminHome";
+import OutlineComments from "./OutlineComments";
 import { AdminGuard } from "../guards/AdminGuard";
 
 function App() {
@@ -24,6 +25,11 @@ function App() {
                 element={<AdminHome></AdminHome>}
               />
             </Route>
+            <Route
+              exact
+              path="/comments"
+              element={<OutlineComments></OutlineComments>}
+            />
           </Routes>
         </Router>
       </div>
