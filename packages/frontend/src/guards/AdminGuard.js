@@ -4,9 +4,15 @@ import useAuth from "../hooks/useAuth";
 
 export const AdminGuard = () => {
   const { user } = useAuth();
-  return user.role === "ADMINISTRATOR" ? (
-    <Outlet />
-  ) : (
-    <Navigate to="/" replace />
-  );
+  try {
+    if (user.role !== null) {
+      if (user.role === "ADMINISTRATOR") {
+        return <Outlet />;
+      } else if (user.role === "INSTRUCTOR") {
+        return <Navigate to="/unauth" replace />;
+      }
+    }
+  } catch (e) {
+    return <Navigate to="/unauth" replace />;
+  }
 };

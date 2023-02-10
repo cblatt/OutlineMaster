@@ -5,7 +5,9 @@ import Login from "./Login";
 import AdminHome from "./AdminHome";
 import { AdminGuard } from "../guards/AdminGuard";
 import UnAuth from "./UnAuth";
+
 import AddInstructor from "./AddInstructor";
+
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
               />
             </Route>
             <Route exact path="/unauth" element={<UnAuth></UnAuth>} />
+
             <Route element={<AdminGuard />}>
               <Route
                 exact
@@ -34,6 +37,7 @@ function App() {
                 element={<AddInstructor></AddInstructor>}
               />
             </Route>
+
           </Routes>
         </Router>
       </div>
