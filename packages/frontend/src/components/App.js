@@ -4,6 +4,7 @@ import InstructorHome from "./InstructorHome";
 import Login from "./Login";
 import AdminHome from "./AdminHome";
 import { AdminGuard } from "../guards/AdminGuard";
+import UnAuth from "./UnAuth";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
                 element={<AdminHome></AdminHome>}
               />
             </Route>
+            <Route exact path="/unauth" element={<UnAuth></UnAuth>} />
           </Routes>
         </Router>
       </div>
