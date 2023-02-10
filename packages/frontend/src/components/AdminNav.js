@@ -3,8 +3,6 @@ import { Nav, Navbar, NavLink } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import InstructorHome from "./InstructorHome";
-
 export default function AdminNav() {
   return (
     <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
@@ -14,9 +12,8 @@ export default function AdminNav() {
       />
       <Navbar.Collapse>
         <Nav>
-          <NavLink eventKey="1" as={Link} to="/homepage">
+          <NavLink eventKey="1" as={Link} to="/admin-home">
             Homepage
-            
           </NavLink>
 
           <NavLink eventKey="2" as={Link} to="/prev-outlines">
@@ -25,6 +22,9 @@ export default function AdminNav() {
 
           <NavLink eventKey="3" as={Link} to="/outline-history">
             Outline History
+          </NavLink>
+          <NavLink eventKey="4" as={Link} to="/admin-add">
+            Add Instructor
           </NavLink>
         </Nav>
       </Navbar.Collapse>

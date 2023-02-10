@@ -6,6 +6,9 @@ import AdminHome from "./AdminHome";
 import { AdminGuard } from "../guards/AdminGuard";
 import UnAuth from "./UnAuth";
 
+import AddInstructor from "./AddInstructor";
+
+
 function App() {
   return (
     <div style={{ minHeight: "100vh", minWidth: "100vh" }}>
@@ -26,6 +29,15 @@ function App() {
               />
             </Route>
             <Route exact path="/unauth" element={<UnAuth></UnAuth>} />
+
+            <Route element={<AdminGuard />}>
+              <Route
+                exact
+                path="/admin-add"
+                element={<AddInstructor></AddInstructor>}
+              />
+            </Route>
+
           </Routes>
         </Router>
       </div>

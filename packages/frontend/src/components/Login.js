@@ -53,7 +53,7 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-purple-500 to-purple-300 ... text-gray-500 py-6 flex flex-col justify-center sm:py-12">
+    <div className="min-h-screen bg-gradient-to-r from-purple-500 to-purple-300 ... text-gray-700 py-6 flex flex-col justify-center sm:py-12">
       <h4 className="text-5xl text-center pb-24 text-white font-semibold uppercase tracking-[5px]">
         {" "}
         WESTERN UNIVERSITY ECE COURSE OUTLINE MANAGER
