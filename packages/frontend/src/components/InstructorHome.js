@@ -9,7 +9,7 @@ export default function InstructorHome() {
         {" "}
         Instructor Portal
       </h2>
-      
+
       <CourseTable />
     </div>
   );
