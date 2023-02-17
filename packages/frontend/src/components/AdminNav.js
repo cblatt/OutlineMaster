@@ -11,7 +11,7 @@ export default function AdminNav() {
         data-bs-target="#navbarScroll"
       />
       <Navbar.Collapse>
-        <Nav>
+        <Nav className="me-auto">
           <NavLink eventKey="1" as={Link} to="/admin-home">
             Homepage
           </NavLink>
@@ -28,6 +28,11 @@ export default function AdminNav() {
           </NavLink>
           <NavLink eventKey="5" as={Link} to="/assign">
             Assign Instructor
+          </NavLink>
+        </Nav>
+        <Nav>
+          <NavLink eventKey="6" as={Link} to="/logout">
+            Log Out
           </NavLink>
         </Nav>
       </Navbar.Collapse>
