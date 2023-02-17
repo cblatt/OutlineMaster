@@ -8,7 +8,7 @@ import UnAuth from "./UnAuth";
 import AssignInstructor from "./AssignInstructor";
 
 import AddInstructor from "./AddInstructor";
-
+import Logout from "./Logout";
 
 function App() {
   return (
@@ -30,7 +30,7 @@ function App() {
               />
             </Route>
             <Route exact path="/unauth" element={<UnAuth></UnAuth>} />
-
+            <Route exact path="/logout" element={<Logout></Logout>}></Route>
             <Route element={<AdminGuard />}>
               <Route
                 exact
@@ -45,7 +45,6 @@ function App() {
                 element={<AssignInstructor></AssignInstructor>}
               />
             </Route>
-
           </Routes>
         </Router>
       </div>

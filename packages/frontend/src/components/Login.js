@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Input, Button } from "@chakra-ui/react";
 import useAuth from "../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const {
@@ -44,12 +44,9 @@ export default function Login() {
   };
 
   if (user) {
-    return (
-      <div>
-        <div>{user.uwoId} is logged in</div>
-        <Button onClick={logOut}>Log Out</Button>
-      </div>
-    );
+    if (user.role === "ADMINISTRATOR")
+      return <Navigate to="/admin-home" replace />;
+    return <Navigate to="/home" replace />;
   }
 
   return (
@@ -62,10 +59,10 @@ export default function Login() {
         <span className="text-3xl font-semibold text-white">Login</span>
         <div className="mt-4 bg-white shadow-md rounded-lg text-left">
           <div className="px-8 py-6">
-            <label className="block font-semibold">Email</label>
+            <label className="block font-semibold">UWO ID</label>
             <Input
               type="text"
-              placeholder="Email"
+              placeholder="UWO ID"
               {...register("uwoId", { required: true })}
             ></Input>
             {errors.uwoId && <span>This field is required</span>}
