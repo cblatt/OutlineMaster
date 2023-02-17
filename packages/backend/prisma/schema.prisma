@@ -19,6 +19,28 @@ model User {
   role        Role        
 }
 
+model Department {
+  departmentUuid  String    @id @default(uuid())
+  departmentName  String    @unique
+  courses Course[]
+}
+
+model Course {
+  courseUuid    String      @id @default(uuid())
+  courseCode    String      
+  semester      Term        
+  year          Int    
+  courseName    String      @unique
+  department Department     @relation(fields: [departmentUuid], references: [departmentUuid])
+  departmentUuid String
+}
+
+enum Term {
+  FALL
+  WINTER
+  SUMMER
+}
+
 enum Role {
   ADMINISTRATOR
   INSTRUCTOR
