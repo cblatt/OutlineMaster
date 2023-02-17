@@ -5,6 +5,7 @@ import Login from "./Login";
 import AdminHome from "./AdminHome";
 import { AdminGuard } from "../guards/AdminGuard";
 import UnAuth from "./UnAuth";
+import AssignInstructor from "./AssignInstructor";
 
 import AddInstructor from "./AddInstructor";
 
@@ -35,6 +36,13 @@ function App() {
                 exact
                 path="/admin-add"
                 element={<AddInstructor></AddInstructor>}
+              />
+            </Route>
+            <Route element={<AdminGuard />}>
+              <Route
+                exact
+                path="/assign"
+                element={<AssignInstructor></AssignInstructor>}
               />
             </Route>
 

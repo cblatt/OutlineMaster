@@ -26,6 +26,9 @@ export default function AdminNav() {
           <NavLink eventKey="4" as={Link} to="/admin-add">
             Add Instructor
           </NavLink>
+          <NavLink eventKey="5" as={Link} to="/assign">
+            Assign Instructor
+          </NavLink>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
