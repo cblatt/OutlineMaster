@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Input, Button } from "@chakra-ui/react";
+import { Input } from "@chakra-ui/react";
 import useAuth from "../hooks/useAuth";
 import { Navigate, useNavigate } from "react-router-dom";
 
@@ -37,11 +37,6 @@ export default function Login() {
         }
       });
   }
-
-  const logOut = () => {
-    setUser();
-    localStorage.clear();
-  };
 
   if (user) {
     if (user.role === "ADMINISTRATOR")
