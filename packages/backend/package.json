@@ -20,7 +20,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "db": "docker-compose up -d",
     "db:stop": "docker-compose down",
-    "migration": "npx prisma migrate dev"
+    "migration": "npx prisma migrate dev",
+    "generate": "npx nest generate resource"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
