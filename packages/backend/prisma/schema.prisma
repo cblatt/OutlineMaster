@@ -14,6 +14,7 @@ model User {
   firstName String
   lastName  String
   role      Role
+  InstructorCourse InstructorCourse[]
 }
 
 model Department {
@@ -30,6 +31,15 @@ model Course {
   courseName    String      @unique
   department Department     @relation(fields: [departmentUuid], references: [departmentUuid])
   departmentUuid String
+  InstructorCourse InstructorCourse[]
+}
+
+model InstructorCourse {
+  user    User  @relation(fields: [uwoId], references: [uwoId])
+  uwoId   String
+  course  Course  @relation(fields: [courseUuid], references: [courseUuid])
+  courseUuid  String 
+  @@id([uwoId, courseUuid])
 }
 
 enum Term {
