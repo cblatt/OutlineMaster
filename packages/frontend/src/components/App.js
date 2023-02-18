@@ -3,11 +3,16 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import InstructorHome from "./InstructorHome";
 import Login from "./Login";
 import AdminHome from "./AdminHome";
+
+import CreateOutline from "./CreateOutline";
+
+
 import { AdminGuard } from "../guards/AdminGuard";
 import UnAuth from "./UnAuth";
 import AssignInstructor from "./AssignInstructor";
 
 import AddInstructor from "./AddInstructor";
+import Logout from "./Logout";
 
 
 function App() {
@@ -22,6 +27,11 @@ function App() {
               path="/home"
               element={<InstructorHome></InstructorHome>}
             />
+
+            <Route exact path="/admin-home" element={<AdminHome></AdminHome>} />
+            <Route exact path="/create-outline" element={<CreateOutline></CreateOutline>} />
+            
+
             <Route element={<AdminGuard />}>
               <Route
                 exact
@@ -30,7 +40,7 @@ function App() {
               />
             </Route>
             <Route exact path="/unauth" element={<UnAuth></UnAuth>} />
-
+            <Route exact path="/logout" element={<Logout></Logout>}></Route>
             <Route element={<AdminGuard />}>
               <Route
                 exact
