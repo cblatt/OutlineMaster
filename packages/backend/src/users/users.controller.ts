@@ -28,6 +28,11 @@ export class UsersController {
     return this.usersService.login(loginUserDto.uwoId, loginUserDto.password);
   }
 
+  @Get('instructors')
+  findInstructors(){
+    return this.usersService.findInstructors();
+  }
+
   @Get()
   findAll() {
     return this.usersService.findAll();
