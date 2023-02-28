@@ -4,6 +4,7 @@ import InstructorHome from "./InstructorHome";
 import Login from "./Login";
 import AdminHome from "./AdminHome";
 import { AdminGuard, InstructorGuard, UserGuard } from "../guards/Guard";
+import CreateOutline from "./CreateOutline";
 import UnAuth from "./UnAuth";
 import AssignInstructor from "./AssignInstructor";
 import AddInstructor from "./AddInstructor";
@@ -22,6 +23,11 @@ function App() {
                   exact
                   path="/home"
                   element={<InstructorHome></InstructorHome>}
+                />
+                <Route
+                  exact
+                  path="/create-outline"
+                  element={<CreateOutline></CreateOutline>}
                 />
               </Route>
 

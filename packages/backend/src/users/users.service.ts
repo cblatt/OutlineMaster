@@ -61,4 +61,8 @@ export class UsersService {
   remove(id: string) {
     return this.prisma.user.delete({ where: { uwoId: id } });
   }
+
+  findInstructors() {
+    return this.prisma.user.findMany({where: {role: "INSTRUCTOR"}});
+  }
 }
