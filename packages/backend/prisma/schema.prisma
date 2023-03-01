@@ -33,6 +33,7 @@ model Course {
   department Department     @relation(fields: [departmentUuid], references: [departmentUuid])
   departmentUuid String
   InstructorCourse InstructorCourse[]
+  courseOutlines  CourseOutline[]
 }
 
 model InstructorCourse {
@@ -56,3 +57,26 @@ enum Role {
   ASSOCIATE_CHAIR
   PROGRAM_DIRECTOR
 }
+
+model Comments{
+  commentId       String    @id @default(uuid())
+  commentTxt      String 
+  
+}
+
+model CourseOutline {
+  courseUuid    String  
+  course        Course    @relation(fields: [courseUuid], references: [courseUuid])
+  versionNum    Int       //this values are set manually
+  editLogs       EditLog[]
+  @@id([courseUuid, versionNum])
+}
+
+model EditLog {
+  courseUuid    String  
+  versionNum    Int        
+  editNum       Int    //this values are set manually       
+  courseOutline  CourseOutline     @relation(fields: [courseUuid,versionNum], references: [courseUuid, versionNum])
+  @@id([courseUuid, versionNum])
+}
+

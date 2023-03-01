@@ -8,12 +8,6 @@ class MyTable extends Component {
     this.state = { expandedRows: [] };
   }
 
-  getCourses = async () => {
-    let result = await fetch("/courses");
-    console.log("WOWZA", result);
-    // this.handleExpand(result);
-  };
-
   handleExpand = (course) => {
     let newExpandedRows = [...this.state.expandedRows];
     let allExpanded = this.state.allExpanded;
