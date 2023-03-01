@@ -56,3 +56,9 @@ enum Role {
   ASSOCIATE_CHAIR
   PROGRAM_DIRECTOR
 }
+
+model Comments{
+  commentId       String    @id @default(uuid())
+  commentTxt      String 
+  
+}
