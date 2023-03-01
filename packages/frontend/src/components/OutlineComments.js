@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "@chakra-ui/react";
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
@@ -10,6 +10,22 @@ export default function OutlineComments() {
     formState: { errors },
   } = useForm();
 
+  //Comment works
+  const [cmnts, setcmnts] = useState([]);
+  //Shows current comments
+
+  useEffect(() => {
+    getComments();
+  }, []);
+
+  //shows coments on playlist
+  const getComments = async () => {
+    let result = await fetch(`/comments`);
+    result = await result.json();
+    setcmnts(result);
+  };
+
+  //Submiting comments
   async function onSubmit(data) {
     console.log(data);
 
@@ -21,6 +37,8 @@ export default function OutlineComments() {
       },
       body: JSON.stringify(data),
     });
+
+    getComments();
   }
 
   return (
@@ -41,6 +59,15 @@ export default function OutlineComments() {
               Sumbit
             </Button>
           </div>
+          <table id="t2" className="indent-5">
+            <tbody>
+              {cmnts.map((item) => (
+                <tr>
+                  <td>{item.commentTxt}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
