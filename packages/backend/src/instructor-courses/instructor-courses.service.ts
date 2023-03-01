@@ -16,7 +16,7 @@ export class InstructorCoursesService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} instructorCourse`;
+    return `This action updates a #${id} instructorCourse`;
   }
 
   update(id: number, updateInstructorCourseDto: UpdateInstructorCourseDto) {
@@ -26,4 +26,5 @@ export class InstructorCoursesService {
   remove(id: number) {
     return `This action removes a #${id} instructorCourse`;
   }
+  
 }

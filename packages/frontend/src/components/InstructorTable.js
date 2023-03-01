@@ -58,6 +58,7 @@ class MyTable extends Component {
 
     const firstRow = (
       <tr>
+        <button onClick={() => this.getCourses()}>HELLO RONIN</button>
         <td>{course.firstName}</td>
         <td>{course.lastName}</td>
         <td>{course.team}</td>
