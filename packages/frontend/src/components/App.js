@@ -4,7 +4,6 @@ import InstructorHome from "./InstructorHome";
 import Login from "./Login";
 import AdminHome from "./AdminHome";
 import OutlineComments from "./OutlineComments";
-import { AdminGuard } from "../guards/AdminGuard";
 import { AdminGuard, InstructorGuard, UserGuard } from "../guards/Guard";
 import CreateOutline from "./CreateOutline";
 import UnAuth from "./UnAuth";

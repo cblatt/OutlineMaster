@@ -8,7 +8,7 @@ class MyTable extends Component {
     this.state = { expandedRows: [] };
   }
 
-√  handleExpand = (course) => {
+  handleExpand = (course) => {
     let newExpandedRows = [...this.state.expandedRows];
     let allExpanded = this.state.allExpanded;
     let idxFound = newExpandedRows.findIndex((id) => {
