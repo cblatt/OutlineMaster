@@ -8,7 +8,13 @@ class MyTable extends Component {
     this.state = { expandedRows: [] };
   }
 
-√  handleExpand = (course) => {
+  getCourses = async () => {
+    let result = await fetch("/courses");
+    console.log("WOWZA", result);
+    // this.handleExpand(result);
+  };
+
+  handleExpand = (course) => {
     let newExpandedRows = [...this.state.expandedRows];
     let allExpanded = this.state.allExpanded;
     let idxFound = newExpandedRows.findIndex((id) => {
@@ -58,6 +64,7 @@ class MyTable extends Component {
 
     const firstRow = (
       <tr>
+        <button onClick={() => this.getCourses()}>HELLO RONIN</button>
         <td>{course.firstName}</td>
         <td>{course.lastName}</td>
         <td>{course.team}</td>
