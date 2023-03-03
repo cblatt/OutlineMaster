@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
 import {
   FormControl,
   FormLabel,
@@ -8,6 +9,7 @@ import {
   Flex,
   Button,
   SimpleGrid,
+  Checkbox,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 
@@ -19,6 +21,19 @@ export default function CreateOutline() {
   } = useForm();
 
   function submitChanges(data) {
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch("/courses");
+      const data = await response.json();
+      setCourses(data);
+      console.log(data);
+    }
+    fetchData();
+  }, []);
+
+  function submitChanges() {
     const elements = document.querySelectorAll('[id$="Txt"], [id$="drop"]');
 
     for (let i = 0; i < elements.length; i++) {
@@ -29,6 +44,9 @@ export default function CreateOutline() {
 
       if (value !== data.length) {
         label.innerHTML = value;
+        if (label.innerHTML == "empty") {
+          label.innerHTML = "";
+        }
       }
     }
 
@@ -130,15 +148,21 @@ export default function CreateOutline() {
             Department of Electrical and Computer Engineering
           </label>
           <br />
-          <label id="codeLbl" class="text-xl font-serif text-black mt-2">
-            ECE XXXXA/B: Course Title
-          </label>
+          <span class="text-xl font-serif text-black mt-2">ECE&nbsp;</span>
+          <span id="codeLbl" class="text-xl font-serif text-black mt-2">
+            XXXXA/B
+          </span>
+          <span class="text-xl font-serif text-black mt-2">:&nbsp;</span>
+          <span id="titleLbl" class="text-xl font-serif text-black mt-2">
+            Course Title
+          </span>
           <br />
-          <label
-            id="titleLbl"
-            class="text-xl font-serif text-black mt-2"
-          ></label>
-          <br />
+          <span class="text-xl font-serif text-black mt-2">
+            Course Outline&nbsp;
+          </span>
+          <span id="yearLbl" class="text-xl font-serif text-black mt-2">
+            20YY-YY
+          </span>
         </center>
 
         <label class="text-3xl font-serif text-black ml-2">Description</label>
@@ -363,13 +387,13 @@ export default function CreateOutline() {
         <br />
 
         <label class="text-xl font-serif text-black ml-2 w-5/6">
-          Notation: where x be I: Introductory, D: Intermediate, A: Advanced, or
-          empty. I – The instructor will introduce the topic at the level
-          required. It is not necessary for the student to have seen the
-          material before. D – There may be a reminder or review, but the
-          student is expected to have seen and been tested on the material
-          before taking the course. A – It is expected that the student can
-          apply the knowledge without prompting (e.g. no review).
+          Notation: where x be I: Iductory, D: Dmediate, A: Aanced, or empty. I
+          – The instructor will Iduce the topic at the level required. It is not
+          necessary for the student to have seen the material before. D – There
+          may be a reminder or review, but the student is expected to have seen
+          and been tested on the material before taking the course. A – It is
+          expected that the student can apply the knowledge without prompting
+          (e.g. no review).
         </label>
         <br />
         <br />
@@ -394,7 +418,7 @@ export default function CreateOutline() {
               class="text-xl font-serif text-black ml-2 w-5/6"
             ></span>
           </Box>
-          <Box height="170px" border="1px" borderColor="black">
+          <Box height="60px" border="1px" borderColor="black">
             <label
               id="top1Lbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
@@ -402,23 +426,121 @@ export default function CreateOutline() {
             <label class="text-xl font-serif text-black ml-2 w-5/6">
               At the end of this section, students will be able to:
             </label>
+          </Box>
+          <Box height="60px" border="1px" borderColor="black"></Box>
+          <Box height="60px" border="1px" borderColor="black">
             <label
               id="top1aLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
             ></label>
+          </Box>
+          <Box height="60px" border="1px" borderColor="black">
+            <span
+              id="top1AknowLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top1AproLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top1AinvLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top1AdesiLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top1AuseEngLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top1AindLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top1AcomLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top1AprofLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top1AimpLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top1AethLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top1AeconLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top1AlifeLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+          </Box>
+          <Box height="60px" border="1px" borderColor="black">
             <label
               id="top1bLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
             ></label>
           </Box>
-          <Box height="170px" border="1px" borderColor="black">
-            <label class="text-xl font-serif text-black ml-2 w-5/6"></label>
+          <Box height="60px" border="1px" borderColor="black">
             <span
-              id="proLbl"
+              id="top1BknowLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top1BproLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top1BinvLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top1BdesiLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top1BuseEngLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top1BindLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top1BcomLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top1BprofLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top1BimpLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top1BethLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top1BeconLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top1BlifeLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
             ></span>
           </Box>
-          <Box height="170px" border="1px" borderColor="black">
+          <Box>
             <label
               id="top2Lbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
@@ -426,23 +548,121 @@ export default function CreateOutline() {
             <label class="text-xl font-serif text-black ml-2 w-5/6">
               At the end of this section, students will be able to:
             </label>
+          </Box>
+          <Box height="60px" border="1px" borderColor="black"></Box>
+          <Box height="60px" border="1px" borderColor="black">
             <label
               id="top2aLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
             ></label>
+          </Box>
+          <Box height="60px" border="1px" borderColor="black">
+            <span
+              id="top2AknowLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top2AproLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top2AinvLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top2AdesiLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top2AuseEngLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top2AindLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top2AcomLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top2AprofLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top2AimpLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top2AethLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top2AeconLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top2AlifeLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+          </Box>
+          <Box height="60px" border="1px" borderColor="black">
             <label
               id="top2bLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
             ></label>
           </Box>
-          <Box height="170px" border="1px" borderColor="black">
-            <label class="text-xl font-serif text-black ml-2 w-5/6"></label>
+          <Box height="60px" border="1px" borderColor="black">
             <span
-              id="ethLbl"
+              id="top2BknowLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top2BproLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top2BinvLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top2BdesiLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top2BuseEngLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top2BindLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top2BcomLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top2BprofLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top2BimpLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top2BethLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top2BeconLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top2BlifeLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
             ></span>
           </Box>
-          <Box height="170px" border="1px" borderColor="black">
+          <Box>
             <label
               id="top3Lbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
@@ -450,23 +670,121 @@ export default function CreateOutline() {
             <label class="text-xl font-serif text-black ml-2 w-5/6">
               At the end of this section, students will be able to:
             </label>
+          </Box>
+          <Box height="60px" border="1px" borderColor="black"></Box>
+          <Box height="60px" border="1px" borderColor="black">
             <label
               id="top3aLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
             ></label>
+          </Box>
+          <Box height="60px" border="1px" borderColor="black">
+            <span
+              id="top3AknowLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top3AproLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top3AinvLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top3AdesiLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top3AuseEngLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top3AindLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top3AcomLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top3AprofLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top3AimpLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top3AethLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top3AeconLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top3AlifeLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+          </Box>
+          <Box height="60px" border="1px" borderColor="black">
             <label
               id="top3bLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
             ></label>
           </Box>
-          <Box height="170px" border="1px" borderColor="black">
-            <label class="text-xl font-serif text-black ml-2 w-5/6"></label>
+          <Box height="60px" border="1px" borderColor="black">
             <span
-              id="comLbl"
+              id="top3BknowLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top3BproLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top3BinvLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top3BdesiLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top3BuseEngLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top3BindLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top3BcomLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top3BprofLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top3BimpLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top3BethLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top3BeconLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top3BlifeLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
             ></span>
           </Box>
-          <Box height="170px" border="1px" borderColor="black">
+          <Box height="60px" border="1px" borderColor="black">
             <label
               id="top4Lbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
@@ -474,19 +792,117 @@ export default function CreateOutline() {
             <label class="text-xl font-serif text-black ml-2 w-5/6">
               At the end of this section, students will be able to:
             </label>
+          </Box>
+          <Box height="60px" border="1px" borderColor="black"></Box>
+          <Box height="60px" border="1px" borderColor="black">
             <label
               id="top4aLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
             ></label>
+          </Box>
+          <Box height="60px" border="1px" borderColor="black">
+            <span
+              id="top4AknowLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top4AproLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top4AinvLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top4AdesiLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top4AuseEngLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top4AindLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top4AcomLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top4AprofLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top4AimpLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top4AethLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top4AeconLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top4AlifeLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+          </Box>
+          <Box height="60px" border="1px" borderColor="black">
             <label
               id="top4bLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
             ></label>
           </Box>
-          <Box height="170px" border="1px" borderColor="black">
-            <label class="text-xl font-serif text-black ml-2 w-5/6"></label>
+          <Box height="60px" border="1px" borderColor="black">
             <span
-              id="comLbl"
+              id="top4BknowLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top4BproLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top4BinvLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top4BdesiLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top4BuseEngLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top4BindLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top4BcomLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top4BprofLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top4BimpLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top4BethLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top4BeconLbl"
+              class="text-xl font-serif text-black ml-2 w-5/6"
+            ></span>
+            <span
+              id="top4BlifeLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
             ></span>
           </Box>
@@ -694,7 +1110,7 @@ export default function CreateOutline() {
           the course. Where appropriate, the problems should be documented (see
           the attached “Instructions for Students Unable to Write Tests or
           Examinations or Submit Assignments as Scheduled”). The student should
-          seek advice from the instructor or department Chair regarding how best
+          seek Aice from the instructor or department Chair regarding how best
           to deal with the problem. Failure to notify the instructor or
           department Chair immediately (or as soon as possible thereafter) will
           have a negative effect on any appeal. For more information concerning
@@ -795,7 +1211,7 @@ export default function CreateOutline() {
         <br />
 
         <label class="text-3xl font-serif text-black ml-2">
-          Internet and Electronic Mail
+          Dnet and Electronic Mail
         </label>
         <br />
         <label id="intLbl" class="text-xl font-serif text-black ml-2 w-5/6">
@@ -838,6 +1254,18 @@ export default function CreateOutline() {
       <br />
 
       <form class="ml-6 mt-1">
+        <h2 className="text-3xl font-serif text-black mt-4">Course UUID:</h2>
+        <div style={{ display: "flex" }}>
+          <select name="courseUuid" required>
+            <option value="">Select a Course</option>
+            {courses.map((courses) => (
+              <option key={courses.id} value={courses.id}>
+                {courses.departmentUuid}
+              </option>
+            ))}
+          </select>
+        </div>
+
         <label class="text-3xl font-serif text-black mt-4">Course Code:</label>
         <textarea
           id="codeTxt"
@@ -846,7 +1274,7 @@ export default function CreateOutline() {
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
           {...register("codeLbl")}
-        ></textarea>
+        > XXXXA/B </textarea>
         <br />
 
         <label class="text-3xl font-serif text-black">Course Title:</label>
@@ -858,6 +1286,18 @@ export default function CreateOutline() {
           class="border-2 border-black ml-3 rounded-lg"
           {...register("titleLbl")}
         ></textarea>
+        <br />
+
+        <label class="text-3xl font-serif text-black">Year:</label>
+        <textarea
+          cols="30"
+          rows="1"
+          id="yearTxt"
+          type="text"
+          class="border-2 border-black ml-3 rounded-lg"
+        >
+          20YY-YY
+        </textarea>
         <br />
         <br />
 
@@ -881,7 +1321,8 @@ export default function CreateOutline() {
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
           {...register("insLbl")}
-        ></textarea>
+        > Dr. Name, P.Eng. TEB XXX, 519-661-2111 ext. XXXXX, UWO e-mail address
+          as hyperlink Consultation hours:</textarea>
         <br />
         <br />
         <br />
@@ -909,7 +1350,7 @@ export default function CreateOutline() {
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
           {...register("conLbl")}
-        ></textarea>
+        >X lecture hours, Y laboratory hours, Z tutorial hours, 0.5 course.</textarea>
         <br />
         <br />
         <br />
@@ -948,7 +1389,12 @@ export default function CreateOutline() {
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
           {...register("coLbl")}
-        ></textarea>
+        > Unless you have either the requisites for this course or written
+          special permission from your Dean to enroll in it, you will be removed
+          from this course and it will be deleted from your record. This
+          decision may not be appealed. You will receive no adjustment to your
+          fees in the event that you are dropped from a course for failing to
+          have the necessary prerequisites.</textarea>
         <br />
         <br />
         <br />
@@ -963,7 +1409,7 @@ export default function CreateOutline() {
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
           {...register("ceabLbl")}
-        ></textarea>
+        >Engineering Science X%, Engineering Design Y%.</textarea>
         <br />
         <br />
         <br />
@@ -1213,10 +1659,12 @@ export default function CreateOutline() {
           {...register("top1Lbl")}
         ></textarea>
         <br />
+
         <label class="text-xl font-serif ml-12 text-black">
           At the end of this section, students will be able to:
         </label>
         <br />
+
         <label class="text-xl font-serif ml-12 text-black">a:</label>
         <textarea
           id="top1aTxt"
@@ -1227,6 +1675,141 @@ export default function CreateOutline() {
           {...register("top1aLbl")}
         ></textarea>
         <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Knowledge Base:
+        </label>
+        <select id="top1Aknowdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="KB1">KB1</option>
+          <option value="KB2">KB2</option>
+          <option value="KB3">KB3</option>
+          <option value="KB4">KB4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Problem Analysis:
+        </label>
+        <select id="top1Aprodrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="PA1">PA1</option>
+          <option value="PA2">PA2</option>
+          <option value="PA3">PA3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Investigation:
+        </label>
+        <select id="top1Ainvdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="I1">I1</option>
+          <option value="I2">I2</option>
+          <option value="I3">I3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">Design:</label>
+        <select id="top1Adesidrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="D1">D1</option>
+          <option value="D2">D2</option>
+          <option value="D3">D3</option>
+          <option value="D4">D4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Use of Engineering Tools:
+        </label>
+        <select id="top1AuseEngdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="ET1">ET1</option>
+          <option value="ET2">ET2</option>
+          <option value="ET3">ET3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Individual and Team Work:
+        </label>
+        <select id="top1Ainddrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="ITW1">ITW1</option>
+          <option value="ITW2">ITW2</option>
+          <option value="ITW3">ITW3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Communication Skills:
+        </label>
+        <select id="top1Acomdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="CS1">CS1</option>
+          <option value="CS2">CS2</option>
+          <option value="CS3">CS3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Professionalism:
+        </label>
+        <select id="top1Aprofdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="PR1">PR1</option>
+          <option value="PR2">PR2</option>
+          <option value="PR3">PR3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Impact of Engineering on Society and the Environment:
+        </label>
+        <select id="top1Aimpdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="IESE1">IESE1</option>
+          <option value="IESE2">IESE2</option>
+          <option value="IESE3">IESE3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Ethics and Equity:
+        </label>
+        <select id="top1Aethdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="EE1">EE1</option>
+          <option value="EE2">EE2</option>
+          <option value="EE3">EE3</option>
+          <option value="EE4">EE4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Economics and Project Management:
+        </label>
+        <select id="top1Aecondrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="EPM1">EPM1</option>
+          <option value="EPM2">EPM2</option>
+          <option value="EPM3">EPM3</option>
+          <option value="EPM4">EPM4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Life-Long Learning:
+        </label>
+        <select id="top1Alifedrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="LL1">LL1</option>
+          <option value="LL2">LL2</option>
+        </select>
+        <br />
+        <br />
+
         <label class="text-xl font-serif ml-12 text-black">b:</label>
         <textarea
           id="top1bTxt"
@@ -1236,6 +1819,140 @@ export default function CreateOutline() {
           class="border-2 border-black ml-3 rounded-lg"
           {...register("top1bLbl")}
         ></textarea>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Knowledge Base:
+        </label>
+        <select id="top1Bknowdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="KB1">KB1</option>
+          <option value="KB2">KB2</option>
+          <option value="KB3">KB3</option>
+          <option value="KB4">KB4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Problem Analysis:
+        </label>
+        <select id="top1Bprodrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="PA1">PA1</option>
+          <option value="PA2">PA2</option>
+          <option value="PA3">PA3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Investigation:
+        </label>
+        <select id="top1Binvdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="I1">I1</option>
+          <option value="I2">I2</option>
+          <option value="I3">I3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">Design:</label>
+        <select id="top1Bdesidrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="D1">D1</option>
+          <option value="D2">D2</option>
+          <option value="D3">D3</option>
+          <option value="D4">D4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Use of Engineering Tools:
+        </label>
+        <select id="top1BuseEngdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="ET1">ET1</option>
+          <option value="ET2">ET2</option>
+          <option value="ET3">ET3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Individual and Team Work:
+        </label>
+        <select id="top1Binddrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="ITW1">ITW1</option>
+          <option value="ITW2">ITW2</option>
+          <option value="ITW3">ITW3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Communication Skills:
+        </label>
+        <select id="top1Bcomdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="CS1">CS1</option>
+          <option value="CS2">CS2</option>
+          <option value="CS3">CS3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Professionalism:
+        </label>
+        <select id="top1Bprofdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="PR1">PR1</option>
+          <option value="PR2">PR2</option>
+          <option value="PR3">PR3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Impact of Engineering on Society and the Environment:
+        </label>
+        <select id="top1Bimpdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="IESE1">IESE1</option>
+          <option value="IESE2">IESE2</option>
+          <option value="IESE3">IESE3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Ethics and Equity:
+        </label>
+        <select id="top1Bethdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="EE1">EE1</option>
+          <option value="EE2">EE2</option>
+          <option value="EE3">EE3</option>
+          <option value="EE4">EE4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Economics and Project Management:
+        </label>
+        <select id="top1Becondrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="EPM1">EPM1</option>
+          <option value="EPM2">EPM2</option>
+          <option value="EPM3">EPM3</option>
+          <option value="EPM4">EPM4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Life-Long Learning:
+        </label>
+        <select id="top1Blifedrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="LL1">LL1</option>
+          <option value="LL2">LL2</option>
+        </select>
+        <br />
         <br />
 
         <label class="text-xl font-serif ml-9 text-black">Topic 2:</label>
@@ -1252,6 +1969,7 @@ export default function CreateOutline() {
           At the end of this section, students will be able to:
         </label>
         <br />
+
         <label class="text-xl font-serif ml-12 text-black">a:</label>
         <textarea
           id="top2aTxt"
@@ -1262,6 +1980,141 @@ export default function CreateOutline() {
           {...register("top2aLbl")}
         ></textarea>
         <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Knowledge Base:
+        </label>
+        <select id="top2Aknowdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="KB1">KB1</option>
+          <option value="KB2">KB2</option>
+          <option value="KB3">KB3</option>
+          <option value="KB4">KB4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Problem Analysis:
+        </label>
+        <select id="top2Aprodrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="PA1">PA1</option>
+          <option value="PA2">PA2</option>
+          <option value="PA3">PA3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Investigation:
+        </label>
+        <select id="top2Ainvdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="I1">I1</option>
+          <option value="I2">I2</option>
+          <option value="I3">I3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">Design:</label>
+        <select id="top2Adesidrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="D1">D1</option>
+          <option value="D2">D2</option>
+          <option value="D3">D3</option>
+          <option value="D4">D4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Use of Engineering Tools:
+        </label>
+        <select id="top2AuseEngdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="ET1">ET1</option>
+          <option value="ET2">ET2</option>
+          <option value="ET3">ET3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Individual and Team Work:
+        </label>
+        <select id="top2Ainddrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="ITW1">ITW1</option>
+          <option value="ITW2">ITW2</option>
+          <option value="ITW3">ITW3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Communication Skills:
+        </label>
+        <select id="top2Acomdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="CS1">CS1</option>
+          <option value="CS2">CS2</option>
+          <option value="CS3">CS3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Professionalism:
+        </label>
+        <select id="top2Aprofdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="PR1">PR1</option>
+          <option value="PR2">PR2</option>
+          <option value="PR3">PR3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Impact of Engineering on Society and the Environment:
+        </label>
+        <select id="top2Aimpdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="IESE1">IESE1</option>
+          <option value="IESE2">IESE2</option>
+          <option value="IESE3">IESE3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Ethics and Equity:
+        </label>
+        <select id="top2Aethdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="EE1">EE1</option>
+          <option value="EE2">EE2</option>
+          <option value="EE3">EE3</option>
+          <option value="EE4">EE4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Economics and Project Management:
+        </label>
+        <select id="top2Aecondrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="EPM1">EPM1</option>
+          <option value="EPM2">EPM2</option>
+          <option value="EPM3">EPM3</option>
+          <option value="EPM4">EPM4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Life-Long Learning:
+        </label>
+        <select id="top2Alifedrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="LL1">LL1</option>
+          <option value="LL2">LL2</option>
+        </select>
+        <br />
+        <br />
+
         <label class="text-xl font-serif ml-12 text-black">b:</label>
         <textarea
           id="top2bTxt"
@@ -1271,6 +2124,140 @@ export default function CreateOutline() {
           class="border-2 border-black ml-3 rounded-lg"
           {...register("top2bLbl")}
         ></textarea>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Knowledge Base:
+        </label>
+        <select id="top2Bknowdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="KB1">KB1</option>
+          <option value="KB2">KB2</option>
+          <option value="KB3">KB3</option>
+          <option value="KB4">KB4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Problem Analysis:
+        </label>
+        <select id="top2Bprodrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="PA1">PA1</option>
+          <option value="PA2">PA2</option>
+          <option value="PA3">PA3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Investigation:
+        </label>
+        <select id="top2Binvdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="I1">I1</option>
+          <option value="I2">I2</option>
+          <option value="I3">I3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">Design:</label>
+        <select id="top2Bdesidrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="D1">D1</option>
+          <option value="D2">D2</option>
+          <option value="D3">D3</option>
+          <option value="D4">D4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Use of Engineering Tools:
+        </label>
+        <select id="top2BuseEngdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="ET1">ET1</option>
+          <option value="ET2">ET2</option>
+          <option value="ET3">ET3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Individual and Team Work:
+        </label>
+        <select id="top2Binddrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="ITW1">ITW1</option>
+          <option value="ITW2">ITW2</option>
+          <option value="ITW3">ITW3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Communication Skills:
+        </label>
+        <select id="top2Bcomdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="CS1">CS1</option>
+          <option value="CS2">CS2</option>
+          <option value="CS3">CS3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Professionalism:
+        </label>
+        <select id="top2Bprofdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="PR1">PR1</option>
+          <option value="PR2">PR2</option>
+          <option value="PR3">PR3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Impact of Engineering on Society and the Environment:
+        </label>
+        <select id="top2Bimpdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="IESE1">IESE1</option>
+          <option value="IESE2">IESE2</option>
+          <option value="IESE3">IESE3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Ethics and Equity:
+        </label>
+        <select id="top2Bethdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="EE1">EE1</option>
+          <option value="EE2">EE2</option>
+          <option value="EE3">EE3</option>
+          <option value="EE4">EE4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Economics and Project Management:
+        </label>
+        <select id="top2Becondrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="EPM1">EPM1</option>
+          <option value="EPM2">EPM2</option>
+          <option value="EPM3">EPM3</option>
+          <option value="EPM4">EPM4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Life-Long Learning:
+        </label>
+        <select id="top2Blifedrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="LL1">LL1</option>
+          <option value="LL2">LL2</option>
+        </select>
+        <br />
         <br />
 
         <label class="text-xl font-serif ml-9 text-black">Topic 3:</label>
@@ -1287,6 +2274,7 @@ export default function CreateOutline() {
           At the end of this section, students will be able to:
         </label>
         <br />
+
         <label class="text-xl font-serif ml-12 text-black">a:</label>
         <textarea
           id="top3aTxt"
@@ -1297,6 +2285,141 @@ export default function CreateOutline() {
           {...register("top3aLbl")}
         ></textarea>
         <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Knowledge Base:
+        </label>
+        <select id="top3Aknowdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="KB1">KB1</option>
+          <option value="KB2">KB2</option>
+          <option value="KB3">KB3</option>
+          <option value="KB4">KB4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Problem Analysis:
+        </label>
+        <select id="top3Aprodrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="PA1">PA1</option>
+          <option value="PA2">PA2</option>
+          <option value="PA3">PA3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Investigation:
+        </label>
+        <select id="top3Ainvdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="I1">I1</option>
+          <option value="I2">I2</option>
+          <option value="I3">I3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">Design:</label>
+        <select id="top3Adesidrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="D1">D1</option>
+          <option value="D2">D2</option>
+          <option value="D3">D3</option>
+          <option value="D4">D4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Use of Engineering Tools:
+        </label>
+        <select id="top3AuseEngdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="ET1">ET1</option>
+          <option value="ET2">ET2</option>
+          <option value="ET3">ET3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Individual and Team Work:
+        </label>
+        <select id="top3Ainddrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="ITW1">ITW1</option>
+          <option value="ITW2">ITW2</option>
+          <option value="ITW3">ITW3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Communication Skills:
+        </label>
+        <select id="top3Acomdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="CS1">CS1</option>
+          <option value="CS2">CS2</option>
+          <option value="CS3">CS3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Professionalism:
+        </label>
+        <select id="top3Aprofdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="PR1">PR1</option>
+          <option value="PR2">PR2</option>
+          <option value="PR3">PR3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Impact of Engineering on Society and the Environment:
+        </label>
+        <select id="top3Aimpdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="IESE1">IESE1</option>
+          <option value="IESE2">IESE2</option>
+          <option value="IESE3">IESE3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Ethics and Equity:
+        </label>
+        <select id="top3Aethdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="EE1">EE1</option>
+          <option value="EE2">EE2</option>
+          <option value="EE3">EE3</option>
+          <option value="EE4">EE4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Economics and Project Management:
+        </label>
+        <select id="top3Aecondrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="EPM1">EPM1</option>
+          <option value="EPM2">EPM2</option>
+          <option value="EPM3">EPM3</option>
+          <option value="EPM4">EPM4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Life-Long Learning:
+        </label>
+        <select id="top3Alifedrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="LL1">LL1</option>
+          <option value="LL2">LL2</option>
+        </select>
+        <br />
+        <br />
+
         <label class="text-xl font-serif ml-12 text-black">b:</label>
         <textarea
           id="top3bTxt"
@@ -1306,6 +2429,140 @@ export default function CreateOutline() {
           class="border-2 border-black ml-3 rounded-lg"
           {...register("top3bLbl")}
         ></textarea>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Knowledge Base:
+        </label>
+        <select id="top3Bknowdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="KB1">KB1</option>
+          <option value="KB2">KB2</option>
+          <option value="KB3">KB3</option>
+          <option value="KB4">KB4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Problem Analysis:
+        </label>
+        <select id="top3Bprodrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="PA1">PA1</option>
+          <option value="PA2">PA2</option>
+          <option value="PA3">PA3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Investigation:
+        </label>
+        <select id="top3Binvdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="I1">I1</option>
+          <option value="I2">I2</option>
+          <option value="I3">I3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">Design:</label>
+        <select id="top3Bdesidrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="D1">D1</option>
+          <option value="D2">D2</option>
+          <option value="D3">D3</option>
+          <option value="D4">D4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Use of Engineering Tools:
+        </label>
+        <select id="top3BuseEngdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="ET1">ET1</option>
+          <option value="ET2">ET2</option>
+          <option value="ET3">ET3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Individual and Team Work:
+        </label>
+        <select id="top3Binddrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="ITW1">ITW1</option>
+          <option value="ITW2">ITW2</option>
+          <option value="ITW3">ITW3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Communication Skills:
+        </label>
+        <select id="top3Bcomdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="CS1">CS1</option>
+          <option value="CS2">CS2</option>
+          <option value="CS3">CS3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Professionalism:
+        </label>
+        <select id="top3Bprofdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="PR1">PR1</option>
+          <option value="PR2">PR2</option>
+          <option value="PR3">PR3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Impact of Engineering on Society and the Environment:
+        </label>
+        <select id="top3Bimpdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="IESE1">IESE1</option>
+          <option value="IESE2">IESE2</option>
+          <option value="IESE3">IESE3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Ethics and Equity:
+        </label>
+        <select id="top3Bethdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="EE1">EE1</option>
+          <option value="EE2">EE2</option>
+          <option value="EE3">EE3</option>
+          <option value="EE4">EE4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Economics and Project Management:
+        </label>
+        <select id="top3Becondrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="EPM1">EPM1</option>
+          <option value="EPM2">EPM2</option>
+          <option value="EPM3">EPM3</option>
+          <option value="EPM4">EPM4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Life-Long Learning:
+        </label>
+        <select id="top3Blifedrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="LL1">LL1</option>
+          <option value="LL2">LL2</option>
+        </select>
+        <br />
         <br />
 
         <label class="text-xl font-serif ml-9 text-black">Topic 4:</label>
@@ -1322,6 +2579,7 @@ export default function CreateOutline() {
           At the end of this section, students will be able to:
         </label>
         <br />
+
         <label class="text-xl font-serif ml-12 text-black">a:</label>
         <textarea
           id="top4aTxt"
@@ -1332,6 +2590,141 @@ export default function CreateOutline() {
           {...register("top4aLbl")}
         ></textarea>
         <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Knowledge Base:
+        </label>
+        <select id="top4Aknowdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="KB1">KB1</option>
+          <option value="KB2">KB2</option>
+          <option value="KB3">KB3</option>
+          <option value="KB4">KB4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Problem Analysis:
+        </label>
+        <select id="top4Aprodrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="PA1">PA1</option>
+          <option value="PA2">PA2</option>
+          <option value="PA3">PA3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Investigation:
+        </label>
+        <select id="top4Ainvdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="I1">I1</option>
+          <option value="I2">I2</option>
+          <option value="I3">I3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">Design:</label>
+        <select id="top4Adesidrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="D1">D1</option>
+          <option value="D2">D2</option>
+          <option value="D3">D3</option>
+          <option value="D4">D4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Use of Engineering Tools:
+        </label>
+        <select id="top4AuseEngdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="ET1">ET1</option>
+          <option value="ET2">ET2</option>
+          <option value="ET3">ET3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Individual and Team Work:
+        </label>
+        <select id="top4Ainddrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="ITW1">ITW1</option>
+          <option value="ITW2">ITW2</option>
+          <option value="ITW3">ITW3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Communication Skills:
+        </label>
+        <select id="top4Acomdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="CS1">CS1</option>
+          <option value="CS2">CS2</option>
+          <option value="CS3">CS3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Professionalism:
+        </label>
+        <select id="top4Aprofdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="PR1">PR1</option>
+          <option value="PR2">PR2</option>
+          <option value="PR3">PR3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Impact of Engineering on Society and the Environment:
+        </label>
+        <select id="top4Aimpdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="IESE1">IESE1</option>
+          <option value="IESE2">IESE2</option>
+          <option value="IESE3">IESE3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Ethics and Equity:
+        </label>
+        <select id="top4Aethdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="EE1">EE1</option>
+          <option value="EE2">EE2</option>
+          <option value="EE3">EE3</option>
+          <option value="EE4">EE4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Economics and Project Management:
+        </label>
+        <select id="top4Aecondrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="EPM1">EPM1</option>
+          <option value="EPM2">EPM2</option>
+          <option value="EPM3">EPM3</option>
+          <option value="EPM4">EPM4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Life-Long Learning:
+        </label>
+        <select id="top4Alifedrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="LL1">LL1</option>
+          <option value="LL2">LL2</option>
+        </select>
+        <br />
+        <br />
+
         <label class="text-xl font-serif ml-12 text-black">b:</label>
         <textarea
           id="top4bTxt"
@@ -1341,6 +2734,140 @@ export default function CreateOutline() {
           class="border-2 border-black ml-3 rounded-lg"
           {...register("top4bLbl")}
         ></textarea>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Knowledge Base:
+        </label>
+        <select id="top4Bknowdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="KB1">KB1</option>
+          <option value="KB2">KB2</option>
+          <option value="KB3">KB3</option>
+          <option value="KB4">KB4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Problem Analysis:
+        </label>
+        <select id="top4Bprodrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="PA1">PA1</option>
+          <option value="PA2">PA2</option>
+          <option value="PA3">PA3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Investigation:
+        </label>
+        <select id="top4Binvdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="I1">I1</option>
+          <option value="I2">I2</option>
+          <option value="I3">I3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">Design:</label>
+        <select id="top4Bdesidrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="D1">D1</option>
+          <option value="D2">D2</option>
+          <option value="D3">D3</option>
+          <option value="D4">D4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Use of Engineering Tools:
+        </label>
+        <select id="top4BuseEngdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="ET1">ET1</option>
+          <option value="ET2">ET2</option>
+          <option value="ET3">ET3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Individual and Team Work:
+        </label>
+        <select id="top4Binddrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="ITW1">ITW1</option>
+          <option value="ITW2">ITW2</option>
+          <option value="ITW3">ITW3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Communication Skills:
+        </label>
+        <select id="top4Bcomdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="CS1">CS1</option>
+          <option value="CS2">CS2</option>
+          <option value="CS3">CS3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Professionalism:
+        </label>
+        <select id="top4Bprofdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="PR1">PR1</option>
+          <option value="PR2">PR2</option>
+          <option value="PR3">PR3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Impact of Engineering on Society and the Environment:
+        </label>
+        <select id="top4Bimpdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="IESE1">IESE1</option>
+          <option value="IESE2">IESE2</option>
+          <option value="IESE3">IESE3</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Ethics and Equity:
+        </label>
+        <select id="top4Bethdrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="EE1">EE1</option>
+          <option value="EE2">EE2</option>
+          <option value="EE3">EE3</option>
+          <option value="EE4">EE4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Economics and Project Management:
+        </label>
+        <select id="top4Becondrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="EPM1">EPM1</option>
+          <option value="EPM2">EPM2</option>
+          <option value="EPM3">EPM3</option>
+          <option value="EPM4">EPM4</option>
+        </select>
+        <br />
+
+        <label class="text-xl font-serif ml-20 text-black">
+          Life-Long Learning:
+        </label>
+        <select id="top4Blifedrop" class="border-2 border-black rounded-lg">
+          <option value="empty"></option>
+          <option value="LL1">LL1</option>
+          <option value="LL2">LL2</option>
+        </select>
+        <br />
         <br />
 
         <label class="text-3xl font-serif text-black">Evaluation Weights</label>
@@ -1464,7 +2991,8 @@ export default function CreateOutline() {
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
           {...register("finLbl")}
-        ></textarea>
+        >The final examination will be take place during the regular
+          examination period.</textarea>
         <br />
         <br />
         <br />
@@ -1494,153 +3022,8 @@ export default function CreateOutline() {
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
           {...register("assSubLbl")}
-        ></textarea>
+        >Locker XYZ located on the second floor of TEB.</textarea>
         <br />
-        <br />
-        <br />
-
-        <label class="text-3xl font-serif text-black">Use of English</label>
-        <br />
-        <textarea
-          id="useTxt"
-          type="text"
-          cols="50"
-          class="border-2 border-black p-4 rounded-lg"
-        ></textarea>
-        <br />
-        <br />
-        <br />
-
-        <label class="text-3xl font-serif text-black">Attendance</label>
-        <br />
-        <textarea
-          id="attTxt"
-          type="text"
-          cols="50"
-          class="border-2 border-black p-4 rounded-lg"
-        ></textarea>
-        <br />
-        <br />
-        <br />
-
-        <label class="text-3xl font-serif text-black">
-          Absence Due to Illness or Other Circumstances
-        </label>
-        <br />
-        <textarea
-          id="absTxt"
-          type="text"
-          cols="50"
-          class="border-2 border-black p-4 rounded-lg"
-        ></textarea>
-        <br />
-        <br />
-        <br />
-
-        <label class="text-3xl font-serif text-black">
-          Missed Midterm Examinations
-        </label>
-        <br />
-        <textarea
-          id="misTxt"
-          type="text"
-          cols="50"
-          class="border-2 border-black p-4 rounded-lg"
-        ></textarea>
-        <br />
-        <br />
-        <br />
-
-        <label class="text-3xl font-serif text-black">
-          Cheating and Plagiarism
-        </label>
-        <br />
-        <textarea
-          id="cheTxt"
-          type="text"
-          cols="50"
-          class="border-2 border-black p-4 rounded-lg"
-        ></textarea>
-        <br />
-        <br />
-        <br />
-
-        <label class="text-3xl font-serif text-black">
-          Use of Electronic Devices
-        </label>
-        <br />
-        <textarea
-          id="useElTxt"
-          type="text"
-          cols="50"
-          class="border-2 border-black p-4 rounded-lg"
-        ></textarea>
-        <br />
-        <br />
-        <br />
-
-        <label class="text-3xl font-serif text-black">
-          Use of Personal Response Devices ("Clickers")
-        </label>
-        <br />
-        <textarea
-          id="usePerTxt"
-          type="text"
-          cols="50"
-          class="border-2 border-black p-4 rounded-lg"
-        ></textarea>
-        <br />
-        <br />
-        <br />
-
-        <label class="text-3xl font-serif text-black">
-          Policy on Repeating All Components of a Course
-        </label>
-        <br />
-        <textarea
-          id="polTxt"
-          type="text"
-          cols="50"
-          class="border-2 border-black p-4 rounded-lg"
-        ></textarea>
-        <br />
-        <br />
-        <br />
-
-        <label class="text-3xl font-serif text-black">
-          Internet and Electronic Mail
-        </label>
-        <br />
-        <textarea
-          id="intTxt"
-          type="text"
-          cols="50"
-          class="border-2 border-black p-4 rounded-lg"
-        ></textarea>
-        <br />
-        <br />
-        <br />
-
-        <label class="text-3xl font-serif text-black">Accessibility</label>
-        <br />
-        <textarea
-          id="accTxt"
-          type="text"
-          cols="50"
-          class="border-2 border-black p-4 rounded-lg"
-        ></textarea>
-        <br />
-        <br />
-        <br />
-
-        <label class="text-3xl font-serif text-black">Support Services</label>
-        <br />
-        <textarea
-          id="supTxt"
-          type="text"
-          cols="50"
-          class="border-2 border-black p-4 rounded-lg"
-        ></textarea>
         <br />
         <br />
 

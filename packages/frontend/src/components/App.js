@@ -9,6 +9,7 @@ import CreateOutline from "./CreateOutline";
 import UnAuth from "./UnAuth";
 import AssignInstructor from "./AssignInstructor";
 import AddInstructor from "./AddInstructor";
+import CreateCourse from "./CreateCourse";
 
 function App() {
   return (
@@ -54,6 +55,11 @@ function App() {
               exact
               path="/comments"
               element={<OutlineComments></OutlineComments>}
+            />
+            <Route
+              exact
+              path="/createCourse"
+              element={<CreateCourse></CreateCourse>}
             />
           </Routes>
         </Router>

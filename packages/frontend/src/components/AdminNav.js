@@ -41,6 +41,10 @@ export default function AdminNav() {
           <NavLink eventKey="5" as={Link} to="/assign">
             Assign Instructor
           </NavLink>
+
+          <NavLink eventKey="6" as={Link} to="/createcourse">
+            Create Course
+          </NavLink>
         </Nav>
         <Nav>
           <NavLink eventKey="6" as={Link} to="/">
