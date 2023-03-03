@@ -7,7 +7,8 @@ import {
   Box,
   Flex,
   Button,
-  SimpleGrid
+  SimpleGrid,
+  Checkbox
 } from '@chakra-ui/react'
 
 export default function CreateOutline() {
@@ -22,6 +23,9 @@ export default function CreateOutline() {
 
       if (value !== '') {
         label.innerHTML = value;
+        if(label.innerHTML == "empty"){
+          label.innerHTML = '';
+        }
       }
     }
 
@@ -52,8 +56,12 @@ export default function CreateOutline() {
   <label class="text-xl font-serif text-black mt-2">Support Services</label><br />
   <label class="text-xl font-serif text-black mt-2">Faculty of Engineering</label><br />
   <label class="text-xl font-serif text-black mt-2">Department of Electrical and Computer Engineering</label><br />
-  <label id="codeLbl" class="text-xl font-serif text-black mt-2">ECE XXXXA/B: Course Title</label><br />
-  <label id="titleLbl" class="text-xl font-serif text-black mt-2"></label><br />
+  <span class="text-xl font-serif text-black mt-2">ECE&nbsp;</span>
+  <span id="codeLbl" class="text-xl font-serif text-black mt-2">XXXXA/B</span>
+  <span class="text-xl font-serif text-black mt-2">:&nbsp;</span>
+  <span id="titleLbl" class="text-xl font-serif text-black mt-2">Course Title</span><br />
+  <span class="text-xl font-serif text-black mt-2">Course Outline&nbsp;</span>
+  <span id="yearLbl" class="text-xl font-serif text-black mt-2">20YY-YY</span>
 
 </center>
 
@@ -345,11 +353,16 @@ Students who are in emotional/mental distress should refer to Mental Health @ We
       <form class="ml-6 mt-1">
 
         <label class="text-3xl font-serif text-black mt-4">Course Code:</label>
-        <textarea id="codeTxt" cols="20" rows="1" type="text" class="border-2 border-black ml-3 rounded-lg"></textarea><br />
+        <textarea id="codeTxt" cols="20" rows="1" type="text" class="border-2 border-black ml-3 rounded-lg">XXXXA/B</textarea><br />
         
 
         <label class="text-3xl font-serif text-black">Course Title:</label>
-        <textarea cols="30" rows="1" id="titleTxt" type="text" class="border-2 border-black ml-3 rounded-lg"></textarea><br /><br />
+        <textarea cols="30" rows="1" id="titleTxt" type="text" class="border-2 border-black ml-3 rounded-lg"></textarea>< br />
+
+        <label class="text-3xl font-serif text-black">Year:</label>
+        <textarea cols="30" rows="1" id="yearTxt" type="text" class="border-2 border-black ml-3 rounded-lg">20YY-YY</textarea>< br />< br />
+        
+        
         
 
         <label class="text-3xl font-serif text-black">Description</label><br />
@@ -357,7 +370,8 @@ Students who are in emotional/mental distress should refer to Mental Health @ We
         
 
         <label class="text-3xl font-serif text-black">Instructor</label><br />
-        <textarea id="insTxt" type="text" cols="50" class="border-2 border-black p-4 rounded-lg"></textarea><br />
+        <textarea id="insTxt" type="text" cols="50" class="border-2 border-black p-4 rounded-lg">Dr. Name, P.Eng.
+TEB XXX, 519-661-2111 ext. XXXXX, UWO e-mail address as hyperlink Consultation hours:</textarea><br />
         <br /><br />
 
         <label class="text-3xl font-serif text-black">Academic Calendar Copy</label><br />
@@ -365,7 +379,7 @@ Students who are in emotional/mental distress should refer to Mental Health @ We
         <br /><br />
 
         <label class="text-3xl font-serif text-black">Contact Hours</label><br />
-        <textarea id="conTxt" type="text" cols="50" class="border-2 border-black p-4 rounded-lg"></textarea><br />
+        <textarea id="conTxt" type="text" cols="50" class="border-2 border-black p-4 rounded-lg">X lecture hours, Y laboratory hours, Z tutorial hours, 0.5 course.</textarea><br />
         <br /><br />
 
         <label class="text-3xl font-serif text-black">Antirequisites</label><br />
@@ -377,11 +391,11 @@ Students who are in emotional/mental distress should refer to Mental Health @ We
         <br /><br />
 
         <label class="text-3xl font-serif text-black">Co-requisites</label><br />
-        <textarea id="coTxt" type="text" cols="50" class="border-2 border-black p-4 rounded-lg"></textarea><br />
+        <textarea id="coTxt" type="text" cols="50" class="border-2 border-black p-4 rounded-lg">Unless you have either the requisites for this course or written special permission from your Dean to enroll in it, you will be removed from this course and it will be deleted from your record. This decision may not be appealed. You will receive no adjustment to your fees in the event that you are dropped from a course for failing to have the necessary prerequisites.</textarea><br />
         <br /><br />
 
         <label class="text-3xl font-serif text-black">CEAB Academic Units</label><br />
-        <textarea id="ceabTxt" type="text" cols="50" class="border-2 border-black p-4 rounded-lg"></textarea><br />
+        <textarea id="ceabTxt" type="text" cols="50" class="border-2 border-black p-4 rounded-lg">Engineering Science X%, Engineering Design Y%.</textarea><br />
         <br /><br />
 
         <label class="text-3xl font-serif text-black">Required Textbook</label><br />
@@ -500,38 +514,49 @@ Students who are in emotional/mental distress should refer to Mental Health @ We
         <label class="text-3xl font-serif text-black">Course Topics and Specific Learning Outcomes</label><br /><br />
         <label class="text-xl font-serif ml-9 text-black">Topic 1:</label>
         <textarea id="top1Txt" cols="40" rows="1" type="text" class="border-2 border-black ml-3 rounded-lg"></textarea><br />
+
         <label class="text-xl font-serif ml-12 text-black">At the end of this section, students will be able to:</label><br />
+        
         <label class="text-xl font-serif ml-12 text-black">a:</label>
         <textarea id="top1aTxt" cols="50" rows="1" type="text" class="border-2 border-black ml-3 rounded-lg"></textarea><br />
+        
+        
         <label class="text-xl font-serif ml-12 text-black">b:</label>
-        <textarea id="top1bTxt" cols="50" rows="1" type="text" class="border-2 border-black ml-3 rounded-lg"></textarea><br />
+        <textarea id="top1bTxt" cols="50" rows="1" type="text" class="border-2 border-black ml-3 rounded-lg"></textarea><br /><br />
         
 
         <label class="text-xl font-serif ml-9 text-black">Topic 2:</label>
         <textarea id="top2Txt" cols="40" rows="1" type="text" class="border-2 border-black ml-3 rounded-lg"></textarea><br />
         <label class="text-xl font-serif ml-12 text-black">At the end of this section, students will be able to:</label><br />
+        
         <label class="text-xl font-serif ml-12 text-black">a:</label>
         <textarea id="top2aTxt" cols="50" rows="1" type="text" class="border-2 border-black ml-3 rounded-lg"></textarea><br />
+        
+        
         <label class="text-xl font-serif ml-12 text-black">b:</label>
-        <textarea id="top2bTxt" cols="50" rows="1" type="text" class="border-2 border-black ml-3 rounded-lg"></textarea><br />
+        <textarea id="top2bTxt" cols="50" rows="1" type="text" class="border-2 border-black ml-3 rounded-lg"></textarea><br /><br />
         
 
         <label class="text-xl font-serif ml-9 text-black">Topic 3:</label>
         <textarea id="top3Txt" cols="40" rows="1" type="text" class="border-2 border-black ml-3 rounded-lg"></textarea><br />
         <label class="text-xl font-serif ml-12 text-black">At the end of this section, students will be able to:</label><br />
+        
         <label class="text-xl font-serif ml-12 text-black">a:</label>
         <textarea id="top3aTxt" cols="50" rows="1" type="text" class="border-2 border-black ml-3 rounded-lg"></textarea><br />
+        
         <label class="text-xl font-serif ml-12 text-black">b:</label>
-        <textarea id="top3bTxt" cols="50" rows="1" type="text" class="border-2 border-black ml-3 rounded-lg"></textarea><br />
+        <textarea id="top3bTxt" cols="50" rows="1" type="text" class="border-2 border-black ml-3 rounded-lg"></textarea><br /><br />
         
 
         <label class="text-xl font-serif ml-9 text-black">Topic 4:</label>
         <textarea id="top4Txt" cols="40" rows="1" type="text" class="border-2 border-black ml-3 rounded-lg"></textarea><br />
         <label class="text-xl font-serif ml-12 text-black">At the end of this section, students will be able to:</label><br />
+        
         <label class="text-xl font-serif ml-12 text-black">a:</label>
         <textarea id="top4aTxt" cols="50" rows="1" type="text" class="border-2 border-black ml-3 rounded-lg"></textarea><br />
+        
         <label class="text-xl font-serif ml-12 text-black">b:</label>
-        <textarea id="top4bTxt" cols="50" rows="1" type="text" class="border-2 border-black ml-3 rounded-lg"></textarea><br />
+        <textarea id="top4bTxt" cols="50" rows="1" type="text" class="border-2 border-black ml-3 rounded-lg"></textarea><br /><br />
         
 
         <label class="text-3xl font-serif text-black">Evaluation Weights</label><br /><br />
@@ -570,7 +595,7 @@ Students who are in emotional/mental distress should refer to Mental Health @ We
         <br /><br />
 
         <label class="text-3xl font-serif text-black">Final Examination</label><br />
-        <textarea id="finTxt" type="text" cols="50" class="border-2 border-black p-4 rounded-lg"></textarea><br />
+        <textarea id="finTxt" type="text" cols="50" class="border-2 border-black p-4 rounded-lg">The final examination will be take place during the regular examination period.</textarea><br />
         <br /><br />
 
         <label class="text-3xl font-serif text-black">Late Submission Policy</label><br />
@@ -578,51 +603,9 @@ Students who are in emotional/mental distress should refer to Mental Health @ We
         <br /><br />
 
         <label class="text-3xl font-serif text-black">Assignment Submission Locker</label><br />
-        <textarea id="assSubTxt" type="text" cols="50" class="border-2 border-black p-4 rounded-lg"></textarea><br />
+        <textarea id="assSubTxt" type="text" cols="50" class="border-2 border-black p-4 rounded-lg">Locker XYZ located on the second floor of TEB.</textarea><br />
         <br /><br />
 
-        <label class="text-3xl font-serif text-black">Use of English</label><br />
-        <textarea id="useTxt" type="text" cols="50" class="border-2 border-black p-4 rounded-lg"></textarea><br />
-        <br /><br />
-
-        <label class="text-3xl font-serif text-black">Attendance</label><br />
-        <textarea id="attTxt" type="text" cols="50" class="border-2 border-black p-4 rounded-lg"></textarea><br />
-        <br /><br />
-
-        <label class="text-3xl font-serif text-black">Absence Due to Illness or Other Circumstances</label><br />
-        <textarea id="absTxt" type="text" cols="50" class="border-2 border-black p-4 rounded-lg"></textarea><br />
-        <br /><br />
-
-        <label class="text-3xl font-serif text-black">Missed Midterm Examinations</label><br />
-        <textarea id="misTxt" type="text" cols="50" class="border-2 border-black p-4 rounded-lg"></textarea><br />
-        <br /><br />
-
-        <label class="text-3xl font-serif text-black">Cheating and Plagiarism</label><br />
-        <textarea id="cheTxt" type="text" cols="50" class="border-2 border-black p-4 rounded-lg"></textarea><br />
-        <br /><br />
-
-        <label class="text-3xl font-serif text-black">Use of Electronic Devices</label><br />
-        <textarea id="useElTxt" type="text" cols="50" class="border-2 border-black p-4 rounded-lg"></textarea><br />
-        <br /><br />
-
-        <label class="text-3xl font-serif text-black">Use of Personal Response Devices ("Clickers")</label><br />
-        <textarea id="usePerTxt" type="text" cols="50" class="border-2 border-black p-4 rounded-lg"></textarea><br />
-        <br /><br />
-
-        <label class="text-3xl font-serif text-black">Policy on Repeating All Components of a Course</label><br />
-        <textarea id="polTxt" type="text" cols="50" class="border-2 border-black p-4 rounded-lg"></textarea><br />
-        <br /><br />
-
-        <label class="text-3xl font-serif text-black">Internet and Electronic Mail</label><br />
-        <textarea id="intTxt" type="text" cols="50" class="border-2 border-black p-4 rounded-lg"></textarea><br />
-        <br /><br />
-
-        <label class="text-3xl font-serif text-black">Accessibility</label><br />
-        <textarea id="accTxt" type="text" cols="50" class="border-2 border-black p-4 rounded-lg"></textarea><br />
-        <br /><br />
-
-        <label class="text-3xl font-serif text-black">Support Services</label><br />
-        <textarea id="supTxt" type="text" cols="50" class="border-2 border-black p-4 rounded-lg"></textarea><br /><br />
 
         
         <Button colorScheme="green" size='lg' width="80" id="saveBtn" onClick={() => submitChanges()}>
