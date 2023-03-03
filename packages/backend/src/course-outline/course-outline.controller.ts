@@ -42,6 +42,6 @@ export class CourseOutlineController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.courseOutlineService.remove(+id);
+    return this.courseOutlineService.remove(id);
   }
 }

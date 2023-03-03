@@ -42,7 +42,7 @@ export default function CreateOutline() {
       },
       body: JSON.stringify({
         courseUuid: "39bdbbc3-ece0-48db-9aee-bd4f50a4b7a4",
-        versionNum: 4,
+        versionNum: 5,
         titleLbl: data.titleLbl,
         codeLbl: data.codeLbl,
         yearLbl: "2019",
