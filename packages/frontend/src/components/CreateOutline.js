@@ -27,7 +27,7 @@ export default function CreateOutline() {
         elements[i].id.replace("Txt", "Lbl").replace("drop", "Lbl")
       );
 
-      if (value !== "") {
+      if (value !== data.length) {
         label.innerHTML = value;
       }
     }
@@ -41,58 +41,58 @@ export default function CreateOutline() {
         "Content-length": 7,
       },
       body: JSON.stringify({
-        courseUuid: "93d49549-a478-4e92-990b-ad5a91082663",
-        versionNum: 2,
-        titleLbl: "",
+        courseUuid: "39bdbbc3-ece0-48db-9aee-bd4f50a4b7a4",
+        versionNum: 4,
+        titleLbl: data.titleLbl,
         codeLbl: data.codeLbl,
-        yearLbl: "",
-        desLbl: "",
-        insLbl: "",
-        acaLbl: "",
-        conLbl: "",
-        antLbl: "",
-        preLbl: "",
-        coLbl: "",
-        ceabLbl: "",
-        reqTbLbl: "",
-        othLbl: "",
-        recRefLbl: "",
-        knowLbl: "",
-        useEngLbl: "",
-        impLbl: "",
-        proLbl: "",
-        indLbl: "",
-        ethLbl: "",
-        invLbl: "",
-        comLbl: "",
-        econLbl: "",
-        desiLbl: "",
-        profLbl: "",
-        lifeLbl: "",
-        top1Lbl: "",
-        top1aLbl: "",
-        top1bLbl: "",
-        top2Lbl: "",
-        top2aLbl: "",
-        top2bLbl: "",
-        top3Lbl: "",
-        top3aLbl: "",
-        top3bLbl: "",
-        top4Lbl: "",
-        top4aLbl: "",
-        top4bLbl: "",
-        homPercLbl: "",
-        quizPercLbl: "",
-        labPercLbl: "",
-        midPercLbl: "",
-        finPercLbl: "",
-        homLbl: "",
-        quiLbl: "",
-        labLbl: "",
-        midLbl: "",
-        finLbl: "",
-        lateLbl: "",
-        assSubLbl: "",
+        yearLbl: "2019",
+        desLbl: data.desLbl,
+        insLbl: data.insLbl,
+        acaLbl: data.acaLbl,
+        conLbl: data.conLbl,
+        antLbl: data.antLbl,
+        preLbl: data.preLbl,
+        coLbl: data.coLbl,
+        ceabLbl: data.ceabLbl,
+        reqTbLbl: data.reqTbLbl,
+        othLbl: data.othLbl,
+        recRefLbl: data.recRefLbl,
+        knowLbl: data.knowLbl,
+        useEngLbl: data.useEngLbl,
+        impLbl: data.impLbl,
+        proLbl: data.proLbl,
+        indLbl: data.indLbl,
+        ethLbl: data.ethLbl,
+        invLbl: data.invLbl,
+        comLbl: data.comLbl,
+        econLbl: data.conLbl,
+        desiLbl: data.desiLbl,
+        profLbl: data.profLbl,
+        lifeLbl: data.lifeLbl,
+        top1Lbl: data.top1Lbl,
+        top1aLbl: data.top1aLbl,
+        top1bLbl: data.top1bLbl,
+        top2Lbl: data.top2Lbl,
+        top2aLbl: data.top2aLbl,
+        top2bLbl: data.top2bLbl,
+        top3Lbl: data.top3Lbl,
+        top3aLbl: data.top3aLbl,
+        top3bLbl: data.top3bLbl,
+        top4Lbl: data.top4Lbl,
+        top4aLbl: data.top4aLbl,
+        top4bLbl: data.top4bLbl,
+        homPercLbl: data.homPercLbl,
+        quizPercLbl: data.quizPercLbl,
+        labPercLbl: data.labPercLbl,
+        midPercLbl: data.midPercLbl,
+        finPercLbl: data.finPercLbl,
+        homLbl: data.homLbl,
+        quiLbl: data.quiLbl,
+        labLbl: data.labLbl,
+        midLbl: data.midLbl,
+        finLbl: data.finLbl,
+        lateLbl: data.lateLbl,
+        assSubLbl: data.assSubLbl,
       }),
     });
   }
@@ -856,6 +856,7 @@ export default function CreateOutline() {
           id="titleTxt"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("titleLbl")}
         ></textarea>
         <br />
         <br />
@@ -867,6 +868,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("desLbl")}
         ></textarea>
         <br />
         <br />
@@ -878,6 +880,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("insLbl")}
         ></textarea>
         <br />
         <br />
@@ -892,6 +895,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("acaLbl")}
         ></textarea>
         <br />
         <br />
@@ -904,6 +908,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("conLbl")}
         ></textarea>
         <br />
         <br />
@@ -916,6 +921,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("antLbl")}
         ></textarea>
         <br />
         <br />
@@ -928,6 +934,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("preLbl")}
         ></textarea>
         <br />
         <br />
@@ -940,6 +947,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("coLbl")}
         ></textarea>
         <br />
         <br />
@@ -954,6 +962,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("ceabLbl")}
         ></textarea>
         <br />
         <br />
@@ -966,6 +975,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("reqTbLbl")}
         ></textarea>
         <br />
         <br />
@@ -980,6 +990,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("othLbl")}
         ></textarea>
         <br />
         <br />
@@ -994,6 +1005,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("recRefLbl")}
         ></textarea>
         <br />
         <br />
@@ -1012,7 +1024,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-9 text-black">
           Knowledge Base:
         </label>
-        <select id="knowdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="knowdrop"
+          class="border-2 border-black rounded-lg "
+          {...register("knowLbl")}
+        >
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
@@ -1023,7 +1039,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-9 text-black">
           Problem Analysis:
         </label>
-        <select id="prodrop" class="border-2 border-black rounded-lg">
+        <select
+          id="prodrop"
+          class="border-2 border-black rounded-lg"
+          {...register("proLbl")}
+        >
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
@@ -1032,7 +1052,11 @@ export default function CreateOutline() {
         <br />
 
         <label class="text-xl font-serif ml-9 text-black">Investigation:</label>
-        <select id="invdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="invdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("invLbl")}
+        >
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
@@ -1041,7 +1065,11 @@ export default function CreateOutline() {
         <br />
 
         <label class="text-xl font-serif ml-9 text-black">Design:</label>
-        <select id="desidrop" class="border-2 border-black rounded-lg">
+        <select
+          id="desidrop"
+          class="border-2 border-black rounded-lg"
+          {...register("desiLbl")}
+        >
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
@@ -1052,7 +1080,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-9 text-black">
           Use of Engineering Tools:
         </label>
-        <select id="useEngdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="useEngdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("useEngLbl")}
+        >
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
@@ -1063,7 +1095,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-9 text-black">
           Individual and Team Work:
         </label>
-        <select id="inddrop" class="border-2 border-black rounded-lg">
+        <select
+          id="inddrop"
+          class="border-2 border-black rounded-lg"
+          {...register("indLbl")}
+        >
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
@@ -1074,7 +1110,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-9 text-black">
           Communication Skills:
         </label>
-        <select id="comdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="comdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("comLbl")}
+        >
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
@@ -1085,7 +1125,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-9 text-black">
           Professionalism:
         </label>
-        <select id="profdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="profdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("profLbl")}
+        >
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
@@ -1096,7 +1140,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-9 text-black">
           Impact on Society and the Environment:
         </label>
-        <select id="impdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="impdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("impLbl")}
+        >
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
@@ -1107,7 +1155,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-9 text-black">
           Ethics and Equity:
         </label>
-        <select id="ethdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="ethdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("ethLbl")}
+        >
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
@@ -1118,7 +1170,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-9 text-black">
           Economics and Project Management:
         </label>
-        <select id="econdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="econdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("econLbl")}
+        >
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
@@ -1129,7 +1185,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-9 text-black">
           Life-Long Learning:
         </label>
-        <select id="lifedrop" class="border-2 border-black rounded-lg">
+        <select
+          id="lifedrop"
+          class="border-2 border-black rounded-lg"
+          {...register("lifeLbl")}
+        >
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
@@ -1150,6 +1210,7 @@ export default function CreateOutline() {
           rows="1"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("top1Lbl")}
         ></textarea>
         <br />
         <label class="text-xl font-serif ml-12 text-black">
@@ -1163,6 +1224,7 @@ export default function CreateOutline() {
           rows="1"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("top1aLbl")}
         ></textarea>
         <br />
         <label class="text-xl font-serif ml-12 text-black">b:</label>
@@ -1172,6 +1234,7 @@ export default function CreateOutline() {
           rows="1"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("top1bLbl")}
         ></textarea>
         <br />
 
@@ -1182,6 +1245,7 @@ export default function CreateOutline() {
           rows="1"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("top2Lbl")}
         ></textarea>
         <br />
         <label class="text-xl font-serif ml-12 text-black">
@@ -1195,6 +1259,7 @@ export default function CreateOutline() {
           rows="1"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("top2aLbl")}
         ></textarea>
         <br />
         <label class="text-xl font-serif ml-12 text-black">b:</label>
@@ -1204,6 +1269,7 @@ export default function CreateOutline() {
           rows="1"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("top2bLbl")}
         ></textarea>
         <br />
 
@@ -1214,6 +1280,7 @@ export default function CreateOutline() {
           rows="1"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("top3Lbl")}
         ></textarea>
         <br />
         <label class="text-xl font-serif ml-12 text-black">
@@ -1227,6 +1294,7 @@ export default function CreateOutline() {
           rows="1"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("top3aLbl")}
         ></textarea>
         <br />
         <label class="text-xl font-serif ml-12 text-black">b:</label>
@@ -1236,6 +1304,7 @@ export default function CreateOutline() {
           rows="1"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("top3bLbl")}
         ></textarea>
         <br />
 
@@ -1246,6 +1315,7 @@ export default function CreateOutline() {
           rows="1"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("top4Lbl")}
         ></textarea>
         <br />
         <label class="text-xl font-serif ml-12 text-black">
@@ -1259,6 +1329,7 @@ export default function CreateOutline() {
           rows="1"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("top4aLbl")}
         ></textarea>
         <br />
         <label class="text-xl font-serif ml-12 text-black">b:</label>
@@ -1268,6 +1339,7 @@ export default function CreateOutline() {
           rows="1"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("top4bLbl")}
         ></textarea>
         <br />
 
@@ -1283,6 +1355,7 @@ export default function CreateOutline() {
           type="number"
           placeholder="%"
           class="border-2 border-black ml-3 w-11 rounded-lg"
+          {...register("homPercLbl")}
         ></input>
         <br />
 
@@ -1292,6 +1365,7 @@ export default function CreateOutline() {
           type="number"
           placeholder="%"
           class="border-2 border-black ml-3 w-11 rounded-lg"
+          {...register("quizPercLbl")}
         ></input>
         <br />
 
@@ -1301,6 +1375,7 @@ export default function CreateOutline() {
           type="number"
           placeholder="%"
           class="border-2 border-black ml-3 w-11 rounded-lg"
+          {...register("labPercLbl")}
         ></input>
         <br />
 
@@ -1310,6 +1385,7 @@ export default function CreateOutline() {
           type="number"
           placeholder="%"
           class="border-2 border-black ml-3 w-11 rounded-lg"
+          {...register("midPercLbl")}
         ></input>
         <br />
 
@@ -1321,6 +1397,7 @@ export default function CreateOutline() {
           type="number"
           placeholder="%"
           class="border-2 border-black ml-3 w-11 rounded-lg"
+          {...register("finPercLbl")}
         ></input>
         <br />
         <br />
@@ -1334,6 +1411,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("homLbl")}
         ></textarea>
         <br />
         <br />
@@ -1346,6 +1424,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("quiLbl")}
         ></textarea>
         <br />
         <br />
@@ -1358,6 +1437,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("labLbl")}
         ></textarea>
         <br />
         <br />
@@ -1370,6 +1450,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("midLbl")}
         ></textarea>
         <br />
         <br />
@@ -1382,6 +1463,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("finLbl")}
         ></textarea>
         <br />
         <br />
@@ -1396,6 +1478,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("lateLbl")}
         ></textarea>
         <br />
         <br />
@@ -1410,6 +1493,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("assSubLbl")}
         ></textarea>
         <br />
         <br />
