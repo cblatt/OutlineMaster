@@ -76,6 +76,8 @@ model EditLog {
   courseUuid    String  
   versionNum    Int        
   editNum       Int    //this values are set manually       
+  timeLastEdited DateTime
+  editor String 
   courseOutline  CourseOutline     @relation(fields: [courseUuid,versionNum], references: [courseUuid, versionNum])
   @@id([courseUuid, versionNum])
 }

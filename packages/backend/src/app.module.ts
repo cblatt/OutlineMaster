@@ -7,6 +7,7 @@ import { DepartmentsModule } from './departments/departments.module';
 import { CoursesModule } from './courses/courses.module';
 import { InstructorCoursesModule } from './instructor-courses/instructor-courses.module';
 import { CommentsModule } from './comments/comments.module';
+import { EditorlogModule } from './editor-log/editorlog.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { CommentsModule } from './comments/comments.module';
     CoursesModule,
     InstructorCoursesModule,
     CommentsModule,
+    EditorlogModule,
   ],
   controllers: [AppController],
   providers: [AppService],
