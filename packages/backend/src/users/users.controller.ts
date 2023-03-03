@@ -29,7 +29,7 @@ export class UsersController {
   }
 
   @Get('instructors')
-  findInstructors(){
+  findInstructors() {
     return this.usersService.findInstructors();
   }
 
