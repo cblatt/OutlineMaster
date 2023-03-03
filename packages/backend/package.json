@@ -21,7 +21,8 @@
     "db": "docker-compose up -d",
     "db:stop": "docker-compose down",
     "migration": "npx prisma migrate dev",
-    "generate": "npx nest generate resource"
+    "generate": "npx nest generate resource",
+    "seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
