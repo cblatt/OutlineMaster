@@ -9,16 +9,23 @@ export class CommentsService {
   //Do this constructor at the top of every service .
   constructor(private prisma: PrismaService) {}
 
+  //Creates comment
   create(createCommentDto: CreateCommentDto) {
     return this.prisma.comments.create({ data: createCommentDto });
   }
 
+  //Gets all comments
   findAll() {
     return this.prisma.comments.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} comment`;
+  //Get comment for individual course outline
+  findOne(commentId: string) {
+    return this.prisma.comments.findMany({
+      where: {
+        commentId: commentId,
+      },
+    });
   }
 
   update(id: number, updateCommentDto: UpdateCommentDto) {

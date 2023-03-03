@@ -6,4 +6,7 @@ export class CreateCommentDto {
 
   @ApiProperty()
   commentTxt: string;
+
+  @ApiProperty()
+  outlineId: string;
 }
