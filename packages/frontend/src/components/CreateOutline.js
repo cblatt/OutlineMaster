@@ -8,40 +8,43 @@ import {
   Flex,
   Button,
   SimpleGrid,
-
   Checkbox
 } from '@chakra-ui/react'
 
-
 export default function CreateOutline() {
-  function submitChanges() {
+
+  function submitChanges(){
+
     const elements = document.querySelectorAll('[id$="Txt"], [id$="drop"]');
 
     for (let i = 0; i < elements.length; i++) {
       const value = elements[i].value.trim();
-      const label = document.getElementById(
-        elements[i].id.replace("Txt", "Lbl").replace("drop", "Lbl")
-      );
+      const label = document.getElementById(elements[i].id.replace('Txt', 'Lbl').replace('drop', 'Lbl'));
 
-      if (value !== "") {
+      if (value !== '') {
         label.innerHTML = value;
         if(label.innerHTML == "empty"){
           label.innerHTML = '';
         }
       }
     }
+
+
+    
+    
   }
 
-  return (
-    <div class="min-h-screen bg-gradient-to-r from-purple-500 to-purple-300 ... text-gray-500 py-6 flex flex-col justify-center sm:py-12">
-      <center>
-        <span class="text-6xl text-black font-serif font-bold">
-          Create & Edit Course Outline
-        </span>
-        <br />
-        <br />
-      </center>
 
+    
+  
+
+  return (
+
+    <div class="min-h-screen bg-gradient-to-r from-purple-500 to-purple-300 ... text-gray-500 py-6 flex flex-col justify-center sm:py-12">
+
+      <center>
+        <span class="text-6xl text-black font-serif font-bold">Create & Edit Course Outline</span><br /><br />
+      </center>
 
       
       
@@ -485,11 +488,9 @@ Students who are in emotional/mental distress should refer to Mental Health @ We
 
 
 
-      
-
       <form class="ml-6 mt-1">
-        <label class="text-3xl font-serif text-black mt-4">Course Code:</label>
 
+        <label class="text-3xl font-serif text-black mt-4">Course Code:</label>
         <textarea id="codeTxt" cols="20" rows="1" type="text" class="border-2 border-black ml-3 rounded-lg">XXXXA/B</textarea><br />
         
 
@@ -551,30 +552,20 @@ TEB XXX, 519-661-2111 ext. XXXXX, UWO e-mail address as hyperlink Consultation h
         <label class="text-3xl font-serif text-black">(CEAB Graduate Attributes):</label><br /><br />
 
         <label class="text-xl font-serif ml-9 text-black">Knowledge Base:</label>
-
-     
-
-     
-    
-       
         <select id="knowdrop" class="border-2 border-black rounded-lg">
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
           <option value="A">A</option>
-        </select>
-        <br />
+        </select><br />
 
-        <label class="text-xl font-serif ml-9 text-black">
-          Problem Analysis:
-        </label>
+        <label class="text-xl font-serif ml-9 text-black">Problem Analysis:</label>
         <select id="prodrop" class="border-2 border-black rounded-lg">
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
           <option value="A">A</option>
-        </select>
-        <br />
+        </select><br />
 
         <label class="text-xl font-serif ml-9 text-black">Investigation:</label>
         <select id="invdrop" class="border-2 border-black rounded-lg">
@@ -582,8 +573,7 @@ TEB XXX, 519-661-2111 ext. XXXXX, UWO e-mail address as hyperlink Consultation h
           <option value="I">I</option>
           <option value="D">D</option>
           <option value="A">A</option>
-        </select>
-        <br />
+        </select><br />
 
         <label class="text-xl font-serif ml-9 text-black">Design:</label>
         <select id="desidrop" class="border-2 border-black rounded-lg">
@@ -591,105 +581,77 @@ TEB XXX, 519-661-2111 ext. XXXXX, UWO e-mail address as hyperlink Consultation h
           <option value="I">I</option>
           <option value="D">D</option>
           <option value="A">A</option>
-        </select>
-        <br />
+        </select><br />
 
 
         <label class="text-xl font-serif ml-9 text-black">Use of Engineering Tools:</label>
-
         <select id="useEngdrop" class="border-2 border-black rounded-lg">
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
           <option value="A">A</option>
-        </select>
-        <br />
+        </select><br />
 
-        <label class="text-xl font-serif ml-9 text-black">
-          Individual and Team Work:
-        </label>
+        <label class="text-xl font-serif ml-9 text-black">Individual and Team Work:</label>
         <select id="inddrop" class="border-2 border-black rounded-lg">
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
           <option value="A">A</option>
-        </select>
-        <br />
+        </select><br />
 
-        <label class="text-xl font-serif ml-9 text-black">
-          Communication Skills:
-        </label>
+        <label class="text-xl font-serif ml-9 text-black">Communication Skills:</label>
         <select id="comdrop" class="border-2 border-black rounded-lg">
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
           <option value="A">A</option>
-        </select>
-        <br />
+        </select><br />
 
-        <label class="text-xl font-serif ml-9 text-black">
-          Professionalism:
-        </label>
+        <label class="text-xl font-serif ml-9 text-black">Professionalism:</label>
         <select id="profdrop" class="border-2 border-black rounded-lg">
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
           <option value="A">A</option>
-        </select>
-        <br />
+        </select><br />
 
-        <label class="text-xl font-serif ml-9 text-black">
-          Impact on Society and the Environment:
-        </label>
+        <label class="text-xl font-serif ml-9 text-black">Impact on Society and the Environment:</label>
         <select id="impdrop" class="border-2 border-black rounded-lg">
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
           <option value="A">A</option>
-        </select>
-        <br />
+        </select><br />
 
-        <label class="text-xl font-serif ml-9 text-black">
-          Ethics and Equity:
-        </label>
+        <label class="text-xl font-serif ml-9 text-black">Ethics and Equity:</label>
         <select id="ethdrop" class="border-2 border-black rounded-lg">
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
           <option value="A">A</option>
-        </select>
-        <br />
+        </select><br />
 
-        <label class="text-xl font-serif ml-9 text-black">
-          Economics and Project Management:
-        </label>
+        <label class="text-xl font-serif ml-9 text-black">Economics and Project Management:</label>
         <select id="econdrop" class="border-2 border-black rounded-lg">
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
           <option value="A">A</option>
-        </select>
-        <br />
+        </select><br />
 
-        <label class="text-xl font-serif ml-9 text-black">
-          Life-Long Learning:
-        </label>
+        <label class="text-xl font-serif ml-9 text-black">Life-Long Learning:</label>
         <select id="lifedrop" class="border-2 border-black rounded-lg">
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
           <option value="A">A</option>
-        </select>
-        <br />
-        <br />
+        </select><br /><br />
 
-        <label class="text-3xl font-serif text-black">
-          Course Topics and Specific Learning Outcomes
-        </label>
-        <br />
-        <br />
+        
+
+        <label class="text-3xl font-serif text-black">Course Topics and Specific Learning Outcomes</label><br /><br />
         <label class="text-xl font-serif ml-9 text-black">Topic 1:</label>
-
         <textarea id="top1Txt" cols="40" rows="1" type="text" class="border-2 border-black ml-3 rounded-lg"></textarea><br />
 
         <label class="text-xl font-serif ml-12 text-black">At the end of this section, students will be able to:</label><br />
@@ -1535,26 +1497,11 @@ TEB XXX, 519-661-2111 ext. XXXXX, UWO e-mail address as hyperlink Consultation h
         <label class="text-xl font-serif ml-9 text-black">Homework Assignments:</label>
         <input id="homPercTxt" type="number" placeholder="%" class="border-2 border-black ml-3 w-11 rounded-lg"></input><br />
 
-
-       
-
         <label class="text-xl font-serif ml-9 text-black">Quizzes:</label>
-        <input
-          id="quizPercTxt"
-          type="number"
-          placeholder="%"
-          class="border-2 border-black ml-3 w-11 rounded-lg"
-        ></input>
-        <br />
+        <input id="quizPercTxt" type="number" placeholder="%" class="border-2 border-black ml-3 w-11 rounded-lg"></input><br />
 
         <label class="text-xl font-serif ml-9 text-black">Laboratory:</label>
-        <input
-          id="labPercTxt"
-          type="number"
-          placeholder="%"
-          class="border-2 border-black ml-3 w-11 rounded-lg"
-        ></input>
-        <br />
+        <input id="labPercTxt" type="number" placeholder="%" class="border-2 border-black ml-3 w-11 rounded-lg"></input><br />
 
         <label class="text-xl font-serif ml-9 text-black">Midterm Test:</label>
         <input id="midPercTxt" type="number" placeholder="%" class="border-2 border-black ml-3 w-11 rounded-lg"></input><br />
@@ -1595,11 +1542,33 @@ TEB XXX, 519-661-2111 ext. XXXXX, UWO e-mail address as hyperlink Consultation h
 
         
         <Button colorScheme="green" size='lg' width="80" id="saveBtn" onClick={() => submitChanges()}>
-        Save        
-
-
+        Save
         </Button>
+        
+        
+
+        
+
       </form>
+ 
+      
+
+      
+
+      
+
+      
+
+      
+
+
+
+
+      
+
+      
+        
+      
     </div>
   );
 }
