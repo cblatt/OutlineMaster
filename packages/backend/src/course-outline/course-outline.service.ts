@@ -16,7 +16,7 @@ export class CourseOutlineService {
   }
 
   findAll() {
-    return `This action returns all courseOutline`;
+    return this.prisma.courseOutline.findMany();
   }
 
   findOne(id: number) {
