@@ -26,21 +26,26 @@ export class EditorlogController {
     return this.editorlogService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.editorlogService.findOne(id);
+  @Get(':courseUuid:versionNum')
+  findOne(@Param() courseUuid: string, versionNum: number) {
+    return this.editorlogService.findOne(courseUuid, versionNum);
   }
 
-  @Patch(':id')
+  @Patch(':courseUuid:versionNum')
   update(
-    @Param('id') id: string,
+    @Param() courseUuid: string,
+    versionNum: number,
     @Body() updateEditorlogDto: UpdateEditorlogDto,
   ) {
-    return this.editorlogService.update(id, updateEditorlogDto);
+    return this.editorlogService.update(
+      courseUuid,
+      versionNum,
+      updateEditorlogDto,
+    );
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.editorlogService.remove(id);
+  @Delete(':courseUuid:versionNum')
+  remove(@Param() courseUuid: string, versionNum: number) {
+    return this.editorlogService.remove(courseUuid, versionNum);
   }
 }
