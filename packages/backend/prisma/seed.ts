@@ -6,7 +6,7 @@ async function main() {
   const instructor = await prisma.user.create({
     data: {
       uwoId: 'instructor',
-      email: 'email@email.com',
+      email: 'instructor@email.com',
       password: 'password',
       firstName: 'John',
       lastName: 'Smith',
@@ -17,7 +17,7 @@ async function main() {
   const administrator = await prisma.user.create({
     data: {
       uwoId: 'admin',
-      email: 'email@email.com',
+      email: 'admin@email.com',
       password: 'password',
       firstName: 'John',
       lastName: 'Smith',
