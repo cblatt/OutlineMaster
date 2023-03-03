@@ -9,9 +9,16 @@ import {
   Button,
   SimpleGrid,
 } from "@chakra-ui/react";
+import { useForm } from "react-hook-form";
 
 export default function CreateOutline() {
-  function submitChanges() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  function submitChanges(data) {
     const elements = document.querySelectorAll('[id$="Txt"], [id$="drop"]');
 
     for (let i = 0; i < elements.length; i++) {
@@ -24,6 +31,70 @@ export default function CreateOutline() {
         label.innerHTML = value;
       }
     }
+
+    console.log(data.codeLbl);
+
+    fetch("/course-outline", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Content-length": 7,
+      },
+      body: JSON.stringify({
+        courseUuid: "93d49549-a478-4e92-990b-ad5a91082663",
+        versionNum: 2,
+        titleLbl: "",
+        codeLbl: data.codeLbl,
+        yearLbl: "",
+        desLbl: "",
+        insLbl: "",
+        acaLbl: "",
+        conLbl: "",
+        antLbl: "",
+        preLbl: "",
+        coLbl: "",
+        ceabLbl: "",
+        reqTbLbl: "",
+        othLbl: "",
+        recRefLbl: "",
+        knowLbl: "",
+        useEngLbl: "",
+        impLbl: "",
+        proLbl: "",
+        indLbl: "",
+        ethLbl: "",
+        invLbl: "",
+        comLbl: "",
+        econLbl: "",
+        desiLbl: "",
+        profLbl: "",
+        lifeLbl: "",
+        top1Lbl: "",
+        top1aLbl: "",
+        top1bLbl: "",
+        top2Lbl: "",
+        top2aLbl: "",
+        top2bLbl: "",
+        top3Lbl: "",
+        top3aLbl: "",
+        top3bLbl: "",
+        top4Lbl: "",
+        top4aLbl: "",
+        top4bLbl: "",
+        homPercLbl: "",
+        quizPercLbl: "",
+        labPercLbl: "",
+        midPercLbl: "",
+        finPercLbl: "",
+        homLbl: "",
+        quiLbl: "",
+        labLbl: "",
+        midLbl: "",
+        finLbl: "",
+        lateLbl: "",
+        assSubLbl: "",
+      }),
+    });
   }
 
   return (
@@ -774,6 +845,7 @@ export default function CreateOutline() {
           rows="1"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("codeLbl")}
         ></textarea>
         <br />
 
@@ -1493,7 +1565,7 @@ export default function CreateOutline() {
           size="lg"
           width="80"
           id="saveBtn"
-          onClick={() => submitChanges()}
+          onClick={handleSubmit(submitChanges)}
         >
           Save
         </Button>
