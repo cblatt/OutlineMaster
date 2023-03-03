@@ -10,34 +10,29 @@ export default function OutlineComments() {
     formState: { errors },
   } = useForm();
 
-  //Comment works
+  //Gets all the comments to display live
   const [cmnts, setcmnts] = useState([]);
-  //Shows current comments
-
   useEffect(() => {
     getComments();
   }, []);
 
-  //shows coments on playlist
+  //Gets comments from database
   const getComments = async () => {
     let result = await fetch(`/comments`);
     result = await result.json();
     setcmnts(result);
   };
 
-  //Submiting comments
+  //Posting comments to database
   async function onSubmit(data) {
-    console.log(data);
-
     fetch("/comments", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Content-length": 7,
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ ...data, outlineId: "2" }),
     });
-
     getComments();
   }
 
