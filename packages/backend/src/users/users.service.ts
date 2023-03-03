@@ -63,6 +63,6 @@ export class UsersService {
   }
 
   findInstructors() {
-    return this.prisma.user.findMany({where: {role: "INSTRUCTOR"}});
+    return this.prisma.user.findMany({ where: { role: 'INSTRUCTOR' } });
   }
 }
