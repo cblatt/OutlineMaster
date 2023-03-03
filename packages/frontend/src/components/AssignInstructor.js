@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import {
   FormControl,
   Input,
@@ -11,7 +11,31 @@ import AdminNav from "./AdminNav";
 
 export default function AssignInstructor() {
   const [show, setShow] = useState(false);
-  const handleClick = () => setShow(!show);
+
+
+  const [instructors, setInstructors] = useState([]);
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    
+    async function fetchData() {
+      const res = await fetch("/users/instructors", { method: "GET" });
+      const data = await res.json();
+      setInstructors(data);
+      
+    }
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch("/courses", { method: "GET" });
+      const data = await res.json();
+      console.log(data)
+      setCourses(data);
+    }
+    fetchData();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-purple-500 to-purple-300 ... ">
@@ -23,18 +47,25 @@ export default function AssignInstructor() {
           </h4>
           <FormControl isRequired>
             <Stack spacing={5}>
+
             <select size="lg" variant="outline">
-              <option value="">-- Select UWO ID --</option>
-              <option value="hlyytika@uwo.ca">hlyytika@uwo.ca</option>
-              <option value="xyz123@uwo.ca">xyz123@uwo.ca</option>
-              <option value="abc456@uwo.ca">abc456@uwo.ca</option>
-            </select>
-            <select size="lg" variant="outline">
-              <option value="">-- Select UWO ID --</option>
-              <option value="hlyytika@uwo.ca">hlyytika@uwo.ca</option>
-              <option value="xyz123@uwo.ca">xyz123@uwo.ca</option>
-              <option value="abc456@uwo.ca">abc456@uwo.ca</option>
-            </select>
+                <option value="">-- Select UWO ID --</option>
+                {instructors &&
+                  instructors.map((instructor) => (
+                    <option value={instructor.uwo_id}>
+                      {instructor.uwoId}
+                    </option>
+                  ))}
+              </select>
+              <select size="lg" variant="outline">
+                <option value="">-- Select a Course Code --</option>
+                {courses &&
+                  courses.map((course) => (
+                    <option value={course.courseCode}>
+                      {course.courseCode}
+                    </option>
+                  ))}
+              </select>
 
              
              

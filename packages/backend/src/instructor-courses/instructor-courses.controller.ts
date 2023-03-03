@@ -19,18 +19,18 @@ export class InstructorCoursesController {
     return this.instructorCoursesService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.instructorCoursesService.findOne(+id);
+  @Get(':id/:course')
+  findOne(@Param('id') id: string, @Param('course') course: string) {
+    return this.instructorCoursesService.findOne(id,course);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateInstructorCourseDto: UpdateInstructorCourseDto) {
-    return this.instructorCoursesService.update(+id, updateInstructorCourseDto);
+  @Patch(':id/:course')
+  update(@Param('id') id: string,@Param('course') course: string, @Body() updateInstructorCourseDto: UpdateInstructorCourseDto) {
+    return this.instructorCoursesService.update(id, course,updateInstructorCourseDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.instructorCoursesService.remove(+id);
+  @Delete(':id/:course')
+  remove(@Param('id') id: string,@Param('course') course:string) {
+    return this.instructorCoursesService.remove(id,course);
   }
 }

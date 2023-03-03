@@ -8,23 +8,27 @@ export class InstructorCoursesService {
   constructor(private prisma: PrismaService) {}
 
   create(createInstructorCourseDto: CreateInstructorCourseDto) {
-    return 'This action adds a new instructorCourse';
+    return this.prisma.instructorCourse.create({data: createInstructorCourseDto});
   }
 
   findAll() {
     return this.prisma.instructorCourse.findMany();
   }
 
-  findOne(id: number) {
-    return `This action updates a #${id} instructorCourse`;
+  findOne(id: string, course:string) {
+    return this.prisma.instructorCourse.findUnique({where:{uwoId_courseUuid:{uwoId:id,courseUuid:course}}});
   }
 
-  update(id: number, updateInstructorCourseDto: UpdateInstructorCourseDto) {
-    return `This action updates a #${id} instructorCourse`;
+  update(id: string, course:string, updateInstructorCourseDto: UpdateInstructorCourseDto) {
+    return this.prisma.instructorCourse.update({
+      where:{uwoId_courseUuid:{uwoId:id,courseUuid:course}},
+      data:updateInstructorCourseDto,
+    
+    })
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} instructorCourse`;
+  remove(id: string, course:string) {
+    return this.prisma.instructorCourse.delete({where:{uwoId_courseUuid:{uwoId:id,courseUuid:course}}});
   }
   
 }
