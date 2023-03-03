@@ -8,6 +8,11 @@ import { CoursesModule } from './courses/courses.module';
 import { InstructorCoursesModule } from './instructor-courses/instructor-courses.module';
 import { CommentsModule } from './comments/comments.module';
 
+import { CourseOutlineModule } from './course-outline/course-outline.module';
+
+import { EditorlogModule } from './editor-log/editorlog.module';
+
+
 @Module({
   imports: [
     PrismaModule,
@@ -16,6 +21,11 @@ import { CommentsModule } from './comments/comments.module';
     CoursesModule,
     InstructorCoursesModule,
     CommentsModule,
+
+    CourseOutlineModule,
+
+    EditorlogModule,
+
   ],
   controllers: [AppController],
   providers: [AppService],

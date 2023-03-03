@@ -61,14 +61,65 @@ enum Role {
 model Comments{
   commentId       String    @id @default(uuid())
   commentTxt      String 
+  outlineId       String
   
 }
 
 model CourseOutline {
-  courseUuid    String  
+  courseUuid    String    
   course        Course    @relation(fields: [courseUuid], references: [courseUuid])
   versionNum    Int       //this values are set manually
-  editLogs       EditLog[]
+  editLogs      EditLog[]
+  titleLbl      String
+  codeLbl       String
+  yearLbl       String
+  desLbl        String
+insLbl          String
+acaLbl          String
+conLbl          String
+antLbl          String
+preLbl          String
+coLbl           String
+ceabLbl         String
+reqTbLbl        String
+othLbl          String
+recRefLbl       String
+knowLbl         String
+useEngLbl       String
+impLbl          String
+proLbl          String
+indLbl          String
+ethLbl    String
+  invLbl    String
+  comLbl    String
+  econLbl     String
+  desiLbl     String
+  profLbl     String
+  lifeLbl     String
+  top1Lbl     String
+  top1aLbl    String
+  top1bLbl    String
+  top2Lbl     String
+  top2aLbl    String
+  top2bLbl    String
+  top3Lbl     String
+  top3aLbl    String
+  top3bLbl    String
+  top4Lbl     String
+  top4aLbl    String
+  top4bLbl    String
+  homPercLbl    String
+  quizPercLbl     String
+  labPercLbl    String
+  midPercLbl    String
+  finPercLbl    String
+  homLbl    String
+  quiLbl    String
+  labLbl    String
+  midLbl    String
+  finLbl    String
+  lateLbl     String
+  assSubLbl     String
   @@id([courseUuid, versionNum])
 }
 
@@ -76,6 +127,8 @@ model EditLog {
   courseUuid    String  
   versionNum    Int        
   editNum       Int    //this values are set manually       
+  timeLastEdited DateTime
+  editor String 
   courseOutline  CourseOutline     @relation(fields: [courseUuid,versionNum], references: [courseUuid, versionNum])
   @@id([courseUuid, versionNum])
 }
