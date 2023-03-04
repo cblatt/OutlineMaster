@@ -75,3 +75,25 @@ Nest is [MIT licensed](LICENSE).
 ## Tutorials
 
 https://www.prisma.io/blog/nestjs-prisma-rest-api-7D056s1BmOL0
+
+## Deploy
+
+docker build -t backend .
+docker tag backend gcr.io/teak-brook-377021/backend
+docker push gcr.io/teak-brook-377021/backend
+
+# frontend:
+
+# build: ./packages/frontend
+
+# ports:
+
+# - "3000:3000"
+
+# backend:
+
+# build: ./packages/backend
+
+# ports:
+
+# - "4000:4000"
