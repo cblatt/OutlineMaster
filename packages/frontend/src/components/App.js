@@ -11,6 +11,8 @@ import AssignInstructor from "./AssignInstructor";
 import AddInstructor from "./AddInstructor";
 import CreateCourse from "./CreateCourse";
 import Departments from "./Departments";
+import DepartmentCourses from "./DepartmentCourses";
+import Courses from "./CoursesPage";
 
 function App() {
   return (
@@ -49,7 +51,14 @@ function App() {
                   path="/assign"
                   element={<AssignInstructor></AssignInstructor>}
                 />
-                <Route exact path="/departments" element={<Departments />} />
+                <Route path="/courses">
+                  <Route path="" element={<Courses />}></Route>
+                  {/* <Route path=":id" element={<AdminHome />}></Route> */}
+                </Route>
+                <Route path="/departments">
+                  <Route path="" element={<Departments />}></Route>
+                  <Route path="courses" element={<DepartmentCourses />} />
+                </Route>
               </Route>
               <Route exact path="/unauth" element={<UnAuth></UnAuth>} />
             </Route>

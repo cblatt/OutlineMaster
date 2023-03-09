@@ -12,7 +12,7 @@ export class CoursesService {
   }
 
   findAll() {
-    return this.prisma.course.findMany();
+    return this.prisma.course.findMany({ include: { department: true } });
   }
 
   findOne(id: string) {

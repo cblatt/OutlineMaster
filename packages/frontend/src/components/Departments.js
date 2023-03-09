@@ -26,19 +26,32 @@ import {
 } from "@chakra-ui/react";
 import AdminNav from "./AdminNav";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
-const DepartmentCard = ({ name, code }) => {
+const DepartmentCard = ({ department }) => {
+  const navigate = useNavigate();
   return (
     <Card size={"lg"}>
       <CardHeader>
-        <Heading size="md">{name}</Heading>
+        <Heading size="md">{department.departmentName}</Heading>
         <Heading size="xs" textTransform="uppercase">
-          {code}
+          {department.departmentCode}
         </Heading>
       </CardHeader>
       <CardFooter>
         <HStack spacing="10px">
-          <Button colorScheme="purple">View Courses</Button>
+          <Button
+            colorScheme="purple"
+            onClick={() =>
+              navigate("courses", {
+                state: {
+                  departmentUuid: department.departmentUuid,
+                },
+              })
+            }
+          >
+            View Courses
+          </Button>
           <Button colorScheme="purple" variant="outline">
             Edit Department
           </Button>
@@ -122,10 +135,7 @@ const Departments = () => {
             departments.map((department) => {
               return (
                 <WrapItem>
-                  <DepartmentCard
-                    name={department.departmentName}
-                    code={department.departmentCode}
-                  />
+                  <DepartmentCard department={department} />
                 </WrapItem>
               );
             })
