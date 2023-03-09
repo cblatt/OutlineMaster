@@ -11,8 +11,15 @@ import {
   SimpleGrid,
   Checkbox,
 } from "@chakra-ui/react";
+import { useForm } from "react-hook-form";
 
 export default function CreateOutline() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
@@ -25,7 +32,7 @@ export default function CreateOutline() {
     fetchData();
   }, []);
 
-  function submitChanges() {
+  function submitChanges(data) {
     const elements = document.querySelectorAll('[id$="Txt"], [id$="drop"]');
 
     for (let i = 0; i < elements.length; i++) {
@@ -34,13 +41,173 @@ export default function CreateOutline() {
         elements[i].id.replace("Txt", "Lbl").replace("drop", "Lbl")
       );
 
-      if (value !== "") {
+      if (value !== data.length) {
         label.innerHTML = value;
         if (label.innerHTML == "empty") {
           label.innerHTML = "";
         }
       }
     }
+
+    console.log(data.codeLbl);
+
+    fetch("/course-outline", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Content-length": 7,
+      },
+      body: JSON.stringify({
+        courseUuid: "39bdbbc3-ece0-48db-9aee-bd4f50a4b7a4",
+        versionNum: 5,
+        titleLbl: data.titleLbl,
+        codeLbl: data.codeLbl,
+        yearLbl: "2019",
+        desLbl: data.desLbl,
+        insLbl: data.insLbl,
+        acaLbl: data.acaLbl,
+        conLbl: data.conLbl,
+        antLbl: data.antLbl,
+        preLbl: data.preLbl,
+        coLbl: data.coLbl,
+        ceabLbl: data.ceabLbl,
+        reqTbLbl: data.reqTbLbl,
+        othLbl: data.othLbl,
+        recRefLbl: data.recRefLbl,
+        knowLbl: data.knowLbl,
+        useEngLbl: data.useEngLbl,
+        impLbl: data.impLbl,
+        proLbl: data.proLbl,
+        indLbl: data.indLbl,
+        ethLbl: data.ethLbl,
+        invLbl: data.invLbl,
+        comLbl: data.comLbl,
+        econLbl: data.conLbl,
+        desiLbl: data.desiLbl,
+        profLbl: data.profLbl,
+        lifeLbl: data.lifeLbl,
+        top1Lbl: data.top1Lbl,
+        top1aLbl: data.top1aLbl,
+        top1bLbl: data.top1bLbl,
+        top2Lbl: data.top2Lbl,
+        top2aLbl: data.top2aLbl,
+        top2bLbl: data.top2bLbl,
+        top3Lbl: data.top3Lbl,
+        top3aLbl: data.top3aLbl,
+        top3bLbl: data.top3bLbl,
+        top4Lbl: data.top4Lbl,
+        top4aLbl: data.top4aLbl,
+        top4bLbl: data.top4bLbl,
+        homPercLbl: data.homPercLbl,
+        quizPercLbl: data.quizPercLbl,
+        labPercLbl: data.labPercLbl,
+        midPercLbl: data.midPercLbl,
+        finPercLbl: data.finPercLbl,
+        homLbl: data.homLbl,
+        quiLbl: data.quiLbl,
+        labLbl: data.labLbl,
+        midLbl: data.midLbl,
+        finLbl: data.finLbl,
+        lateLbl: data.lateLbl,
+        assSubLbl: data.assSubLbl,
+        top1AknowLbl: data.top1AknowLbl,
+        top1AproLbl: data.top1AproLbl,
+        top1AinvLbl: data.top1AinvLbl,
+        top1AdesiLbl: data.top1AdesiLbl,
+        top1AuseEngLbl: data.top1AuseEngLbl,
+        top1AindLbl: data.top1AindLbl,
+        top1AcomLbl: data.top1AcomLbl,
+        top1AprofLbl: data.top1AprofLbl,
+        top1AimpLbl: data.top1AimpLbl,
+        top1AethLbl: data.top1AethLbl,
+        top1AeconLbl: data.top1AeconLbl,
+        top1AlifeLbl: data.top2AlifeLbl,
+        top1BknowLbl: data.top1BknowLbl,
+        top1BproLbl: data.top1BproLbl,
+        top1BinvLbl: data.top1BinvLbl,
+        top1BdesiLbl: data.top1BdesiLbl,
+        top1BuseEngLbl: data.top1BuseEngLbl,
+        top1BindLbl: data.top1BindLbl,
+        top1BcomLbl: data.top1BcomLbl,
+        top1BprofLbl: data.top1BprofLbl,
+        top1BimpLbl: data.top1BimpLbl,
+        top1BethLbl: data.top1BethLbl,
+        top1BeconLbl: data.top1BeconLbl,
+        top1BlifeLbl: data.top1BlifeLbl,
+        top2AknowLbl: data.top2AknowLbl,
+        top2AproLbl: data.top2AproLbl,
+        top2AinvLbl: data.top2AinvLbl,
+        top2AdesiLbl: data.top2AdesiLbl,
+        top2AuseEngLbl: data.top2AuseEngLbl,
+        top2AindLbl: data.top2AindLbl,
+        top2AcomLbl: data.top2AcomLbl,
+        top2AprofLbl: data.top2AprofLbl,
+        top2AimpLbl: data.top2AimpLbl,
+        top2AethLbl: data.top2AethLbl,
+        top2AeconLbl: data.top2AeconLbl,
+        top2AlifeLbl: data.top2AlifeLbl,
+        top2BknowLbl: data.top2BknowLbl,
+        top2BproLbl: data.top2BproLbl,
+        top2BinvLbl: data.top2BinvLbl,
+        top2BdesiLbl: data.top2BdesiLbl,
+        top2BuseEngLbl: data.top2BuseEngLbl,
+        top2BindLbl: data.top2BindLbl,
+        top2BcomLbl: data.top2BcomLbl,
+        top2BprofLbl: data.top2BprofLbl,
+        top2BimpLbl: data.top2BimpLbl,
+        top2BethLbl: data.top2BethLbl,
+        top2BeconLbl: data.top2BeconLbl,
+        top2BlifeLbl: data.top2BlifeLbl,
+        top3AknowLbl: data.top3AknowLbl,
+        top3AproLbl: data.top3AproLbl,
+        top3AinvLbl: data.top3AinvLbl,
+        top3AdesiLbl: data.top3AdesiLbl,
+        top3AuseEngLbl: data.top3AuseEngLbl,
+        top3AindLbl: data.top3AindLbl,
+        top3AcomLbl: data.top3AcomLbl,
+        top3AprofLbl: data.top3AprofLbl,
+        top3AimpLbl: data.top3AimpLbl,
+        top3AethLbl: data.top3AethLbl,
+        top3AeconLbl: data.top3AeconLbl,
+        top3AlifeLbl: data.top3AlifeLbl,
+        top3BknowLbl: data.top3BknowLbl,
+        top3BproLbl: data.top3BproLbl,
+        top3BinvLbl: data.top3BinvLbl,
+        top3BdesiLbl: data.top3BdesiLbl,
+        top3BuseEngLbl: data.top3BuseEngLbl,
+        top3BindLbl: data.top3BindLbl,
+        top3BcomLbl: data.top3BcomLbl,
+        top3BprofLbl: data.top3BprofLbl,
+        top3BimpLbl: data.top3BimpLbl,
+        top3BethLbl: data.top3BethLbl,
+        top3BeconLbl: data.top3BeconLbl,
+        top3BlifeLbl: data.top3BlifeLbl,
+        top4AknowLbl: data.top4AknowLbl,
+        top4AproLbl: data.top4AproLbl,
+        top4AinvLbl: data.top4AinvLbl,
+        top4AdesiLbl: data.top4AdesiLbl,
+        top4AuseEngLbl: data.top4AuseEngLbl,
+        top4AindLbl: data.top4AindLbl,
+        top4AcomLbl: data.top4AcomLbl,
+        top4AprofLbl: data.top4AprofLbl,
+        top4AimpLbl: data.top4AimpLbl,
+        top4AethLbl: data.top4AethLbl,
+        top4AeconLbl: data.top4AeconLbl,
+        top4AlifeLbl: data.top4AlifeLbl,
+        top4BknowLbl: data.top4BknowLbl,
+        top4BproLbl: data.top4BproLbl,
+        top4BinvLbl: data.top4BinvLbl,
+        top4BdesiLbl: data.top4BdesiLbl,
+        top4BuseEngLbl: data.top4BuseEngLbl,
+        top4BindLbl: data.top4BindLbl,
+        top4BcomLbl: data.top4BcomLbl,
+        top4BprofLbl: data.top4BprofLbl,
+        top4BimpLbl: data.top4BimpLbl,
+        top4BethLbl: data.top4BethLbl,
+        top4BeconLbl: data.top4BeconLbl,
+        top4BlifeLbl: data.top4BlifeLbl,
+      }),
+    });
   }
 
   return (
@@ -1201,9 +1368,8 @@ export default function CreateOutline() {
           rows="1"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
-        >
-          XXXXA/B
-        </textarea>
+          {...register("codeLbl")}
+        ></textarea>
         <br />
 
         <label class="text-3xl font-serif text-black">Course Title:</label>
@@ -1213,6 +1379,7 @@ export default function CreateOutline() {
           id="titleTxt"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("titleLbl")}
         ></textarea>
         <br />
 
@@ -1236,6 +1403,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("desLbl")}
         ></textarea>
         <br />
         <br />
@@ -1247,10 +1415,8 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
-        >
-          Dr. Name, P.Eng. TEB XXX, 519-661-2111 ext. XXXXX, UWO e-mail address
-          as hyperlink Consultation hours:
-        </textarea>
+          {...register("insLbl")}
+        ></textarea>
         <br />
         <br />
         <br />
@@ -1264,6 +1430,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("acaLbl")}
         ></textarea>
         <br />
         <br />
@@ -1276,9 +1443,8 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
-        >
-          X lecture hours, Y laboratory hours, Z tutorial hours, 0.5 course.
-        </textarea>
+          {...register("conLbl")}
+        ></textarea>
         <br />
         <br />
         <br />
@@ -1290,6 +1456,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("antLbl")}
         ></textarea>
         <br />
         <br />
@@ -1302,6 +1469,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("preLbl")}
         ></textarea>
         <br />
         <br />
@@ -1314,14 +1482,8 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
-        >
-          Unless you have either the requisites for this course or written
-          special permission from your Dean to enroll in it, you will be removed
-          from this course and it will be deleted from your record. This
-          decision may not be appealed. You will receive no adjustment to your
-          fees in the event that you are dropped from a course for failing to
-          have the necessary prerequisites.
-        </textarea>
+          {...register("coLbl")}
+        ></textarea>
         <br />
         <br />
         <br />
@@ -1335,9 +1497,8 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
-        >
-          Engineering Science X%, Engineering Design Y%.
-        </textarea>
+          {...register("ceabLbl")}
+        ></textarea>
         <br />
         <br />
         <br />
@@ -1349,6 +1510,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("reqTbLbl")}
         ></textarea>
         <br />
         <br />
@@ -1363,6 +1525,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("othLbl")}
         ></textarea>
         <br />
         <br />
@@ -1377,6 +1540,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("recRefLbl")}
         ></textarea>
         <br />
         <br />
@@ -1395,7 +1559,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-9 text-black">
           Knowledge Base:
         </label>
-        <select id="knowdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="knowdrop"
+          class="border-2 border-black rounded-lg "
+          {...register("knowLbl")}
+        >
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
@@ -1406,7 +1574,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-9 text-black">
           Problem Analysis:
         </label>
-        <select id="prodrop" class="border-2 border-black rounded-lg">
+        <select
+          id="prodrop"
+          class="border-2 border-black rounded-lg"
+          {...register("proLbl")}
+        >
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
@@ -1415,7 +1587,11 @@ export default function CreateOutline() {
         <br />
 
         <label class="text-xl font-serif ml-9 text-black">Investigation:</label>
-        <select id="invdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="invdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("invLbl")}
+        >
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
@@ -1424,7 +1600,11 @@ export default function CreateOutline() {
         <br />
 
         <label class="text-xl font-serif ml-9 text-black">Design:</label>
-        <select id="desidrop" class="border-2 border-black rounded-lg">
+        <select
+          id="desidrop"
+          class="border-2 border-black rounded-lg"
+          {...register("desiLbl")}
+        >
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
@@ -1435,7 +1615,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-9 text-black">
           Use of Engineering Tools:
         </label>
-        <select id="useEngdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="useEngdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("useEngLbl")}
+        >
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
@@ -1446,7 +1630,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-9 text-black">
           Individual and Team Work:
         </label>
-        <select id="inddrop" class="border-2 border-black rounded-lg">
+        <select
+          id="inddrop"
+          class="border-2 border-black rounded-lg"
+          {...register("indLbl")}
+        >
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
@@ -1457,7 +1645,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-9 text-black">
           Communication Skills:
         </label>
-        <select id="comdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="comdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("comLbl")}
+        >
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
@@ -1468,7 +1660,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-9 text-black">
           Professionalism:
         </label>
-        <select id="profdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="profdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("profLbl")}
+        >
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
@@ -1479,7 +1675,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-9 text-black">
           Impact on Society and the Environment:
         </label>
-        <select id="impdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="impdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("impLbl")}
+        >
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
@@ -1490,7 +1690,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-9 text-black">
           Ethics and Equity:
         </label>
-        <select id="ethdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="ethdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("ethLbl")}
+        >
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
@@ -1501,7 +1705,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-9 text-black">
           Economics and Project Management:
         </label>
-        <select id="econdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="econdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("econLbl")}
+        >
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
@@ -1512,7 +1720,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-9 text-black">
           Life-Long Learning:
         </label>
-        <select id="lifedrop" class="border-2 border-black rounded-lg">
+        <select
+          id="lifedrop"
+          class="border-2 border-black rounded-lg"
+          {...register("lifeLbl")}
+        >
           <option value="empty"></option>
           <option value="I">I</option>
           <option value="D">D</option>
@@ -1533,6 +1745,7 @@ export default function CreateOutline() {
           rows="1"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("top1Lbl")}
         ></textarea>
         <br />
 
@@ -1548,13 +1761,18 @@ export default function CreateOutline() {
           rows="1"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("top1aLbl")}
         ></textarea>
         <br />
 
         <label class="text-xl font-serif ml-20 text-black">
           Knowledge Base:
         </label>
-        <select id="top1Aknowdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top1Aknowdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top1AknowLbl")}
+        >
           <option value="empty"></option>
           <option value="KB1">KB1</option>
           <option value="KB2">KB2</option>
@@ -1566,7 +1784,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Problem Analysis:
         </label>
-        <select id="top1Aprodrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top1Aprodrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top1AproLbl")}
+        >
           <option value="empty"></option>
           <option value="PA1">PA1</option>
           <option value="PA2">PA2</option>
@@ -1577,7 +1799,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Investigation:
         </label>
-        <select id="top1Ainvdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top1Ainvdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top1AinvLbl")}
+        >
           <option value="empty"></option>
           <option value="I1">I1</option>
           <option value="I2">I2</option>
@@ -1586,7 +1812,11 @@ export default function CreateOutline() {
         <br />
 
         <label class="text-xl font-serif ml-20 text-black">Design:</label>
-        <select id="top1Adesidrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top1Adesidrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top1AdesiLbl")}
+        >
           <option value="empty"></option>
           <option value="D1">D1</option>
           <option value="D2">D2</option>
@@ -1598,7 +1828,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Use of Engineering Tools:
         </label>
-        <select id="top1AuseEngdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top1AuseEngdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top1AuseEngLbl")}
+        >
           <option value="empty"></option>
           <option value="ET1">ET1</option>
           <option value="ET2">ET2</option>
@@ -1609,7 +1843,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Individual and Team Work:
         </label>
-        <select id="top1Ainddrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top1Ainddrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top1AindLbl")}
+        >
           <option value="empty"></option>
           <option value="ITW1">ITW1</option>
           <option value="ITW2">ITW2</option>
@@ -1620,7 +1858,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Communication Skills:
         </label>
-        <select id="top1Acomdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top1Acomdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top1AcomLbl")}
+        >
           <option value="empty"></option>
           <option value="CS1">CS1</option>
           <option value="CS2">CS2</option>
@@ -1631,7 +1873,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Professionalism:
         </label>
-        <select id="top1Aprofdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top1Aprofdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top1AprofLbl")}
+        >
           <option value="empty"></option>
           <option value="PR1">PR1</option>
           <option value="PR2">PR2</option>
@@ -1642,7 +1888,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Impact of Engineering on Society and the Environment:
         </label>
-        <select id="top1Aimpdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top1Aimpdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top1AimpLbl")}
+        >
           <option value="empty"></option>
           <option value="IESE1">IESE1</option>
           <option value="IESE2">IESE2</option>
@@ -1653,7 +1903,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Ethics and Equity:
         </label>
-        <select id="top1Aethdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top1Aethdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top1AethLbl")}
+        >
           <option value="empty"></option>
           <option value="EE1">EE1</option>
           <option value="EE2">EE2</option>
@@ -1665,7 +1919,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Economics and Project Management:
         </label>
-        <select id="top1Aecondrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top1Aecondrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top1AeconLbl")}
+        >
           <option value="empty"></option>
           <option value="EPM1">EPM1</option>
           <option value="EPM2">EPM2</option>
@@ -1677,7 +1935,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Life-Long Learning:
         </label>
-        <select id="top1Alifedrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top1Alifedrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top1AlifeLbl")}
+        >
           <option value="empty"></option>
           <option value="LL1">LL1</option>
           <option value="LL2">LL2</option>
@@ -1692,13 +1954,18 @@ export default function CreateOutline() {
           rows="1"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("top1bLbl")}
         ></textarea>
         <br />
 
         <label class="text-xl font-serif ml-20 text-black">
           Knowledge Base:
         </label>
-        <select id="top1Bknowdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top1Bknowdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top1BknowLbl")}
+        >
           <option value="empty"></option>
           <option value="KB1">KB1</option>
           <option value="KB2">KB2</option>
@@ -1710,7 +1977,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Problem Analysis:
         </label>
-        <select id="top1Bprodrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top1Bprodrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top1BproLbl")}
+        >
           <option value="empty"></option>
           <option value="PA1">PA1</option>
           <option value="PA2">PA2</option>
@@ -1721,7 +1992,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Investigation:
         </label>
-        <select id="top1Binvdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top1Binvdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top1BinvLbl")}
+        >
           <option value="empty"></option>
           <option value="I1">I1</option>
           <option value="I2">I2</option>
@@ -1730,7 +2005,11 @@ export default function CreateOutline() {
         <br />
 
         <label class="text-xl font-serif ml-20 text-black">Design:</label>
-        <select id="top1Bdesidrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top1Bdesidrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top1BdesiLbl")}
+        >
           <option value="empty"></option>
           <option value="D1">D1</option>
           <option value="D2">D2</option>
@@ -1742,7 +2021,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Use of Engineering Tools:
         </label>
-        <select id="top1BuseEngdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top1BuseEngdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top1BuseEngLbl")}
+        >
           <option value="empty"></option>
           <option value="ET1">ET1</option>
           <option value="ET2">ET2</option>
@@ -1753,7 +2036,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Individual and Team Work:
         </label>
-        <select id="top1Binddrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top1Binddrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top1BindLbl")}
+        >
           <option value="empty"></option>
           <option value="ITW1">ITW1</option>
           <option value="ITW2">ITW2</option>
@@ -1764,7 +2051,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Communication Skills:
         </label>
-        <select id="top1Bcomdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top1Bcomdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top1BcomLbl")}
+        >
           <option value="empty"></option>
           <option value="CS1">CS1</option>
           <option value="CS2">CS2</option>
@@ -1775,7 +2066,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Professionalism:
         </label>
-        <select id="top1Bprofdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top1Bprofdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top1BprofLbl")}
+        >
           <option value="empty"></option>
           <option value="PR1">PR1</option>
           <option value="PR2">PR2</option>
@@ -1786,7 +2081,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Impact of Engineering on Society and the Environment:
         </label>
-        <select id="top1Bimpdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top1Bimpdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top1BimpLbl")}
+        >
           <option value="empty"></option>
           <option value="IESE1">IESE1</option>
           <option value="IESE2">IESE2</option>
@@ -1797,7 +2096,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Ethics and Equity:
         </label>
-        <select id="top1Bethdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top1Bethdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top1BethLbl")}
+        >
           <option value="empty"></option>
           <option value="EE1">EE1</option>
           <option value="EE2">EE2</option>
@@ -1809,7 +2112,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Economics and Project Management:
         </label>
-        <select id="top1Becondrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top1Becondrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top1BeconLbl")}
+        >
           <option value="empty"></option>
           <option value="EPM1">EPM1</option>
           <option value="EPM2">EPM2</option>
@@ -1821,7 +2128,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Life-Long Learning:
         </label>
-        <select id="top1Blifedrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top1Blifedrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top1BlifeLbl")}
+        >
           <option value="empty"></option>
           <option value="LL1">LL1</option>
           <option value="LL2">LL2</option>
@@ -1836,6 +2147,7 @@ export default function CreateOutline() {
           rows="1"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("top2Lbl")}
         ></textarea>
         <br />
         <label class="text-xl font-serif ml-12 text-black">
@@ -1850,13 +2162,18 @@ export default function CreateOutline() {
           rows="1"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("top2aLbl")}
         ></textarea>
         <br />
 
         <label class="text-xl font-serif ml-20 text-black">
           Knowledge Base:
         </label>
-        <select id="top2Aknowdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top2Aknowdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top2AknowLbl")}
+        >
           <option value="empty"></option>
           <option value="KB1">KB1</option>
           <option value="KB2">KB2</option>
@@ -1868,7 +2185,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Problem Analysis:
         </label>
-        <select id="top2Aprodrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top2Aprodrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top2AproLbl")}
+        >
           <option value="empty"></option>
           <option value="PA1">PA1</option>
           <option value="PA2">PA2</option>
@@ -1879,7 +2200,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Investigation:
         </label>
-        <select id="top2Ainvdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top2Ainvdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top2AinvLbl")}
+        >
           <option value="empty"></option>
           <option value="I1">I1</option>
           <option value="I2">I2</option>
@@ -1888,7 +2213,11 @@ export default function CreateOutline() {
         <br />
 
         <label class="text-xl font-serif ml-20 text-black">Design:</label>
-        <select id="top2Adesidrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top2Adesidrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top2AdesiLbl")}
+        >
           <option value="empty"></option>
           <option value="D1">D1</option>
           <option value="D2">D2</option>
@@ -1900,7 +2229,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Use of Engineering Tools:
         </label>
-        <select id="top2AuseEngdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top2AuseEngdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top2AuseEngLbl")}
+        >
           <option value="empty"></option>
           <option value="ET1">ET1</option>
           <option value="ET2">ET2</option>
@@ -1911,7 +2244,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Individual and Team Work:
         </label>
-        <select id="top2Ainddrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top2Ainddrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top2AindLbl")}
+        >
           <option value="empty"></option>
           <option value="ITW1">ITW1</option>
           <option value="ITW2">ITW2</option>
@@ -1922,7 +2259,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Communication Skills:
         </label>
-        <select id="top2Acomdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top2Acomdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top2AcomLbl")}
+        >
           <option value="empty"></option>
           <option value="CS1">CS1</option>
           <option value="CS2">CS2</option>
@@ -1933,7 +2274,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Professionalism:
         </label>
-        <select id="top2Aprofdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top2Aprofdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top2AprofLbl")}
+        >
           <option value="empty"></option>
           <option value="PR1">PR1</option>
           <option value="PR2">PR2</option>
@@ -1944,7 +2289,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Impact of Engineering on Society and the Environment:
         </label>
-        <select id="top2Aimpdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top2Aimpdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top2AimpLbl")}
+        >
           <option value="empty"></option>
           <option value="IESE1">IESE1</option>
           <option value="IESE2">IESE2</option>
@@ -1955,7 +2304,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Ethics and Equity:
         </label>
-        <select id="top2Aethdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top2Aethdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top2AethLbl")}
+        >
           <option value="empty"></option>
           <option value="EE1">EE1</option>
           <option value="EE2">EE2</option>
@@ -1967,7 +2320,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Economics and Project Management:
         </label>
-        <select id="top2Aecondrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top2Aecondrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top2AeconLbl")}
+        >
           <option value="empty"></option>
           <option value="EPM1">EPM1</option>
           <option value="EPM2">EPM2</option>
@@ -1979,7 +2336,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Life-Long Learning:
         </label>
-        <select id="top2Alifedrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top2Alifedrop"
+          class="border-2 border-black rounded-lg "
+          {...register("top2AlifeLbl")}
+        >
           <option value="empty"></option>
           <option value="LL1">LL1</option>
           <option value="LL2">LL2</option>
@@ -1994,13 +2355,18 @@ export default function CreateOutline() {
           rows="1"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("top2bLbl")}
         ></textarea>
         <br />
 
         <label class="text-xl font-serif ml-20 text-black">
           Knowledge Base:
         </label>
-        <select id="top2Bknowdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top2Bknowdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top2BknowLbl")}
+        >
           <option value="empty"></option>
           <option value="KB1">KB1</option>
           <option value="KB2">KB2</option>
@@ -2012,7 +2378,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Problem Analysis:
         </label>
-        <select id="top2Bprodrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top2Bprodrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top2BproLbl")}
+        >
           <option value="empty"></option>
           <option value="PA1">PA1</option>
           <option value="PA2">PA2</option>
@@ -2023,7 +2393,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Investigation:
         </label>
-        <select id="top2Binvdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top2Binvdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top2BinvLbl")}
+        >
           <option value="empty"></option>
           <option value="I1">I1</option>
           <option value="I2">I2</option>
@@ -2032,7 +2406,11 @@ export default function CreateOutline() {
         <br />
 
         <label class="text-xl font-serif ml-20 text-black">Design:</label>
-        <select id="top2Bdesidrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top2Bdesidrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top2BdesiLbl")}
+        >
           <option value="empty"></option>
           <option value="D1">D1</option>
           <option value="D2">D2</option>
@@ -2044,7 +2422,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Use of Engineering Tools:
         </label>
-        <select id="top2BuseEngdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top2BuseEngdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top2BuseEngLbl")}
+        >
           <option value="empty"></option>
           <option value="ET1">ET1</option>
           <option value="ET2">ET2</option>
@@ -2055,7 +2437,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Individual and Team Work:
         </label>
-        <select id="top2Binddrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top2Binddrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top2BindLbl")}
+        >
           <option value="empty"></option>
           <option value="ITW1">ITW1</option>
           <option value="ITW2">ITW2</option>
@@ -2066,7 +2452,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Communication Skills:
         </label>
-        <select id="top2Bcomdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top2Bcomdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top2BcomLbl")}
+        >
           <option value="empty"></option>
           <option value="CS1">CS1</option>
           <option value="CS2">CS2</option>
@@ -2077,7 +2467,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Professionalism:
         </label>
-        <select id="top2Bprofdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top2Bprofdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top2BprofLbl")}
+        >
           <option value="empty"></option>
           <option value="PR1">PR1</option>
           <option value="PR2">PR2</option>
@@ -2088,7 +2482,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Impact of Engineering on Society and the Environment:
         </label>
-        <select id="top2Bimpdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top2Bimpdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top2BimpLbl")}
+        >
           <option value="empty"></option>
           <option value="IESE1">IESE1</option>
           <option value="IESE2">IESE2</option>
@@ -2099,7 +2497,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Ethics and Equity:
         </label>
-        <select id="top2Bethdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top2Bethdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top2BethLbl")}
+        >
           <option value="empty"></option>
           <option value="EE1">EE1</option>
           <option value="EE2">EE2</option>
@@ -2111,7 +2513,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Economics and Project Management:
         </label>
-        <select id="top2Becondrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top2Becondrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top2BeconLbl")}
+        >
           <option value="empty"></option>
           <option value="EPM1">EPM1</option>
           <option value="EPM2">EPM2</option>
@@ -2123,7 +2529,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Life-Long Learning:
         </label>
-        <select id="top2Blifedrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top2Blifedrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top2BlifeLbl")}
+        >
           <option value="empty"></option>
           <option value="LL1">LL1</option>
           <option value="LL2">LL2</option>
@@ -2138,6 +2548,7 @@ export default function CreateOutline() {
           rows="1"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("top3Lbl")}
         ></textarea>
         <br />
         <label class="text-xl font-serif ml-12 text-black">
@@ -2152,13 +2563,18 @@ export default function CreateOutline() {
           rows="1"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("top3aLbl")}
         ></textarea>
         <br />
 
         <label class="text-xl font-serif ml-20 text-black">
           Knowledge Base:
         </label>
-        <select id="top3Aknowdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top3Aknowdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top3AknowLbl")}
+        >
           <option value="empty"></option>
           <option value="KB1">KB1</option>
           <option value="KB2">KB2</option>
@@ -2170,7 +2586,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Problem Analysis:
         </label>
-        <select id="top3Aprodrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top3Aprodrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top3AproLbl")}
+        >
           <option value="empty"></option>
           <option value="PA1">PA1</option>
           <option value="PA2">PA2</option>
@@ -2181,7 +2601,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Investigation:
         </label>
-        <select id="top3Ainvdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top3Ainvdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top3AinvLbl")}
+        >
           <option value="empty"></option>
           <option value="I1">I1</option>
           <option value="I2">I2</option>
@@ -2190,7 +2614,11 @@ export default function CreateOutline() {
         <br />
 
         <label class="text-xl font-serif ml-20 text-black">Design:</label>
-        <select id="top3Adesidrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top3Adesidrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top3AdesiLbl")}
+        >
           <option value="empty"></option>
           <option value="D1">D1</option>
           <option value="D2">D2</option>
@@ -2202,7 +2630,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Use of Engineering Tools:
         </label>
-        <select id="top3AuseEngdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top3AuseEngdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top3AuseEngLbl")}
+        >
           <option value="empty"></option>
           <option value="ET1">ET1</option>
           <option value="ET2">ET2</option>
@@ -2213,7 +2645,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Individual and Team Work:
         </label>
-        <select id="top3Ainddrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top3Ainddrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top3AindLbl")}
+        >
           <option value="empty"></option>
           <option value="ITW1">ITW1</option>
           <option value="ITW2">ITW2</option>
@@ -2224,7 +2660,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Communication Skills:
         </label>
-        <select id="top3Acomdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top3Acomdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top3AcomLbl")}
+        >
           <option value="empty"></option>
           <option value="CS1">CS1</option>
           <option value="CS2">CS2</option>
@@ -2235,7 +2675,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Professionalism:
         </label>
-        <select id="top3Aprofdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top3Aprofdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top3AprofLbl")}
+        >
           <option value="empty"></option>
           <option value="PR1">PR1</option>
           <option value="PR2">PR2</option>
@@ -2246,7 +2690,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Impact of Engineering on Society and the Environment:
         </label>
-        <select id="top3Aimpdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top3Aimpdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top3AimpLbl")}
+        >
           <option value="empty"></option>
           <option value="IESE1">IESE1</option>
           <option value="IESE2">IESE2</option>
@@ -2257,7 +2705,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Ethics and Equity:
         </label>
-        <select id="top3Aethdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top3Aethdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top3AethLbl")}
+        >
           <option value="empty"></option>
           <option value="EE1">EE1</option>
           <option value="EE2">EE2</option>
@@ -2269,7 +2721,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Economics and Project Management:
         </label>
-        <select id="top3Aecondrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top3Aecondrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top3AeconLbl")}
+        >
           <option value="empty"></option>
           <option value="EPM1">EPM1</option>
           <option value="EPM2">EPM2</option>
@@ -2281,7 +2737,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Life-Long Learning:
         </label>
-        <select id="top3Alifedrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top3Alifedrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top3AlifeLbl")}
+        >
           <option value="empty"></option>
           <option value="LL1">LL1</option>
           <option value="LL2">LL2</option>
@@ -2296,13 +2756,18 @@ export default function CreateOutline() {
           rows="1"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("top3bLbl")}
         ></textarea>
         <br />
 
         <label class="text-xl font-serif ml-20 text-black">
           Knowledge Base:
         </label>
-        <select id="top3Bknowdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top3Bknowdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top3BknowLbl")}
+        >
           <option value="empty"></option>
           <option value="KB1">KB1</option>
           <option value="KB2">KB2</option>
@@ -2314,7 +2779,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Problem Analysis:
         </label>
-        <select id="top3Bprodrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top3Bprodrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top3BproLbl")}
+        >
           <option value="empty"></option>
           <option value="PA1">PA1</option>
           <option value="PA2">PA2</option>
@@ -2325,7 +2794,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Investigation:
         </label>
-        <select id="top3Binvdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top3Binvdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top3BinvLbl")}
+        >
           <option value="empty"></option>
           <option value="I1">I1</option>
           <option value="I2">I2</option>
@@ -2334,7 +2807,11 @@ export default function CreateOutline() {
         <br />
 
         <label class="text-xl font-serif ml-20 text-black">Design:</label>
-        <select id="top3Bdesidrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top3Bdesidrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top3BdesiLbl")}
+        >
           <option value="empty"></option>
           <option value="D1">D1</option>
           <option value="D2">D2</option>
@@ -2346,7 +2823,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Use of Engineering Tools:
         </label>
-        <select id="top3BuseEngdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top3BuseEngdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top3BuseEngLbl")}
+        >
           <option value="empty"></option>
           <option value="ET1">ET1</option>
           <option value="ET2">ET2</option>
@@ -2357,7 +2838,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Individual and Team Work:
         </label>
-        <select id="top3Binddrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top3Binddrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top3BindLbl")}
+        >
           <option value="empty"></option>
           <option value="ITW1">ITW1</option>
           <option value="ITW2">ITW2</option>
@@ -2368,7 +2853,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Communication Skills:
         </label>
-        <select id="top3Bcomdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top3Bcomdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top3BcomLbl")}
+        >
           <option value="empty"></option>
           <option value="CS1">CS1</option>
           <option value="CS2">CS2</option>
@@ -2379,7 +2868,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Professionalism:
         </label>
-        <select id="top3Bprofdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top3Bprofdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top3BprofLbl")}
+        >
           <option value="empty"></option>
           <option value="PR1">PR1</option>
           <option value="PR2">PR2</option>
@@ -2390,7 +2883,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Impact of Engineering on Society and the Environment:
         </label>
-        <select id="top3Bimpdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top3Bimpdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top3BimpLbl")}
+        >
           <option value="empty"></option>
           <option value="IESE1">IESE1</option>
           <option value="IESE2">IESE2</option>
@@ -2401,7 +2898,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Ethics and Equity:
         </label>
-        <select id="top3Bethdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top3Bethdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top3BethLbl")}
+        >
           <option value="empty"></option>
           <option value="EE1">EE1</option>
           <option value="EE2">EE2</option>
@@ -2413,7 +2914,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Economics and Project Management:
         </label>
-        <select id="top3Becondrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top3Becondrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top3BeconLbl")}
+        >
           <option value="empty"></option>
           <option value="EPM1">EPM1</option>
           <option value="EPM2">EPM2</option>
@@ -2425,7 +2930,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Life-Long Learning:
         </label>
-        <select id="top3Blifedrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top3Blifedrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top3BlifeLbl")}
+        >
           <option value="empty"></option>
           <option value="LL1">LL1</option>
           <option value="LL2">LL2</option>
@@ -2440,6 +2949,7 @@ export default function CreateOutline() {
           rows="1"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("top4Lbl")}
         ></textarea>
         <br />
         <label class="text-xl font-serif ml-12 text-black">
@@ -2454,13 +2964,18 @@ export default function CreateOutline() {
           rows="1"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("top4aLbl")}
         ></textarea>
         <br />
 
         <label class="text-xl font-serif ml-20 text-black">
           Knowledge Base:
         </label>
-        <select id="top4Aknowdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top4Aknowdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top4AknowLbl")}
+        >
           <option value="empty"></option>
           <option value="KB1">KB1</option>
           <option value="KB2">KB2</option>
@@ -2472,7 +2987,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Problem Analysis:
         </label>
-        <select id="top4Aprodrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top4Aprodrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top4AproLbl")}
+        >
           <option value="empty"></option>
           <option value="PA1">PA1</option>
           <option value="PA2">PA2</option>
@@ -2483,7 +3002,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Investigation:
         </label>
-        <select id="top4Ainvdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top4Ainvdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top4AinvLbl")}
+        >
           <option value="empty"></option>
           <option value="I1">I1</option>
           <option value="I2">I2</option>
@@ -2492,7 +3015,11 @@ export default function CreateOutline() {
         <br />
 
         <label class="text-xl font-serif ml-20 text-black">Design:</label>
-        <select id="top4Adesidrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top4Adesidrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top4AdesiLbl")}
+        >
           <option value="empty"></option>
           <option value="D1">D1</option>
           <option value="D2">D2</option>
@@ -2504,7 +3031,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Use of Engineering Tools:
         </label>
-        <select id="top4AuseEngdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top4AuseEngdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top4AuseEngLbl")}
+        >
           <option value="empty"></option>
           <option value="ET1">ET1</option>
           <option value="ET2">ET2</option>
@@ -2515,7 +3046,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Individual and Team Work:
         </label>
-        <select id="top4Ainddrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top4Ainddrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top4AindLbl")}
+        >
           <option value="empty"></option>
           <option value="ITW1">ITW1</option>
           <option value="ITW2">ITW2</option>
@@ -2526,7 +3061,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Communication Skills:
         </label>
-        <select id="top4Acomdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top4Acomdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top4AcomLbl")}
+        >
           <option value="empty"></option>
           <option value="CS1">CS1</option>
           <option value="CS2">CS2</option>
@@ -2537,7 +3076,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Professionalism:
         </label>
-        <select id="top4Aprofdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top4Aprofdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top4AprofLbl")}
+        >
           <option value="empty"></option>
           <option value="PR1">PR1</option>
           <option value="PR2">PR2</option>
@@ -2548,7 +3091,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Impact of Engineering on Society and the Environment:
         </label>
-        <select id="top4Aimpdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top4Aimpdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top4AimpLbl")}
+        >
           <option value="empty"></option>
           <option value="IESE1">IESE1</option>
           <option value="IESE2">IESE2</option>
@@ -2559,7 +3106,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Ethics and Equity:
         </label>
-        <select id="top4Aethdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top4Aethdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top4AethLbl")}
+        >
           <option value="empty"></option>
           <option value="EE1">EE1</option>
           <option value="EE2">EE2</option>
@@ -2571,7 +3122,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Economics and Project Management:
         </label>
-        <select id="top4Aecondrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top4Aecondrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top4AeconLbl")}
+        >
           <option value="empty"></option>
           <option value="EPM1">EPM1</option>
           <option value="EPM2">EPM2</option>
@@ -2583,7 +3138,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Life-Long Learning:
         </label>
-        <select id="top4Alifedrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top4Alifedrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top4AlifeLbl")}
+        >
           <option value="empty"></option>
           <option value="LL1">LL1</option>
           <option value="LL2">LL2</option>
@@ -2598,13 +3157,18 @@ export default function CreateOutline() {
           rows="1"
           type="text"
           class="border-2 border-black ml-3 rounded-lg"
+          {...register("top4bLbl")}
         ></textarea>
         <br />
 
         <label class="text-xl font-serif ml-20 text-black">
           Knowledge Base:
         </label>
-        <select id="top4Bknowdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top4Bknowdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top4BknowLbl")}
+        >
           <option value="empty"></option>
           <option value="KB1">KB1</option>
           <option value="KB2">KB2</option>
@@ -2616,7 +3180,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Problem Analysis:
         </label>
-        <select id="top4Bprodrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top4Bprodrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top4BproLbl")}
+        >
           <option value="empty"></option>
           <option value="PA1">PA1</option>
           <option value="PA2">PA2</option>
@@ -2627,7 +3195,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Investigation:
         </label>
-        <select id="top4Binvdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top4Binvdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top4BinvLbl")}
+        >
           <option value="empty"></option>
           <option value="I1">I1</option>
           <option value="I2">I2</option>
@@ -2636,7 +3208,11 @@ export default function CreateOutline() {
         <br />
 
         <label class="text-xl font-serif ml-20 text-black">Design:</label>
-        <select id="top4Bdesidrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top4Bdesidrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top4BdesiLbl")}
+        >
           <option value="empty"></option>
           <option value="D1">D1</option>
           <option value="D2">D2</option>
@@ -2648,7 +3224,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Use of Engineering Tools:
         </label>
-        <select id="top4BuseEngdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top4BuseEngdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top4BuseEngLbl")}
+        >
           <option value="empty"></option>
           <option value="ET1">ET1</option>
           <option value="ET2">ET2</option>
@@ -2659,7 +3239,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Individual and Team Work:
         </label>
-        <select id="top4Binddrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top4Binddrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top4BindLbl")}
+        >
           <option value="empty"></option>
           <option value="ITW1">ITW1</option>
           <option value="ITW2">ITW2</option>
@@ -2670,7 +3254,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Communication Skills:
         </label>
-        <select id="top4Bcomdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top4Bcomdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top4BcomLbl")}
+        >
           <option value="empty"></option>
           <option value="CS1">CS1</option>
           <option value="CS2">CS2</option>
@@ -2681,7 +3269,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Professionalism:
         </label>
-        <select id="top4Bprofdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top4Bprofdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top4BprofLbl")}
+        >
           <option value="empty"></option>
           <option value="PR1">PR1</option>
           <option value="PR2">PR2</option>
@@ -2692,7 +3284,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Impact of Engineering on Society and the Environment:
         </label>
-        <select id="top4Bimpdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top4Bimpdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top4BimpLbl")}
+        >
           <option value="empty"></option>
           <option value="IESE1">IESE1</option>
           <option value="IESE2">IESE2</option>
@@ -2703,7 +3299,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Ethics and Equity:
         </label>
-        <select id="top4Bethdrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top4Bethdrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top4BethLbl")}
+        >
           <option value="empty"></option>
           <option value="EE1">EE1</option>
           <option value="EE2">EE2</option>
@@ -2715,7 +3315,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Economics and Project Management:
         </label>
-        <select id="top4Becondrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top4Becondrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top4BeconLbl")}
+        >
           <option value="empty"></option>
           <option value="EPM1">EPM1</option>
           <option value="EPM2">EPM2</option>
@@ -2727,7 +3331,11 @@ export default function CreateOutline() {
         <label class="text-xl font-serif ml-20 text-black">
           Life-Long Learning:
         </label>
-        <select id="top4Blifedrop" class="border-2 border-black rounded-lg">
+        <select
+          id="top4Blifedrop"
+          class="border-2 border-black rounded-lg"
+          {...register("top4BlifeLbl")}
+        >
           <option value="empty"></option>
           <option value="LL1">LL1</option>
           <option value="LL2">LL2</option>
@@ -2747,6 +3355,7 @@ export default function CreateOutline() {
           type="number"
           placeholder="%"
           class="border-2 border-black ml-3 w-11 rounded-lg"
+          {...register("homPercLbl")}
         ></input>
         <br />
 
@@ -2756,6 +3365,7 @@ export default function CreateOutline() {
           type="number"
           placeholder="%"
           class="border-2 border-black ml-3 w-11 rounded-lg"
+          {...register("quizPercLbl")}
         ></input>
         <br />
 
@@ -2765,6 +3375,7 @@ export default function CreateOutline() {
           type="number"
           placeholder="%"
           class="border-2 border-black ml-3 w-11 rounded-lg"
+          {...register("labPercLbl")}
         ></input>
         <br />
 
@@ -2774,6 +3385,7 @@ export default function CreateOutline() {
           type="number"
           placeholder="%"
           class="border-2 border-black ml-3 w-11 rounded-lg"
+          {...register("midPercLbl")}
         ></input>
         <br />
 
@@ -2785,6 +3397,7 @@ export default function CreateOutline() {
           type="number"
           placeholder="%"
           class="border-2 border-black ml-3 w-11 rounded-lg"
+          {...register("finPercLbl")}
         ></input>
         <br />
         <br />
@@ -2798,6 +3411,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("homLbl")}
         ></textarea>
         <br />
         <br />
@@ -2810,6 +3424,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("quiLbl")}
         ></textarea>
         <br />
         <br />
@@ -2822,6 +3437,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("labLbl")}
         ></textarea>
         <br />
         <br />
@@ -2834,6 +3450,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("midLbl")}
         ></textarea>
         <br />
         <br />
@@ -2846,10 +3463,8 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
-        >
-          The final examination will be take place during the regular
-          examination period.
-        </textarea>
+          {...register("finLbl")}
+        ></textarea>
         <br />
         <br />
         <br />
@@ -2863,6 +3478,7 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
+          {...register("lateLbl")}
         ></textarea>
         <br />
         <br />
@@ -2877,9 +3493,8 @@ export default function CreateOutline() {
           type="text"
           cols="50"
           class="border-2 border-black p-4 rounded-lg"
-        >
-          Locker XYZ located on the second floor of TEB.
-        </textarea>
+          {...register("assSubLbl")}
+        ></textarea>
         <br />
         <br />
         <br />
@@ -2889,7 +3504,7 @@ export default function CreateOutline() {
           size="lg"
           width="80"
           id="saveBtn"
-          onClick={() => submitChanges()}
+          onClick={handleSubmit(submitChanges)}
         >
           Save
         </Button>

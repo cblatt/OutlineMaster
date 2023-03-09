@@ -6,12 +6,13 @@ services:
     image: postgres:13.5
     restart: always
     environment:
+      - POSTGRES_DB=courseoutline-db
       - POSTGRES_USER=myuser
       - POSTGRES_PASSWORD=mypassword
     volumes:
       - postgres:/var/lib/postgresql/data
     ports:
-      - '5432:5432'
+      - '5555:5432'
   pgadmin:
     container_name: pgadmin4_container
     image: dpage/pgadmin4

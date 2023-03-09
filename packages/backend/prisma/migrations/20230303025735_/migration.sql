@@ -49,6 +49,7 @@ CREATE TABLE "InstructorCourse" (
 CREATE TABLE "Comments" (
     "commentId" TEXT NOT NULL,
     "commentTxt" TEXT NOT NULL,
+    "outlineId" TEXT NOT NULL,
 
     CONSTRAINT "Comments_pkey" PRIMARY KEY ("commentId")
 );
@@ -57,6 +58,56 @@ CREATE TABLE "Comments" (
 CREATE TABLE "CourseOutline" (
     "courseUuid" TEXT NOT NULL,
     "versionNum" INTEGER NOT NULL,
+    "titleLbl" TEXT NOT NULL,
+    "codeLbl" TEXT NOT NULL,
+    "yearLbl" TEXT NOT NULL,
+    "desLbl" TEXT NOT NULL,
+    "insLbl" TEXT NOT NULL,
+    "acaLbl" TEXT NOT NULL,
+    "conLbl" TEXT NOT NULL,
+    "antLbl" TEXT NOT NULL,
+    "preLbl" TEXT NOT NULL,
+    "coLbl" TEXT NOT NULL,
+    "ceabLbl" TEXT NOT NULL,
+    "reqTbLbl" TEXT NOT NULL,
+    "othLbl" TEXT NOT NULL,
+    "recRefLbl" TEXT NOT NULL,
+    "knowLbl" TEXT NOT NULL,
+    "useEngLbl" TEXT NOT NULL,
+    "impLbl" TEXT NOT NULL,
+    "proLbl" TEXT NOT NULL,
+    "indLbl" TEXT NOT NULL,
+    "ethLbl" TEXT NOT NULL,
+    "invLbl" TEXT NOT NULL,
+    "comLbl" TEXT NOT NULL,
+    "econLbl" TEXT NOT NULL,
+    "desiLbl" TEXT NOT NULL,
+    "profLbl" TEXT NOT NULL,
+    "lifeLbl" TEXT NOT NULL,
+    "top1Lbl" TEXT NOT NULL,
+    "top1aLbl" TEXT NOT NULL,
+    "top1bLbl" TEXT NOT NULL,
+    "top2Lbl" TEXT NOT NULL,
+    "top2aLbl" TEXT NOT NULL,
+    "top2bLbl" TEXT NOT NULL,
+    "top3Lbl" TEXT NOT NULL,
+    "top3aLbl" TEXT NOT NULL,
+    "top3bLbl" TEXT NOT NULL,
+    "top4Lbl" TEXT NOT NULL,
+    "top4aLbl" TEXT NOT NULL,
+    "top4bLbl" TEXT NOT NULL,
+    "homPercLbl" TEXT NOT NULL,
+    "quizPercLbl" TEXT NOT NULL,
+    "labPercLbl" TEXT NOT NULL,
+    "midPercLbl" TEXT NOT NULL,
+    "finPercLbl" TEXT NOT NULL,
+    "homLbl" TEXT NOT NULL,
+    "quiLbl" TEXT NOT NULL,
+    "labLbl" TEXT NOT NULL,
+    "midLbl" TEXT NOT NULL,
+    "finLbl" TEXT NOT NULL,
+    "lateLbl" TEXT NOT NULL,
+    "assSubLbl" TEXT NOT NULL,
 
     CONSTRAINT "CourseOutline_pkey" PRIMARY KEY ("courseUuid","versionNum")
 );
@@ -66,6 +117,8 @@ CREATE TABLE "EditLog" (
     "courseUuid" TEXT NOT NULL,
     "versionNum" INTEGER NOT NULL,
     "editNum" INTEGER NOT NULL,
+    "timeLastEdited" TIMESTAMP(3) NOT NULL,
+    "editor" TEXT NOT NULL,
 
     CONSTRAINT "EditLog_pkey" PRIMARY KEY ("courseUuid","versionNum")
 );

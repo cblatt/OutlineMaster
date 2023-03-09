@@ -27,7 +27,7 @@ export class CourseOutlineService {
     return `This action updates a #${id} courseOutline`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} courseOutline`;
+  remove(courseUuid: string) {
+    return this.prisma.courseOutline.deleteMany({ where: { courseUuid } });
   }
 }

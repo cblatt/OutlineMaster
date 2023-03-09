@@ -68,3 +68,18 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### To build and deploy
+
+# Build production files
+
+npm run build
+
+# Build docker image
+
+docker build -t frontend .
+
+# Tag image with gcloud project and push to google cloud registry
+
+docker tag frontend gcr.io/teak-brook-377021/frontend
+docker push gcr.io/teak-brook-377021/frontend

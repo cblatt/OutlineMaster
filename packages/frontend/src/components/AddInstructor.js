@@ -22,11 +22,12 @@ export default function AddInstructor() {
   const navigate = useNavigate();
 
   async function onSubmit(data) {
-    fetch("/users", {
+    fetch(process.env.REACT_APP_API_URI + "/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Content-length": 7,
+        Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
       },
       body: JSON.stringify({ role: "INSTRUCTOR", ...data }),
     })
