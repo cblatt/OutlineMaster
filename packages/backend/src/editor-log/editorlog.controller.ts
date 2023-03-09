@@ -13,6 +13,7 @@ import { UpdateEditorlogDto } from './dto/update-editorlog.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @Controller('editorlog')
+@ApiTags('editorlog')
 export class EditorlogController {
   constructor(private readonly editorlogService: EditorlogService) {}
 

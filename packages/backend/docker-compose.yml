@@ -6,6 +6,7 @@ services:
     image: postgres:13.5
     restart: always
     environment:
+      - POSTGRES_DB=courseoutline-db
       - POSTGRES_USER=myuser
       - POSTGRES_PASSWORD=mypassword
     volumes:

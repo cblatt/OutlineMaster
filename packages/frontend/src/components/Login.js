@@ -14,11 +14,12 @@ export default function Login() {
   const { user, setUser } = useAuth();
 
   async function onSubmit(data) {
-    fetch("/users/login", {
+    fetch(process.env.REACT_APP_API_URI + "/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Content-length": 7,
+        Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
       },
       body: JSON.stringify(data),
     })
