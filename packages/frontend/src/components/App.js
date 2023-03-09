@@ -10,6 +10,7 @@ import UnAuth from "./UnAuth";
 import AssignInstructor from "./AssignInstructor";
 import AddInstructor from "./AddInstructor";
 import CreateCourse from "./CreateCourse";
+import Departments from "./Departments";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
                   path="/assign"
                   element={<AssignInstructor></AssignInstructor>}
                 />
+                <Route exact path="/departments" element={<Departments />} />
               </Route>
               <Route exact path="/unauth" element={<UnAuth></UnAuth>} />
             </Route>

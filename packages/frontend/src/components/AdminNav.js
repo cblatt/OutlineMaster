@@ -45,9 +45,12 @@ export default function AdminNav() {
           <NavLink eventKey="6" as={Link} to="/createcourse">
             Create Course
           </NavLink>
+          <NavLink eventKey="7" as={Link} to="/departments">
+            Departments
+          </NavLink>
         </Nav>
         <Nav>
-          <NavLink eventKey="6" as={Link} to="/">
+          <NavLink eventKey="8" as={Link} to="/">
             <Button
               className="text-black rounded-md hover:opacity-100"
               onClick={logOut}
