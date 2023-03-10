@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/ShaimaaAliECE/se3350_groupproject-se3350-team-34#readme",
   "dependencies": {
-    "turbo": "^1.7.0"
+    "moment": "^2.29.4",
+    "turbo": "^1.7.4"
   }
 }

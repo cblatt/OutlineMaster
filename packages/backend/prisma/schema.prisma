@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,12 +8,46 @@ datasource db {
 }
 
 model User {
-  uwoId       String      @id
-  email       String      @unique
-  password    String
-  firstName   String      
-  lastName    String
-  role        Role        
+  uwoId     String @id
+  email     String @unique
+  password  String
+  firstName String
+  lastName  String
+  role      Role
+  InstructorCourse InstructorCourse[]
+}
+
+model Department {
+  departmentUuid  String    @id @default(uuid())
+  departmentName  String    @unique
+  departmentCode String @unique
+  courses Course[]
+}
+
+model Course {
+  courseUuid    String      @id @default(uuid())
+  courseCode    String      
+  semester      Term        
+  year          Int    
+  courseName    String      @unique
+  department Department     @relation(fields: [departmentUuid], references: [departmentUuid])
+  departmentUuid String
+  InstructorCourse InstructorCourse[]
+  courseOutlines  CourseOutline[]
+}
+
+model InstructorCourse {
+  user    User  @relation(fields: [uwoId], references: [uwoId])
+  uwoId   String
+  course  Course  @relation(fields: [courseUuid], references: [courseUuid])
+  courseUuid  String 
+  @@id([uwoId, courseUuid])
+}
+
+enum Term {
+  FALL
+  WINTER
+  SUMMER
 }
 
 enum Role {
@@ -26,3 +57,175 @@ enum Role {
   ASSOCIATE_CHAIR
   PROGRAM_DIRECTOR
 }
+
+model Comments{
+  commentId       String    @id @default(uuid())
+  commentTxt      String 
+  outlineId       String
+  
+}
+
+model CourseOutline {
+  courseUuid    String    
+  course        Course    @relation(fields: [courseUuid], references: [courseUuid])
+  versionNum    Int       //this values are set manually
+  editLogs      EditLog[]
+  titleLbl      String
+  codeLbl       String
+  yearLbl       String
+  desLbl        String
+insLbl          String
+acaLbl          String
+conLbl          String
+antLbl          String
+preLbl          String
+coLbl           String
+ceabLbl         String
+reqTbLbl        String
+othLbl          String
+recRefLbl       String
+knowLbl         String
+useEngLbl       String
+impLbl          String
+proLbl          String
+indLbl          String
+ethLbl    String
+  invLbl    String
+  comLbl    String
+  econLbl     String
+  desiLbl     String
+  profLbl     String
+  lifeLbl     String
+  top1Lbl     String
+  top1aLbl    String
+  top1bLbl    String
+  top2Lbl     String
+  top2aLbl    String
+  top2bLbl    String 
+  top3Lbl     String
+  top3aLbl    String
+  top3bLbl    String
+  top4Lbl     String
+  top4aLbl    String
+  top4bLbl    String
+  homPercLbl    String
+  quizPercLbl     String
+  labPercLbl    String
+  midPercLbl    String
+  finPercLbl    String
+  homLbl    String
+  quiLbl    String
+  labLbl    String
+  midLbl    String
+  finLbl    String
+  lateLbl     String
+  assSubLbl     String
+top1AknowLbl String
+top1AproLbl String
+top1AinvLbl String
+top1AdesiLbl String
+top1AuseEngLbl String
+top1AindLbl String
+top1AcomLbl String
+top1AprofLbl String
+top1AimpLbl String
+top1AethLbl String
+top1AeconLbl String
+top1AlifeLbl String
+top1BknowLbl String
+top1BproLbl String
+top1BinvLbl String
+top1BdesiLbl String
+top1BuseEngLbl String
+top1BindLbl String
+top1BcomLbl String
+top1BprofLbl String
+top1BimpLbl String
+top1BethLbl String
+top1BeconLbl String
+top1BlifeLbl String
+top2AknowLbl String
+top2AproLbl String
+top2AinvLbl String
+top2AdesiLbl String
+top2AuseEngLbl String
+top2AindLbl String
+top2AcomLbl String
+top2AprofLbl String
+top2AimpLbl String
+top2AethLbl String
+top2AeconLbl String
+top2AlifeLbl String
+top2BknowLbl String
+top2BproLbl String
+top2BinvLbl String
+top2BdesiLbl String
+top2BuseEngLbl String
+top2BindLbl String
+top2BcomLbl String
+top2BprofLbl String
+top2BimpLbl String
+top2BethLbl String
+top2BeconLbl String
+top2BlifeLbl String
+top3AknowLbl String
+top3AproLbl String
+top3AinvLbl String
+top3AdesiLbl String
+top3AuseEngLbl String
+top3AindLbl String
+top3AcomLbl String
+top3AprofLbl String
+top3AimpLbl String
+top3AethLbl String
+top3AeconLbl String
+top3AlifeLbl String
+top3BknowLbl String
+top3BproLbl String
+top3BinvLbl String
+top3BdesiLbl String
+top3BuseEngLbl String
+top3BindLbl String
+top3BcomLbl String
+top3BprofLbl String
+top3BimpLbl String
+top3BethLbl String
+top3BeconLbl String
+top3BlifeLbl String
+top4AknowLbl String
+top4AproLbl String
+top4AinvLbl String
+top4AdesiLbl String
+top4AuseEngLbl String
+top4AindLbl String
+top4AcomLbl String
+top4AprofLbl String
+top4AimpLbl String
+top4AethLbl String
+top4AeconLbl String
+top4AlifeLbl String
+top4BknowLbl String
+top4BproLbl String
+top4BinvLbl String
+top4BdesiLbl String
+top4BuseEngLbl String
+top4BindLbl String
+top4BcomLbl String
+top4BprofLbl String
+top4BimpLbl String
+top4BethLbl String
+top4BeconLbl String
+top4BlifeLbl String
+  @@id([courseUuid, versionNum])
+}
+
+model EditLog {
+  courseUuid    String  
+  versionNum    Int        
+  editNum       Int           
+  timeLastEdited String
+  editor String 
+  courseOutline  CourseOutline     @relation(fields: [courseUuid,versionNum], references: [courseUuid, versionNum])
+  @@id([courseUuid, versionNum, editNum])
+}
+

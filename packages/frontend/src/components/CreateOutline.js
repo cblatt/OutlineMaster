@@ -61,14 +61,6 @@ export default function CreateOutline() {
       }
     }
 
-    // function getLatestCourseOutlineVersion(courseOutlines) {
-    //   for (let i = 0; i < courseOutlines.length; i++){
-    //     if (courseOutlines[i].courseCode === ){
-
-    //     }
-    //   }
-    // }
-
     fetch(`/course-outline/${data.courseUuid}/versionMax`, { method: "GET" })
       .then((response) => {
         if (response.status === 200) {

@@ -19,15 +19,13 @@ export class CourseOutlineService {
     return this.prisma.courseOutline.findMany();
   }
 
-  findOne(courseUuid: string, versionNum: string) {
+  findOne(courseUuid: string, versionNum: number) {
     console.log('VERSIONNN NO', versionNum);
-    const versionNumInt = parseInt(versionNum);
-    console.log('VERSIONNN', versionNumInt);
     return this.prisma.courseOutline.findUnique({
       where: {
         courseUuid_versionNum: {
           courseUuid: courseUuid,
-          versionNum: versionNumInt,
+          versionNum: versionNum,
         },
       },
     });
