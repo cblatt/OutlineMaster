@@ -11,8 +11,10 @@ import AssignInstructor from "./AssignInstructor";
 import AddInstructor from "./AddInstructor";
 import Departments from "./Departments";
 import DepartmentCourses from "./DepartmentCourses";
+import ReviewCourses from "./ReviewCourses";
 import Courses from "./CoursesPage";
 import CourseInfo from "./CourseInfoPage";
+import EditCourseOutline from "./EditCourseOutline";
 
 function App() {
   return (
@@ -66,6 +68,15 @@ function App() {
               exact
               path="/comments"
               element={<OutlineComments></OutlineComments>}
+            />
+            <Route
+              exact
+              path="/reviewcourse"
+              element={<ReviewCourses></ReviewCourses>}
+            />
+            <Route
+              path="/edit-course-outline/:courseUuid/:versionNum"
+              element={<EditCourseOutline></EditCourseOutline>}
             />
           </Routes>
         </Router>
