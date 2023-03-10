@@ -48,7 +48,14 @@ const CourseInfo = () => {
   const courseUrl = location.pathname;
 
   const fetchCourseData = useCallback(async () => {
-    const res = await fetch(courseUrl, { method: "GET" });
+    const res = await fetch(process.env.REACT_APP_API_URI + courseUrl, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Content-length": 7,
+        Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
+      },
+    });
     const data = await res.json();
     setCourse(data);
   }, [courseUrl]);
@@ -165,7 +172,7 @@ const CourseEditModal = ({
         return obj;
       }, {});
 
-    fetch(`/courses/${course.courseUuid}`, {
+    fetch(`${process.env.REACT_APP_API_URI}/courses/${course.courseUuid}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -272,7 +279,14 @@ const AssignInstructorModal = ({
   };
 
   const fetchInstructors = useCallback(async () => {
-    fetch("/users/instructors", { method: "GET" })
+    fetch(process.env.REACT_APP_API_URI + "/users/instructors", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Content-length": 7,
+        Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
+      },
+    })
       .then((res) => {
         if (res.status === 200) {
           return res.json();
@@ -326,14 +340,17 @@ const AssignInstructorModal = ({
   };
 
   const removeCourseInstructor = (uwoId) => {
-    fetch(`/instructor-courses/${uwoId}/${course.courseUuid}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        "Content-length": 7,
-        Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
-      },
-    }).then((response) => {
+    fetch(
+      `${process.env.REACT_APP_API_URI}/instructor-courses/${uwoId}/${course.courseUuid}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Content-length": 7,
+          Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
+        },
+      }
+    ).then((response) => {
       if (response.status === 200) {
         fetchCourseData();
       }

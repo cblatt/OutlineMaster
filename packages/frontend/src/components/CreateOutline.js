@@ -32,7 +32,14 @@ export default function CreateOutline() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("/courses");
+      const response = await fetch(process.env.REACT_APP_API_URI + "/courses", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Content-length": 7,
+          Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
+        },
+      });
       const data = await response.json();
       setCourses(data);
 
@@ -61,7 +68,17 @@ export default function CreateOutline() {
       }
     }
 
-    fetch(`/course-outline/versionMax/${data.courseUuid}`, { method: "GET" })
+    fetch(
+      `${process.env.REACT_APP_API_URI}/course-outline/versionMax/${data.courseUuid}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Content-length": 7,
+          Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
+        },
+      }
+    )
       .then((response) => {
         if (response.status === 200) {
           return response.json();
@@ -70,11 +87,12 @@ export default function CreateOutline() {
       .then((currentVersionNum) => {
         console.log("VERSION", currentVersionNum);
         console.log(data.courseUuid);
-        fetch("/course-outline", {
+        fetch(process.env.REACT_APP_API_URI + "/course-outline", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             "Content-length": 7,
+            Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
           },
           body: JSON.stringify({
             courseUuid: data.courseUuid,

@@ -18,7 +18,17 @@ export default function ReviewCourses() {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch("/course-outline", { method: "GET" });
+      const res = await fetch(
+        process.env.REACT_APP_API_URI + "/course-outline",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Content-length": 7,
+            Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
+          },
+        }
+      );
       const data = await res.json();
       setInstructors(data);
     }

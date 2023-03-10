@@ -77,7 +77,14 @@ const Departments = () => {
   } = useForm();
 
   const fetchDepartments = useCallback(async () => {
-    const res = await fetch("/departments", { method: "GET" });
+    const res = await fetch(process.env.REACT_APP_API_URI + "/departments", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Content-length": 7,
+        Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
+      },
+    });
     const data = await res.json();
     setDepartments(data);
   }, []);
@@ -87,10 +94,12 @@ const Departments = () => {
   }, [fetchDepartments]);
 
   const onSubmit = async (data) => {
-    fetch("/departments", {
+    fetch(process.env.REACT_APP_API_URI + "/departments", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Content-length": 7,
+        Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
       },
       body: JSON.stringify(data),
     }).then(async (response) => {
@@ -255,15 +264,18 @@ const EditModal = ({
         return obj;
       }, {});
 
-    fetch(`/departments/${selectedDepartment.departmentUuid}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        "Content-length": 7,
-        Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
-      },
-      body: JSON.stringify(filteredData),
-    }).then((response) => {
+    fetch(
+      `${process.env.REACT_APP_API_URI}/departments/${selectedDepartment.departmentUuid}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "Content-length": 7,
+          Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
+        },
+        body: JSON.stringify(filteredData),
+      }
+    ).then((response) => {
       if (response.status === 200) {
         fetchDepartments();
         closeModal();
