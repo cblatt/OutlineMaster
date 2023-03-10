@@ -61,7 +61,7 @@ export default function CreateOutline() {
       }
     }
 
-    fetch(`/course-outline/${data.courseUuid}/versionMax`, { method: "GET" })
+    fetch(`/course-outline/versionMax/${data.courseUuid}`, { method: "GET" })
       .then((response) => {
         if (response.status === 200) {
           return response.json();
