@@ -13,6 +13,7 @@ import CreateCourse from "./CreateCourse";
 import Departments from "./Departments";
 import DepartmentCourses from "./DepartmentCourses";
 import Courses from "./CoursesPage";
+import CourseInfo from "./CourseInfoPage";
 
 function App() {
   return (
@@ -53,7 +54,7 @@ function App() {
                 />
                 <Route path="/courses">
                   <Route path="" element={<Courses />}></Route>
-                  {/* <Route path=":id" element={<AdminHome />}></Route> */}
+                  <Route path=":id" element={<CourseInfo />}></Route>
                 </Route>
                 <Route path="/departments">
                   <Route path="" element={<Departments />}></Route>
