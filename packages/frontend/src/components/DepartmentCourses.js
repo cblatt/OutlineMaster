@@ -101,8 +101,6 @@ const DepartmentCourses = () => {
               <Tr>
                 <Th>Course Name</Th>
                 <Th>Course Code</Th>
-                <Th>Semester</Th>
-                <Th>Year</Th>
                 <Th>Instructors</Th>
               </Tr>
             </Thead>
@@ -121,8 +119,6 @@ const DepartmentCourses = () => {
                       {department.departmentCode}
                       {course.courseCode}
                     </Td>
-                    <Td>WINTER</Td>
-                    <Td>2023</Td>
                     <Td>
                       <UnorderedList>
                         {course.InstructorCourse.map((instructorCourse) => {

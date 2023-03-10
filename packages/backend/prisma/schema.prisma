@@ -27,8 +27,6 @@ model Department {
 model Course {
   courseUuid    String      @id @default(uuid())
   courseCode    String      
-  semester      Term        
-  year          Int    
   courseName    String      @unique
   department Department     @relation(fields: [departmentUuid], references: [departmentUuid])
   departmentUuid String
@@ -42,12 +40,6 @@ model InstructorCourse {
   course  Course  @relation(fields: [courseUuid], references: [courseUuid])
   courseUuid  String 
   @@id([uwoId, courseUuid])
-}
-
-enum Term {
-  FALL
-  WINTER
-  SUMMER
 }
 
 enum Role {

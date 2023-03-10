@@ -80,8 +80,6 @@ const Courses = () => {
                 <Th>Department Name</Th>
                 <Th>Course Name</Th>
                 <Th>Course Code</Th>
-                <Th>Semester</Th>
-                <Th>Year</Th>
                 <Th>Instructors</Th>
               </Tr>
             </Thead>
@@ -99,8 +97,6 @@ const Courses = () => {
                       {course.department.departmentCode}
                       {course.courseCode}
                     </Td>
-                    <Td>{course.semester}</Td>
-                    <Td>{course.year}</Td>
                     <Td>John Smith</Td>
                   </Tr>
                 );
