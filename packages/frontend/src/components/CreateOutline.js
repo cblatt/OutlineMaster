@@ -50,6 +50,7 @@ export default function CreateOutline() {
     }
 
     console.log(data.codeLbl);
+    console.log(data.courseUuid);
 
     fetch("/course-outline", {
       method: "POST",
@@ -58,8 +59,8 @@ export default function CreateOutline() {
         "Content-length": 7,
       },
       body: JSON.stringify({
-        courseUuid: "39bdbbc3-ece0-48db-9aee-bd4f50a4b7a4",
-        versionNum: 5,
+        courseUuid: data.courseUuid,
+        versionNum: 9,
         titleLbl: data.titleLbl,
         codeLbl: data.codeLbl,
         yearLbl: "2019",
@@ -1351,11 +1352,11 @@ export default function CreateOutline() {
       <form class="ml-6 mt-1">
         <h2 className="text-3xl font-serif text-black mt-4">Course UUID:</h2>
         <div style={{ display: "flex" }}>
-          <select name="courseUuid" required>
+          <select name="courseUuid" required {...register("courseUuid")}>
             <option value="">Select a Course</option>
-            {courses.map((courses) => (
-              <option key={courses.id} value={courses.id}>
-                {courses.departmentUuid}
+            {courses.map((course) => (
+              <option key={course.courseUuid} value={course.courseUuid}>
+                {course.courseCode}
               </option>
             ))}
           </select>
