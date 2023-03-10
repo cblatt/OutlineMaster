@@ -4,7 +4,6 @@ import {
   FormErrorMessage,
   FormLabel,
   Heading,
-  HStack,
   Input,
   ListItem,
   Modal,
@@ -16,11 +15,9 @@ import {
   ModalOverlay,
   Stack,
   Table,
-  TableCaption,
   TableContainer,
   Tbody,
   Td,
-  Tfoot,
   Th,
   Thead,
   Tr,
@@ -41,9 +38,17 @@ const DepartmentCourses = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const fetchDepartment = useCallback(async () => {
-    const res = await fetch(`/departments/${departmentUuid}`, {
-      method: "GET",
-    });
+    const res = await fetch(
+      `${process.env.REACT_APP_API_URI}/departments/${departmentUuid}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Content-length": 7,
+          Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
+        },
+      }
+    );
     const data = await res.json();
     setDepartment(data);
   }, [departmentUuid]);
@@ -109,9 +114,7 @@ const DepartmentCourses = () => {
                 return (
                   <Tr
                     style={{ cursor: "pointer" }}
-                    onClick={() =>
-                      goToCourse("f6ee6908-3494-4d43-9c86-3e532aec2596")
-                    }
+                    onClick={() => goToCourse(course.courseUuid)}
                     key={course.courseUuid}
                   >
                     <Td>{course.courseName}</Td>
@@ -145,7 +148,7 @@ const DepartmentCourses = () => {
       </div>
       <CourseAddModal
         department={department}
-        fetchCourses={fetchDepartment}
+        fetchDepartment={fetchDepartment}
         onClose={onClose}
         isOpen={isOpen}
       />
@@ -163,7 +166,7 @@ const CourseAddModal = ({ department, fetchDepartment, onClose, isOpen }) => {
   } = useForm();
 
   const addCourse = (formData) => {
-    fetch(`/courses`, {
+    fetch(`${process.env.REACT_APP_API_URI}/courses`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

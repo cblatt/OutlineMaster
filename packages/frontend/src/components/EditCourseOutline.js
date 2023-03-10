@@ -33,7 +33,19 @@ export default function EditCourseOutline() {
   }, []);
 
   function submitChanges() {
-    fetch(`/course-outline/${id}/${parseInt(version)}`)
+    fetch(
+      `${process.env.REACT_APP_API_URI}/course-outline/${id}/${parseInt(
+        version
+      )}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Content-length": 7,
+          Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
+        },
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         // update HTML for elements with specific IDs

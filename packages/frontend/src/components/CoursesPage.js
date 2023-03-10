@@ -36,7 +36,7 @@ const Courses = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const fetchCourses = useCallback(async () => {
-    const res = await fetch("/courses", {
+    const res = await fetch(process.env.REACT_APP_API_URI + "/courses", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -125,7 +125,7 @@ const CourseAddModal = ({ fetchCourses, onClose, isOpen }) => {
   const [departments, setDepartments] = useState([]);
 
   const fetchDepartments = useCallback(async () => {
-    const res = await fetch("/departments", {
+    const res = await fetch(process.env.REACT_APP_API_URI + "/departments", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -142,7 +142,7 @@ const CourseAddModal = ({ fetchCourses, onClose, isOpen }) => {
   }, [fetchDepartments]);
 
   const addCourse = (formData) => {
-    fetch(`/courses`, {
+    fetch(`${process.env.REACT_APP_API_URI}/courses`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

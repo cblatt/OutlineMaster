@@ -27,11 +27,13 @@ model Department {
 model Course {
   courseUuid    String      @id @default(uuid())
   courseCode    String      
-  courseName    String      @unique
+  courseName    String
   department Department     @relation(fields: [departmentUuid], references: [departmentUuid])
   departmentUuid String
   InstructorCourse InstructorCourse[]
   courseOutlines  CourseOutline[]
+  @@unique([departmentUuid, courseName])
+  @@unique([departmentUuid, courseCode])
 }
 
 model InstructorCourse {

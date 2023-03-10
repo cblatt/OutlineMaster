@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FormControl,
   Input,
@@ -12,26 +12,40 @@ import AdminNav from "./AdminNav";
 export default function AssignInstructor() {
   const [show, setShow] = useState(false);
 
-
   const [instructors, setInstructors] = useState([]);
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    
     async function fetchData() {
-      const res = await fetch("/users/instructors", { method: "GET" });
+      const res = await fetch(
+        process.env.REACT_APP_API_URI + "/users/instructors",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Content-length": 7,
+            Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
+          },
+        }
+      );
       const data = await res.json();
       setInstructors(data);
-      
     }
     fetchData();
   }, []);
 
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch("/courses", { method: "GET" });
+      const res = await fetch(process.env.REACT_APP_API_URI + "/courses", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Content-length": 7,
+          Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
+        },
+      });
       const data = await res.json();
-      console.log(data)
+      console.log(data);
       setCourses(data);
     }
     fetchData();
@@ -47,8 +61,7 @@ export default function AssignInstructor() {
           </h4>
           <FormControl isRequired>
             <Stack spacing={5}>
-
-            <select size="lg" variant="outline">
+              <select size="lg" variant="outline">
                 <option value="">-- Select UWO ID --</option>
                 {instructors &&
                   instructors.map((instructor) => (
@@ -67,8 +80,6 @@ export default function AssignInstructor() {
                   ))}
               </select>
 
-             
-             
               <Button className="text-gray-700 rounded-md hover:opacity-100">
                 Assign
               </Button>
