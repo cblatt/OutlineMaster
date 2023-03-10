@@ -14,6 +14,7 @@ import Departments from "./Departments";
 import DepartmentCourses from "./DepartmentCourses";
 import ReviewCourses from "./ReviewCourses";
 import Courses from "./CoursesPage";
+import EditCourseOutline from "./EditCourseOutline";
 
 function App() {
   return (
@@ -77,6 +78,11 @@ function App() {
               exact
               path="/reviewcourse"
               element={<ReviewCourses></ReviewCourses>}
+            />
+            <Route
+              exact
+              path="/edit-courseoutline"
+              element={<EditCourseOutline></EditCourseOutline>}
             />
           </Routes>
         </Router>

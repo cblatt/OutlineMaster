@@ -18,9 +18,15 @@ export class CourseOutlineService {
   findAll() {
     return this.prisma.courseOutline.findMany();
   }
-
-  findOne(id: number) {
-    return `This action returns a #${id} courseOutline`;
+  findOne(courseUuid: string, versionNum: number) {
+    return this.prisma.courseOutline.findUnique({
+      where: {
+        courseUuid_versionNum: {
+          courseUuid: courseUuid,
+          versionNum: versionNum,
+        },
+      },
+    });
   }
 
   update(id: number, updateCourseOutlineDto: UpdateCourseOutlineDto) {
