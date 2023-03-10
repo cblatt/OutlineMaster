@@ -1,18 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateEditorlogDto {
+export class CreateEditorLogDto {
   @ApiProperty()
   courseUuid: string;
-
   @ApiProperty()
   versionNum: number;
-
   @ApiProperty()
   editNum: number;
-
   @ApiProperty()
   timeLastEdited: string;
-
   @ApiProperty()
   editor: string;
 }

@@ -10,8 +10,7 @@ import { CommentsModule } from './comments/comments.module';
 
 import { CourseOutlineModule } from './course-outline/course-outline.module';
 
-import { EditorlogModule } from './editor-log/editorlog.module';
-
+import { EditorLogModule } from './editor-log/editor-log.module';
 
 @Module({
   imports: [
@@ -24,8 +23,7 @@ import { EditorlogModule } from './editor-log/editorlog.module';
 
     CourseOutlineModule,
 
-    EditorlogModule,
-
+    EditorLogModule,
   ],
   controllers: [AppController],
   providers: [AppService],
