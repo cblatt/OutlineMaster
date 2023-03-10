@@ -91,7 +91,6 @@ export default function CreateOutline() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Content-length": 7,
             Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
           },
           body: JSON.stringify({
@@ -244,48 +243,30 @@ export default function CreateOutline() {
             top4BeconLbl: data.top4BeconLbl,
             top4BlifeLbl: data.top4BlifeLbl,
           }),
-        });
-        // .then((res) => {
-        //   if (res.status === 201) {
-        //     return res.json();
-        //   }
-        //   // console.log(data);
-        //   // fetch("editorlog", {
-        //   //   method: "POST",
-        //   //   headers: {
-        //   //     "Content-Type": "application/json",
-        //   //     "Content-length": 5,
-        //   //   },
-        //   //   body: JSON.stringify({
-        //   //     courseUuid: document.getElementById("course-dropdown").value,
-        //   //     versionNum: 9,
-        //   //     editNum: 1,
-        //   //     timeLastEdited: moment().format("MMMM Do YYYY, h:mm:ss a"),
-        //   //     editor: user.uwoId,
-        //   //   }),
-        //   // });
-        // })
-        // .then((res) => {
-        //   console.log(res);
-        //   console.log("SAVE", res.courseUuid);
-        //   fetch("editorlog", {
-        //     method: "POST",
-        //     headers: {
-        //       "Content-Type": "application/json",
-        //       "Content-length": 5,
-        //     },
-        //     body: JSON.stringify({
-        //       courseUuid: res.courseUuid,
-        //       versionNum: res.versionNum,
-        //       editNum: 1,
-        //       timeLastEdited: moment().format("MMMM Do YYYY, h:mm:ss a"),
-        //       editor: user.uwoId,
-        //     }),
-        //   });
-        // });
+        })
+          .then((res) => {
+            if (res.status === 201) {
+              return res.json();
+            }
+          })
+          .then((res) => {
+            fetch(process.env.REACT_APP_API_URI + "editor-log", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "Content-length": 5,
+                Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
+              },
+              body: JSON.stringify({
+                courseUuid: res.courseUuid,
+                versionNum: res.versionNum,
+                editNum: 1,
+                timeLastEdited: moment().format("MMMM Do YYYY, h:mm:ss a"),
+                editor: user.uwoId,
+              }),
+            });
+          });
       });
-    // console.log(data.codeLbl);
-    // console.log(data.courseUuid);
   }
 
   return (
