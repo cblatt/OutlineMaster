@@ -109,7 +109,7 @@ const Courses = () => {
           </Table>
         </TableContainer>
       </div>
-      <CourseEditModal
+      <CourseAddModal
         fetchCourses={fetchCourses}
         onClose={onClose}
         isOpen={isOpen}
@@ -118,7 +118,7 @@ const Courses = () => {
   );
 };
 
-const CourseEditModal = ({ fetchCourses, onClose, isOpen }) => {
+const CourseAddModal = ({ fetchCourses, onClose, isOpen }) => {
   const {
     register,
     handleSubmit,

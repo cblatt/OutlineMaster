@@ -42,13 +42,7 @@ const DepartmentCard = ({ department, openEditModal }) => {
         <HStack spacing="10px">
           <Button
             colorScheme="purple"
-            onClick={() =>
-              navigate("courses", {
-                state: {
-                  departmentUuid: department.departmentUuid,
-                },
-              })
-            }
+            onClick={() => navigate(`${department.departmentUuid}/courses`)}
           >
             View Courses
           </Button>

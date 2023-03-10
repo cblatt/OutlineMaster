@@ -57,7 +57,7 @@ function App() {
                 </Route>
                 <Route path="/departments">
                   <Route path="" element={<Departments />}></Route>
-                  <Route path="courses" element={<DepartmentCourses />} />
+                  <Route path=":id/courses" element={<DepartmentCourses />} />
                 </Route>
               </Route>
               <Route exact path="/unauth" element={<UnAuth></UnAuth>} />
