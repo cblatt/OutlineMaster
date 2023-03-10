@@ -12,6 +12,7 @@ import AddInstructor from "./AddInstructor";
 import CreateCourse from "./CreateCourse";
 import Departments from "./Departments";
 import DepartmentCourses from "./DepartmentCourses";
+import ReviewCourses from "./ReviewCourses";
 import Courses from "./CoursesPage";
 
 function App() {
@@ -71,6 +72,11 @@ function App() {
               exact
               path="/createCourse"
               element={<CreateCourse></CreateCourse>}
+            />
+            <Route
+              exact
+              path="/reviewcourse"
+              element={<ReviewCourses></ReviewCourses>}
             />
           </Routes>
         </Router>
