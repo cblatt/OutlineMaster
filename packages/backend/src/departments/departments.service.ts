@@ -16,7 +16,12 @@ export class DepartmentsService {
   }
 
   findOne(id: string) {
-    return this.prisma.department.findUnique({ where: { departmentUuid: id } });
+    return this.prisma.department.findUnique({
+      where: { departmentUuid: id },
+      include: {
+        courses: { include: { InstructorCourse: { include: { user: true } } } },
+      },
+    });
   }
 
   update(id: string, updateDepartmentDto: UpdateDepartmentDto) {

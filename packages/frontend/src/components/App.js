@@ -9,11 +9,11 @@ import CreateOutline from "./CreateOutline";
 import UnAuth from "./UnAuth";
 import AssignInstructor from "./AssignInstructor";
 import AddInstructor from "./AddInstructor";
-import CreateCourse from "./CreateCourse";
 import Departments from "./Departments";
 import DepartmentCourses from "./DepartmentCourses";
 import ReviewCourses from "./ReviewCourses";
 import Courses from "./CoursesPage";
+import CourseInfo from "./CourseInfoPage";
 import EditCourseOutline from "./EditCourseOutline";
 
 function App() {
@@ -55,11 +55,11 @@ function App() {
                 />
                 <Route path="/courses">
                   <Route path="" element={<Courses />}></Route>
-                  {/* <Route path=":id" element={<AdminHome />}></Route> */}
+                  <Route path=":id" element={<CourseInfo />}></Route>
                 </Route>
                 <Route path="/departments">
                   <Route path="" element={<Departments />}></Route>
-                  <Route path="courses" element={<DepartmentCourses />} />
+                  <Route path=":id/courses" element={<DepartmentCourses />} />
                 </Route>
               </Route>
               <Route exact path="/unauth" element={<UnAuth></UnAuth>} />
@@ -68,11 +68,6 @@ function App() {
               exact
               path="/comments"
               element={<OutlineComments></OutlineComments>}
-            />
-            <Route
-              exact
-              path="/createCourse"
-              element={<CreateCourse></CreateCourse>}
             />
             <Route
               exact

@@ -1,6 +1,19 @@
 import {
   Button,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
   Heading,
+  HStack,
+  Input,
+  ListItem,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Stack,
   Table,
   TableCaption,
@@ -11,27 +24,52 @@ import {
   Th,
   Thead,
   Tr,
+  UnorderedList,
+  useDisclosure,
+  VStack,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import AdminNav from "./AdminNav";
 
 const DepartmentCourses = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const departmentUuid = location.state?.departmentUuid;
+  const departmentUuid = location.pathname.split("/")[2];
+  const [department, setDepartment] = useState();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const fetchDepartment = useCallback(async () => {
+    const res = await fetch(`/departments/${departmentUuid}`, {
+      method: "GET",
+    });
+    const data = await res.json();
+    setDepartment(data);
+  }, [departmentUuid]);
 
   useEffect(() => {
-    if (departmentUuid === undefined) {
-      navigate("/departments");
-    }
-  }, [location, navigate, departmentUuid]);
+    fetchDepartment();
+  }, [fetchDepartment, departmentUuid]);
 
   const goToCourse = (uuid) => {
     navigate(`/courses/${uuid}`);
   };
 
-  return departmentUuid ? (
+  if (!department) {
+    return (
+      <div className="min-h-screen bg-gradient-to-r from-purple-500 to-purple-300 ... ">
+        <AdminNav />
+        <div style={{ padding: "24px" }}>
+          <Heading size="lg" colorScheme="purple">
+            Loading...
+          </Heading>
+        </div>
+      </div>
+    );
+  }
+
+  return (
     <div className="min-h-screen bg-gradient-to-r from-purple-500 to-purple-300 ... ">
       <AdminNav />
       <div style={{ padding: "24px" }}>
@@ -43,69 +81,172 @@ const DepartmentCourses = () => {
             margin: "10px 0 40px 0",
           }}
         >
-          <Heading size="lg" colorScheme="purple">
-            {departmentUuid}
+          <Heading size="lg">
+            {department.departmentCode} - {department.departmentName}
           </Heading>
+
           <Stack spacing="24px" direction="row-reverse">
-            <Button colorScheme="blackAlpha" variant="solid">
+            <Button colorScheme="blackAlpha" variant="solid" onClick={onOpen}>
               Add Course
             </Button>
           </Stack>
         </div>
+        <div style={{ paddingBottom: "24px" }}>
+          <Heading size="md">Courses</Heading>
+        </div>
+
         <TableContainer background="whitesmoke" borderRadius="8px">
           <Table variant="simple" colorScheme="blackAlpha">
             <Thead>
               <Tr>
                 <Th>Course Name</Th>
                 <Th>Course Code</Th>
-                <Th>Semester</Th>
-                <Th>Year</Th>
                 <Th>Instructors</Th>
               </Tr>
             </Thead>
             <Tbody>
-              <Tr
-                style={{ cursor: "pointer" }}
-                onClick={() =>
-                  goToCourse("f6ee6908-3494-4d43-9c86-3e532aec2596")
-                }
-              >
-                <Td>Software Design</Td>
-                <Td>3350</Td>
-                <Td>WINTER</Td>
-                <Td>2023</Td>
-                <Td>John Smith</Td>
-              </Tr>
-              <Tr style={{ cursor: "pointer" }} onClick={goToCourse}>
-                <Td>Software Design</Td>
-                <Td>3350</Td>
-                <Td>WINTER</Td>
-                <Td>2023</Td>
-                <Td>John Smith</Td>
-              </Tr>
-              <Tr style={{ cursor: "pointer" }} onClick={goToCourse}>
-                <Td>Software Design</Td>
-                <Td>3350</Td>
-                <Td>WINTER</Td>
-                <Td>2023</Td>
-                <Td>John Smith</Td>
-              </Tr>
+              {department.courses.map((course) => {
+                return (
+                  <Tr
+                    style={{ cursor: "pointer" }}
+                    onClick={() =>
+                      goToCourse("f6ee6908-3494-4d43-9c86-3e532aec2596")
+                    }
+                    key={course.courseUuid}
+                  >
+                    <Td>{course.courseName}</Td>
+                    <Td>
+                      {department.departmentCode}
+                      {course.courseCode}
+                    </Td>
+                    <Td>
+                      <UnorderedList>
+                        {course.InstructorCourse.map((instructorCourse) => {
+                          return (
+                            <ListItem
+                              key={
+                                instructorCourse.uwoId +
+                                instructorCourse.courseUuid
+                              }
+                            >
+                              {instructorCourse.user.firstName}{" "}
+                              {instructorCourse.user.lastName}
+                            </ListItem>
+                          );
+                        })}
+                      </UnorderedList>
+                    </Td>
+                  </Tr>
+                );
+              })}
             </Tbody>
-            <Tfoot>
-              <Tr style={{ cursor: "pointer" }} onClick={goToCourse}>
-                <Td>Software Design</Td>
-                <Td>3350</Td>
-                <Td>WINTER</Td>
-                <Td>2023</Td>
-                <Td>John Smith</Td>
-              </Tr>
-            </Tfoot>
           </Table>
         </TableContainer>
       </div>
+      <CourseAddModal
+        department={department}
+        fetchCourses={fetchDepartment}
+        onClose={onClose}
+        isOpen={isOpen}
+      />
     </div>
-  ) : (
-    <div></div>
+  );
+};
+
+const CourseAddModal = ({ department, fetchDepartment, onClose, isOpen }) => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setError,
+    formState: { errors },
+  } = useForm();
+
+  const addCourse = (formData) => {
+    fetch(`/courses`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Content-length": 7,
+        Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
+      },
+      body: JSON.stringify({
+        departmentUuid: department.departmentUuid,
+        ...formData,
+      }),
+    }).then((response) => {
+      if (response.status === 201) {
+        fetchDepartment();
+        closeModal();
+      } else {
+        setError("submissionError", {
+          type: 500,
+          message: "Could not submit",
+        });
+      }
+    });
+  };
+
+  const closeModal = () => {
+    onClose();
+    reset();
+  };
+
+  return (
+    <Modal isOpen={isOpen} onClose={closeModal} isCentered={true}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>Add Course</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          <VStack spacing="24px">
+            <FormControl isRequired isInvalid={errors.courseName}>
+              <FormLabel>Course Name</FormLabel>
+              <Input
+                focusBorderColor="purple.400"
+                type="text"
+                placeholder="Name"
+                {...register("courseName", { required: "Required" })}
+              />
+              <FormErrorMessage>{errors.courseName?.message}</FormErrorMessage>
+            </FormControl>
+            <FormControl isRequired isInvalid={errors.courseCode}>
+              <FormLabel>Course Code</FormLabel>
+              <Input
+                focusBorderColor="purple.400"
+                type="text"
+                placeholder="Code"
+                {...register("courseCode", { required: "Required" })}
+              />
+              <FormErrorMessage>{errors.courseCode?.message}</FormErrorMessage>
+            </FormControl>
+          </VStack>
+          <FormControl isInvalid={errors.submissionError}>
+            <FormErrorMessage>
+              {errors.submissionError?.message}
+            </FormErrorMessage>
+          </FormControl>
+        </ModalBody>
+
+        <ModalFooter>
+          <Button
+            colorScheme="purple"
+            variant="outline"
+            mr={3}
+            onClick={closeModal}
+          >
+            Close
+          </Button>
+          <Button
+            colorScheme="purple"
+            variant="solid"
+            onClick={handleSubmit(addCourse)}
+          >
+            Submit
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
   );
 };
 

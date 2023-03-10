@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Button,
   Card,
@@ -28,7 +28,7 @@ import AdminNav from "./AdminNav";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-const DepartmentCard = ({ department }) => {
+const DepartmentCard = ({ department, openEditModal }) => {
   const navigate = useNavigate();
   return (
     <Card size={"lg"}>
@@ -42,17 +42,15 @@ const DepartmentCard = ({ department }) => {
         <HStack spacing="10px">
           <Button
             colorScheme="purple"
-            onClick={() =>
-              navigate("courses", {
-                state: {
-                  departmentUuid: department.departmentUuid,
-                },
-              })
-            }
+            onClick={() => navigate(`${department.departmentUuid}/courses`)}
           >
             View Courses
           </Button>
-          <Button colorScheme="purple" variant="outline">
+          <Button
+            colorScheme="purple"
+            variant="outline"
+            onClick={() => openEditModal(department)}
+          >
             Edit Department
           </Button>
         </HStack>
@@ -63,7 +61,13 @@ const DepartmentCard = ({ department }) => {
 
 const Departments = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isEditOpen,
+    onOpen: onEditOpen,
+    onClose: onEditClose,
+  } = useDisclosure();
   const [departments, setDepartments] = useState([]);
+  const [selectedDepartment, setSelectedDepartment] = useState({});
   const {
     register,
     handleSubmit,
@@ -72,14 +76,15 @@ const Departments = () => {
     formState: { errors },
   } = useForm();
 
-  useEffect(() => {
-    async function fetchData() {
-      const res = await fetch("/departments", { method: "GET" });
-      const data = await res.json();
-      setDepartments(data);
-    }
-    fetchData();
+  const fetchDepartments = useCallback(async () => {
+    const res = await fetch("/departments", { method: "GET" });
+    const data = await res.json();
+    setDepartments(data);
   }, []);
+
+  useEffect(() => {
+    fetchDepartments();
+  }, [fetchDepartments]);
 
   const onSubmit = async (data) => {
     fetch("/departments", {
@@ -90,6 +95,7 @@ const Departments = () => {
       body: JSON.stringify(data),
     }).then(async (response) => {
       if (response.status === 201) {
+        fetchDepartments();
         closeModal();
       } else {
         const data = await response.json();
@@ -99,6 +105,11 @@ const Departments = () => {
         });
       }
     });
+  };
+
+  const openEditModal = (department) => {
+    setSelectedDepartment(department);
+    onEditOpen();
   };
 
   const closeModal = () => {
@@ -134,8 +145,11 @@ const Departments = () => {
           ) : (
             departments.map((department) => {
               return (
-                <WrapItem>
-                  <DepartmentCard department={department} />
+                <WrapItem key={department.departmentUuid}>
+                  <DepartmentCard
+                    department={department}
+                    openEditModal={openEditModal}
+                  />
                 </WrapItem>
               );
             })
@@ -197,7 +211,131 @@ const Departments = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
+      {isEditOpen && (
+        <EditModal
+          onClose={onEditClose}
+          isOpen={isEditOpen}
+          selectedDepartment={selectedDepartment}
+          fetchDepartments={fetchDepartments}
+        />
+      )}
     </div>
+  );
+};
+
+const EditModal = ({
+  onClose,
+  isOpen,
+  selectedDepartment,
+  fetchDepartments,
+}) => {
+  const defaultValues = {
+    departmentCode: selectedDepartment.departmentCode,
+    departmentName: selectedDepartment.departmentName,
+  };
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setError,
+    formState: { errors },
+  } = useForm({ defaultValues: defaultValues });
+
+  const editCourse = (formData) => {
+    //Filter data to remove empty strings before submitting
+    const filteredData = Object.keys(formData)
+      .filter((key) => {
+        if (formData[key] === "") {
+          return false;
+        }
+        return true;
+      })
+      .reduce((obj, key) => {
+        obj[key] = formData[key];
+        return obj;
+      }, {});
+
+    fetch(`/departments/${selectedDepartment.departmentUuid}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Content-length": 7,
+        Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
+      },
+      body: JSON.stringify(filteredData),
+    }).then((response) => {
+      if (response.status === 200) {
+        fetchDepartments();
+        closeModal();
+      } else {
+        setError("submissionError", {
+          type: 500,
+          message: "Could not submit",
+        });
+      }
+    });
+  };
+
+  const closeModal = () => {
+    onClose();
+    reset();
+  };
+
+  return (
+    <Modal isOpen={isOpen} onClose={closeModal} isCentered={true}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>Edit Department</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          <VStack spacing="24px">
+            <FormControl isInvalid={errors.departmentName}>
+              <FormLabel>Department Name</FormLabel>
+              <Input
+                focusBorderColor="purple.400"
+                type="text"
+                placeholder="Name"
+                {...register("departmentName")}
+              />
+              <FormErrorMessage>{errors.departmentName?.type}</FormErrorMessage>
+            </FormControl>
+            <FormControl isInvalid={errors.departmentCode}>
+              <FormLabel>Department Code</FormLabel>
+              <Input
+                focusBorderColor="purple.400"
+                type="text"
+                placeholder="Code"
+                {...register("departmentCode")}
+              />
+              <FormErrorMessage>{errors.departmentCode?.type}</FormErrorMessage>
+            </FormControl>
+          </VStack>
+          <FormControl isInvalid={errors.submissionError}>
+            <FormErrorMessage>
+              {errors.submissionError?.message}
+            </FormErrorMessage>
+          </FormControl>
+        </ModalBody>
+
+        <ModalFooter>
+          <Button
+            colorScheme="purple"
+            variant="outline"
+            mr={3}
+            onClick={onClose}
+          >
+            Close
+          </Button>
+          <Button
+            colorScheme="purple"
+            variant="solid"
+            onClick={handleSubmit(editCourse)}
+          >
+            Submit
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
   );
 };
 
