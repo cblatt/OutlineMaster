@@ -2,13 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Input } from "@chakra-ui/react";
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
+import AdminNav from "./AdminNav";
 
 export default function CreateCourse() {
-  const {
-    register,
-    formState: { errors },
-  } = useForm();
-
   const [departments, setDepartments] = useState([]);
 
   useEffect(() => {
@@ -43,64 +39,72 @@ export default function CreateCourse() {
   };
 
   return (
-    <div>
-      <h2 className="text-5xl text-center pb-24 text-blue font-semibold uppercase tracking-[5px]">
-        Create Course
-      </h2>
+    <div className="min-h-screen bg-gradient-to-r from-purple-500 to-purple-300 ... ">
+      <AdminNav />
 
-      <form onSubmit={handleSubmit}>
-        <div className="w-1/5 h-screen left-0 top-0 pl-5">
-          <h2 className="font-bold text-lg">Course Code:</h2>
-          <div style={{ display: "flex" }}>
-            <input
-              type="text"
-              name="courseCode"
-              placeholder="Course Code"
-              required
-            />
-          </div>
+      <div className="min-h-screen flex flex-col justify-center items-center  ">
+        <div className="bg-white py-5 rounded-2xl w-1/3 px-5">
+          <h2 className="text-4xl text-gray-700 font-semibold text-center py-5">
+            Create Course
+          </h2>
 
-          <h2 className="font-bold text-lg">Semester:</h2>
-          <div style={{ display: "flex" }}>
-            <input
-              type="text"
-              name="semester"
-              placeholder="Semester"
-              required
-            />
-          </div>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <h2 className="font-bold text-lg">Course Code:</h2>
+              <div style={{ display: "flex" }}>
+                <input
+                  type="text"
+                  name="courseCode"
+                  placeholder="Course Code"
+                  required
+                />
+              </div>
+              <h2 className="font-bold text-lg">Semester:</h2>
+              <div style={{ display: "flex" }}>
+                <select name="semester" required>
+                  <option value="">Select a semester</option>
+                  <option value="FALL">Fall</option>
+                  <option value="WINTER">Winter</option>
+                  <option value="SUMMER">Summer</option>
+                </select>
+              </div>
 
-          <h2 className="font-bold text-lg">Year:</h2>
-          <div style={{ display: "flex" }}>
-            <input type="text" name="year" placeholder="Year" required />
-          </div>
+              <h2 className="font-bold text-lg">Year:</h2>
+              <div style={{ display: "flex" }}>
+                <input type="text" name="year" placeholder="Year" required />
+              </div>
 
-          <h2 className="font-bold text-lg">Course Name:</h2>
-          <div style={{ display: "flex" }}>
-            <input
-              type="text"
-              name="courseName"
-              placeholder="Course"
-              required
-            />
-          </div>
+              <h2 className="font-bold text-lg">Course Name:</h2>
+              <div style={{ display: "flex" }}>
+                <input
+                  type="text"
+                  name="courseName"
+                  placeholder="Course"
+                  required
+                />
+              </div>
 
-          <h2 className="font-bold text-lg">Department:</h2>
-          <div style={{ display: "flex" }}>
-            <select name="departmentUuid" required>
-              <option value="">Select a department</option>
-              {departments.map((department) => (
-                <option key={department.id} value={department.id}>
-                  {department.departmentUuid}
-                </option>
-              ))}
-            </select>
-          </div>
+              <h2 className="font-bold text-lg">Department:</h2>
+              <div style={{ display: "flex" }}>
+                <select name="departmentUuid" required>
+                  <option value="">Select a department</option>
+                  {departments.map((department) => (
+                    <option
+                      key={department.departmentUuid}
+                      value={department.departmentUuid}
+                    >
+                      {department.departmentName}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-          <br />
-          <button type="submit">Submit</button>
+              <br />
+              <button type="submit">Submit</button>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </div>
   );
 }
