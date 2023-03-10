@@ -8,27 +8,35 @@ export class InstructorCoursesService {
   constructor(private prisma: PrismaService) {}
 
   create(createInstructorCourseDto: CreateInstructorCourseDto) {
-    return this.prisma.instructorCourse.create({data: createInstructorCourseDto});
+    return this.prisma.instructorCourse.create({
+      data: createInstructorCourseDto,
+    });
   }
 
   findAll() {
     return this.prisma.instructorCourse.findMany();
   }
 
-  findOne(id: string, course:string) {
-    return this.prisma.instructorCourse.findUnique({where:{uwoId_courseUuid:{uwoId:id,courseUuid:course}}});
+  findOne(id: string, course: string) {
+    return this.prisma.instructorCourse.findUnique({
+      where: { uwoId_courseUuid: { uwoId: id, courseUuid: course } },
+    });
   }
 
-  update(id: string, course:string, updateInstructorCourseDto: UpdateInstructorCourseDto) {
+  update(
+    id: string,
+    course: string,
+    updateInstructorCourseDto: UpdateInstructorCourseDto,
+  ) {
     return this.prisma.instructorCourse.update({
-      where:{uwoId_courseUuid:{uwoId:id,courseUuid:course}},
-      data:updateInstructorCourseDto,
-    
-    })
+      where: { uwoId_courseUuid: { uwoId: id, courseUuid: course } },
+      data: updateInstructorCourseDto,
+    });
   }
 
-  remove(id: string, course:string) {
-    return this.prisma.instructorCourse.delete({where:{uwoId_courseUuid:{uwoId:id,courseUuid:course}}});
+  remove(id: string, course: string) {
+    return this.prisma.instructorCourse.delete({
+      where: { uwoId_courseUuid: { uwoId: id, courseUuid: course } },
+    });
   }
-  
 }

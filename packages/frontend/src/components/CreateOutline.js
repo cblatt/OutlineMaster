@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import moment from "moment";
 
 import {
   FormControl,
@@ -12,6 +13,7 @@ import {
   Checkbox,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
+import useAuth from "../hooks/useAuth";
 
 export default function CreateOutline() {
   const {
@@ -19,6 +21,12 @@ export default function CreateOutline() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { user } = useAuth();
+
+  //const now = new Date();
+  //const year = now.getFullYear();
+  //const month = parseInt(now.getMonth()) + 1;
+  //const day = now.getDate();
 
   const [courses, setCourses] = useState([]);
 
@@ -49,7 +57,8 @@ export default function CreateOutline() {
       }
     }
 
-    console.log(data.codeLbl);
+    //console.log(user.uwoId);
+    //console.log(data.codeLbl);
 
     fetch("/course-outline", {
       method: "POST",
@@ -58,8 +67,8 @@ export default function CreateOutline() {
         "Content-length": 7,
       },
       body: JSON.stringify({
-        courseUuid: "39bdbbc3-ece0-48db-9aee-bd4f50a4b7a4",
-        versionNum: 5,
+        courseUuid: "e86f0054-966d-4956-ab15-d0dc0ab8ce5d",
+        versionNum: 11,
         titleLbl: data.titleLbl,
         codeLbl: data.codeLbl,
         yearLbl: "2019",
@@ -207,7 +216,43 @@ export default function CreateOutline() {
         top4BeconLbl: data.top4BeconLbl,
         top4BlifeLbl: data.top4BlifeLbl,
       }),
-    });
+    })
+      .then((data) => {
+        if (data.status === 201) {
+          return data.json();
+        }
+        // console.log(data);
+        // fetch("editorlog", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //     "Content-length": 5,
+        //   },
+        //   body: JSON.stringify({
+        //     courseUuid: document.getElementById("course-dropdown").value,
+        //     versionNum: 9,
+        //     editNum: 1,
+        //     timeLastEdited: moment().format("MMMM Do YYYY, h:mm:ss a"),
+        //     editor: user.uwoId,
+        //   }),
+        // });
+      })
+      .then((data) => {
+        fetch("editorlog", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Content-length": 5,
+          },
+          body: JSON.stringify({
+            courseUuid: data.courseUuid,
+            versionNum: data.versionNum,
+            editNum: 1,
+            timeLastEdited: moment().format("MMMM Do YYYY, h:mm:ss a"),
+            editor: user.uwoId,
+          }),
+        });
+      });
   }
 
   return (
@@ -1351,7 +1396,7 @@ export default function CreateOutline() {
       <form class="ml-6 mt-1">
         <h2 className="text-3xl font-serif text-black mt-4">Course UUID:</h2>
         <div style={{ display: "flex" }}>
-          <select name="courseUuid" required>
+          <select id="course-dropdown" name="courseUuid" required>
             <option value="">Select a Course</option>
             {courses.map((courses) => (
               <option key={courses.id} value={courses.id}>
