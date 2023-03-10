@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { BrowserRouter, Route, useParams } from "react-router-dom";
 
 import {
   FormControl,
@@ -14,6 +15,10 @@ import {
 import { useForm } from "react-hook-form";
 
 export default function EditCourseOutline() {
+  const params = useParams();
+  var id = params.courseUuid;
+  var version = params.versionNum;
+
   const {
     register,
     handleSubmit,
@@ -23,192 +28,171 @@ export default function EditCourseOutline() {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    async function fetchData() {
-      const response = await fetch("/courses");
-      const data = await response.json();
-      setCourses(data);
-      console.log(data);
-    }
-    fetchData();
+    submitChanges();
   }, []);
 
-  function submitChanges(data) {
-    const elements = document.querySelectorAll('[id$="Txt"], [id$="drop"]');
+  function submitChanges() {
+    fetch(`/course-outline/${id}/${parseInt(version)}`)
+      .then((response) => response.json())
+      .then((data) => {
+        // update HTML for elements with specific IDs
+        document.getElementById("titleLbl").innerHTML = data.titleLbl;
+        document.getElementById("codeLbl").innerHTML = data.codeLbl;
+        document.getElementById("desLbl").innerHTML = data.desLbl;
+        document.getElementById("insLbl").innerHTML = data.insLbl;
+        document.getElementById("acaLbl").innerHTML = data.acaLbl;
+        document.getElementById("conLbl").innerHTML = data.conLbl;
+        document.getElementById("antLbl").innerHTML = data.antLbl;
+        document.getElementById("preLbl").innerHTML = data.preLbl;
+        document.getElementById("coLbl").innerHTML = data.coLbl;
+        document.getElementById("ceabLbl").innerHTML = data.ceabLbl;
+        document.getElementById("reqTbLbl").innerHTML = data.reqTbLbl;
+        document.getElementById("othLbl").innerHTML = data.othLbl;
+        document.getElementById("recRefLbl").innerHTML = data.recRefLbl;
+        document.getElementById("knowLbl").innerHTML = data.knowLbl;
+        document.getElementById("useEngLbl").innerHTML = data.useEngLbl;
+        document.getElementById("impLbl").innerHTML = data.impLbl;
+        document.getElementById("proLbl").innerHTML = data.proLbl;
+        document.getElementById("indLbl").innerHTML = data.indLbl;
+        document.getElementById("ethLbl").innerHTML = data.ethLbl;
+        document.getElementById("invLbl").innerHTML = data.invLbl;
+        document.getElementById("comLbl").innerHTML = data.comLbl;
+        document.getElementById("econLbl").innerHTML = data.econLbl;
+        document.getElementById("desiLbl").innerHTML = data.desiLbl;
+        document.getElementById("profLbl").innerHTML = data.profLbl;
+        document.getElementById("lifeLbl").innerHTML = data.lifeLbl;
+        document.getElementById("top1Lbl").innerHTML = data.top1Lbl;
+        document.getElementById("top1aLbl").innerHTML = data.top1aLbl;
+        document.getElementById("top1bLbl").innerHTML = data.top1bLbl;
+        document.getElementById("top2Lbl").innerHTML = data.top2Lbl;
+        document.getElementById("top2aLbl").innerHTML = data.top2aLbl;
+        document.getElementById("top2bLbl").innerHTML = data.top2bLbl;
+        document.getElementById("top3Lbl").innerHTML = data.top3Lbl;
+        document.getElementById("top3aLbl").innerHTML = data.top3aLbl;
+        document.getElementById("top3bLbl").innerHTML = data.top3bLbl;
+        document.getElementById("top4Lbl").innerHTML = data.top4Lbl;
+        document.getElementById("top4aLbl").innerHTML = data.top4aLbl;
+        document.getElementById("top4bLbl").innerHTML = data.top4bLbl;
+        document.getElementById("homPercLbl").innerHTML = data.homPercLbl;
+        document.getElementById("quizPercLbl").innerHTML = data.quizPercLbl;
+        document.getElementById("labPercLbl").innerHTML = data.labPercLbl;
+        document.getElementById("midPercLbl").innerHTML = data.midPercLbl;
+        document.getElementById("finPercLbl").innerHTML = data.finPercLbl;
+        document.getElementById("homLbl").innerHTML = data.homLbl;
+        document.getElementById("quiLbl").innerHTML = data.quiLbl;
+        document.getElementById("labLbl").innerHTML = data.labLbl;
+        document.getElementById("midLbl").innerHTML = data.midLbl;
+        document.getElementById("finLbl").innerHTML = data.finLbl;
+        document.getElementById("lateLbl").innerHTML = data.lateLbl;
+        document.getElementById("assSubLbl").innerHTML = data.assSubLbl;
+        document.getElementById("top1AknowLbl").innerHTML = data.top1AknowLbl;
+        document.getElementById("top1AproLbl").innerHTML = data.top1AproLbl;
+        document.getElementById("top1AinvLbl").innerHTML = data.top1AinvLbl;
+        document.getElementById("top1AdesiLbl").innerHTML = data.top1AdesiLbl;
+        document.getElementById("top1AuseEngLbl").innerHTML = data.top1;
+        document.getElementById("top1AindLbl").innerHTML = data.top1AindLbl;
+        document.getElementById("top1AcomLbl").innerHTML = data.top1AcomLbl;
+        document.getElementById("top1AprofLbl").innerHTML = data.top1AprofLbl;
+        document.getElementById("top1AimpLbl").innerHTML = data.top1AimpLbl;
+        document.getElementById("top1AethLbl").innerHTML = data.top1AethLbl;
+        document.getElementById("top1AeconLbl").innerHTML = data.top1AeconLbl;
+        document.getElementById("top1AlifeLbl").innerHTML = data.top2AlifeLbl;
+        document.getElementById("top1BknowLbl").innerHTML = data.top1BknowLbl;
+        document.getElementById("top1BproLbl").innerHTML = data.top1BproLbl;
+        document.getElementById("top1BinvLbl").innerHTML = data.top1BinvLbl;
+        document.getElementById("top1BdesiLbl").innerHTML = data.top1BdesiLbl;
+        document.getElementById("top1BuseEngLbl").innerHTML =
+          data.top1BuseEngLbl;
+        document.getElementById("top1BindLbl").innerHTML = data.top1BindLbl;
+        document.getElementById("top1BcomLbl").innerHTML = data.top1BcomLbl;
+        document.getElementById("top1BprofLbl").innerHTML = data.top1BprofLbl;
+        document.getElementById("top1BimpLbl").innerHTML = data.top1BimpLbl;
+        document.getElementById("top1BethLbl").innerHTML = data.top1BethLbl;
+        document.getElementById("top1BeconLbl").innerHTML = data.top1BeconLbl;
+        document.getElementById("top1BlifeLbl").innerHTML = data.top1BlifeLbl;
+        document.getElementById("top2AknowLbl").innerHTML = data.top2AknowLbl;
+        document.getElementById("top2AproLbl").innerHTML = data.top2AproLbl;
+        document.getElementById("top2AinvLbl").innerHTML = data.top2AinvLbl;
+        document.getElementById("top2AdesiLbl").innerHTML = data.top2AdesiLbl;
+        document.getElementById("top2AuseEngLbl").innerHTML =
+          data.top2AuseEngLbl;
+        document.getElementById("top2AindLbl").innerHTML = data.top2AindLbl;
+        document.getElementById("top2AcomLbl").innerHTML = data.top2AcomLbl;
+        document.getElementById("top2AprofLbl").innerHTML = data.top2AprofLbl;
+        document.getElementById("top2AimpLbl").innerHTML = data.top2AimpLbl;
+        document.getElementById("top2AethLbl").innerHTML = data.top2AethLbl;
+        document.getElementById("top2AeconLbl").innerHTML = data.top2AeconLbl;
+        document.getElementById("top2AlifeLbl").innerHTML = data.top2AlifeLbl;
+        document.getElementById("top2BknowLbl").innerHTML = data.top2BknowLbl;
+        document.getElementById("top2BproLbl").innerHTML = data.top2BproLbl;
+        document.getElementById("top2BinvLbl").innerHTML = data.top2BinvLbl;
+        document.getElementById("top2BdesiLbl").innerHTML = data.top2BdesiLbl;
+        document.getElementById("top2BuseEngLbl").innerHTML =
+          data.top2BuseEngLbl;
+        document.getElementById("top2BindLbl").innerHTML = data.top2BindLbl;
+        document.getElementById("top2BcomLbl").innerHTML = data.top2BcomLbl;
+        document.getElementById("top2BprofLbl").innerHTML = data.top2BprofLbl;
+        document.getElementById("top2BimpLbl").innerHTML = data.top2BimpLbl;
+        document.getElementById("top2BimpLbl").innerHTML = data.top2BimpLbl;
+        document.getElementById("top2BethLbl").innerHTML = data.top2BethLbl;
+        document.getElementById("top2BeconLbl").innerHTML = data.top2BeconLbl;
+        document.getElementById("top2BlifeLbl").innerHTML = data.top2BlifeLbl;
+        document.getElementById("top3AknowLbl").innerHTML = data.top3AknowLbl;
+        document.getElementById("top3AproLbl").innerHTML = data.top3AproLbl;
+        document.getElementById("top3AinvLbl").innerHTML = data.top3AinvLbl;
+        document.getElementById("top3AdesiLbl").innerHTML = data.top3AdesiLbl;
+        document.getElementById("top3AuseEngLbl").innerHTML =
+          data.top3AuseEngLbl;
+        document.getElementById("top3AindLbl").innerHTML = data.top3AindLbl;
+        document.getElementById("top3AcomLbl").innerHTML = data.top3AcomLbl;
+        document.getElementById("top3AprofLbl").innerHTML = data.top3AprofLbl;
+        document.getElementById("top3AimpLbl").innerHTML = data.top3AimpLbl;
+        document.getElementById("top3AethLbl").innerHTML = data.top3AethLbl;
+        document.getElementById("top3AeconLbl").innerHTML = data.top3AeconLbl;
+        document.getElementById("top3AlifeLbl").innerHTML = data.top3AlifeLbl;
+        document.getElementById("top3BknowLbl").innerHTML = data.top3BknowLbl;
+        document.getElementById("top3BproLbl").innerHTML = data.top3BproLbl;
+        document.getElementById("top3BinvLbl").innerHTML = data.top3BinvLbl;
+        document.getElementById("top3BdesiLbl").innerHTML = data.top3BdesiLbl;
+        document.getElementById("top3BuseEngLbl").innerHTML =
+          data.top3BuseEngLbl;
+        document.getElementById("top3BindLbl").innerHTML = data.top3BindLbl;
+        document.getElementById("top3BcomLbl").innerHTML = data.top3BcomLbl;
+        document.getElementById("top3BprofLbl").innerHTML = data.top3BprofLbl;
+        document.getElementById("top3BimpLbl").innerHTML = data.top3BimpLbl;
+        document.getElementById("top3BethLbl").innerHTML = data.top3BethLbl;
+        document.getElementById("top3BeconLbl").innerHTML = data.top3BeconLbl;
+        document.getElementById("top3BlifeLbl").innerHTML = data.top3BlifeLbl;
+        document.getElementById("top4AknowLbl").innerHTML = data.top4AknowLbl;
+        document.getElementById("top4AproLbl").innerHTML = data.top4AproLbl;
+        document.getElementById("top4AinvLbl").innerHTML = data.top4AinvLbl;
+        document.getElementById("top4AdesiLbl").innerHTML = data.top4AdesiLbl;
+        document.getElementById("top4AuseEngLbl").innerHTML =
+          data.top4AuseEngLbl;
+        document.getElementById("top4AindLbl").innerHTML = data.top4AindLbl;
+        document.getElementById("top4AcomLbl").innerHTML = data.top4AcomLbl;
+        document.getElementById("top4AprofLbl").innerHTML = data.top4AprofLbl;
+        document.getElementById("top4AimpLbl").innerHTML = data.top4AimpLbl;
+        document.getElementById("top4AethLbl").innerHTML = data.top4AethLbl;
+        document.getElementById("top4AeconLbl").innerHTML = data.top4AeconLbl;
+        document.getElementById("top4AlifeLbl").innerHTML = data.top4AlifeLbl;
+        document.getElementById("top4BknowLbl").innerHTML = data.top4BknowLbl;
+        document.getElementById("top4BproLbl").innerHTML = data.top4BproLbl;
+        document.getElementById("top4BinvLbl").innerHTML = data.top4BinvLbl;
+        document.getElementById("top4BdesiLbl").innerHTML = data.top4BdesiLbl;
+        document.getElementById("top4BuseEngLbl").innerHTML =
+          data.top4BuseEngLbl;
+        document.getElementById("top4BindLbl").innerHTML = data.top4BindLbl;
+        document.getElementById("top4BcomLbl").innerHTML = data.top4BcomLbl;
+        document.getElementById("top4BprofLbl").innerHTML = data.top4BprofLbl;
+        document.getElementById("top4BimpLbl").innerHTML = data.top4BimpLbl;
+        document.getElementById("top4BethLbl").innerHTML = data.top4BethLbl;
+        document.getElementById("top4BeconLbl").innerHTML = data.top4BeconLbl;
+        document.getElementById("top4BlifeLbl").innerHTML = data.top4BlifeLbl;
 
-    for (let i = 0; i < elements.length; i++) {
-      const value = elements[i].value.trim();
-      const label = document.getElementById(
-        elements[i].id.replace("Txt", "Lbl").replace("drop", "Lbl")
-      );
-
-      if (value !== data.length) {
-        label.innerHTML = value;
-        if (label.innerHTML == "empty") {
-          label.innerHTML = "";
-        }
-      }
-    }
-
-    console.log(data.codeLbl);
-    console.log(data.courseUuid);
-
-    fetch("/course-outline", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Content-length": 7,
-      },
-      body: JSON.stringify({
-        courseUuid: data.courseUuid,
-        versionNum: 9,
-        titleLbl: data.titleLbl,
-        codeLbl: data.codeLbl,
-        yearLbl: "2019",
-        desLbl: data.desLbl,
-        insLbl: data.insLbl,
-        acaLbl: data.acaLbl,
-        conLbl: data.conLbl,
-        antLbl: data.antLbl,
-        preLbl: data.preLbl,
-        coLbl: data.coLbl,
-        ceabLbl: data.ceabLbl,
-        reqTbLbl: data.reqTbLbl,
-        othLbl: data.othLbl,
-        recRefLbl: data.recRefLbl,
-        knowLbl: data.knowLbl,
-        useEngLbl: data.useEngLbl,
-        impLbl: data.impLbl,
-        proLbl: data.proLbl,
-        indLbl: data.indLbl,
-        ethLbl: data.ethLbl,
-        invLbl: data.invLbl,
-        comLbl: data.comLbl,
-        econLbl: data.conLbl,
-        desiLbl: data.desiLbl,
-        profLbl: data.profLbl,
-        lifeLbl: data.lifeLbl,
-        top1Lbl: data.top1Lbl,
-        top1aLbl: data.top1aLbl,
-        top1bLbl: data.top1bLbl,
-        top2Lbl: data.top2Lbl,
-        top2aLbl: data.top2aLbl,
-        top2bLbl: data.top2bLbl,
-        top3Lbl: data.top3Lbl,
-        top3aLbl: data.top3aLbl,
-        top3bLbl: data.top3bLbl,
-        top4Lbl: data.top4Lbl,
-        top4aLbl: data.top4aLbl,
-        top4bLbl: data.top4bLbl,
-        homPercLbl: data.homPercLbl,
-        quizPercLbl: data.quizPercLbl,
-        labPercLbl: data.labPercLbl,
-        midPercLbl: data.midPercLbl,
-        finPercLbl: data.finPercLbl,
-        homLbl: data.homLbl,
-        quiLbl: data.quiLbl,
-        labLbl: data.labLbl,
-        midLbl: data.midLbl,
-        finLbl: data.finLbl,
-        lateLbl: data.lateLbl,
-        assSubLbl: data.assSubLbl,
-        top1AknowLbl: data.top1AknowLbl,
-        top1AproLbl: data.top1AproLbl,
-        top1AinvLbl: data.top1AinvLbl,
-        top1AdesiLbl: data.top1AdesiLbl,
-        top1AuseEngLbl: data.top1AuseEngLbl,
-        top1AindLbl: data.top1AindLbl,
-        top1AcomLbl: data.top1AcomLbl,
-        top1AprofLbl: data.top1AprofLbl,
-        top1AimpLbl: data.top1AimpLbl,
-        top1AethLbl: data.top1AethLbl,
-        top1AeconLbl: data.top1AeconLbl,
-        top1AlifeLbl: data.top2AlifeLbl,
-        top1BknowLbl: data.top1BknowLbl,
-        top1BproLbl: data.top1BproLbl,
-        top1BinvLbl: data.top1BinvLbl,
-        top1BdesiLbl: data.top1BdesiLbl,
-        top1BuseEngLbl: data.top1BuseEngLbl,
-        top1BindLbl: data.top1BindLbl,
-        top1BcomLbl: data.top1BcomLbl,
-        top1BprofLbl: data.top1BprofLbl,
-        top1BimpLbl: data.top1BimpLbl,
-        top1BethLbl: data.top1BethLbl,
-        top1BeconLbl: data.top1BeconLbl,
-        top1BlifeLbl: data.top1BlifeLbl,
-        top2AknowLbl: data.top2AknowLbl,
-        top2AproLbl: data.top2AproLbl,
-        top2AinvLbl: data.top2AinvLbl,
-        top2AdesiLbl: data.top2AdesiLbl,
-        top2AuseEngLbl: data.top2AuseEngLbl,
-        top2AindLbl: data.top2AindLbl,
-        top2AcomLbl: data.top2AcomLbl,
-        top2AprofLbl: data.top2AprofLbl,
-        top2AimpLbl: data.top2AimpLbl,
-        top2AethLbl: data.top2AethLbl,
-        top2AeconLbl: data.top2AeconLbl,
-        top2AlifeLbl: data.top2AlifeLbl,
-        top2BknowLbl: data.top2BknowLbl,
-        top2BproLbl: data.top2BproLbl,
-        top2BinvLbl: data.top2BinvLbl,
-        top2BdesiLbl: data.top2BdesiLbl,
-        top2BuseEngLbl: data.top2BuseEngLbl,
-        top2BindLbl: data.top2BindLbl,
-        top2BcomLbl: data.top2BcomLbl,
-        top2BprofLbl: data.top2BprofLbl,
-        top2BimpLbl: data.top2BimpLbl,
-        top2BethLbl: data.top2BethLbl,
-        top2BeconLbl: data.top2BeconLbl,
-        top2BlifeLbl: data.top2BlifeLbl,
-        top3AknowLbl: data.top3AknowLbl,
-        top3AproLbl: data.top3AproLbl,
-        top3AinvLbl: data.top3AinvLbl,
-        top3AdesiLbl: data.top3AdesiLbl,
-        top3AuseEngLbl: data.top3AuseEngLbl,
-        top3AindLbl: data.top3AindLbl,
-        top3AcomLbl: data.top3AcomLbl,
-        top3AprofLbl: data.top3AprofLbl,
-        top3AimpLbl: data.top3AimpLbl,
-        top3AethLbl: data.top3AethLbl,
-        top3AeconLbl: data.top3AeconLbl,
-        top3AlifeLbl: data.top3AlifeLbl,
-        top3BknowLbl: data.top3BknowLbl,
-        top3BproLbl: data.top3BproLbl,
-        top3BinvLbl: data.top3BinvLbl,
-        top3BdesiLbl: data.top3BdesiLbl,
-        top3BuseEngLbl: data.top3BuseEngLbl,
-        top3BindLbl: data.top3BindLbl,
-        top3BcomLbl: data.top3BcomLbl,
-        top3BprofLbl: data.top3BprofLbl,
-        top3BimpLbl: data.top3BimpLbl,
-        top3BethLbl: data.top3BethLbl,
-        top3BeconLbl: data.top3BeconLbl,
-        top3BlifeLbl: data.top3BlifeLbl,
-        top4AknowLbl: data.top4AknowLbl,
-        top4AproLbl: data.top4AproLbl,
-        top4AinvLbl: data.top4AinvLbl,
-        top4AdesiLbl: data.top4AdesiLbl,
-        top4AuseEngLbl: data.top4AuseEngLbl,
-        top4AindLbl: data.top4AindLbl,
-        top4AcomLbl: data.top4AcomLbl,
-        top4AprofLbl: data.top4AprofLbl,
-        top4AimpLbl: data.top4AimpLbl,
-        top4AethLbl: data.top4AethLbl,
-        top4AeconLbl: data.top4AeconLbl,
-        top4AlifeLbl: data.top4AlifeLbl,
-        top4BknowLbl: data.top4BknowLbl,
-        top4BproLbl: data.top4BproLbl,
-        top4BinvLbl: data.top4BinvLbl,
-        top4BdesiLbl: data.top4BdesiLbl,
-        top4BuseEngLbl: data.top4BuseEngLbl,
-        top4BindLbl: data.top4BindLbl,
-        top4BcomLbl: data.top4BcomLbl,
-        top4BprofLbl: data.top4BprofLbl,
-        top4BimpLbl: data.top4BimpLbl,
-        top4BethLbl: data.top4BethLbl,
-        top4BeconLbl: data.top4BeconLbl,
-        top4BlifeLbl: data.top4BlifeLbl,
-      }),
-    });
+        // add more element updates as needed
+      })
+      .catch((error) => console.error(error));
   }
 
   return (

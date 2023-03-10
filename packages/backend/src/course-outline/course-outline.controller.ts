@@ -32,7 +32,7 @@ export class CourseOutlineController {
     @Param('courseUuid') courseUuid: string,
     @Param('versionNum') versionNum: string,
   ) {
-    return this.courseOutlineService.findOne(courseUuid, parseInt(versionNum));
+    return this.courseOutlineService.findOne(courseUuid, versionNum);
   }
 
   @Patch(':id')

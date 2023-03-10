@@ -80,8 +80,7 @@ function App() {
               element={<ReviewCourses></ReviewCourses>}
             />
             <Route
-              exact
-              path="/edit-courseoutline"
+              path="/edit-course-outline/:courseUuid/:versionNum"
               element={<EditCourseOutline></EditCourseOutline>}
             />
           </Routes>

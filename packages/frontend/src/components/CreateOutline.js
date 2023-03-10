@@ -40,8 +40,6 @@ export default function CreateOutline() {
     fetchData();
   }, []);
 
-  
-
   function submitChanges(data) {
     const elements = document.querySelectorAll('[id$="Txt"], [id$="drop"]');
 
@@ -51,14 +49,15 @@ export default function CreateOutline() {
         elements[i].id.replace("Txt", "Lbl").replace("drop", "Lbl")
       );
 
-      if (value !== data.length) {
-        label.innerHTML = value;
-        if (label.innerHTML == "empty") {
-          label.innerHTML = "";
+      if (label) {
+        if (value !== data.length) {
+          label.innerHTML = value;
+          if (label.innerHTML == "empty") {
+            label.innerHTML = "";
+          }
         }
       }
     }
-
 
     fetch("/course-outline", {
       method: "POST",
@@ -67,9 +66,8 @@ export default function CreateOutline() {
         "Content-length": 7,
       },
       body: JSON.stringify({
-
         courseUuid: data.courseUuid,
-        versionNum: 9,
+        versionNum: 10,
         titleLbl: data.titleLbl,
         codeLbl: data.codeLbl,
         yearLbl: "2019",
@@ -548,7 +546,6 @@ export default function CreateOutline() {
             <span
               id="knowLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              
             ></span>
           </Box>
           <Box height="60px" border="1px" borderColor="black">
@@ -580,62 +577,110 @@ export default function CreateOutline() {
             <span
               id="top1AknowLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1XJQgvuS8d_5KZVF-USaEiKwt-L_pttTs/view')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1XJQgvuS8d_5KZVF-USaEiKwt-L_pttTs/view"
+                )
+              }
             ></span>
             <span
               id="top1AproLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1tbD6_ukS1eZB6Ks7mapQ4JfBUPB2B4VM/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1tbD6_ukS1eZB6Ks7mapQ4JfBUPB2B4VM/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top1AinvLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/14e7nTnTKMOIAiMOd40h1nzjxJ5pD1rSJ/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/14e7nTnTKMOIAiMOd40h1nzjxJ5pD1rSJ/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top1AdesiLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1iKLqaUwWY5f_v7fqkWhlcEQfbREB5vaq/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1iKLqaUwWY5f_v7fqkWhlcEQfbREB5vaq/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top1AuseEngLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1Q9QwRfWy1fElP94Y1VTv4YcUXRzaOFVZ/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1Q9QwRfWy1fElP94Y1VTv4YcUXRzaOFVZ/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top1AindLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1TbmgJpxWadWZCqGBhviqzwV_sVb9oTn3/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1TbmgJpxWadWZCqGBhviqzwV_sVb9oTn3/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top1AcomLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1vN3obR9ayx_OLFItEtdMu8SCabHXzRSl/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1vN3obR9ayx_OLFItEtdMu8SCabHXzRSl/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top1AprofLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1kqZCTgEBbrp_gwDxrbGzPh40XCo6K5YX/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1kqZCTgEBbrp_gwDxrbGzPh40XCo6K5YX/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top1AimpLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1O9zxcCQuuX0B_cpcX2FhaV2H7m0Gcz9C/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1O9zxcCQuuX0B_cpcX2FhaV2H7m0Gcz9C/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top1AethLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1i0vwZpaDzvBYmnY19WGvEDXr3JwjWC-4/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1i0vwZpaDzvBYmnY19WGvEDXr3JwjWC-4/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top1AeconLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1HK7hhToRn6sZi4I3z6bHrCZGiSAJ9w5E/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1HK7hhToRn6sZi4I3z6bHrCZGiSAJ9w5E/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top1AlifeLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1Rf8IsTTRaLwopksj_hkdrQXlXmbYBJRB/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1Rf8IsTTRaLwopksj_hkdrQXlXmbYBJRB/view?usp=sharing"
+                )
+              }
             ></span>
           </Box>
           <Box height="60px" border="1px" borderColor="black">
@@ -648,62 +693,110 @@ export default function CreateOutline() {
             <span
               id="top1BknowLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1XJQgvuS8d_5KZVF-USaEiKwt-L_pttTs/view')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1XJQgvuS8d_5KZVF-USaEiKwt-L_pttTs/view"
+                )
+              }
             ></span>
             <span
               id="top1BproLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1tbD6_ukS1eZB6Ks7mapQ4JfBUPB2B4VM/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1tbD6_ukS1eZB6Ks7mapQ4JfBUPB2B4VM/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top1BinvLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/14e7nTnTKMOIAiMOd40h1nzjxJ5pD1rSJ/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/14e7nTnTKMOIAiMOd40h1nzjxJ5pD1rSJ/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top1BdesiLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1iKLqaUwWY5f_v7fqkWhlcEQfbREB5vaq/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1iKLqaUwWY5f_v7fqkWhlcEQfbREB5vaq/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top1BuseEngLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1Q9QwRfWy1fElP94Y1VTv4YcUXRzaOFVZ/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1Q9QwRfWy1fElP94Y1VTv4YcUXRzaOFVZ/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top1BindLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1TbmgJpxWadWZCqGBhviqzwV_sVb9oTn3/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1TbmgJpxWadWZCqGBhviqzwV_sVb9oTn3/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top1BcomLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1vN3obR9ayx_OLFItEtdMu8SCabHXzRSl/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1vN3obR9ayx_OLFItEtdMu8SCabHXzRSl/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top1BprofLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1kqZCTgEBbrp_gwDxrbGzPh40XCo6K5YX/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1kqZCTgEBbrp_gwDxrbGzPh40XCo6K5YX/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top1BimpLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1O9zxcCQuuX0B_cpcX2FhaV2H7m0Gcz9C/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1O9zxcCQuuX0B_cpcX2FhaV2H7m0Gcz9C/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top1BethLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1i0vwZpaDzvBYmnY19WGvEDXr3JwjWC-4/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1i0vwZpaDzvBYmnY19WGvEDXr3JwjWC-4/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top1BeconLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1HK7hhToRn6sZi4I3z6bHrCZGiSAJ9w5E/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1HK7hhToRn6sZi4I3z6bHrCZGiSAJ9w5E/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top1BlifeLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1Rf8IsTTRaLwopksj_hkdrQXlXmbYBJRB/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1Rf8IsTTRaLwopksj_hkdrQXlXmbYBJRB/view?usp=sharing"
+                )
+              }
             ></span>
           </Box>
           <Box>
@@ -726,62 +819,110 @@ export default function CreateOutline() {
             <span
               id="top2AknowLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1XJQgvuS8d_5KZVF-USaEiKwt-L_pttTs/view')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1XJQgvuS8d_5KZVF-USaEiKwt-L_pttTs/view"
+                )
+              }
             ></span>
             <span
               id="top2AproLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1tbD6_ukS1eZB6Ks7mapQ4JfBUPB2B4VM/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1tbD6_ukS1eZB6Ks7mapQ4JfBUPB2B4VM/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top2AinvLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/14e7nTnTKMOIAiMOd40h1nzjxJ5pD1rSJ/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/14e7nTnTKMOIAiMOd40h1nzjxJ5pD1rSJ/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top2AdesiLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1iKLqaUwWY5f_v7fqkWhlcEQfbREB5vaq/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1iKLqaUwWY5f_v7fqkWhlcEQfbREB5vaq/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top2AuseEngLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1Q9QwRfWy1fElP94Y1VTv4YcUXRzaOFVZ/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1Q9QwRfWy1fElP94Y1VTv4YcUXRzaOFVZ/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top2AindLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1TbmgJpxWadWZCqGBhviqzwV_sVb9oTn3/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1TbmgJpxWadWZCqGBhviqzwV_sVb9oTn3/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top2AcomLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1vN3obR9ayx_OLFItEtdMu8SCabHXzRSl/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1vN3obR9ayx_OLFItEtdMu8SCabHXzRSl/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top2AprofLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1kqZCTgEBbrp_gwDxrbGzPh40XCo6K5YX/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1kqZCTgEBbrp_gwDxrbGzPh40XCo6K5YX/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top2AimpLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1O9zxcCQuuX0B_cpcX2FhaV2H7m0Gcz9C/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1O9zxcCQuuX0B_cpcX2FhaV2H7m0Gcz9C/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top2AethLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1i0vwZpaDzvBYmnY19WGvEDXr3JwjWC-4/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1i0vwZpaDzvBYmnY19WGvEDXr3JwjWC-4/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top2AeconLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1HK7hhToRn6sZi4I3z6bHrCZGiSAJ9w5E/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1HK7hhToRn6sZi4I3z6bHrCZGiSAJ9w5E/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top2AlifeLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1Rf8IsTTRaLwopksj_hkdrQXlXmbYBJRB/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1Rf8IsTTRaLwopksj_hkdrQXlXmbYBJRB/view?usp=sharing"
+                )
+              }
             ></span>
           </Box>
           <Box height="60px" border="1px" borderColor="black">
@@ -794,62 +935,110 @@ export default function CreateOutline() {
             <span
               id="top2BknowLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1XJQgvuS8d_5KZVF-USaEiKwt-L_pttTs/view')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1XJQgvuS8d_5KZVF-USaEiKwt-L_pttTs/view"
+                )
+              }
             ></span>
             <span
               id="top2BproLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1tbD6_ukS1eZB6Ks7mapQ4JfBUPB2B4VM/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1tbD6_ukS1eZB6Ks7mapQ4JfBUPB2B4VM/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top2BinvLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/14e7nTnTKMOIAiMOd40h1nzjxJ5pD1rSJ/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/14e7nTnTKMOIAiMOd40h1nzjxJ5pD1rSJ/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top2BdesiLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1iKLqaUwWY5f_v7fqkWhlcEQfbREB5vaq/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1iKLqaUwWY5f_v7fqkWhlcEQfbREB5vaq/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top2BuseEngLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1Q9QwRfWy1fElP94Y1VTv4YcUXRzaOFVZ/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1Q9QwRfWy1fElP94Y1VTv4YcUXRzaOFVZ/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top2BindLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1TbmgJpxWadWZCqGBhviqzwV_sVb9oTn3/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1TbmgJpxWadWZCqGBhviqzwV_sVb9oTn3/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top2BcomLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1vN3obR9ayx_OLFItEtdMu8SCabHXzRSl/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1vN3obR9ayx_OLFItEtdMu8SCabHXzRSl/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top2BprofLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1kqZCTgEBbrp_gwDxrbGzPh40XCo6K5YX/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1kqZCTgEBbrp_gwDxrbGzPh40XCo6K5YX/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top2BimpLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1O9zxcCQuuX0B_cpcX2FhaV2H7m0Gcz9C/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1O9zxcCQuuX0B_cpcX2FhaV2H7m0Gcz9C/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top2BethLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1i0vwZpaDzvBYmnY19WGvEDXr3JwjWC-4/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1i0vwZpaDzvBYmnY19WGvEDXr3JwjWC-4/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top2BeconLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1HK7hhToRn6sZi4I3z6bHrCZGiSAJ9w5E/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1HK7hhToRn6sZi4I3z6bHrCZGiSAJ9w5E/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top2BlifeLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1Rf8IsTTRaLwopksj_hkdrQXlXmbYBJRB/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1Rf8IsTTRaLwopksj_hkdrQXlXmbYBJRB/view?usp=sharing"
+                )
+              }
             ></span>
           </Box>
           <Box>
@@ -872,62 +1061,110 @@ export default function CreateOutline() {
             <span
               id="top3AknowLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1XJQgvuS8d_5KZVF-USaEiKwt-L_pttTs/view')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1XJQgvuS8d_5KZVF-USaEiKwt-L_pttTs/view"
+                )
+              }
             ></span>
             <span
               id="top3AproLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1tbD6_ukS1eZB6Ks7mapQ4JfBUPB2B4VM/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1tbD6_ukS1eZB6Ks7mapQ4JfBUPB2B4VM/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top3AinvLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/14e7nTnTKMOIAiMOd40h1nzjxJ5pD1rSJ/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/14e7nTnTKMOIAiMOd40h1nzjxJ5pD1rSJ/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top3AdesiLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1iKLqaUwWY5f_v7fqkWhlcEQfbREB5vaq/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1iKLqaUwWY5f_v7fqkWhlcEQfbREB5vaq/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top3AuseEngLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1Q9QwRfWy1fElP94Y1VTv4YcUXRzaOFVZ/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1Q9QwRfWy1fElP94Y1VTv4YcUXRzaOFVZ/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top3AindLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1TbmgJpxWadWZCqGBhviqzwV_sVb9oTn3/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1TbmgJpxWadWZCqGBhviqzwV_sVb9oTn3/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top3AcomLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1vN3obR9ayx_OLFItEtdMu8SCabHXzRSl/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1vN3obR9ayx_OLFItEtdMu8SCabHXzRSl/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top3AprofLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1kqZCTgEBbrp_gwDxrbGzPh40XCo6K5YX/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1kqZCTgEBbrp_gwDxrbGzPh40XCo6K5YX/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top3AimpLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1O9zxcCQuuX0B_cpcX2FhaV2H7m0Gcz9C/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1O9zxcCQuuX0B_cpcX2FhaV2H7m0Gcz9C/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top3AethLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1i0vwZpaDzvBYmnY19WGvEDXr3JwjWC-4/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1i0vwZpaDzvBYmnY19WGvEDXr3JwjWC-4/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top3AeconLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1HK7hhToRn6sZi4I3z6bHrCZGiSAJ9w5E/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1HK7hhToRn6sZi4I3z6bHrCZGiSAJ9w5E/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top3AlifeLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1Rf8IsTTRaLwopksj_hkdrQXlXmbYBJRB/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1Rf8IsTTRaLwopksj_hkdrQXlXmbYBJRB/view?usp=sharing"
+                )
+              }
             ></span>
           </Box>
           <Box height="60px" border="1px" borderColor="black">
@@ -940,62 +1177,110 @@ export default function CreateOutline() {
             <span
               id="top3BknowLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1XJQgvuS8d_5KZVF-USaEiKwt-L_pttTs/view')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1XJQgvuS8d_5KZVF-USaEiKwt-L_pttTs/view"
+                )
+              }
             ></span>
             <span
               id="top3BproLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1tbD6_ukS1eZB6Ks7mapQ4JfBUPB2B4VM/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1tbD6_ukS1eZB6Ks7mapQ4JfBUPB2B4VM/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top3BinvLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/14e7nTnTKMOIAiMOd40h1nzjxJ5pD1rSJ/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/14e7nTnTKMOIAiMOd40h1nzjxJ5pD1rSJ/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top3BdesiLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1iKLqaUwWY5f_v7fqkWhlcEQfbREB5vaq/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1iKLqaUwWY5f_v7fqkWhlcEQfbREB5vaq/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top3BuseEngLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1Q9QwRfWy1fElP94Y1VTv4YcUXRzaOFVZ/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1Q9QwRfWy1fElP94Y1VTv4YcUXRzaOFVZ/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top3BindLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1TbmgJpxWadWZCqGBhviqzwV_sVb9oTn3/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1TbmgJpxWadWZCqGBhviqzwV_sVb9oTn3/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top3BcomLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1vN3obR9ayx_OLFItEtdMu8SCabHXzRSl/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1vN3obR9ayx_OLFItEtdMu8SCabHXzRSl/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top3BprofLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1kqZCTgEBbrp_gwDxrbGzPh40XCo6K5YX/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1kqZCTgEBbrp_gwDxrbGzPh40XCo6K5YX/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top3BimpLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1O9zxcCQuuX0B_cpcX2FhaV2H7m0Gcz9C/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1O9zxcCQuuX0B_cpcX2FhaV2H7m0Gcz9C/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top3BethLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1i0vwZpaDzvBYmnY19WGvEDXr3JwjWC-4/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1i0vwZpaDzvBYmnY19WGvEDXr3JwjWC-4/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top3BeconLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1HK7hhToRn6sZi4I3z6bHrCZGiSAJ9w5E/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1HK7hhToRn6sZi4I3z6bHrCZGiSAJ9w5E/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top3BlifeLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1Rf8IsTTRaLwopksj_hkdrQXlXmbYBJRB/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1Rf8IsTTRaLwopksj_hkdrQXlXmbYBJRB/view?usp=sharing"
+                )
+              }
             ></span>
           </Box>
           <Box height="60px" border="1px" borderColor="black">
@@ -1018,62 +1303,110 @@ export default function CreateOutline() {
             <span
               id="top4AknowLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1XJQgvuS8d_5KZVF-USaEiKwt-L_pttTs/view')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1XJQgvuS8d_5KZVF-USaEiKwt-L_pttTs/view"
+                )
+              }
             ></span>
             <span
               id="top4AproLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1tbD6_ukS1eZB6Ks7mapQ4JfBUPB2B4VM/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1tbD6_ukS1eZB6Ks7mapQ4JfBUPB2B4VM/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top4AinvLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/14e7nTnTKMOIAiMOd40h1nzjxJ5pD1rSJ/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/14e7nTnTKMOIAiMOd40h1nzjxJ5pD1rSJ/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top4AdesiLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1iKLqaUwWY5f_v7fqkWhlcEQfbREB5vaq/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1iKLqaUwWY5f_v7fqkWhlcEQfbREB5vaq/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top4AuseEngLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1Q9QwRfWy1fElP94Y1VTv4YcUXRzaOFVZ/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1Q9QwRfWy1fElP94Y1VTv4YcUXRzaOFVZ/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top4AindLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1TbmgJpxWadWZCqGBhviqzwV_sVb9oTn3/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1TbmgJpxWadWZCqGBhviqzwV_sVb9oTn3/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top4AcomLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1vN3obR9ayx_OLFItEtdMu8SCabHXzRSl/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1vN3obR9ayx_OLFItEtdMu8SCabHXzRSl/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top4AprofLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1kqZCTgEBbrp_gwDxrbGzPh40XCo6K5YX/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1kqZCTgEBbrp_gwDxrbGzPh40XCo6K5YX/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top4AimpLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1O9zxcCQuuX0B_cpcX2FhaV2H7m0Gcz9C/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1O9zxcCQuuX0B_cpcX2FhaV2H7m0Gcz9C/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top4AethLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1i0vwZpaDzvBYmnY19WGvEDXr3JwjWC-4/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1i0vwZpaDzvBYmnY19WGvEDXr3JwjWC-4/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top4AeconLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1HK7hhToRn6sZi4I3z6bHrCZGiSAJ9w5E/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1HK7hhToRn6sZi4I3z6bHrCZGiSAJ9w5E/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top4AlifeLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1Rf8IsTTRaLwopksj_hkdrQXlXmbYBJRB/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1Rf8IsTTRaLwopksj_hkdrQXlXmbYBJRB/view?usp=sharing"
+                )
+              }
             ></span>
           </Box>
           <Box height="60px" border="1px" borderColor="black">
@@ -1086,62 +1419,110 @@ export default function CreateOutline() {
             <span
               id="top4BknowLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1XJQgvuS8d_5KZVF-USaEiKwt-L_pttTs/view')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1XJQgvuS8d_5KZVF-USaEiKwt-L_pttTs/view"
+                )
+              }
             ></span>
             <span
               id="top4BproLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1tbD6_ukS1eZB6Ks7mapQ4JfBUPB2B4VM/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1tbD6_ukS1eZB6Ks7mapQ4JfBUPB2B4VM/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top4BinvLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/14e7nTnTKMOIAiMOd40h1nzjxJ5pD1rSJ/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/14e7nTnTKMOIAiMOd40h1nzjxJ5pD1rSJ/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top4BdesiLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1iKLqaUwWY5f_v7fqkWhlcEQfbREB5vaq/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1iKLqaUwWY5f_v7fqkWhlcEQfbREB5vaq/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top4BuseEngLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1Q9QwRfWy1fElP94Y1VTv4YcUXRzaOFVZ/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1Q9QwRfWy1fElP94Y1VTv4YcUXRzaOFVZ/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top4BindLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1TbmgJpxWadWZCqGBhviqzwV_sVb9oTn3/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1TbmgJpxWadWZCqGBhviqzwV_sVb9oTn3/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top4BcomLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1vN3obR9ayx_OLFItEtdMu8SCabHXzRSl/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1vN3obR9ayx_OLFItEtdMu8SCabHXzRSl/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top4BprofLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1kqZCTgEBbrp_gwDxrbGzPh40XCo6K5YX/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1kqZCTgEBbrp_gwDxrbGzPh40XCo6K5YX/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top4BimpLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1O9zxcCQuuX0B_cpcX2FhaV2H7m0Gcz9C/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1O9zxcCQuuX0B_cpcX2FhaV2H7m0Gcz9C/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top4BethLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1i0vwZpaDzvBYmnY19WGvEDXr3JwjWC-4/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1i0vwZpaDzvBYmnY19WGvEDXr3JwjWC-4/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top4BeconLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1HK7hhToRn6sZi4I3z6bHrCZGiSAJ9w5E/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1HK7hhToRn6sZi4I3z6bHrCZGiSAJ9w5E/view?usp=sharing"
+                )
+              }
             ></span>
             <span
               id="top4BlifeLbl"
               class="text-xl font-serif text-black ml-2 w-5/6"
-              onClick={() => window.open('https://drive.google.com/file/d/1Rf8IsTTRaLwopksj_hkdrQXlXmbYBJRB/view?usp=sharing')}
+              onClick={() =>
+                window.open(
+                  "https://drive.google.com/file/d/1Rf8IsTTRaLwopksj_hkdrQXlXmbYBJRB/view?usp=sharing"
+                )
+              }
             ></span>
           </Box>
         </SimpleGrid>
@@ -1494,7 +1875,6 @@ export default function CreateOutline() {
       <form class="ml-6 mt-1">
         <h2 className="text-3xl font-serif text-black mt-4">Course UUID:</h2>
         <div style={{ display: "flex" }}>
-
           <select name="courseUuid" required {...register("courseUuid")}>
             <option value="">Select a Course</option>
             {courses.map((course) => (

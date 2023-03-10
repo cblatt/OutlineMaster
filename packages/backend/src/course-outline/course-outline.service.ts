@@ -18,12 +18,13 @@ export class CourseOutlineService {
   findAll() {
     return this.prisma.courseOutline.findMany();
   }
-  findOne(courseUuid: string, versionNum: number) {
+  findOne(courseUuid: string, versionNum: string) {
+    const versionNumInt = parseInt(versionNum);
     return this.prisma.courseOutline.findUnique({
       where: {
         courseUuid_versionNum: {
           courseUuid: courseUuid,
-          versionNum: versionNum,
+          versionNum: versionNumInt,
         },
       },
     });
