@@ -12,6 +12,7 @@ import {
   Checkbox,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
+import { jsPDF } from "jspdf";
 
 export default function CreateOutline() {
   const {
@@ -212,6 +213,18 @@ export default function CreateOutline() {
     });
   }
 
+  
+
+  function savePDF(){
+    var contentOfDiv = document.getElementById("courseOutline").innerHTML;
+    var newWin = window.open('', '', 'height=650, width=650');
+    newWin.document.write('');
+    newWin.document.write(contentOfDiv);
+    newWin.document.write('');
+    newWin.print();
+    newWin.close();
+  }
+
   return (
     <div class="min-h-screen bg-gradient-to-r from-purple-500 to-purple-300 ... text-gray-500 py-6 flex flex-col justify-center sm:py-12">
       <center>
@@ -228,9 +241,10 @@ export default function CreateOutline() {
         borderWidth="2px"
         borderColor="black"
         bg="white"
-        h="6000px"
+        h="7000px"
         w="80%"
         alignSelf="center"
+        id="courseOutline"
       >
         <center>
           <label class="text-xl font-serif text-black mt-2">
@@ -3621,6 +3635,17 @@ export default function CreateOutline() {
           onClick={handleSubmit(submitChanges)}
         >
           Save
+        </Button>
+
+        <Button
+          colorScheme="green"
+          ml="8"
+          size="lg"
+          width="80"
+          id="pdfBtn"
+          onClick={() => savePDF('courseOutline', 'Title')}
+        >
+          Export to PDF
         </Button>
       </form>
     </div>
