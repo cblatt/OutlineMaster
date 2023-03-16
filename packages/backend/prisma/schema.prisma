@@ -27,13 +27,13 @@ model Department {
 model Course {
   courseUuid    String      @id @default(uuid())
   courseCode    String      
-  semester      Term        
-  year          Int    
-  courseName    String      @unique
+  courseName    String
   department Department     @relation(fields: [departmentUuid], references: [departmentUuid])
   departmentUuid String
   InstructorCourse InstructorCourse[]
   courseOutlines  CourseOutline[]
+  @@unique([departmentUuid, courseName])
+  @@unique([departmentUuid, courseCode])
 }
 
 model InstructorCourse {
@@ -42,12 +42,6 @@ model InstructorCourse {
   course  Course  @relation(fields: [courseUuid], references: [courseUuid])
   courseUuid  String 
   @@id([uwoId, courseUuid])
-}
-
-enum Term {
-  FALL
-  WINTER
-  SUMMER
 }
 
 enum Role {
@@ -222,10 +216,10 @@ top4BlifeLbl String
 model EditLog {
   courseUuid    String  
   versionNum    Int        
-  editNum       Int    //this values are set manually       
-  timeLastEdited DateTime
+  editNum       Int           
+  timeLastEdited String
   editor String 
   courseOutline  CourseOutline     @relation(fields: [courseUuid,versionNum], references: [courseUuid, versionNum])
-  @@id([courseUuid, versionNum])
+  @@id([courseUuid, versionNum, editNum])
 }
 

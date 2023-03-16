@@ -42,12 +42,18 @@ export default function AdminNav() {
             Assign Instructor
           </NavLink>
 
-          <NavLink eventKey="6" as={Link} to="/createcourse">
-            Create Course
+          <NavLink eventKey="6" as={Link} to="/courses">
+            Courses
+          </NavLink>
+          <NavLink eventKey="7" as={Link} to="/departments">
+            Departments
+          </NavLink>
+          <NavLink eventKey="8" as={Link} to="/reviewcourse">
+            Review Courses
           </NavLink>
         </Nav>
         <Nav>
-          <NavLink eventKey="6" as={Link} to="/">
+          <NavLink eventKey="8" as={Link} to="/">
             <Button
               className="text-black rounded-md hover:opacity-100"
               onClick={logOut}

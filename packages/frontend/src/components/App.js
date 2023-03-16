@@ -9,7 +9,12 @@ import CreateOutline from "./CreateOutline";
 import UnAuth from "./UnAuth";
 import AssignInstructor from "./AssignInstructor";
 import AddInstructor from "./AddInstructor";
-import CreateCourse from "./CreateCourse";
+import Departments from "./Departments";
+import DepartmentCourses from "./DepartmentCourses";
+import ReviewCourses from "./ReviewCourses";
+import Courses from "./CoursesPage";
+import CourseInfo from "./CourseInfoPage";
+import EditCourseOutline from "./EditCourseOutline";
 
 function App() {
   return (
@@ -48,6 +53,14 @@ function App() {
                   path="/assign"
                   element={<AssignInstructor></AssignInstructor>}
                 />
+                <Route path="/courses">
+                  <Route path="" element={<Courses />}></Route>
+                  <Route path=":id" element={<CourseInfo />}></Route>
+                </Route>
+                <Route path="/departments">
+                  <Route path="" element={<Departments />}></Route>
+                  <Route path=":id/courses" element={<DepartmentCourses />} />
+                </Route>
               </Route>
               <Route exact path="/unauth" element={<UnAuth></UnAuth>} />
             </Route>
@@ -58,8 +71,12 @@ function App() {
             />
             <Route
               exact
-              path="/createCourse"
-              element={<CreateCourse></CreateCourse>}
+              path="/reviewcourse"
+              element={<ReviewCourses></ReviewCourses>}
+            />
+            <Route
+              path="/edit-course-outline/:courseUuid/:versionNum"
+              element={<EditCourseOutline></EditCourseOutline>}
             />
           </Routes>
         </Router>

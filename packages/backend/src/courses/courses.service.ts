@@ -12,11 +12,17 @@ export class CoursesService {
   }
 
   findAll() {
-    return this.prisma.course.findMany();
+    return this.prisma.course.findMany({ include: { department: true } });
   }
 
   findOne(id: string) {
-    return this.prisma.course.findUnique({ where: { courseUuid: id } });
+    return this.prisma.course.findUnique({
+      where: { courseUuid: id },
+      include: {
+        department: true,
+        InstructorCourse: { include: { user: true } },
+      },
+    });
   }
 
   update(id: string, updateCourseDto: UpdateCourseDto) {

@@ -97,3 +97,9 @@ docker push gcr.io/teak-brook-377021/backend
 # ports:
 
 # - "4000:4000"
+
+# Reset Database on cloud SQL
+
+gcloud sql connect courseoutlines --user=postgres
+password: mypassword
+DROP DATABASE "courseoutline-db";

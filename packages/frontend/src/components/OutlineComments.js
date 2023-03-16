@@ -32,11 +32,12 @@ export default function OutlineComments() {
 
   //Posting comments to database
   async function onSubmit(data) {
-    fetch("/comments", {
+    fetch(process.env.REACT_APP_API_URI + "/comments", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Content-length": 7,
+        Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
       },
       body: JSON.stringify({ ...data, outlineId: "2" }),
     });

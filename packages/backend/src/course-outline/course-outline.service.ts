@@ -19,8 +19,16 @@ export class CourseOutlineService {
     return this.prisma.courseOutline.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} courseOutline`;
+  findOne(courseUuid: string, versionNum: number) {
+    console.log('VERSIONNN NO', versionNum);
+    return this.prisma.courseOutline.findUnique({
+      where: {
+        courseUuid_versionNum: {
+          courseUuid: courseUuid,
+          versionNum: versionNum,
+        },
+      },
+    });
   }
 
   update(id: number, updateCourseOutlineDto: UpdateCourseOutlineDto) {
@@ -29,5 +37,17 @@ export class CourseOutlineService {
 
   remove(courseUuid: string) {
     return this.prisma.courseOutline.deleteMany({ where: { courseUuid } });
+  }
+
+  async getVersionNumber(courseUuid: string) {
+    const latestOutline = await this.prisma.courseOutline.findFirst({
+      where: {
+        courseUuid: courseUuid,
+      },
+      orderBy: {
+        versionNum: 'desc',
+      },
+    });
+    return latestOutline.versionNum;
   }
 }
