@@ -28,7 +28,8 @@ export class CommentsController {
   }
 
   @Get(':id')
-  findOne(@Param('outlineId') id: string) {
+  findOne(@Param('id') id: string) {
+    console.log(id);
     return this.commentsService.findOne(id);
   }
 
