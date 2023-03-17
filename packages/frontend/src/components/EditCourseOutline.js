@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, useParams } from "react-router-dom";
+import OutlineComments from "./OutlineComments";
 
 import {
   FormControl,
@@ -1385,6 +1386,8 @@ export default function EditCourseOutline() {
         </Box>
         <br />
         <br />
+
+        <OutlineComments></OutlineComments>
       </div>
     </div>
   );
