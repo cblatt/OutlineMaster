@@ -14,10 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 
-
-
-import from "../hooks/useAuth";
-
+import useAuth from "../hooks/useAuth";
 
 export default function CreateOutline() {
   const {
@@ -273,14 +270,12 @@ export default function CreateOutline() {
       });
   }
 
-  
-
-  function savePDF(){
+  function savePDF() {
     var contentOfDiv = document.getElementById("courseOutline").innerHTML;
-    var newWin = window.open('', '', 'height=650, width=650');
-    newWin.document.write('');
+    var newWin = window.open("", "", "height=650, width=650");
+    newWin.document.write("");
     newWin.document.write(contentOfDiv);
-    newWin.document.write('');
+    newWin.document.write("");
     newWin.print();
     newWin.close();
   }
@@ -4086,7 +4081,7 @@ export default function CreateOutline() {
           size="lg"
           width="80"
           id="pdfBtn"
-          onClick={() => savePDF('courseOutline', 'Title')}
+          onClick={() => savePDF("courseOutline", "Title")}
         >
           Export to PDF
         </Button>

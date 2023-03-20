@@ -20,11 +20,11 @@ export class CommentsService {
   }
 
   //Get comment for individual course outline
-  findOne(id: string) {
-    console.log(id);
+  findOne(id: string, versionId: string) {
     return this.prisma.comments.findMany({
       where: {
         outlineId: id,
+        versionId: versionId,
       },
     });
   }

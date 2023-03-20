@@ -27,10 +27,12 @@ export class CommentsController {
     return this.commentsService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    console.log(id);
-    return this.commentsService.findOne(id);
+  @Get(':id/:versionNum')
+  findOne(
+    @Param('id') courseUuid: string,
+    @Param('versionNum') versionId: string,
+  ) {
+    return this.commentsService.findOne(courseUuid, versionId);
   }
 
   @Patch(':id')

@@ -16,7 +16,7 @@ import {
 import { useForm } from "react-hook-form";
 import AdminNav from "./AdminNav";
 
-export default function EditCourseOutline() {
+export default function ReviewCourseOutline() {
   const params = useParams();
   var id = params.courseUuid;
   var version = params.versionNum;

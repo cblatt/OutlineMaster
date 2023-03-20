@@ -24,7 +24,7 @@ export default function OutlineComments() {
   //Gets comments from database
   const getComments = async () => {
     let result = await fetch(
-      process.env.REACT_APP_API_URI + `/comments/${id}`,
+      process.env.REACT_APP_API_URI + `/comments/${id}/${version}`,
       {
         method: "GET",
         headers: {

@@ -14,7 +14,7 @@ import DepartmentCourses from "./DepartmentCourses";
 import ReviewCourses from "./ReviewCourses";
 import Courses from "./CoursesPage";
 import CourseInfo from "./CourseInfoPage";
-import EditCourseOutline from "./EditCourseOutline";
+import ReviewCourseOutline from "./ReviewCourseOutline";
 
 function App() {
   return (
@@ -76,7 +76,7 @@ function App() {
             />
             <Route
               path="/edit-course-outline/:courseUuid/:versionNum"
-              element={<EditCourseOutline></EditCourseOutline>}
+              element={<ReviewCourseOutline></ReviewCourseOutline>}
             />
           </Routes>
         </Router>
