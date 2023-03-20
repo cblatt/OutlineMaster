@@ -67,7 +67,7 @@ export default function ReviewCourses() {
                       key={`${instructor.courseUuid}:${instructor.versionNum}`}
                       value={`${instructor.courseUuid}:${instructor.versionNum}`}
                     >
-                      {`${instructor.titleLbl} ${instructor.codeLbl}, Version #:${instructor.versionNum}`}
+                      {`${instructor.titleLbl} ${instructor.codeLbl}, Version #${instructor.versionNum}`}
                     </option>
                   ))}
               </select>

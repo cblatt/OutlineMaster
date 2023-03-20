@@ -15,6 +15,7 @@ import ReviewCourses from "./ReviewCourses";
 import Courses from "./CoursesPage";
 import CourseInfo from "./CourseInfoPage";
 import EditCourseOutline from "./EditCourseOutline";
+import EditCourseInstructor from "./EditCourseInstructor";
 
 function App() {
   return (
@@ -34,6 +35,11 @@ function App() {
                   exact
                   path="/create-outline"
                   element={<CreateOutline></CreateOutline>}
+                />
+                <Route
+                  exact
+                  path="/edit-outline"
+                  element={<EditCourseInstructor></EditCourseInstructor>}
                 />
               </Route>
 
