@@ -2,8 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Input } from "@chakra-ui/react";
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
+import { BrowserRouter, Route, useParams } from "react-router-dom";
 
 export default function OutlineComments() {
+  const params = useParams();
+  var id = params.courseUuid;
+  var version = params.versionNum;
+
   const {
     register,
     handleSubmit,
@@ -18,14 +23,17 @@ export default function OutlineComments() {
 
   //Gets comments from database
   const getComments = async () => {
-    let result = await fetch(process.env.REACT_APP_API_URI + `/comments`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Content-length": 7,
-        Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
-      },
-    });
+    let result = await fetch(
+      process.env.REACT_APP_API_URI + `/comments/${id}/${version}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Content-length": 7,
+          Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
+        },
+      }
+    );
     result = await result.json();
     setcmnts(result);
   };
@@ -39,40 +47,38 @@ export default function OutlineComments() {
         "Content-length": 7,
         Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
       },
-      body: JSON.stringify({ ...data, outlineId: "2" }),
+      body: JSON.stringify({ ...data, outlineId: id, versionId: version }),
     });
     getComments();
   }
 
   return (
     <div>
-      <h2 className="text-5xl text-center pb-24 text-blue font-semibold uppercase tracking-[5px]">
-        Course Outline
-      </h2>
-
-      <div className="w-1/5 h-screen left-0 top-0">
-        <h2 className="font-bold text-lg">Comments:</h2>
-        <div className="bg-red-400 h-screen left-0 top-0 rounded-lg ">
-          <div style={{ display: "flex" }}>
-            <Input
-              placeholder="Comments..."
-              {...register("commentTxt", { required: true })}
-            />
-            <Button onClick={handleSubmit(onSubmit)} colorScheme="gray">
-              Sumbit
-            </Button>
+      <center>
+        <div className="w-1/4 h-screen left-0 top-0 ">
+          <h2 className="font-bold text-lg">Comments:</h2>
+          <div className="bg-purple-400  left-0 top-0 rounded-lg ">
+            <div style={{ display: "flex" }}>
+              <Input
+                placeholder="Comments..."
+                {...register("commentTxt", { required: true })}
+              />
+              <Button onClick={handleSubmit(onSubmit)} colorScheme="gray">
+                Sumbit
+              </Button>
+            </div>
+            <table id="t2" className="indent-5">
+              <tbody>
+                {cmnts.map((item) => (
+                  <tr>
+                    <td>{item.commentTxt}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-          <table id="t2" className="indent-5">
-            <tbody>
-              {cmnts.map((item) => (
-                <tr>
-                  <td>{item.commentTxt}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
         </div>
-      </div>
+      </center>
     </div>
   );
 }

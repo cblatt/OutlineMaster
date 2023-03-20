@@ -9,4 +9,7 @@ export class CreateCommentDto {
 
   @ApiProperty()
   outlineId: string;
+
+  @ApiProperty()
+  versionId: string;
 }
