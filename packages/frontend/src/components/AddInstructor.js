@@ -6,6 +6,7 @@ import {
   InputGroup,
   InputRightElement,
   Button,
+  Select
 } from "@chakra-ui/react";
 import AdminNav from "./AdminNav";
 import { useForm } from "react-hook-form";
@@ -29,7 +30,7 @@ export default function AddInstructor() {
         "Content-length": 7,
         Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
       },
-      body: JSON.stringify({ role: "INSTRUCTOR", ...data }),
+      body: JSON.stringify({ ...data }),
     })
       .then((res) => {
         if (res.status === 201) {
@@ -49,7 +50,7 @@ export default function AddInstructor() {
       <div className="min-h-screen flex flex-col justify-center items-center  ">
         <div className="bg-white py-5 rounded-2xl w-1/3 px-5">
           <h4 className="text-4xl text-gray-700 font-semibold text-center py-5">
-            Add an Instructor
+            Add a User
           </h4>
           <FormControl isRequired={errors}>
             <Stack spacing={5}>
@@ -101,11 +102,24 @@ export default function AddInstructor() {
                 placeholder="Last Name"
                 {...register("lastName", { required: true })}
               />
+             <select
+                size="lg"
+                variant="outline"
+                name="course"
+                placeholder = "Role"
+                {...register("role", { required: true })}
+          
+              >
+                <option value="INSTRUCTOR">Instructor</option>
+                <option value="ADMINISTRATOR">Administrator</option>
+                <option value="DEPCHAIR">Department chair</option>
+                
+              </select>
               <Button
                 className="text-gray-700 rounded-md hover:opacity-100"
                 onClick={handleSubmit(onSubmit)}
               >
-                Add Instructor
+                Add User
               </Button>
             </Stack>
           </FormControl>
