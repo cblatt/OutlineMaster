@@ -51,6 +51,11 @@ enum Role {
   ASSOCIATE_CHAIR
   PROGRAM_DIRECTOR
 }
+enum Status{
+  APPROVED
+  PENDING
+  REJECTED
+}
 
 model Comments{
   commentId       String    @id @default(uuid())
@@ -65,6 +70,7 @@ model CourseOutline {
   course        Course    @relation(fields: [courseUuid], references: [courseUuid])
   versionNum    Int       //this values are set manually
   editLogs      EditLog[]
+  isApproved    Status[]
   titleLbl      String
   codeLbl       String
   yearLbl       String
