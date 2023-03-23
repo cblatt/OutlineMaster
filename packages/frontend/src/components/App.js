@@ -7,7 +7,7 @@ import OutlineComments from "./OutlineComments";
 import { AdminGuard, InstructorGuard, UserGuard } from "../guards/Guard";
 import CreateOutline from "./CreateOutline";
 import UnAuth from "./UnAuth";
-import AssignInstructor from "./AssignInstructor";
+
 import AddInstructor from "./AddInstructor";
 import Departments from "./Departments";
 import DepartmentCourses from "./DepartmentCourses";
@@ -48,11 +48,7 @@ function App() {
                   path="/admin-add"
                   element={<AddInstructor></AddInstructor>}
                 />
-                <Route
-                  exact
-                  path="/assign"
-                  element={<AssignInstructor></AssignInstructor>}
-                />
+                
                 <Route path="/courses">
                   <Route path="" element={<Courses />}></Route>
                   <Route path=":id" element={<CourseInfo />}></Route>

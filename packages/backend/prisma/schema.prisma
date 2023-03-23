@@ -65,6 +65,7 @@ model CourseOutline {
   course        Course    @relation(fields: [courseUuid], references: [courseUuid])
   versionNum    Int       //this values are set manually
   editLogs      EditLog[]
+  isApproved    String
   titleLbl      String
   codeLbl       String
   yearLbl       String
