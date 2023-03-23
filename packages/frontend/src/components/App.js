@@ -4,7 +4,12 @@ import InstructorHome from "./InstructorHome";
 import Login from "./Login";
 import AdminHome from "./AdminHome";
 import OutlineComments from "./OutlineComments";
-import { AdminGuard, InstructorGuard, UserGuard } from "../guards/Guard";
+import {
+  AdminGuard,
+  InstructorGuard,
+  UserGuard,
+  DptChairGuard,
+} from "../guards/Guard";
 import CreateOutline from "./CreateOutline";
 import UnAuth from "./UnAuth";
 import AssignInstructor from "./AssignInstructor";
@@ -15,6 +20,7 @@ import ReviewCourses from "./ReviewCourses";
 import Courses from "./CoursesPage";
 import CourseInfo from "./CourseInfoPage";
 import ReviewCourseOutline from "./ReviewCourseOutline";
+import DptChairHome from "./DptChairHome";
 
 function App() {
   return (
@@ -34,6 +40,14 @@ function App() {
                   exact
                   path="/create-outline"
                   element={<CreateOutline></CreateOutline>}
+                />
+              </Route>
+
+              <Route element={<DptChairGuard />}>
+                <Route
+                  exact
+                  path="/dptChair-home"
+                  element={<DptChairHome></DptChairHome>}
                 />
               </Route>
 
