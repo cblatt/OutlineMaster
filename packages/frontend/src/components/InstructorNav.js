@@ -34,6 +34,10 @@ export default function InstructorNav() {
           <NavLink eventKey="4" as={Link} to="/prev-outlines">
             Previous Outlines
           </NavLink>
+
+          <NavLink eventKey="5" as={Link} to="/edit-outline">
+            Edit Outline
+          </NavLink>
         </Nav>
         <Nav>
           <NavLink eventKey="4" as={Link} to="/">
