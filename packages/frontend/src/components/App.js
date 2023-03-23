@@ -14,7 +14,7 @@ import DepartmentCourses from "./DepartmentCourses";
 import ReviewCourses from "./ReviewCourses";
 import Courses from "./CoursesPage";
 import CourseInfo from "./CourseInfoPage";
-import EditCourseOutline from "./EditCourseOutline";
+import ReviewCourseOutline from "./ReviewCourseOutline";
 import EditCourseInstructor from "./EditCourseInstructor";
 
 function App() {
