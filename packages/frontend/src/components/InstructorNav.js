@@ -27,10 +27,6 @@ export default function InstructorNav() {
           <NavLink eventKey="1" as={Link} to="/home">
             Homepage
           </NavLink>
-          <NavLink eventKey="2" as={Link} to="/current-courses">
-            Current Courses
-          </NavLink>
-
           <NavLink eventKey="3" as={Link} to="/create-outline">
             Create Outline
           </NavLink>
