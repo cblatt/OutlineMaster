@@ -24,16 +24,19 @@ export default function InstructorNav() {
       />
       <Navbar.Collapse>
         <Nav className="me-auto">
-          <NavLink eventKey="1" as={Link} to="/current-courses">
-            Current Courses
+          <NavLink eventKey="1" as={Link} to="/home">
+            Homepage
           </NavLink>
-
-          <NavLink eventKey="2" as={Link} to="/create-outline">
+          <NavLink eventKey="3" as={Link} to="/create-outline">
             Create Outline
           </NavLink>
 
-          <NavLink eventKey="3" as={Link} to="/prev-outlines">
+          <NavLink eventKey="4" as={Link} to="/prev-outlines">
             Previous Outlines
+          </NavLink>
+
+          <NavLink eventKey="5" as={Link} to="/edit-outline">
+            Edit Outline
           </NavLink>
         </Nav>
         <Nav>

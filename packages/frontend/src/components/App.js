@@ -12,7 +12,7 @@ import {
 } from "../guards/Guard";
 import CreateOutline from "./CreateOutline";
 import UnAuth from "./UnAuth";
-import AssignInstructor from "./AssignInstructor";
+
 import AddInstructor from "./AddInstructor";
 import Departments from "./Departments";
 import DepartmentCourses from "./DepartmentCourses";
@@ -21,6 +21,7 @@ import Courses from "./CoursesPage";
 import CourseInfo from "./CourseInfoPage";
 import ReviewCourseOutline from "./ReviewCourseOutline";
 import DptChairHome from "./DptChairHome";
+import EditCourseInstructor from "./EditCourseInstructor";
 
 function App() {
   return (
@@ -40,6 +41,11 @@ function App() {
                   exact
                   path="/create-outline"
                   element={<CreateOutline></CreateOutline>}
+                />
+                <Route
+                  exact
+                  path="/edit-outline"
+                  element={<EditCourseInstructor></EditCourseInstructor>}
                 />
               </Route>
 
@@ -62,11 +68,7 @@ function App() {
                   path="/admin-add"
                   element={<AddInstructor></AddInstructor>}
                 />
-                <Route
-                  exact
-                  path="/assign"
-                  element={<AssignInstructor></AssignInstructor>}
-                />
+
                 <Route path="/courses">
                   <Route path="" element={<Courses />}></Route>
                   <Route path=":id" element={<CourseInfo />}></Route>
