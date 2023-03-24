@@ -7,6 +7,7 @@ import { UpdateCourseOutlineDto } from './dto/update-course-outline.dto';
 export class CourseOutlineService {
   constructor(private prisma: PrismaService) {}
 
+  //Create outline
   async create(createCourseOutlineDto: CreateCourseOutlineDto) {
     return this.prisma.courseOutline.create({
       data: {
@@ -15,12 +16,23 @@ export class CourseOutlineService {
     });
   }
 
+  //Return all outlines
   findAll() {
     return this.prisma.courseOutline.findMany();
   }
 
+  //Return outlines depending on status
+  async findAllByStatus(isApproved: string) {
+    const courseOutlines = await this.prisma.courseOutline.findMany({
+      where: {
+        isApproved: isApproved,
+      },
+    });
+    return courseOutlines;
+  }
+
+  //Find outlines by version num and uuid
   findOne(courseUuid: string, versionNum: number) {
-    console.log('VERSIONNN NO', versionNum);
     return this.prisma.courseOutline.findUnique({
       where: {
         courseUuid_versionNum: {
@@ -31,8 +43,16 @@ export class CourseOutlineService {
     });
   }
 
-  update(id: number, updateCourseOutlineDto: UpdateCourseOutlineDto) {
-    return `This action updates a #${id} courseOutline`;
+  update(courseUuid: string, versionNum: number, isApproved: string) {
+    return this.prisma.courseOutline.update({
+      where: {
+        courseUuid_versionNum: {
+          courseUuid: courseUuid,
+          versionNum: versionNum,
+        },
+      },
+      data: { isApproved: isApproved },
+    });
   }
 
   remove(courseUuid: string) {

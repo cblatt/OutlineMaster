@@ -22,6 +22,11 @@ export class CourseOutlineController {
     return this.courseOutlineService.create(createCourseOutlineDto);
   }
 
+  @Get(':isApproved')
+  findAllByApprovalStatus(@Param('isApproved') isApproved: string) {
+    return this.courseOutlineService.findAllByStatus(isApproved);
+  }
+
   @Get()
   findAll() {
     return this.courseOutlineService.findAll();
@@ -35,12 +40,17 @@ export class CourseOutlineController {
     return this.courseOutlineService.findOne(courseUuid, +versionNum);
   }
 
-  @Patch(':id')
+  @Patch(':courseUuid/:versionNum')
   update(
-    @Param('id') id: string,
-    @Body() updateCourseOutlineDto: UpdateCourseOutlineDto,
+    @Param('courseUuid') courseUuid: string,
+    @Param('versionNum') versionNum: string,
+    @Body() isApproved: string,
   ) {
-    return this.courseOutlineService.update(+id, updateCourseOutlineDto);
+    return this.courseOutlineService.update(
+      courseUuid,
+      +versionNum,
+      isApproved,
+    );
   }
 
   @Delete(':id')

@@ -70,7 +70,7 @@ model CourseOutline {
   course        Course    @relation(fields: [courseUuid], references: [courseUuid])
   versionNum    Int       //this values are set manually
   editLogs      EditLog[]
-  isApproved    Status[]
+  isApproved    String  @default("PENDING")
   titleLbl      String
   codeLbl       String
   yearLbl       String

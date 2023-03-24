@@ -8,6 +8,9 @@ export class CreateCourseOutlineDto {
   versionNum: number;
 
   @ApiProperty()
+  isApproved: string;
+
+  @ApiProperty()
   titleLbl: string;
 
   @ApiProperty()
