@@ -131,7 +131,7 @@ export default function InstructorTable() {
   const selectedCourse = "3350";
 
   return (
-    <div>
+    <div className="mx-20">
       <DataTable
         columns={columns}
         data={rowTitles}
