@@ -59,6 +59,12 @@ export class CourseOutlineService {
     });
   }
 
+  findAllOutlinesByCourse(id: string) {
+    return this.prisma.courseOutline.findMany({
+      where: { courseUuid: id },
+    });
+  }
+
   remove(courseUuid: string) {
     return this.prisma.courseOutline.deleteMany({ where: { courseUuid } });
   }
