@@ -35,6 +35,11 @@ export class CourseOutlineController {
     return this.courseOutlineService.findOne(courseUuid, +versionNum);
   }
 
+  @Get(':id')
+  findAllOutlinesByCourse(@Param('id') id: string) {
+    return this.courseOutlineService.findAllOutlinesByCourse(id);
+  }
+
   @Patch(':id')
   update(
     @Param('id') id: string,

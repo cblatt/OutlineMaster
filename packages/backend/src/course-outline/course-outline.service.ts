@@ -31,6 +31,12 @@ export class CourseOutlineService {
     });
   }
 
+  findAllOutlinesByCourse(id: string) {
+    return this.prisma.courseOutline.findMany({
+      where: { courseUuid: id },
+    });
+  }
+
   update(id: number, updateCourseOutlineDto: UpdateCourseOutlineDto) {
     return `This action updates a #${id} courseOutline`;
   }

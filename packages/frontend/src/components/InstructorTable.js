@@ -1,64 +1,63 @@
+import DataTable from "react-data-table-component";
 import React, { useCallback, useEffect, useState } from "react";
-import DataTable, { ExpanderComponentProps } from "react-data-table-component";
 import useAuth from "../hooks/useAuth";
+import { Button, ButtonGroup } from "@chakra-ui/react";
 
-const ExpandedComponent = ({ data }) => (
-  <pre>{JSON.stringify(data, null, 2)}</pre>
+const ExpandedComponent = ({ selectedCourse, courseOutlinesByCourse }) => (
+  <div>
+    {Object.entries(courseOutlinesByCourse).map(
+      ([courseCode, courseOutlines]) => {
+        if (courseCode !== selectedCourse) {
+          console.log("ITS NULL");
+          return null;
+        }
+
+        return (
+          <div key={courseCode}>
+            <table>
+              <thead>
+                <tr className="my-8">
+                  <th className="px-8">Version</th>
+                  <th>Year</th>
+                </tr>
+              </thead>
+              <tbody>
+                {courseOutlines.map((outline) => (
+                  <tr key={outline.version}>
+                    <td className="px-8 pb-8">{outline.version}</td>
+                    <td className="px-8 pb-8">{outline.year}</td>
+                    <td className="px-8 pb-8">
+                      <Button colorScheme="purple" size="sm">
+                        Edit Outline
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+      }
+    )}
+  </div>
 );
 
 const columns = [
   {
-    title: "Location",
-    key: "location",
+    name: "Course Code",
+    selector: (row) => row.id,
   },
   {
-    title: "Population",
-    key: "population",
+    name: "Course Name",
+    selector: (row) => row.title,
   },
   {
-    title: "Party",
-    key: "party",
+    name: "Department",
+    selector: (row) => row.year,
   },
 ];
 
-const data = [
-  {
-    location: "Texas",
-    population: "29 million",
-    party: "Republican",
-    child: [
-      {
-        location: "Houston",
-        population: "2 million",
-        party: "Democrat",
-      },
-      {
-        location: "Austin",
-        population: "1 million",
-        party: "Democrat",
-      },
-    ],
-  },
-  {
-    location: "California",
-    population: "39 million",
-    party: "Democrat",
-    child: [
-      {
-        location: "Los Angeles",
-        population: "4 million",
-        party: "Democrat",
-      },
-      {
-        location: "San Jose",
-        population: "1 million",
-        party: "Democrat",
-      },
-    ],
-  },
-];
-
-const InstructorTable = () => {
+export default function InstructorTable() {
   const [courses, setCourses] = useState([]);
   const user = useAuth();
 
@@ -83,15 +82,52 @@ const InstructorTable = () => {
     fetchInstructorCourses();
   }, [setCourses]);
 
-  return (
-    <DataTable
-      className="px-20"
-      columns={columns}
-      data={courses}
-      expandableRows
-      expandableRowsComponent={ExpandedComponent}
-    />
-  );
-};
+  const rowTitles = courses.map((course) => {
+    return {
+      id: course.course.courseCode,
+      title: course.course.courseName,
+      year: course.course.department.departmentCode,
+    };
+  });
 
-export default InstructorTable;
+  const courseOutlinesByCourse = {};
+  courses.forEach((item) => {
+    const courseCode = item.course.courseCode;
+
+    // If the course code doesn't exist in the `courseOutlinesByCourse` object, initialize it with an empty array
+    if (!courseOutlinesByCourse[courseCode]) {
+      courseOutlinesByCourse[courseCode] = [];
+    }
+
+    const courseOutlines = item.course.courseOutlines;
+
+    console.log("outlines array", courseOutlines);
+
+    courseOutlines.map((outline) => {
+      courseOutlinesByCourse[courseCode].push({
+        version: outline.versionNum,
+        year: outline.yearLbl,
+      });
+    });
+  });
+
+  const oneExpandedRow = Object.entries(courseOutlinesByCourse)[0];
+  console.log("EXPAND", oneExpandedRow);
+
+  const selectedCourse = "3350";
+
+  return (
+    <div>
+      <DataTable
+        columns={columns}
+        data={rowTitles}
+        expandableRows
+        expandableRowsComponent={ExpandedComponent}
+        expandableRowsComponentProps={{
+          selectedCourse,
+          courseOutlinesByCourse,
+        }}
+      />
+    </div>
+  );
+}
