@@ -27,13 +27,13 @@ export class CourseOutlineController {
     return this.courseOutlineService.findAll();
   }
 
-  // @Get(':courseUuid/:versionNum')
-  // findOne(
-  //   @Param('courseUuid') courseUuid: string,
-  //   @Param('versionNum') versionNum: string,
-  // ) {
-  //   return this.courseOutlineService.findOne(courseUuid, +versionNum);
-  // }
+  @Get(':courseUuid/:versionNum')
+  findOne(
+    @Param('courseUuid') courseUuid: string,
+    @Param('versionNum') versionNum: string,
+  ) {
+    return this.courseOutlineService.findOne(courseUuid, +versionNum);
+  }
 
   @Patch(':id')
   update(

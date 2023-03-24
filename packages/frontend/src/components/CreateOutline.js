@@ -1,5 +1,6 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
+import InstructorNav from "./InstructorNav";
 import {
   Box,
   Button,
@@ -20,6 +21,7 @@ import {
 } from "@chakra-ui/react";
 import { Select as MultiSelect } from "chakra-react-select";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
+
 import useAuth from "../hooks/useAuth";
 
 export default function CreateOutline() {
@@ -91,6 +93,9 @@ export default function CreateOutline() {
         }
       })
       .then((currentVersionNum) => {
+        if (currentVersionNum === undefined) {
+          currentVersionNum = 0;
+        }
         console.log("VERSION", currentVersionNum);
         fetch(process.env.REACT_APP_API_URI + "/course-outline", {
           method: "POST",
