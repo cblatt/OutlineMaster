@@ -2,6 +2,7 @@ import DataTable from "react-data-table-component";
 import React, { useCallback, useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { Button, ButtonGroup } from "@chakra-ui/react";
+import { useHistory } from "react-router-dom";
 
 const ExpandedComponent = ({ selectedCourse, courseOutlinesByCourse }) => (
   <div>
@@ -14,6 +15,11 @@ const ExpandedComponent = ({ selectedCourse, courseOutlinesByCourse }) => (
 
         return (
           <div key={courseCode}>
+            <div className="m-8">
+              <Button colorScheme="purple" size="sm">
+                <a href="/create-outline">Create Outline</a>
+              </Button>
+            </div>
             <table>
               <thead>
                 <tr className="my-8">
@@ -28,7 +34,12 @@ const ExpandedComponent = ({ selectedCourse, courseOutlinesByCourse }) => (
                     <td className="px-8 pb-8">{outline.year}</td>
                     <td className="px-8 pb-8">
                       <Button colorScheme="purple" size="sm">
-                        Edit Outline
+                        <a
+                          href={`/prev-course-outline/${outline.courseUuid}/${outline.version}`}
+                        >
+                          {" "}
+                          Edit Outline{" "}
+                        </a>
                       </Button>
                     </td>
                   </tr>
@@ -105,11 +116,14 @@ export default function InstructorTable() {
 
     courseOutlines.map((outline) => {
       courseOutlinesByCourse[courseCode].push({
+        courseUuid: outline.courseUuid,
         version: outline.versionNum,
         year: outline.yearLbl,
       });
     });
   });
+
+  console.log("COURSEOUTLINESBYCOURSE", courseOutlinesByCourse);
 
   const oneExpandedRow = Object.entries(courseOutlinesByCourse)[0];
   console.log("EXPAND", oneExpandedRow);
