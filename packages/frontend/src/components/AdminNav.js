@@ -28,7 +28,7 @@ export default function AdminNav() {
             Homepage
           </NavLink>
           <NavLink eventKey="4" as={Link} to="/admin-add">
-            Add Instructor
+            Add User
           </NavLink>
           <NavLink eventKey="6" as={Link} to="/courses">
             Courses
