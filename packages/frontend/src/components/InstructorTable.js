@@ -25,13 +25,15 @@ const ExpandedComponent = ({ selectedCourse, courseOutlinesByCourse }) => (
                 <tr className="my-8">
                   <th className="px-8">Version</th>
                   <th>Year</th>
+                  <th>Status</th>
                 </tr>
               </thead>
               <tbody>
                 {courseOutlines.map((outline) => (
                   <tr key={outline.version}>
                     <td className="px-8 pb-8">{outline.version}</td>
-                    <td className="px-8 pb-8">{outline.year}</td>
+                    <td className="pr-8 pb-8">{outline.year}</td>
+                    <td className="pr-8 pb-8">{outline.status}</td>
                     <td className="px-8 pb-8">
                       <Button colorScheme="purple" size="sm">
                         <a
@@ -119,6 +121,7 @@ export default function InstructorTable() {
         courseUuid: outline.courseUuid,
         version: outline.versionNum,
         year: outline.yearLbl,
+        status: outline.isApproved,
       });
     });
   });
