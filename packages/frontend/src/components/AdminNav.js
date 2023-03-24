@@ -27,29 +27,14 @@ export default function AdminNav() {
           <NavLink eventKey="1" as={Link} to="/admin-home">
             Homepage
           </NavLink>
-
-          <NavLink eventKey="2" as={Link} to="/prev-outlines">
-            Previous Outlines
-          </NavLink>
-
-          <NavLink eventKey="3" as={Link} to="/outline-history">
-            Outline History
-          </NavLink>
           <NavLink eventKey="4" as={Link} to="/admin-add">
-            Add Instructor
+            Add User
           </NavLink>
-          <NavLink eventKey="5" as={Link} to="/assign">
-            Assign Instructor
-          </NavLink>
-
-          <NavLink eventKey="6" as={Link} to="/createcourse">
-            Create Course
+          <NavLink eventKey="6" as={Link} to="/courses">
+            Courses
           </NavLink>
           <NavLink eventKey="7" as={Link} to="/departments">
             Departments
-          </NavLink>
-          <NavLink eventKey="8" as={Link} to="/reviewcourse">
-            Review Courses
           </NavLink>
         </Nav>
         <Nav>

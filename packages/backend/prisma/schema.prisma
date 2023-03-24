@@ -27,13 +27,13 @@ model Department {
 model Course {
   courseUuid    String      @id @default(uuid())
   courseCode    String      
-  semester      Term        
-  year          Int    
-  courseName    String      @unique
+  courseName    String
   department Department     @relation(fields: [departmentUuid], references: [departmentUuid])
   departmentUuid String
   InstructorCourse InstructorCourse[]
   courseOutlines  CourseOutline[]
+  @@unique([departmentUuid, courseName])
+  @@unique([departmentUuid, courseCode])
 }
 
 model InstructorCourse {
@@ -44,12 +44,6 @@ model InstructorCourse {
   @@id([uwoId, courseUuid])
 }
 
-enum Term {
-  FALL
-  WINTER
-  SUMMER
-}
-
 enum Role {
   ADMINISTRATOR
   INSTRUCTOR
@@ -57,11 +51,17 @@ enum Role {
   ASSOCIATE_CHAIR
   PROGRAM_DIRECTOR
 }
+enum Status{
+  APPROVED
+  PENDING
+  REJECTED
+}
 
 model Comments{
   commentId       String    @id @default(uuid())
   commentTxt      String 
   outlineId       String
+  versionId       String
   
 }
 
@@ -70,6 +70,7 @@ model CourseOutline {
   course        Course    @relation(fields: [courseUuid], references: [courseUuid])
   versionNum    Int       //this values are set manually
   editLogs      EditLog[]
+  isApproved    Status[]
   titleLbl      String
   codeLbl       String
   yearLbl       String

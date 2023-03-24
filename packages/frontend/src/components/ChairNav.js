@@ -6,7 +6,7 @@ import { Button } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
-export default function InstructorNav() {
+export default function ChairNav() {
   const navigate = useNavigate();
   const { setUser } = useAuth();
 
@@ -24,19 +24,11 @@ export default function InstructorNav() {
       />
       <Navbar.Collapse>
         <Nav className="me-auto">
-          <NavLink eventKey="1" as={Link} to="/home">
+          <NavLink eventKey="1" as={Link} to="/dptChair-home">
             Homepage
           </NavLink>
-          <NavLink eventKey="3" as={Link} to="/create-outline">
-            Create Outline
-          </NavLink>
-
-          <NavLink eventKey="4" as={Link} to="/prev-outlines">
-            Previous Outlines
-          </NavLink>
-
-          <NavLink eventKey="5" as={Link} to="/edit-outline">
-            Edit Outline
+          <NavLink eventKey="2" as={Link} to="/reviewcourse">
+            Review Courses
           </NavLink>
         </Nav>
         <Nav>
