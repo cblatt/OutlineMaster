@@ -43,7 +43,11 @@ export class CourseOutlineService {
     });
   }
 
-  update(courseUuid: string, versionNum: number, isApproved: string) {
+  update(
+    courseUuid: string,
+    versionNum: number,
+    updateCourseDto: UpdateCourseOutlineDto,
+  ) {
     return this.prisma.courseOutline.update({
       where: {
         courseUuid_versionNum: {
@@ -51,7 +55,7 @@ export class CourseOutlineService {
           versionNum: versionNum,
         },
       },
-      data: { isApproved: isApproved },
+      data: updateCourseDto,
     });
   }
 

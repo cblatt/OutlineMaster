@@ -51,7 +51,7 @@ enum Role {
   ASSOCIATE_CHAIR
   PROGRAM_DIRECTOR
 }
-enum Status{
+enum Status {
   APPROVED
   PENDING
   REJECTED

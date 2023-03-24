@@ -44,12 +44,12 @@ export class CourseOutlineController {
   update(
     @Param('courseUuid') courseUuid: string,
     @Param('versionNum') versionNum: string,
-    @Body() isApproved: string,
+    @Body() updateCourseOutlineDto: UpdateCourseOutlineDto,
   ) {
     return this.courseOutlineService.update(
       courseUuid,
       +versionNum,
-      isApproved,
+      updateCourseOutlineDto,
     );
   }
 
