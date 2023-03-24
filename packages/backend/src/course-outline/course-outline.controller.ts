@@ -48,8 +48,8 @@ export class CourseOutlineController {
     return this.courseOutlineService.remove(id);
   }
 
-  @Get('versionMax/:id')
-  getMaxVersion(@Param('id') id: string) {
+  @Get(':courseUuid')
+  getMaxVersion(@Param('courseUuid') id: string) {
     return this.courseOutlineService.getVersionNumber(id);
   }
 }

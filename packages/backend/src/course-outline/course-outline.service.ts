@@ -11,22 +11,57 @@ export class CourseOutlineService {
     return this.prisma.courseOutline.create({
       data: {
         ...createCourseOutlineDto,
+        instructors: {
+          createMany: {
+            data: createCourseOutlineDto.instructors,
+          },
+        },
+        courseTopics: {
+          createMany: {
+            data: createCourseOutlineDto.courseTopics.map((topic) => {
+              topic.gaIndicators = topic.gaIndicators.map(
+                (indicator: any) => indicator.value,
+              );
+              return topic;
+            }),
+          },
+        },
+        courseEvaluations: {
+          createMany: {
+            data: createCourseOutlineDto.courseEvaluations,
+          },
+        },
+      },
+      include: {
+        instructors: true,
+        courseTopics: true,
+        courseEvaluations: true,
       },
     });
   }
 
   findAll() {
-    return this.prisma.courseOutline.findMany();
+    return this.prisma.courseOutline.findMany({
+      include: {
+        instructors: true,
+        courseTopics: true,
+        courseEvaluations: true,
+      },
+    });
   }
 
   findOne(courseUuid: string, versionNum: number) {
-    console.log('VERSIONNN NO', versionNum);
     return this.prisma.courseOutline.findUnique({
       where: {
         courseUuid_versionNum: {
           courseUuid: courseUuid,
           versionNum: versionNum,
         },
+      },
+      include: {
+        instructors: true,
+        courseTopics: true,
+        courseEvaluations: true,
       },
     });
   }
@@ -36,7 +71,9 @@ export class CourseOutlineService {
   }
 
   remove(courseUuid: string) {
-    return this.prisma.courseOutline.deleteMany({ where: { courseUuid } });
+    return this.prisma.courseOutline.deleteMany({
+      where: { courseUuid },
+    });
   }
 
   async getVersionNumber(courseUuid: string) {

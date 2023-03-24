@@ -22,6 +22,7 @@ model Department {
   departmentName  String    @unique
   departmentCode String @unique
   courses Course[]
+  courseOutlines  CourseOutline[]
 }
 
 model Course {
@@ -51,7 +52,8 @@ enum Role {
   ASSOCIATE_CHAIR
   PROGRAM_DIRECTOR
 }
-enum Status{
+
+enum Status {
   APPROVED
   PENDING
   REJECTED
@@ -67,53 +69,56 @@ model Comments{
 
 model CourseOutline {
   courseUuid    String    
+  departmentUuid String
+  department    Department    @relation(fields: [departmentUuid], references: [departmentUuid])
   course        Course    @relation(fields: [courseUuid], references: [courseUuid])
   versionNum    Int       //this values are set manually
   editLogs      EditLog[]
+  year          String?
   instructors   CourseOutlineInstructor[]
   courseTopics   CourseOutlineTopic[]
   courseEvaluations CourseOutlineEvaluation[]
-  description   String
-  calendarCopy String
-  lectureHours String 
-  labHours String 
-  tutorialHours String 
-  courseCredits String 
-  prerequisites String 
-  antirequisites String 
-  corequisites String 
-  engineeringScience String 
-  engineeringDesign String 
-  requiredTextbook String 
-  requiredReferences String 
-  recommendedReferences String 
-  knowledgeBase String
-  problemAnalysis String
-  investigation   String
-  design        String
-  useOfEngineering  String
-  individualAndTeamWork   String
-  communicationSkills String
-  professionalism String
-  impactOnSocietyAndEnvironment String
-  ethicsAndEquity String
-  economicAndProjectManagement  String
-  lifeLongLearning  String
-  homeWorkAssignments String
-  quizzes String
-  laboratory String
-  midtermTest String
-  finalExamination String
-  lateSubmissionPolicy String
-  submissionLocker String
-
+  description   String?
+  calendarCopy String?
+  lectureHours Int?
+  labHours Int?
+  tutorialHours Int? 
+  courseCredits Int?
+  prerequisites String? 
+  antirequisites String? 
+  corequisites String?
+  engineeringScience Int? 
+  engineeringDesign Int? 
+  requiredTextbook String? 
+  requiredReferences String? 
+  recommendedReferences String? 
+  knowledgeBase String?
+  problemAnalysis String?
+  investigation   String?
+  design        String?
+  useOfEngineering  String?
+  individualAndTeamWork   String?
+  communicationSkills String?
+  professionalism String?
+  impactOnSocietyAndEnvironment String?
+  ethicsAndEquity String?
+  economicAndProjectManagement  String?
+  lifeLongLearning  String?
+  homeWorkAssignments String?
+  quizzes String?
+  laboratory String?
+  midtermTest String?
+  finalExamination String?
+  lateSubmissionPolicy String?
+  submissionLocker String?
+  justification String?
   @@id([courseUuid, versionNum])
 }
 
 model CourseOutlineInstructor {
+  id String     @default(uuid())
   courseUuid    String
   versionNum    Int   
-  indexNum      Int
   prefix String
   name String
   office String
@@ -121,31 +126,28 @@ model CourseOutlineInstructor {
   email String
   hours String
   courseOutline  CourseOutline     @relation(fields: [courseUuid,versionNum], references: [courseUuid, versionNum])
-  @@id([courseUuid, versionNum, indexNum])
+  @@id([courseUuid, versionNum, id])
 }
 
 model CourseOutlineEvaluation {
+  id String     @default(uuid())
   courseUuid    String
   versionNum    Int   
-  indexNum      Int
   courseComponent String
   weight String
   courseOutline  CourseOutline     @relation(fields: [courseUuid,versionNum], references: [courseUuid, versionNum])
-  @@id([courseUuid, versionNum, indexNum])
+  @@id([courseUuid, versionNum, id])
 }
 
 model CourseOutlineTopic {
+  id String     @default(uuid())
   courseUuid    String
   versionNum    Int   
-  indexNum      Int
   topic String
   topicDetails String
   gaIndicators GaIndicators[]
-  phone String
-  email String
-  hours String
   courseOutline  CourseOutline     @relation(fields: [courseUuid,versionNum], references: [courseUuid, versionNum])
-  @@id([courseUuid, versionNum, indexNum])
+  @@id([courseUuid, versionNum, id])
 }
 
 enum GaIndicators {

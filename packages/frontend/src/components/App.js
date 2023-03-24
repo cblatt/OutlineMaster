@@ -31,11 +31,16 @@ function App() {
                   path="/home"
                   element={<InstructorHome></InstructorHome>}
                 />
-                <Route
-                  exact
-                  path="/create-outline"
-                  element={<CreateOutline></CreateOutline>}
-                />
+                <Route exact path="/create-outline">
+                  <Route
+                    path=""
+                    element={<CreateOutline></CreateOutline>}
+                  ></Route>
+                  <Route
+                    path=":id"
+                    element={<CreateOutline></CreateOutline>}
+                  ></Route>
+                </Route>
                 <Route
                   exact
                   path="/edit-outline"
@@ -54,7 +59,7 @@ function App() {
                   path="/admin-add"
                   element={<AddInstructor></AddInstructor>}
                 />
-                
+
                 <Route path="/courses">
                   <Route path="" element={<Courses />}></Route>
                   <Route path=":id" element={<CourseInfo />}></Route>
