@@ -34,7 +34,13 @@ export default function Login() {
           localStorage.setItem("user", JSON.stringify(user));
           if (user.role === "ADMINISTRATOR")
             navigate("/admin-home", { replace: true });
-          else navigate("/home", { replace: true });
+          else if (
+            user.role === "DEPARTMENT_CHAIR" ||
+            "ASSOCIATE_CHAIR" ||
+            "PROGRAM_DIRECTOR"
+          ) {
+            navigate("/dptChair-home", { replace: true });
+          } else navigate("/home", { replace: true });
         }
       });
   }
@@ -42,6 +48,12 @@ export default function Login() {
   if (user) {
     if (user.role === "ADMINISTRATOR")
       return <Navigate to="/admin-home" replace />;
+    else if (
+      user.role === "DEPARTMENT_CHAIR" ||
+      "ASSOCIATE_CHAIR" ||
+      "PROGRAM_DIRECTOR"
+    )
+      return <Navigate to="/dptChair-home" replace />;
     return <Navigate to="/home" replace />;
   }
 

@@ -20,6 +20,20 @@ export const InstructorGuard = () => {
   }
 };
 
+export const DptChairGuard = () => {
+  const { user } = useAuth();
+  console.log(user);
+  if (user ? user.role === "DEPARTMENT_CHAIR" : false) {
+    return <Outlet />;
+  } else if (user ? user.role === "ASSOCIATE_CHAIR" : false) {
+    return <Outlet />;
+  } else if (user ? user.role === "PROGRAM_DIRECTOR" : false) {
+    return <Outlet />;
+  } else {
+    return <Navigate to="/unauth" replace />;
+  }
+};
+
 export const UserGuard = () => {
   const { user } = useAuth();
   if (user) {

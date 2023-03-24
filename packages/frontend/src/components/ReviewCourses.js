@@ -9,6 +9,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import AdminNav from "./AdminNav";
+import ChairNav from "./ChairNav";
 
 export default function ReviewCourses() {
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ export default function ReviewCourses() {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-purple-500 to-purple-300 ... ">
-      <AdminNav />
+      <ChairNav />
       <div className="min-h-screen flex flex-col justify-center items-center  ">
         <div className="bg-white py-5 rounded-2xl w-1/3 px-5">
           <h4 className="text-4xl text-gray-700 font-semibold text-center py-5">
