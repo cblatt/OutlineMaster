@@ -8,7 +8,7 @@ import {
   InputRightElement,
   Button,
 } from "@chakra-ui/react";
-import AdminNav from "./AdminNav";
+import ChairNav from "./ChairNav";
 
 export default function ReviewCourses() {
   const navigate = useNavigate();
@@ -46,7 +46,7 @@ export default function ReviewCourses() {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-purple-500 to-purple-300 ... ">
-      <AdminNav />
+      <ChairNav></ChairNav>
       <div className="min-h-screen flex flex-col justify-center items-center  ">
         <div className="bg-white py-5 rounded-2xl w-1/3 px-5">
           <h4 className="text-4xl text-gray-700 font-semibold text-center py-5">
@@ -71,9 +71,9 @@ export default function ReviewCourses() {
                     </option>
                   ))}
               </select>
-              <span>
+              <span className="flex justify-center">
                 <Button
-                  className="text-gray-700 rounded-md hover:opacity-100 mr-10 ml-10"
+                  className="text-gray-700 rounded-md hover:opacity-100 flex justify-center"
                   onClick={() =>
                     navigate(
                       `../edit-course-outline/${courseUuid}/${versionNum}`
@@ -81,12 +81,6 @@ export default function ReviewCourses() {
                   }
                 >
                   Review
-                </Button>
-                <Button className="text-gray-700 rounded-md hover:opacity-100 mr-10">
-                  Approve
-                </Button>
-                <Button className="text-gray-700 rounded-md hover:opacity-100">
-                  Deny
                 </Button>
               </span>
             </Stack>

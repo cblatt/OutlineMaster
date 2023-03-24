@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, useParams } from "react-router-dom";
 import OutlineComments from "./OutlineComments";
+import { useNavigate } from "react-router-dom";
 
 import {
   FormControl,
@@ -18,6 +19,7 @@ import AdminNav from "./AdminNav";
 import ChairNav from "./ChairNav";
 
 export default function ReviewCourseOutline() {
+  const navigate = useNavigate();
   const params = useParams();
   var id = params.courseUuid;
   var version = params.versionNum;
@@ -209,6 +211,42 @@ export default function ReviewCourseOutline() {
       })
       .catch((error) => console.error(error));
   }
+
+  // logic for approving goes here
+
+  const handleApprove = async () => {
+    const response = await fetch(
+      process.env.REACT_APP_API_URI + `/course-outline/${id}/${version}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          isApproved: "APPROVED",
+        }),
+      }
+    );
+
+    navigate(`../reviewcourse`);
+  };
+
+  const handleDeny = async () => {
+    const response = await fetch(
+      process.env.REACT_APP_API_URI + `/course-outline/${id}/${version}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          isApproved: "REJECTED",
+        }),
+      }
+    );
+
+    navigate(`../reviewcourse`);
+  };
 
   return (
     <div>
@@ -1399,7 +1437,21 @@ export default function ReviewCourseOutline() {
         </Box>
         <br />
         <br />
-
+        <span className="flex justify-center">
+          <Button
+            className="text-gray-700 rounded-md hover:opacity-100 mr-10"
+            onClick={handleApprove}
+          >
+            Approve
+          </Button>
+          <Button
+            className="text-gray-700 rounded-md hover:opacity-100"
+            onClick={handleDeny}
+          >
+            Deny
+          </Button>
+        </span>
+        <br></br>
         <OutlineComments></OutlineComments>
       </div>
     </div>
