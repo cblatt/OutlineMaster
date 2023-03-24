@@ -20,6 +20,9 @@ import Courses from "./CoursesPage";
 import CourseInfo from "./CourseInfoPage";
 import ReviewCourseOutline from "./ReviewCourseOutline";
 import DptChairHome from "./DptChairHome";
+import PreviousOutlines from "./PreviousOutlines";
+import EditCourseInstructor from "./EditCourseInstructor";
+import ViewPrevOutline from "./ViewPrevOutline";
 
 function App() {
   return (
@@ -39,6 +42,20 @@ function App() {
                   exact
                   path="/create-outline"
                   element={<CreateOutline></CreateOutline>}
+                />
+                <Route
+                  exact
+                  path="/edit-outline"
+                  element={<EditCourseInstructor></EditCourseInstructor>}
+                />
+                <Route
+                  exact
+                  path="/prev-outlines"
+                  element={<PreviousOutlines></PreviousOutlines>}
+                />
+                <Route
+                  path="/prev-course-outline/:courseUuid/:versionNum"
+                  element={<ViewPrevOutline></ViewPrevOutline>}
                 />
               </Route>
 
