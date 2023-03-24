@@ -1,125 +1,97 @@
-import React from "react";
-import { Component } from "react";
-import courses from "./courses";
+import React, { useCallback, useEffect, useState } from "react";
+import DataTable, { ExpanderComponentProps } from "react-data-table-component";
+import useAuth from "../hooks/useAuth";
 
-class MyTable extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { expandedRows: [] };
-  }
+const ExpandedComponent = ({ data }) => (
+  <pre>{JSON.stringify(data, null, 2)}</pre>
+);
 
-  handleExpand = (course) => {
-    let newExpandedRows = [...this.state.expandedRows];
-    let allExpanded = this.state.allExpanded;
-    let idxFound = newExpandedRows.findIndex((id) => {
-      return id === course.id;
-    });
+const columns = [
+  {
+    title: "Location",
+    key: "location",
+  },
+  {
+    title: "Population",
+    key: "population",
+  },
+  {
+    title: "Party",
+    key: "party",
+  },
+];
 
-    if (idxFound > -1) {
-      console.log("Collapsing " + course.firstName + " " + idxFound);
-      newExpandedRows.splice(idxFound, 1);
-    } else {
-      console.log("Expanding " + course.firstName);
-      newExpandedRows.push(course.id);
-    }
+const data = [
+  {
+    location: "Texas",
+    population: "29 million",
+    party: "Republican",
+    child: [
+      {
+        location: "Houston",
+        population: "2 million",
+        party: "Democrat",
+      },
+      {
+        location: "Austin",
+        population: "1 million",
+        party: "Democrat",
+      },
+    ],
+  },
+  {
+    location: "California",
+    population: "39 million",
+    party: "Democrat",
+    child: [
+      {
+        location: "Los Angeles",
+        population: "4 million",
+        party: "Democrat",
+      },
+      {
+        location: "San Jose",
+        population: "1 million",
+        party: "Democrat",
+      },
+    ],
+  },
+];
 
-    console.log("Expanded rows");
-    console.log(newExpandedRows);
+const InstructorTable = () => {
+  const [courses, setCourses] = useState([]);
+  const user = useAuth();
 
-    this.setState({ expandedRows: [...newExpandedRows] });
-  };
-
-  isExpanded = (course) => {
-    const idx = this.state.expandedRows.find((id) => {
-      return id === course.id;
-    });
-
-    return idx > -1;
-  };
-
-  expandAll = (courses) => {
-    console.log("ExapndedRows: " + this.state.expandedRows.length);
-    console.log("Players:      " + courses.length);
-    if (this.state.expandedRows.length === courses.length) {
-      let newExpandedRows = [];
-      this.setState({ expandedRows: [...newExpandedRows] });
-      console.log("Collapsing all...");
-    } else {
-      let newExpandedRows = courses.map((course) => course.id);
-      this.setState({ expandedRows: [...newExpandedRows] });
-      console.log("Expanding all...");
-      console.log("Expanded rows " + newExpandedRows.length);
-    }
-  };
-
-  getRows = (course) => {
-    let rows = [];
-    const projects = course.projects || [];
-
-    const firstRow = (
-      <tr>
-        <button onClick={() => this.getCourses()}>HELLO RONIN</button>
-        <td>{course.firstName}</td>
-        <td>{course.lastName}</td>
-        <td>{course.team}</td>
-        <td>
-          {projects.length > 0 && (
-            <button onClick={() => this.handleExpand(course)}>
-              {this.isExpanded(course) ? "-" : "+"}
-            </button>
-          )}
-        </td>
-      </tr>
+  const fetchInstructorCourses = useCallback(async () => {
+    const res = await fetch(
+      process.env.REACT_APP_API_URI + `/instructor-courses/${user.user.uwoId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Content-length": 7,
+          Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
+        },
+      }
     );
+    const data = await res.json();
+    console.log("data", data);
+    setCourses(data);
+  }, []);
 
-    rows.push(firstRow);
+  useEffect(() => {
+    fetchInstructorCourses();
+  }, [setCourses]);
 
-    if (this.isExpanded(course) && projects.length > 0) {
-      const projectRows = projects.map((project) => (
-        <tr className="player-details">
-          <td className="player-details" />
-          <td colspan="3" className="player-details">
-            <br />
-            <div className="attribute">
-              <div className="attribute-name">Toggle Here: </div>
-              <div className="attribute-value">{project.name}</div>
-            </div>
-            <br />
-          </td>
-        </tr>
-      ));
+  return (
+    <DataTable
+      className="px-20"
+      columns={columns}
+      data={courses}
+      expandableRows
+      expandableRowsComponent={ExpandedComponent}
+    />
+  );
+};
 
-      rows.push(projectRows);
-    }
-
-    return rows;
-  };
-
-  getPlayerTable = (courses) => {
-    const playerRows = courses.map((course) => {
-      return this.getRows(course);
-    });
-
-    return (
-      <div className="mt-4 bg-white shadow-md rounded-lg text-left p-8 mx-20">
-        <table className="my-table">
-          <tr>
-            <th>My Courses</th>
-            <th onClick={() => this.expandAll(courses)}>
-              <button>
-                {courses.length === this.state.expandedRows.length ? "-" : "+"}
-              </button>
-            </th>
-          </tr>
-          {playerRows}
-        </table>
-      </div>
-    );
-  };
-
-  render() {
-    return <div>{this.getPlayerTable(courses)}</div>;
-  }
-}
-
-export default MyTable;
+export default InstructorTable;

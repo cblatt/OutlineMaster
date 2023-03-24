@@ -23,6 +23,12 @@ export class InstructorCoursesService {
     });
   }
 
+  findAllCoursesByInstructor(id: string) {
+    return this.prisma.instructorCourse.findMany({
+      where: { uwoId: id },
+    });
+  }
+
   update(
     id: string,
     course: string,
