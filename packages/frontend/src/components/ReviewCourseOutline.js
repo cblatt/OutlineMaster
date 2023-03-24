@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import AdminNav from "./AdminNav";
+import ChairNav from "./ChairNav";
 
 export default function ReviewCourseOutline() {
   const params = useParams();
@@ -211,7 +212,7 @@ export default function ReviewCourseOutline() {
 
   return (
     <div>
-      <AdminNav />
+      <ChairNav />
 
       <div class="min-h-screen bg-gradient-to-r from-purple-500 to-purple-300 ... text-gray-500 py-6 flex flex-col justify-center sm:py-12">
         <center>

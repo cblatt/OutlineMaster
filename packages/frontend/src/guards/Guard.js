@@ -25,6 +25,10 @@ export const DptChairGuard = () => {
   console.log(user);
   if (user ? user.role === "DEPARTMENT_CHAIR" : false) {
     return <Outlet />;
+  } else if (user ? user.role === "ASSOCIATE_CHAIR" : false) {
+    return <Outlet />;
+  } else if (user ? user.role === "PROGRAM_DIRECTOR" : false) {
+    return <Outlet />;
   } else {
     return <Navigate to="/unauth" replace />;
   }
