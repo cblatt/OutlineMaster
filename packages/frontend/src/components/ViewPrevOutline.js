@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, useParams } from "react-router-dom";
-import OutlineComments from "./OutlineComments";
 
 import {
   FormControl,
@@ -14,7 +13,7 @@ import {
   Checkbox,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import AdminNav from "./AdminNav";
+import InstructorNav from "./InstructorNav";
 import ChairNav from "./ChairNav";
 
 export default function ReviewCourseOutline() {
@@ -212,12 +211,12 @@ export default function ReviewCourseOutline() {
 
   return (
     <div>
-      <ChairNav />
+      <InstructorNav />
 
       <div class="min-h-screen bg-gradient-to-r from-purple-500 to-purple-300 ... text-gray-500 py-6 flex flex-col justify-center sm:py-12">
         <center>
           <span class="text-6xl text-black font-serif font-bold">
-            Create & Edit Course Outline
+            Viewing Previous Course Outline
           </span>
           <br />
           <br />
@@ -1399,8 +1398,6 @@ export default function ReviewCourseOutline() {
         </Box>
         <br />
         <br />
-
-        <OutlineComments></OutlineComments>
       </div>
     </div>
   );

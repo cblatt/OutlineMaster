@@ -4,10 +4,14 @@ import InstructorHome from "./InstructorHome";
 import Login from "./Login";
 import AdminHome from "./AdminHome";
 import OutlineComments from "./OutlineComments";
-import { AdminGuard, InstructorGuard, UserGuard } from "../guards/Guard";
+import {
+  AdminGuard,
+  InstructorGuard,
+  UserGuard,
+  DptChairGuard,
+} from "../guards/Guard";
 import CreateOutline from "./CreateOutline";
 import UnAuth from "./UnAuth";
-
 import AddInstructor from "./AddInstructor";
 import Departments from "./Departments";
 import DepartmentCourses from "./DepartmentCourses";
@@ -15,7 +19,10 @@ import ReviewCourses from "./ReviewCourses";
 import Courses from "./CoursesPage";
 import CourseInfo from "./CourseInfoPage";
 import ReviewCourseOutline from "./ReviewCourseOutline";
+import DptChairHome from "./DptChairHome";
+import PreviousOutlines from "./PreviousOutlines";
 import EditCourseInstructor from "./EditCourseInstructor";
+import ViewPrevOutline from "./ViewPrevOutline";
 
 function App() {
   return (
@@ -46,6 +53,33 @@ function App() {
                   path="/edit-outline"
                   element={<EditCourseInstructor></EditCourseInstructor>}
                 />
+                <Route
+                  exact
+                  path="/prev-outlines"
+                  element={<PreviousOutlines></PreviousOutlines>}
+                />
+                <Route
+                  path="/prev-course-outline/:courseUuid/:versionNum"
+                  element={<ViewPrevOutline></ViewPrevOutline>}
+                />
+              </Route>
+
+              <Route element={<DptChairGuard />}>
+                <Route
+                  exact
+                  path="/dptChair-home"
+                  element={<DptChairHome></DptChairHome>}
+                />
+                <Route
+                  exact
+                  path="/reviewcourse"
+                  element={<ReviewCourses></ReviewCourses>}
+                />
+
+                <Route
+                  path="/edit-course-outline/:courseUuid/:versionNum"
+                  element={<ReviewCourseOutline></ReviewCourseOutline>}
+                />
               </Route>
 
               <Route element={<AdminGuard />}>
@@ -59,7 +93,6 @@ function App() {
                   path="/admin-add"
                   element={<AddInstructor></AddInstructor>}
                 />
-
                 <Route path="/courses">
                   <Route path="" element={<Courses />}></Route>
                   <Route path=":id" element={<CourseInfo />}></Route>
@@ -75,15 +108,6 @@ function App() {
               exact
               path="/comments"
               element={<OutlineComments></OutlineComments>}
-            />
-            <Route
-              exact
-              path="/reviewcourse"
-              element={<ReviewCourses></ReviewCourses>}
-            />
-            <Route
-              path="/edit-course-outline/:courseUuid/:versionNum"
-              element={<ReviewCourseOutline></ReviewCourseOutline>}
             />
           </Routes>
         </Router>
