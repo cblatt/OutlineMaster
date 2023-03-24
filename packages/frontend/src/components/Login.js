@@ -32,30 +32,35 @@ export default function Login() {
         if (user) {
           setUser(user);
           localStorage.setItem("user", JSON.stringify(user));
-          if (user.role === "ADMINISTRATOR")
+          if (user.role === "ADMINISTRATOR") {
             navigate("/admin-home", { replace: true });
-          else if (
-            user.role === "DEPARTMENT_CHAIR" ||
-            "ASSOCIATE_CHAIR" ||
-            "PROGRAM_DIRECTOR"
-          ) {
+          } else if (user.role === "DEPARTMENT_CHAIR") {
             navigate("/dptChair-home", { replace: true });
-          } else navigate("/home", { replace: true });
+          } else if (user.role === "ASSOCIATE_CHAIR") {
+            navigate("/dptChair-home", { replace: true });
+          } else if (user.role === "PROGRAM_DIRECTOR") {
+            navigate("/dptChair-home", { replace: true });
+          } else {
+            navigate("/home", { replace: true });
+          }
         }
       });
   }
 
-  if (user) {
-    if (user.role === "ADMINISTRATOR")
-      return <Navigate to="/admin-home" replace />;
-    else if (
-      user.role === "DEPARTMENT_CHAIR" ||
-      "ASSOCIATE_CHAIR" ||
-      "PROGRAM_DIRECTOR"
-    )
-      return <Navigate to="/dptChair-home" replace />;
-    return <Navigate to="/home" replace />;
-  }
+  // if (user) {
+  //   if (user.role === "ADMINISTRATOR")
+  //     return <Navigate to="/admin-home" replace />;
+  //   else if (
+  //     user.role === "DEPARTMENT_CHAIR" ||
+  //     "ASSOCIATE_CHAIR" ||
+  //     "PROGRAM_DIRECTOR"
+  //   ) {
+  //     return <Navigate to="/dptChair-home" replace />;
+  //   } else if (user.role === "INSTRUCTOR") {
+  //     return <Navigate to="/home" replace />;
+  //   } else {
+  //   }
+  // }
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-purple-500 to-purple-300 ... text-gray-700 py-6 flex flex-col justify-center sm:py-12">
