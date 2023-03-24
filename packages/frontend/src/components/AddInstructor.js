@@ -6,7 +6,7 @@ import {
   InputGroup,
   InputRightElement,
   Button,
-  Select
+  Select,
 } from "@chakra-ui/react";
 import AdminNav from "./AdminNav";
 import { useForm } from "react-hook-form";
@@ -102,18 +102,18 @@ export default function AddInstructor() {
                 placeholder="Last Name"
                 {...register("lastName", { required: true })}
               />
-             <select
+              <select
                 size="lg"
                 variant="outline"
                 name="course"
-                placeholder = "Role"
+                placeholder="Role"
                 {...register("role", { required: true })}
-          
               >
                 <option value="INSTRUCTOR">Instructor</option>
                 <option value="ADMINISTRATOR">Administrator</option>
-                <option value="DEPCHAIR">Department chair</option>
-                
+                <option value="DEPARTMENT_CHAIR">Department Chair</option>
+                <option value="ASSOCIATE_CHAIR">Associate Chair</option>
+                <option value="PROGRAM_DIRECTOR">Program Director</option>
               </select>
               <Button
                 className="text-gray-700 rounded-md hover:opacity-100"
