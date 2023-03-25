@@ -19,6 +19,9 @@ export class CreateCourseOutlineDto {
   year: string;
 
   @ApiProperty()
+  isApproved: string;
+
+  @ApiProperty()
   instructors: CourseOutlineInstructor[];
 
   @ApiProperty()
