@@ -21,6 +21,7 @@
   - You are about to drop the column `indLbl` on the `CourseOutline` table. All the data in the column will be lost.
   - You are about to drop the column `insLbl` on the `CourseOutline` table. All the data in the column will be lost.
   - You are about to drop the column `invLbl` on the `CourseOutline` table. All the data in the column will be lost.
+  - You are about to drop the column `isApproved` on the `CourseOutline` table. All the data in the column will be lost.
   - You are about to drop the column `knowLbl` on the `CourseOutline` table. All the data in the column will be lost.
   - You are about to drop the column `labLbl` on the `CourseOutline` table. All the data in the column will be lost.
   - You are about to drop the column `labPercLbl` on the `CourseOutline` table. All the data in the column will be lost.
@@ -147,44 +148,9 @@
   - You are about to drop the column `top4bLbl` on the `CourseOutline` table. All the data in the column will be lost.
   - You are about to drop the column `useEngLbl` on the `CourseOutline` table. All the data in the column will be lost.
   - You are about to drop the column `yearLbl` on the `CourseOutline` table. All the data in the column will be lost.
-  - Added the required column `antirequisites` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `calendarCopy` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `communicationSkills` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `corequisites` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `courseCredits` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `description` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `design` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `economicAndProjectManagement` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `engineeringDesign` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `engineeringScience` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `ethicsAndEquity` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `finalExamination` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `homeWorkAssignments` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `impactOnSocietyAndEnvironment` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `individualAndTeamWork` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `investigation` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `knowledgeBase` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `labHours` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `laboratory` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `lateSubmissionPolicy` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `lectureHours` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `lifeLongLearning` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `midtermTest` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `prerequisites` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `problemAnalysis` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `professionalism` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `quizzes` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `recommendedReferences` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `requiredReferences` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `requiredTextbook` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `submissionLocker` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `tutorialHours` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `useOfEngineering` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
+  - Added the required column `departmentUuid` to the `CourseOutline` table without a default value. This is not possible if the table is not empty.
 
 */
--- CreateEnum
-CREATE TYPE "Status" AS ENUM ('APPROVED', 'PENDING', 'REJECTED');
-
 -- CreateEnum
 CREATE TYPE "GaIndicators" AS ENUM ('KB1', 'KB2', 'KB3', 'KB4', 'PA1', 'PA2', 'PA3', 'I1', 'I2', 'I3', 'D1', 'D2', 'D3', 'D4', 'ET1', 'ET2', 'ET3', 'ITW1', 'ITW2', 'ITW3', 'CS1', 'CS2', 'CS3', 'PR1', 'PR2', 'PR3', 'IESE1', 'IESE2', 'IESE3', 'EE1', 'EE2', 'EE3', 'EE4', 'EPM1', 'EPM2', 'EPM3', 'EPM4', 'LL1', 'LL2');
 
@@ -209,6 +175,7 @@ DROP COLUMN "impLbl",
 DROP COLUMN "indLbl",
 DROP COLUMN "insLbl",
 DROP COLUMN "invLbl",
+DROP COLUMN "isApproved",
 DROP COLUMN "knowLbl",
 DROP COLUMN "labLbl",
 DROP COLUMN "labPercLbl",
@@ -335,45 +302,48 @@ DROP COLUMN "top4aLbl",
 DROP COLUMN "top4bLbl",
 DROP COLUMN "useEngLbl",
 DROP COLUMN "yearLbl",
-ADD COLUMN     "antirequisites" TEXT NOT NULL,
-ADD COLUMN     "calendarCopy" TEXT NOT NULL,
-ADD COLUMN     "communicationSkills" TEXT NOT NULL,
-ADD COLUMN     "corequisites" TEXT NOT NULL,
-ADD COLUMN     "courseCredits" TEXT NOT NULL,
-ADD COLUMN     "description" TEXT NOT NULL,
-ADD COLUMN     "design" TEXT NOT NULL,
-ADD COLUMN     "economicAndProjectManagement" TEXT NOT NULL,
-ADD COLUMN     "engineeringDesign" TEXT NOT NULL,
-ADD COLUMN     "engineeringScience" TEXT NOT NULL,
-ADD COLUMN     "ethicsAndEquity" TEXT NOT NULL,
-ADD COLUMN     "finalExamination" TEXT NOT NULL,
-ADD COLUMN     "homeWorkAssignments" TEXT NOT NULL,
-ADD COLUMN     "impactOnSocietyAndEnvironment" TEXT NOT NULL,
-ADD COLUMN     "individualAndTeamWork" TEXT NOT NULL,
-ADD COLUMN     "investigation" TEXT NOT NULL,
-ADD COLUMN     "knowledgeBase" TEXT NOT NULL,
-ADD COLUMN     "labHours" TEXT NOT NULL,
-ADD COLUMN     "laboratory" TEXT NOT NULL,
-ADD COLUMN     "lateSubmissionPolicy" TEXT NOT NULL,
-ADD COLUMN     "lectureHours" TEXT NOT NULL,
-ADD COLUMN     "lifeLongLearning" TEXT NOT NULL,
-ADD COLUMN     "midtermTest" TEXT NOT NULL,
-ADD COLUMN     "prerequisites" TEXT NOT NULL,
-ADD COLUMN     "problemAnalysis" TEXT NOT NULL,
-ADD COLUMN     "professionalism" TEXT NOT NULL,
-ADD COLUMN     "quizzes" TEXT NOT NULL,
-ADD COLUMN     "recommendedReferences" TEXT NOT NULL,
-ADD COLUMN     "requiredReferences" TEXT NOT NULL,
-ADD COLUMN     "requiredTextbook" TEXT NOT NULL,
-ADD COLUMN     "submissionLocker" TEXT NOT NULL,
-ADD COLUMN     "tutorialHours" TEXT NOT NULL,
-ADD COLUMN     "useOfEngineering" TEXT NOT NULL;
+ADD COLUMN     "antirequisites" TEXT,
+ADD COLUMN     "calendarCopy" TEXT,
+ADD COLUMN     "communicationSkills" TEXT,
+ADD COLUMN     "corequisites" TEXT,
+ADD COLUMN     "courseCredits" INTEGER,
+ADD COLUMN     "departmentUuid" TEXT NOT NULL,
+ADD COLUMN     "description" TEXT,
+ADD COLUMN     "design" TEXT,
+ADD COLUMN     "economicAndProjectManagement" TEXT,
+ADD COLUMN     "engineeringDesign" INTEGER,
+ADD COLUMN     "engineeringScience" INTEGER,
+ADD COLUMN     "ethicsAndEquity" TEXT,
+ADD COLUMN     "finalExamination" TEXT,
+ADD COLUMN     "homeWorkAssignments" TEXT,
+ADD COLUMN     "impactOnSocietyAndEnvironment" TEXT,
+ADD COLUMN     "individualAndTeamWork" TEXT,
+ADD COLUMN     "investigation" TEXT,
+ADD COLUMN     "justification" TEXT,
+ADD COLUMN     "knowledgeBase" TEXT,
+ADD COLUMN     "labHours" INTEGER,
+ADD COLUMN     "laboratory" TEXT,
+ADD COLUMN     "lateSubmissionPolicy" TEXT,
+ADD COLUMN     "lectureHours" INTEGER,
+ADD COLUMN     "lifeLongLearning" TEXT,
+ADD COLUMN     "midtermTest" TEXT,
+ADD COLUMN     "prerequisites" TEXT,
+ADD COLUMN     "problemAnalysis" TEXT,
+ADD COLUMN     "professionalism" TEXT,
+ADD COLUMN     "quizzes" TEXT,
+ADD COLUMN     "recommendedReferences" TEXT,
+ADD COLUMN     "requiredReferences" TEXT,
+ADD COLUMN     "requiredTextbook" TEXT,
+ADD COLUMN     "submissionLocker" TEXT,
+ADD COLUMN     "tutorialHours" INTEGER,
+ADD COLUMN     "useOfEngineering" TEXT,
+ADD COLUMN     "year" TEXT;
 
 -- CreateTable
 CREATE TABLE "CourseOutlineInstructor" (
+    "id" TEXT NOT NULL,
     "courseUuid" TEXT NOT NULL,
     "versionNum" INTEGER NOT NULL,
-    "indexNum" INTEGER NOT NULL,
     "prefix" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "office" TEXT NOT NULL,
@@ -381,34 +351,34 @@ CREATE TABLE "CourseOutlineInstructor" (
     "email" TEXT NOT NULL,
     "hours" TEXT NOT NULL,
 
-    CONSTRAINT "CourseOutlineInstructor_pkey" PRIMARY KEY ("courseUuid","versionNum","indexNum")
+    CONSTRAINT "CourseOutlineInstructor_pkey" PRIMARY KEY ("courseUuid","versionNum","id")
 );
 
 -- CreateTable
 CREATE TABLE "CourseOutlineEvaluation" (
+    "id" TEXT NOT NULL,
     "courseUuid" TEXT NOT NULL,
     "versionNum" INTEGER NOT NULL,
-    "indexNum" INTEGER NOT NULL,
     "courseComponent" TEXT NOT NULL,
     "weight" TEXT NOT NULL,
 
-    CONSTRAINT "CourseOutlineEvaluation_pkey" PRIMARY KEY ("courseUuid","versionNum","indexNum")
+    CONSTRAINT "CourseOutlineEvaluation_pkey" PRIMARY KEY ("courseUuid","versionNum","id")
 );
 
 -- CreateTable
 CREATE TABLE "CourseOutlineTopic" (
+    "id" TEXT NOT NULL,
     "courseUuid" TEXT NOT NULL,
     "versionNum" INTEGER NOT NULL,
-    "indexNum" INTEGER NOT NULL,
     "topic" TEXT NOT NULL,
     "topicDetails" TEXT NOT NULL,
     "gaIndicators" "GaIndicators"[],
-    "phone" TEXT NOT NULL,
-    "email" TEXT NOT NULL,
-    "hours" TEXT NOT NULL,
 
-    CONSTRAINT "CourseOutlineTopic_pkey" PRIMARY KEY ("courseUuid","versionNum","indexNum")
+    CONSTRAINT "CourseOutlineTopic_pkey" PRIMARY KEY ("courseUuid","versionNum","id")
 );
+
+-- AddForeignKey
+ALTER TABLE "CourseOutline" ADD CONSTRAINT "CourseOutline_departmentUuid_fkey" FOREIGN KEY ("departmentUuid") REFERENCES "Department"("departmentUuid") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "CourseOutlineInstructor" ADD CONSTRAINT "CourseOutlineInstructor_courseUuid_versionNum_fkey" FOREIGN KEY ("courseUuid", "versionNum") REFERENCES "CourseOutline"("courseUuid", "versionNum") ON DELETE RESTRICT ON UPDATE CASCADE;

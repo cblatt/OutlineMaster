@@ -24,12 +24,14 @@ import { Controller, useFieldArray, useForm } from "react-hook-form";
 
 import useAuth from "../hooks/useAuth";
 import { useLocation } from "react-router-dom";
+import { PreviewOutline } from "./PreviewOutline";
 
 export default function CreateOutline() {
   const {
     register,
     handleSubmit,
     control,
+    getValues,
     formState: { errors },
   } = useForm();
   const { user } = useAuth();
@@ -59,6 +61,7 @@ export default function CreateOutline() {
 
   const [course, setCourse] = useState();
   const [department, setDepartment] = useState();
+  const [preview, setPreview] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -85,6 +88,10 @@ export default function CreateOutline() {
 
     fetchData();
   }, [courseUrl]);
+
+  function previewOutline() {
+    setPreview(true);
+  }
 
   function submitChanges(data) {
     console.log(data);
@@ -147,12 +154,27 @@ export default function CreateOutline() {
       });
   }
 
-  return (
+  return preview ? (
+    <div className="min-h-screen bg-gradient-to-r from-purple-500 to-purple-300 ... text-gray-500">
+      <InstructorNav />
+      <Button style={{ margin: "12px" }} onClick={() => setPreview(false)}>
+        Go back
+      </Button>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <PreviewOutline
+          courseOutline={getValues()}
+          department={department}
+          course={course}
+          showToolbar={false}
+        />
+      </div>
+    </div>
+  ) : (
     <div className="min-h-screen bg-gradient-to-r from-purple-500 to-purple-300 ... text-gray-500 flex flex-col justify-center">
       <InstructorNav />
       <div className="min-h-screen flex flex-col pt-20 pb-20 ">
         <center>
-          <span class="text-6xl text-black font-serif font-bold">
+          <span className="text-6xl text-black font-serif font-bold">
             Create & Edit Course Outline
           </span>
           <br />
@@ -476,8 +498,8 @@ export default function CreateOutline() {
                   >
                     <option value="">N/A</option>
                     <option value="I">I</option>
-                    <option value="I">D</option>
-                    <option value="I">A</option>
+                    <option value="D">D</option>
+                    <option value="A">A</option>
                   </Select>
                 </FormControl>
                 <FormControl>
@@ -489,8 +511,8 @@ export default function CreateOutline() {
                   >
                     <option value="">N/A</option>
                     <option value="I">I</option>
-                    <option value="I">D</option>
-                    <option value="I">A</option>
+                    <option value="D">D</option>
+                    <option value="A">A</option>
                   </Select>
                 </FormControl>
                 <FormControl>
@@ -502,8 +524,8 @@ export default function CreateOutline() {
                   >
                     <option value="">N/A</option>
                     <option value="I">I</option>
-                    <option value="I">D</option>
-                    <option value="I">A</option>
+                    <option value="D">D</option>
+                    <option value="A">A</option>
                   </Select>
                 </FormControl>
                 <FormControl>
@@ -515,8 +537,8 @@ export default function CreateOutline() {
                   >
                     <option value="">N/A</option>
                     <option value="I">I</option>
-                    <option value="I">D</option>
-                    <option value="I">A</option>
+                    <option value="D">D</option>
+                    <option value="A">A</option>
                   </Select>
                 </FormControl>
                 <FormControl>
@@ -528,8 +550,8 @@ export default function CreateOutline() {
                   >
                     <option value="">N/A</option>
                     <option value="I">I</option>
-                    <option value="I">D</option>
-                    <option value="I">A</option>
+                    <option value="D">D</option>
+                    <option value="A">A</option>
                   </Select>
                 </FormControl>
                 <FormControl>
@@ -541,8 +563,8 @@ export default function CreateOutline() {
                   >
                     <option value="">N/A</option>
                     <option value="I">I</option>
-                    <option value="I">D</option>
-                    <option value="I">A</option>
+                    <option value="D">D</option>
+                    <option value="A">A</option>
                   </Select>
                 </FormControl>
                 <FormControl>
@@ -554,8 +576,8 @@ export default function CreateOutline() {
                   >
                     <option value="">N/A</option>
                     <option value="I">I</option>
-                    <option value="I">D</option>
-                    <option value="I">A</option>
+                    <option value="D">D</option>
+                    <option value="A">A</option>
                   </Select>
                 </FormControl>
                 <FormControl>
@@ -567,8 +589,8 @@ export default function CreateOutline() {
                   >
                     <option value="">N/A</option>
                     <option value="I">I</option>
-                    <option value="I">D</option>
-                    <option value="I">A</option>
+                    <option value="D">D</option>
+                    <option value="A">A</option>
                   </Select>
                 </FormControl>
                 <FormControl>
@@ -580,8 +602,8 @@ export default function CreateOutline() {
                   >
                     <option value="">N/A</option>
                     <option value="I">I</option>
-                    <option value="I">D</option>
-                    <option value="I">A</option>
+                    <option value="D">D</option>
+                    <option value="A">A</option>
                   </Select>
                 </FormControl>
                 <FormControl>
@@ -593,8 +615,8 @@ export default function CreateOutline() {
                   >
                     <option value="">N/A</option>
                     <option value="I">I</option>
-                    <option value="I">D</option>
-                    <option value="I">A</option>
+                    <option value="D">D</option>
+                    <option value="A">A</option>
                   </Select>
                 </FormControl>
                 <FormControl>
@@ -606,8 +628,8 @@ export default function CreateOutline() {
                   >
                     <option value="">N/A</option>
                     <option value="I">I</option>
-                    <option value="I">D</option>
-                    <option value="I">A</option>
+                    <option value="D">D</option>
+                    <option value="A">A</option>
                   </Select>
                 </FormControl>
                 <FormControl>
@@ -619,8 +641,8 @@ export default function CreateOutline() {
                   >
                     <option value="">N/A</option>
                     <option value="I">I</option>
-                    <option value="I">D</option>
-                    <option value="I">A</option>
+                    <option value="D">D</option>
+                    <option value="A">A</option>
                   </Select>
                 </FormControl>
               </SimpleGrid>
@@ -866,14 +888,24 @@ export default function CreateOutline() {
                   {...register("justification")}
                 />
               </FormControl>
-              <Button
-                colorScheme="green"
-                size="lg"
-                width="80"
-                onClick={handleSubmit(submitChanges)}
-              >
-                Save
-              </Button>
+              <HStack spacing="24px">
+                <Button
+                  colorScheme="purple"
+                  size="lg"
+                  width="80"
+                  onClick={previewOutline}
+                >
+                  Preview
+                </Button>
+                <Button
+                  colorScheme="green"
+                  size="lg"
+                  width="80"
+                  onClick={handleSubmit(submitChanges)}
+                >
+                  Save
+                </Button>
+              </HStack>
             </VStack>
           </Box>
         </div>
