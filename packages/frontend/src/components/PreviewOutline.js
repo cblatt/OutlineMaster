@@ -266,10 +266,17 @@ const MyDocument = ({ courseOutline, department, course }) => (
       <View
         style={[styles.bodySection, { display: "flex", flexDirection: "row" }]}
       >
-        <Text style={styles.bodyHeader}>CEAB Academic Units:</Text>
+        <Text style={styles.bodyHeader}>CEAB Academic Units: </Text>
         <Text style={styles.bodyText}>
-          Engineering Science {courseOutline.engineeringScience}%, Engineering
-          Design {courseOutline.engineeringDesign}%.
+          Engineering Science{" "}
+          {isNaN(courseOutline.engineeringScience)
+            ? "X"
+            : courseOutline.engineeringScience}
+          %, Engineering Design{" "}
+          {isNaN(courseOutline.engineeringDesign)
+            ? "Y"
+            : courseOutline.engineeringDesign}
+          %.
         </Text>
       </View>
       <View style={styles.bodySection}>
