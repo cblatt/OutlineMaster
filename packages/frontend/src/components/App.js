@@ -23,6 +23,7 @@ import DptChairHome from "./DptChairHome";
 import PreviousOutlines from "./PreviousOutlines";
 import EditCourseInstructor from "./EditCourseInstructor";
 import ViewPrevOutline from "./ViewPrevOutline";
+import InstructorCourses from "./InstructorCourses";
 
 function App() {
   return (
@@ -41,7 +42,7 @@ function App() {
                 <Route exact path="/create-outline">
                   <Route
                     path=""
-                    element={<CreateOutline></CreateOutline>}
+                    element={<InstructorCourses></InstructorCourses>}
                   ></Route>
                   <Route
                     path=":id"

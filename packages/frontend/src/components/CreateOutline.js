@@ -96,7 +96,7 @@ export default function CreateOutline() {
   function submitChanges(data) {
     console.log(data);
     fetch(
-      `${process.env.REACT_APP_API_URI}/course-outline/${course.courseUuid}`,
+      `${process.env.REACT_APP_API_URI}/course-outline/versionMax/${course.courseUuid}`,
       {
         method: "GET",
         headers: {
@@ -109,6 +109,8 @@ export default function CreateOutline() {
       .then((response) => {
         if (response.status === 200) {
           return response.json();
+        } else {
+          return 0;
         }
       })
       .then((currentVersionNum) => {
@@ -175,7 +177,7 @@ export default function CreateOutline() {
       <div className="min-h-screen flex flex-col pt-20 pb-20 ">
         <center>
           <span className="text-6xl text-black font-serif font-bold">
-            Create & Edit Course Outline
+            Create Course Outline
           </span>
           <br />
           <br />

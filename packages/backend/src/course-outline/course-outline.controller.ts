@@ -32,7 +32,7 @@ export class CourseOutlineController {
     return this.courseOutlineService.findAll();
   }
 
-  @Get(':courseUuid/:versionNum')
+  @Get('findOne/:courseUuid/:versionNum')
   findOne(
     @Param('courseUuid') courseUuid: string,
     @Param('versionNum') versionNum: string,
@@ -46,7 +46,6 @@ export class CourseOutlineController {
   }
 
   @Patch(':courseUuid/:versionNum')
-  @Patch(':id')
   update(
     @Param('courseUuid') courseUuid: string,
     @Param('versionNum') versionNum: string,
@@ -64,7 +63,7 @@ export class CourseOutlineController {
     return this.courseOutlineService.remove(id);
   }
 
-  @Get(':courseUuid')
+  @Get('versionMax/:courseUuid')
   getMaxVersion(@Param('courseUuid') id: string) {
     return this.courseOutlineService.getVersionNumber(id);
   }

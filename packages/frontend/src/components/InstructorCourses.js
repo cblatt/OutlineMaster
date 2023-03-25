@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import InstructorNav from "./InstructorNav";
 import {
   Button,
@@ -27,31 +27,36 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
-export default function PreviousOutlines() {
-  const [courses, setCourses] = useState([]);
+export default function InstructorCourses() {
   const navigate = useNavigate();
+  const [courses, setCourses] = useState([]);
+  const user = useAuth();
 
-  async function fetchData() {
-    const res = await fetch(process.env.REACT_APP_API_URI + "/course-outline", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Content-length": 7,
-        Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
-      },
-    });
+  const fetchInstructorCourses = useCallback(async () => {
+    const res = await fetch(
+      process.env.REACT_APP_API_URI + `/instructor-courses/${user.user.uwoId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Content-length": 7,
+          Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
+        },
+      }
+    );
     const data = await res.json();
-    console.log(data);
+    console.log("data", data);
     setCourses(data);
-  }
+  }, [setCourses, user.user.uwoId]);
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchInstructorCourses();
+  }, [fetchInstructorCourses]);
 
-  async function viewOutline(Uuid, vNum) {
-    navigate(`../prev-course-outline/${Uuid}/${vNum}`);
+  async function createOutline(Uuid) {
+    navigate(Uuid);
   }
 
   return (
@@ -67,37 +72,34 @@ export default function PreviousOutlines() {
           }}
         >
           <Heading size="lg" colorScheme="purple">
-            Previous Outlines
+            Courses
           </Heading>
         </div>
         <TableContainer background="whitesmoke" borderRadius="8px">
           <Table variant="simple" colorScheme="blackAlpha">
             <Thead>
               <Tr>
-                <Th>Course</Th>
-                <Th>Year</Th>
-                <Th>Version Num</Th>
-                <Th>Outline Status</Th>
+                <Th>Course Code</Th>
+                <Th>Course Name</Th>
                 <Td>View Outline</Td>
               </Tr>
             </Thead>
             <Tbody>
-              {courses.map((course) => {
+              {courses.map((instructorCourse) => {
                 return (
-                  <Tr key={course.courseUuid} style={{ cursor: "pointer" }}>
-                    <Td>{course.course.courseName}</Td>
-                    <Td>{course.year}</Td>
-                    <Td>{course.versionNum}</Td>
-                    <Td>{course.isApproved}</Td>
+                  <Tr
+                    key={instructorCourse.course.courseUuid}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <Td>{instructorCourse.course.courseCode}</Td>
+                    <Td>{instructorCourse.course.courseName}</Td>
                     <Button
                       className="mt-2 mb-2"
                       colorScheme="blackAlpha"
                       variant="solid"
-                      onClick={() =>
-                        viewOutline(course.courseUuid, course.versionNum)
-                      }
+                      onClick={() => createOutline(instructorCourse.courseUuid)}
                     >
-                      View Outline
+                      Create New Outline
                     </Button>
                   </Tr>
                 );

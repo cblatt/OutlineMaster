@@ -8,8 +8,7 @@ const ExpandedComponent = ({ selectedCourse, courseOutlinesByCourse }) => (
   <div>
     {Object.entries(courseOutlinesByCourse).map(
       ([courseCode, courseOutlines]) => {
-        if (courseCode !== selectedCourse) {
-          console.log("ITS NULL");
+        if (courseCode !== selectedCourse.course.courseCode) {
           return null;
         }
 
@@ -17,7 +16,9 @@ const ExpandedComponent = ({ selectedCourse, courseOutlinesByCourse }) => (
           <div key={courseCode}>
             <div className="m-8">
               <Button colorScheme="purple" size="sm">
-                <a href="/create-outline">Create Outline</a>
+                <a href={"/create-outline/" + selectedCourse.courseUuid}>
+                  Create Outline
+                </a>
               </Button>
             </div>
             <table>
@@ -72,6 +73,7 @@ const columns = [
 
 export default function InstructorTable() {
   const [courses, setCourses] = useState([]);
+  const [selectedCourse, setSelectedCourse] = useState(null);
   const user = useAuth();
 
   const fetchInstructorCourses = useCallback(async () => {
@@ -131,8 +133,6 @@ export default function InstructorTable() {
   const oneExpandedRow = Object.entries(courseOutlinesByCourse)[0];
   console.log("EXPAND", oneExpandedRow);
 
-  const selectedCourse = "3350";
-
   return (
     <div className="mx-20">
       <DataTable
@@ -143,6 +143,11 @@ export default function InstructorTable() {
         expandableRowsComponentProps={{
           selectedCourse,
           courseOutlinesByCourse,
+        }}
+        onRowExpandToggled={(_, row) => {
+          setSelectedCourse(
+            courses.find((course) => course.course.courseCode === row.id)
+          );
         }}
       />
     </div>

@@ -48,6 +48,8 @@ export class CourseOutlineService {
         instructors: true,
         courseTopics: true,
         courseEvaluations: true,
+        course: true,
+        department: true,
       },
     });
   }
@@ -82,7 +84,7 @@ export class CourseOutlineService {
   update(
     courseUuid: string,
     versionNum: number,
-    updateCourseDto: UpdateCourseOutlineDto,
+    updateCourseOutlineDto: UpdateCourseOutlineDto,
   ) {
     return this.prisma.courseOutline.update({
       where: {
@@ -91,7 +93,33 @@ export class CourseOutlineService {
           versionNum: versionNum,
         },
       },
-      data: updateCourseDto,
+      data: {
+        ...updateCourseOutlineDto,
+        instructors: {
+          createMany: {
+            data: updateCourseOutlineDto.instructors,
+          },
+        },
+        courseTopics: {
+          deleteMany: {
+            courseUuid: updateCourseOutlineDto.courseUuid,
+            versionNum: updateCourseOutlineDto.versionNum,
+          },
+          createMany: {
+            data: updateCourseOutlineDto.courseTopics.map((topic) => {
+              topic.gaIndicators = topic.gaIndicators.map(
+                (indicator: any) => indicator.value,
+              );
+              return topic;
+            }),
+          },
+        },
+        courseEvaluations: {
+          createMany: {
+            data: updateCourseOutlineDto.courseEvaluations,
+          },
+        },
+      },
     });
   }
 
