@@ -1,6 +1,5 @@
 import React from "react";
 import ChairNav from "./ChairNav";
-import InstructorNav from "./InstructorNav";
 export default function DptChairHome() {
   return (
     <div>

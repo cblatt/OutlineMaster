@@ -12,9 +12,7 @@ import ChairNav from "./ChairNav";
 
 export default function ReviewCourses() {
   const navigate = useNavigate();
-  const [show, setShow] = useState(false);
-
-  const [instructors, setInstructors] = useState([]);
+  const [courseOutlines, setCourseOutlines] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -30,7 +28,8 @@ export default function ReviewCourses() {
         }
       );
       const data = await res.json();
-      setInstructors(data);
+      console.log(data);
+      setCourseOutlines(data);
     }
     fetchData();
   }, []);
@@ -61,24 +60,20 @@ export default function ReviewCourses() {
                 onChange={handleSelectChange}
               >
                 <option value="">-- Select UWO Course --</option>
-                {instructors &&
-                  instructors.map((instructor) => (
+                {courseOutlines &&
+                  courseOutlines.map((courseOutline) => (
                     <option
-                      key={`${instructor.courseUuid}:${instructor.versionNum}`}
-                      value={`${instructor.courseUuid}:${instructor.versionNum}`}
+                      key={`${courseOutline.courseUuid}:${courseOutline.versionNum}`}
+                      value={`${courseOutline.courseUuid}:${courseOutline.versionNum}`}
                     >
-                      {`${instructor.titleLbl} ${instructor.codeLbl}, Version #${instructor.versionNum}`}
+                      {`${courseOutline.course.courseCode} ${courseOutline.course.courseName}, Version #${courseOutline.versionNum}`}
                     </option>
                   ))}
               </select>
               <span className="flex justify-center">
                 <Button
                   className="text-gray-700 rounded-md hover:opacity-100 flex justify-center"
-                  onClick={() =>
-                    navigate(
-                      `../edit-course-outline/${courseUuid}/${versionNum}`
-                    )
-                  }
+                  onClick={() => navigate(`${courseUuid}/${versionNum}`)}
                 >
                   Review
                 </Button>

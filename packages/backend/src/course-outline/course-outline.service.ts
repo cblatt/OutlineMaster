@@ -60,6 +60,10 @@ export class CourseOutlineService {
       where: {
         isApproved: isApproved,
       },
+      include: {
+        course: true,
+        department: true,
+      },
     });
     return courseOutlines;
   }
@@ -106,7 +110,7 @@ export class CourseOutlineService {
       },
       data: {
         ...updateCourseOutlineDto,
-        instructors: {
+        instructors: updateCourseOutlineDto.instructors && {
           deleteMany: {
             courseUuid: courseUuid,
             versionNum: versionNum,
@@ -119,7 +123,7 @@ export class CourseOutlineService {
             }),
           },
         },
-        courseTopics: {
+        courseTopics: updateCourseOutlineDto.courseTopics && {
           deleteMany: {
             courseUuid: courseUuid,
             versionNum: versionNum,
@@ -135,13 +139,13 @@ export class CourseOutlineService {
             }),
           },
         },
-        courseEvaluations: {
+        courseEvaluations: updateCourseOutlineDto.courseEvaluations && {
           deleteMany: {
             courseUuid: courseUuid,
             versionNum: versionNum,
           },
           createMany: {
-            data: updateCourseOutlineDto.courseEvaluations.map(
+            data: updateCourseOutlineDto?.courseEvaluations.map(
               (courseEvaluation) => {
                 delete courseEvaluation['courseUuid'];
                 delete courseEvaluation['versionNum'];

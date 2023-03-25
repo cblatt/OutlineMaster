@@ -72,16 +72,13 @@ function App() {
                   path="/dptChair-home"
                   element={<DptChairHome></DptChairHome>}
                 />
-                <Route
-                  exact
-                  path="/reviewcourse"
-                  element={<ReviewCourses></ReviewCourses>}
-                />
-
-                <Route
-                  path="/edit-course-outline/:courseUuid/:versionNum"
-                  element={<ReviewCourseOutline></ReviewCourseOutline>}
-                />
+                <Route exact path="/review">
+                  <Route path="" element={<ReviewCourses></ReviewCourses>} />
+                  <Route
+                    path=":courseUuid/:versionNum"
+                    element={<ReviewCourseOutline></ReviewCourseOutline>}
+                  />
+                </Route>
               </Route>
 
               <Route element={<AdminGuard />}>

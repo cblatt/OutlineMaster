@@ -27,7 +27,7 @@ export default function ChairNav() {
           <NavLink eventKey="1" as={Link} to="/dptChair-home">
             Homepage
           </NavLink>
-          <NavLink eventKey="2" as={Link} to="/reviewcourse">
+          <NavLink eventKey="2" as={Link} to="/review">
             Review Courses
           </NavLink>
         </Nav>
