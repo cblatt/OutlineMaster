@@ -77,6 +77,8 @@ export class CourseOutlineService {
         instructors: true,
         courseTopics: true,
         courseEvaluations: true,
+        course: true,
+        department: true,
       },
     });
   }

@@ -449,8 +449,8 @@ const MyDocument = ({ courseOutline, department, course }) => (
           </View>
         </View>
         {courseOutline.courseTopics.map((topic, index) => (
-          <>
-            <View style={styles.topicTableRowTopic} key={index}>
+          <View key={index}>
+            <View style={styles.topicTableRowTopic}>
               <View style={styles.topicTableColLTopic}>
                 <View style={styles.topicTableCell}>
                   <Text style={styles.bodyHeader}>
@@ -464,7 +464,10 @@ const MyDocument = ({ courseOutline, department, course }) => (
               <View style={styles.topicTableColSTopic}>
                 <Text style={[styles.topicTableCell, styles.bodyHeader]}>
                   {topic.gaIndicators.map((indicator, index) => {
-                    return (index ? ", " : "") + indicator.value;
+                    return (
+                      (index ? ", " : "") +
+                      (indicator.value ? indicator.value : indicator)
+                    );
                   })}
                 </Text>
               </View>
@@ -475,7 +478,7 @@ const MyDocument = ({ courseOutline, department, course }) => (
               </View>
               <View style={styles.topicTableColS}></View>
             </View>
-          </>
+          </View>
         ))}
       </View>
       <View style={styles.bodySection}>
