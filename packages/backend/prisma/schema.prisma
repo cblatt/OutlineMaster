@@ -126,7 +126,7 @@ model CourseOutlineInstructor {
   phone String
   email String
   hours String
-  courseOutline  CourseOutline     @relation(fields: [courseUuid,versionNum], references: [courseUuid, versionNum])
+  courseOutline  CourseOutline     @relation(fields: [courseUuid,versionNum], references: [courseUuid, versionNum], onUpdate: Cascade, onDelete: Cascade)
   @@id([courseUuid, versionNum, id])
 }
 
@@ -136,7 +136,7 @@ model CourseOutlineEvaluation {
   versionNum    Int   
   courseComponent String
   weight String
-  courseOutline  CourseOutline     @relation(fields: [courseUuid,versionNum], references: [courseUuid, versionNum])
+  courseOutline  CourseOutline     @relation(fields: [courseUuid,versionNum], references: [courseUuid, versionNum], onUpdate: Cascade, onDelete: Cascade)
   @@id([courseUuid, versionNum, id])
 }
 
@@ -147,7 +147,7 @@ model CourseOutlineTopic {
   topic String
   topicDetails String
   gaIndicators GaIndicators[]
-  courseOutline  CourseOutline     @relation(fields: [courseUuid,versionNum], references: [courseUuid, versionNum])
+  courseOutline  CourseOutline     @relation(fields: [courseUuid,versionNum], references: [courseUuid, versionNum], onUpdate: Cascade, onDelete: Cascade)
   @@id([courseUuid, versionNum, id])
 }
 

@@ -48,6 +48,7 @@ export default function ReviewCourseOutline() {
       >
         Go back
       </Button>
+
       <div style={{ display: "flex", justifyContent: "center" }}>
         {courseOutline && (
           <PreviewOutline
@@ -57,6 +58,15 @@ export default function ReviewCourseOutline() {
             showToolbar={courseOutline.isApproved === "APPROVED"}
           />
         )}
+        <Button
+          style={{ margin: "12px" }}
+          colorScheme="purple"
+          onClick={() => {
+            navigate(`/edit-outline/${id}/${version}`);
+          }}
+        >
+          Edit Outline
+        </Button>
       </div>
     </div>
   );

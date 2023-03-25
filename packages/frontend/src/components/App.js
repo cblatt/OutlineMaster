@@ -21,9 +21,9 @@ import CourseInfo from "./CourseInfoPage";
 import ReviewCourseOutline from "./ReviewCourseOutline";
 import DptChairHome from "./DptChairHome";
 import PreviousOutlines from "./PreviousOutlines";
-import EditCourseInstructor from "./EditCourseInstructor";
 import ViewPrevOutline from "./ViewPrevOutline";
 import InstructorCourses from "./InstructorCourses";
+import EditOutline from "./EditOutline";
 
 function App() {
   return (
@@ -49,11 +49,12 @@ function App() {
                     element={<CreateOutline></CreateOutline>}
                   ></Route>
                 </Route>
-                <Route
-                  exact
-                  path="/edit-outline"
-                  element={<EditCourseInstructor></EditCourseInstructor>}
-                />
+                <Route exact path="/edit-outline">
+                  <Route
+                    path=":courseUuid/:versionNum"
+                    element={<EditOutline></EditOutline>}
+                  />
+                </Route>
                 <Route
                   exact
                   path="/prev-outlines"

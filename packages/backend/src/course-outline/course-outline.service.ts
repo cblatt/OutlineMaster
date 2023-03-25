@@ -79,6 +79,15 @@ export class CourseOutlineService {
         courseEvaluations: true,
         course: true,
         department: true,
+        editLogs: {
+          take: 1,
+          orderBy: {
+            editNum: 'desc',
+          },
+          select: {
+            editNum: true,
+          },
+        },
       },
     });
   }
@@ -98,27 +107,47 @@ export class CourseOutlineService {
       data: {
         ...updateCourseOutlineDto,
         instructors: {
+          deleteMany: {
+            courseUuid: courseUuid,
+            versionNum: versionNum,
+          },
           createMany: {
-            data: updateCourseOutlineDto.instructors,
+            data: updateCourseOutlineDto.instructors.map((instructor) => {
+              delete instructor['courseUuid'];
+              delete instructor['versionNum'];
+              return instructor;
+            }),
           },
         },
         courseTopics: {
           deleteMany: {
-            courseUuid: updateCourseOutlineDto.courseUuid,
-            versionNum: updateCourseOutlineDto.versionNum,
+            courseUuid: courseUuid,
+            versionNum: versionNum,
           },
           createMany: {
             data: updateCourseOutlineDto.courseTopics.map((topic) => {
               topic.gaIndicators = topic.gaIndicators.map(
                 (indicator: any) => indicator.value,
               );
+              delete topic['courseUuid'];
+              delete topic['versionNum'];
               return topic;
             }),
           },
         },
         courseEvaluations: {
+          deleteMany: {
+            courseUuid: courseUuid,
+            versionNum: versionNum,
+          },
           createMany: {
-            data: updateCourseOutlineDto.courseEvaluations,
+            data: updateCourseOutlineDto.courseEvaluations.map(
+              (courseEvaluation) => {
+                delete courseEvaluation['courseUuid'];
+                delete courseEvaluation['versionNum'];
+                return courseEvaluation;
+              },
+            ),
           },
         },
       },

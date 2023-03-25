@@ -2,59 +2,69 @@ import DataTable from "react-data-table-component";
 import React, { useCallback, useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { Button, ButtonGroup } from "@chakra-ui/react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useNavigate } from "react-router-dom";
 
-const ExpandedComponent = ({ selectedCourse, courseOutlinesByCourse }) => (
-  <div>
-    {Object.entries(courseOutlinesByCourse).map(
-      ([courseCode, courseOutlines]) => {
-        if (courseCode !== selectedCourse.course.courseCode) {
-          return null;
-        }
+const ExpandedComponent = ({ selectedCourse, courseOutlinesByCourse }) => {
+  const navigate = useNavigate();
+  return (
+    <div>
+      {Object.entries(courseOutlinesByCourse).map(
+        ([courseCode, courseOutlines]) => {
+          if (courseCode !== selectedCourse.course.courseCode) {
+            return null;
+          }
 
-        return (
-          <div key={courseCode}>
-            <div className="m-8">
-              <Button colorScheme="purple" size="sm">
-                <a href={"/create-outline/" + selectedCourse.courseUuid}>
+          return (
+            <div key={courseCode}>
+              <div className="m-8">
+                <Button
+                  colorScheme="purple"
+                  size="sm"
+                  onClick={() => {
+                    navigate("/create-outline/" + selectedCourse.courseUuid);
+                  }}
+                >
                   Create Outline
-                </a>
-              </Button>
-            </div>
-            <table>
-              <thead>
-                <tr className="my-8">
-                  <th className="px-8">Version</th>
-                  <th>Year</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {courseOutlines.map((outline) => (
-                  <tr key={outline.version}>
-                    <td className="px-8 pb-8">{outline.version}</td>
-                    <td className="pr-8 pb-8">{outline.year}</td>
-                    <td className="pr-8 pb-8">{outline.status}</td>
-                    <td className="px-8 pb-8">
-                      <Button colorScheme="purple" size="sm">
-                        <a
-                          href={`/prev-course-outline/${outline.courseUuid}/${outline.version}`}
-                        >
-                          {" "}
-                          Edit Outline{" "}
-                        </a>
-                      </Button>
-                    </td>
+                </Button>
+              </div>
+              <table>
+                <thead>
+                  <tr className="my-8">
+                    <th className="px-8">Version</th>
+                    <th>Year</th>
+                    <th>Status</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        );
-      }
-    )}
-  </div>
-);
+                </thead>
+                <tbody>
+                  {courseOutlines.map((outline) => (
+                    <tr key={outline.version}>
+                      <td className="px-8 pb-8">{outline.version}</td>
+                      <td className="pr-8 pb-8">{outline.year}</td>
+                      <td className="pr-8 pb-8">{outline.status}</td>
+                      <td className="px-8 pb-8">
+                        <Button
+                          colorScheme="purple"
+                          size="sm"
+                          onClick={() => {
+                            navigate(
+                              `/prev-course-outline/${outline.courseUuid}/${outline.version}`
+                            );
+                          }}
+                        >
+                          View Outline
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          );
+        }
+      )}
+    </div>
+  );
+};
 
 const columns = [
   {
@@ -91,11 +101,11 @@ export default function InstructorTable() {
     const data = await res.json();
     console.log("data", data);
     setCourses(data);
-  }, []);
+  }, [user.user.uwoId]);
 
   useEffect(() => {
     fetchInstructorCourses();
-  }, [setCourses]);
+  }, [fetchInstructorCourses]);
 
   const rowTitles = courses.map((course) => {
     return {
