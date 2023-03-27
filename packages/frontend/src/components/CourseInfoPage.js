@@ -28,8 +28,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 import AdminNav from "./AdminNav";
 import { Select } from "chakra-react-select";
 import { DeleteIcon } from "@chakra-ui/icons";
+import Courses from "./CoursesPage";
+
+
+
 
 const CourseInfo = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const [course, setCourse] = useState();
 
@@ -76,6 +81,9 @@ const CourseInfo = () => {
       </div>
     );
   }
+  
+  
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-purple-500 to-purple-300 ... ">
@@ -86,17 +94,19 @@ const CourseInfo = () => {
             display: "flex",
             width: "100%",
             justifyContent: "space-between",
-            margin: "10px 0 40px 0",
+            margin: "0 40px 0",
           }}
         >
-          <Heading size="lg" colorScheme="purple">
-            {course.courseCode} {course.courseName}
-          </Heading>
+          <label className="text-6xl font-bold text-white uppercase tracking-[5px]">
+          {course.department.departmentCode}{course.courseCode}
+          </label>
+          
 
           <Stack spacing="24px" direction="row-reverse">
             <Button
               colorScheme="blackAlpha"
               variant="solid"
+              mr="7"
               onClick={courseOnOpen}
             >
               Edit Course Info
@@ -104,19 +114,48 @@ const CourseInfo = () => {
             <Button colorScheme="purple" variant="solid" onClick={assignOnOpen}>
               Manage Instructors
             </Button>
+            <Button colorScheme="blue" variant="solid" onClick={() => navigate('/courses')}>
+              Back to Courses
+            </Button>
           </Stack>
+
+          
+
+          
+          
         </div>
-        <div>{course.courseName}</div>
-        <div>{course.courseCode}</div>
-        <div>
-          Instructors:
-          <div>
+
+        <div style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+            margin: "0 40px 0",
+          }}>
+
+          <label className="text-6xl font-bold text-white uppercase tracking-[5px] mt-4">
+          {course.courseName}
+          </label>
+
+          </div>
+
+        
+
+        
+        <div className="mt-4 ml-4">
+          <label className="text-4xl font-bold text-stone-800 uppercase tracking-[5px] mt-4">Instructors:</label>
+          
+          
+
+
+
+          <div className="ml-12 mt-6 ">
             {course.InstructorCourse &&
               course.InstructorCourse.map((courseInstructor) => {
                 return (
                   <div key={courseInstructor.user?.uwoId}>
-                    {courseInstructor.user?.firstName}{" "}
-                    {courseInstructor.user?.lastName}
+                    <label className="text-3xl font-bold text-stone-800 uppercase tracking-[5px] ">{courseInstructor.user?.firstName}{" "}
+                    {courseInstructor.user?.lastName}{" - "}{courseInstructor.user?.uwoId}</label>
+                    
                   </div>
                 );
               })}
