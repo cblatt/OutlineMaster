@@ -8,18 +8,16 @@ import {
   InputRightElement,
   Button,
 } from "@chakra-ui/react";
-import AdminNav from "./AdminNav";
+import ChairNav from "./ChairNav";
 
 export default function ReviewCourses() {
   const navigate = useNavigate();
-  const [show, setShow] = useState(false);
-
-  const [instructors, setInstructors] = useState([]);
+  const [courseOutlines, setCourseOutlines] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       const res = await fetch(
-        process.env.REACT_APP_API_URI + "/course-outline",
+        process.env.REACT_APP_API_URI + "/course-outline/PENDING",
         {
           method: "GET",
           headers: {
@@ -30,7 +28,8 @@ export default function ReviewCourses() {
         }
       );
       const data = await res.json();
-      setInstructors(data);
+      console.log(data);
+      setCourseOutlines(data);
     }
     fetchData();
   }, []);
@@ -46,7 +45,7 @@ export default function ReviewCourses() {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-purple-500 to-purple-300 ... ">
-      <AdminNav />
+      <ChairNav></ChairNav>
       <div className="min-h-screen flex flex-col justify-center items-center  ">
         <div className="bg-white py-5 rounded-2xl w-1/3 px-5">
           <h4 className="text-4xl text-gray-700 font-semibold text-center py-5">
@@ -61,32 +60,22 @@ export default function ReviewCourses() {
                 onChange={handleSelectChange}
               >
                 <option value="">-- Select UWO Course --</option>
-                {instructors &&
-                  instructors.map((instructor) => (
+                {courseOutlines &&
+                  courseOutlines.map((courseOutline) => (
                     <option
-                      key={`${instructor.courseUuid}:${instructor.versionNum}`}
-                      value={`${instructor.courseUuid}:${instructor.versionNum}`}
+                      key={`${courseOutline.courseUuid}:${courseOutline.versionNum}`}
+                      value={`${courseOutline.courseUuid}:${courseOutline.versionNum}`}
                     >
-                      {`${instructor.titleLbl} ${instructor.codeLbl}, Version #:${instructor.versionNum}`}
+                      {`${courseOutline.course.courseCode} ${courseOutline.course.courseName}, Version #${courseOutline.versionNum}`}
                     </option>
                   ))}
               </select>
-              <span>
+              <span className="flex justify-center">
                 <Button
-                  className="text-gray-700 rounded-md hover:opacity-100 mr-10 ml-10"
-                  onClick={() =>
-                    navigate(
-                      `../edit-course-outline/${courseUuid}/${versionNum}`
-                    )
-                  }
+                  className="text-gray-700 rounded-md hover:opacity-100 flex justify-center"
+                  onClick={() => navigate(`${courseUuid}/${versionNum}`)}
                 >
                   Review
-                </Button>
-                <Button className="text-gray-700 rounded-md hover:opacity-100 mr-10">
-                  Approve
-                </Button>
-                <Button className="text-gray-700 rounded-md hover:opacity-100">
-                  Deny
                 </Button>
               </span>
             </Stack>

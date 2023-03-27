@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Nav, Navbar, NavLink } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import React from "react";
+import { Nav, Navbar, NavLink } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 export default function InstructorNav() {
@@ -24,15 +23,14 @@ export default function InstructorNav() {
       />
       <Navbar.Collapse>
         <Nav className="me-auto">
-          <NavLink eventKey="1" as={Link} to="/current-courses">
-            Current Courses
+          <NavLink eventKey="1" as={Link} to="/home">
+            Homepage
           </NavLink>
-
-          <NavLink eventKey="2" as={Link} to="/create-outline">
+          <NavLink eventKey="3" as={Link} to="/create-outline">
             Create Outline
           </NavLink>
 
-          <NavLink eventKey="3" as={Link} to="/prev-outlines">
+          <NavLink eventKey="4" as={Link} to="/prev-outlines">
             Previous Outlines
           </NavLink>
         </Nav>

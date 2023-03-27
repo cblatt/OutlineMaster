@@ -22,12 +22,17 @@ export class CourseOutlineController {
     return this.courseOutlineService.create(createCourseOutlineDto);
   }
 
+  @Get(':isApproved')
+  findAllByApprovalStatus(@Param('isApproved') isApproved: string) {
+    return this.courseOutlineService.findAllByStatus(isApproved);
+  }
+
   @Get()
   findAll() {
     return this.courseOutlineService.findAll();
   }
 
-  @Get(':courseUuid/:versionNum')
+  @Get('findOne/:courseUuid/:versionNum')
   findOne(
     @Param('courseUuid') courseUuid: string,
     @Param('versionNum') versionNum: string,
@@ -35,12 +40,22 @@ export class CourseOutlineController {
     return this.courseOutlineService.findOne(courseUuid, +versionNum);
   }
 
-  @Patch(':id')
+  @Get(':id')
+  findAllOutlinesByCourse(@Param('id') id: string) {
+    return this.courseOutlineService.findAllOutlinesByCourse(id);
+  }
+
+  @Patch(':courseUuid/:versionNum')
   update(
-    @Param('id') id: string,
+    @Param('courseUuid') courseUuid: string,
+    @Param('versionNum') versionNum: string,
     @Body() updateCourseOutlineDto: UpdateCourseOutlineDto,
   ) {
-    return this.courseOutlineService.update(+id, updateCourseOutlineDto);
+    return this.courseOutlineService.update(
+      courseUuid,
+      +versionNum,
+      updateCourseOutlineDto,
+    );
   }
 
   @Delete(':id')
@@ -48,8 +63,8 @@ export class CourseOutlineController {
     return this.courseOutlineService.remove(id);
   }
 
-  @Get('versionMax/:id')
-  getMaxVersion(@Param('id') id: string) {
+  @Get('versionMax/:courseUuid')
+  getMaxVersion(@Param('courseUuid') id: string) {
     return this.courseOutlineService.getVersionNumber(id);
   }
 }
