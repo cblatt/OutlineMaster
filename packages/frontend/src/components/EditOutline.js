@@ -620,6 +620,14 @@ const OutlineForm = ({ courseOutline, department, course, previewOutline }) => {
                 <Text fontSize="2xl" color="black">
                   Course Topics and Specific Learning Outcomes
                 </Text>
+                <Button
+                colorScheme="purple"
+                onClick={() =>
+                  window.open('https://drive.google.com/file/d/1gjAavmwivUPquS0nSTFDMFU8wUwDS1aq/view?usp=sharing')
+                }
+              >
+                Assessing GA Indicators
+              </Button>
                 <SimpleGrid
                   width="100%"
                   columns={2}

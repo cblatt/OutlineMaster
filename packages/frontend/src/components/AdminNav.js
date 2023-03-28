@@ -24,14 +24,11 @@ export default function AdminNav() {
       />
       <Navbar.Collapse>
         <Nav className="me-auto">
-          <NavLink eventKey="1" as={Link} to="/admin-home">
-            Homepage
+          <NavLink eventKey="1" as={Link} to="/courses">
+            Courses
           </NavLink>
           <NavLink eventKey="4" as={Link} to="/admin-add">
             Add User
-          </NavLink>
-          <NavLink eventKey="6" as={Link} to="/courses">
-            Courses
           </NavLink>
           <NavLink eventKey="7" as={Link} to="/departments">
             Departments

@@ -176,9 +176,9 @@ export default function CreateOutline() {
       <InstructorNav />
       <div className="min-h-screen flex flex-col pt-20 pb-20 ">
         <center>
-          <span className="text-6xl text-black font-serif font-bold">
-            Create Course Outline
-          </span>
+        <h2 className="text-6xl text-center text-white font-bold uppercase tracking-[5px]">
+          Create Course Outline
+        </h2>
           <br />
           <br />
         </center>
@@ -651,6 +651,14 @@ export default function CreateOutline() {
               <Text fontSize="2xl" color="black">
                 Course Topics and Specific Learning Outcomes
               </Text>
+              <Button
+                colorScheme="purple"
+                onClick={() =>
+                  window.open('https://drive.google.com/file/d/1gjAavmwivUPquS0nSTFDMFU8wUwDS1aq/view?usp=sharing')
+                }
+              >
+                Assessing GA Indicators
+              </Button>
               <SimpleGrid
                 width="100%"
                 columns={2}
