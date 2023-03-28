@@ -1,10 +1,23 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { Button } from "@chakra-ui/react";
 import InstructorNav from "./InstructorNav";
 import { PreviewOutline } from "./PreviewOutline";
 import ViewComments from "./ViewComments";
+
+import {
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  FormHelperText,
+  Box,
+  Flex,
+  Button,
+  SimpleGrid,
+  Checkbox,
+  VStack,
+  HStack,
+} from "@chakra-ui/react";
 
 export default function ReviewCourseOutline() {
   const params = useParams();
@@ -59,17 +72,21 @@ export default function ReviewCourseOutline() {
             showToolbar={courseOutline.isApproved === "APPROVED"}
           />
         )}
-        <Button
-          style={{ margin: "12px" }}
-          colorScheme="purple"
-          onClick={() => {
-            navigate(`/edit-outline/${id}/${version}`);
-          }}
-        >
-          Edit Outline
-        </Button>
 
-        <ViewComments></ViewComments>
+        <VStack width="600px">
+          <HStack>
+            <Button
+              style={{ margin: "12px" }}
+              colorScheme="purple"
+              onClick={() => {
+                navigate(`/edit-outline/${id}/${version}`);
+              }}
+            >
+              Edit Outline
+            </Button>
+          </HStack>
+          <ViewComments></ViewComments>
+        </VStack>
       </div>
     </div>
   );

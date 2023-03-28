@@ -54,6 +54,24 @@ const OutlineForm = ({ courseOutline, department, course, previewOutline }) => {
     name: "courseEvaluations",
   });
 
+  // Sets outline to pending after an edit
+  const handleApprove = async () => {
+    await fetch(
+      process.env.REACT_APP_API_URI +
+        `/course-outline/${courseOutline.courseUuid}/${courseOutline.versionNum}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          isApproved: "PENDING",
+        }),
+      }
+    );
+    navigate(`/review`);
+  };
+
   function submitChanges(data) {
     delete data["course"];
     delete data["department"];
@@ -884,7 +902,10 @@ const OutlineForm = ({ courseOutline, department, course, previewOutline }) => {
                     colorScheme="green"
                     size="lg"
                     width="80"
-                    onClick={handleSubmit(submitChanges)}
+                    onClick={() => {
+                      handleSubmit(submitChanges);
+                      handleApprove();
+                    }}
                   >
                     Save
                   </Button>
