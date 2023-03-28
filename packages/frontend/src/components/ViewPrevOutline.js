@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@chakra-ui/react";
 import InstructorNav from "./InstructorNav";
 import { PreviewOutline } from "./PreviewOutline";
+import ViewComments from "./ViewComments";
 
 export default function ReviewCourseOutline() {
   const params = useParams();
@@ -67,6 +68,8 @@ export default function ReviewCourseOutline() {
         >
           Edit Outline
         </Button>
+
+        <ViewComments></ViewComments>
       </div>
     </div>
   );

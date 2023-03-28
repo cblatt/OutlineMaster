@@ -779,12 +779,14 @@ export const PreviewOutline = ({
 }) => {
   console.log(courseOutline);
   return (
-    <PDFViewer height={700} width={600} showToolbar={showToolbar}>
-      <MyDocument
-        courseOutline={courseOutline}
-        department={department}
-        course={course}
-      />
-    </PDFViewer>
+    <div>
+      <PDFViewer height={700} width={600} showToolbar={showToolbar}>
+        <MyDocument
+          courseOutline={courseOutline}
+          department={department}
+          course={course}
+        />
+      </PDFViewer>
+    </div>
   );
 };
