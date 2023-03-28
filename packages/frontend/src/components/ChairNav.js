@@ -18,6 +18,10 @@ export default function ChairNav() {
 
   return (
     <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
+      <Navbar.Text className="text-white mx-4">
+        {" "}
+        PROGRAM CHAIR & DIRECTOR{" "}
+      </Navbar.Text>
       <Navbar.Toggle
         aria-controls="navbarScroll"
         data-bs-target="#navbarScroll"

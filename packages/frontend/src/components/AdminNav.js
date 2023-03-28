@@ -18,6 +18,7 @@ export default function AdminNav() {
 
   return (
     <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
+      <Navbar.Text className="text-white mx-4"> ADMIN </Navbar.Text>
       <Navbar.Toggle
         aria-controls="navbarScroll"
         data-bs-target="#navbarScroll"
