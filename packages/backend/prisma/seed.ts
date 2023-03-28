@@ -28,7 +28,54 @@ async function main() {
     },
   });
 
-  console.log({ instructor, administrator });
+  const dptchair = await prisma.user.create({
+    data: {
+      uwoId: 'dptchair',
+      email: 'dptchair@email.com',
+      password: hashedPassword,
+      firstName: 'John',
+      lastName: 'Smith',
+      role: 'DEPARTMENT_CHAIR',
+    },
+  });
+  const associate = await prisma.user.create({
+    data: {
+      uwoId: 'associate',
+      email: 'associate@email.com',
+      password: hashedPassword,
+      firstName: 'John',
+      lastName: 'Smith',
+      role: 'ASSOCIATE_CHAIR',
+    },
+  });
+
+  const pdirector = await prisma.user.create({
+    data: {
+      uwoId: 'pdirector',
+      email: 'pdirector@email.com',
+      password: hashedPassword,
+      firstName: 'John',
+      lastName: 'Smith',
+      role: 'PROGRAM_DIRECTOR',
+    },
+  });
+
+  const electrical = await prisma.department.create({
+    data: {
+      departmentUuid: '6cff969f-2051-49d7-9433-84827debfff5',
+      departmentName: 'Electrical',
+      departmentCode: 'ECE',
+    },
+  });
+
+  console.log({
+    instructor,
+    administrator,
+    dptchair,
+    associate,
+    pdirector,
+    electrical,
+  });
 }
 
 main()
