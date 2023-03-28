@@ -132,7 +132,7 @@ export default function InstructorTable() {
       courseOutlinesByCourse[courseCode].push({
         courseUuid: outline.courseUuid,
         version: outline.versionNum,
-        year: outline.yearLbl,
+        year: outline.year,
         status: outline.isApproved,
       });
     });
