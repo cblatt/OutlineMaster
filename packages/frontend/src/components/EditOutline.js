@@ -82,6 +82,27 @@ const OutlineForm = ({ courseOutline, department, course, previewOutline }) => {
         }
       })
       .then((res) => {
+        const changes = {};
+        Object.keys(data)
+          .filter((item) => {
+            if (
+              item === "instructors" ||
+              item === "courseTopics" ||
+              item === "courseEvaluations"
+            ) {
+              return (
+                JSON.stringify(data[item]) !==
+                JSON.stringify(courseOutline[item])
+              );
+            }
+            return data[item] !== courseOutline[item];
+          })
+          .forEach((item) => {
+            changes[item] = {
+              old: courseOutline[item],
+              new: data[item],
+            };
+          });
         fetch(process.env.REACT_APP_API_URI + "/editor-log", {
           method: "POST",
           headers: {
@@ -95,6 +116,7 @@ const OutlineForm = ({ courseOutline, department, course, previewOutline }) => {
             editNum: courseOutline.editLogs[0].editNum + 1,
             timeLastEdited: moment().format("MMMM Do YYYY, h:mm:ss a"),
             editor: user.uwoId,
+            changes: changes,
           }),
         })
           .then((res) => {

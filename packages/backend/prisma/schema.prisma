@@ -200,6 +200,7 @@ model EditLog {
   timeLastEdited String
   editor String 
   courseOutline  CourseOutline     @relation(fields: [courseUuid,versionNum], references: [courseUuid, versionNum])
+  changes       Json
   @@id([courseUuid, versionNum, editNum])
 }
 

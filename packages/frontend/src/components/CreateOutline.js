@@ -137,6 +137,21 @@ export default function CreateOutline() {
             }
           })
           .then((res) => {
+            const changes = {};
+            Object.keys(data)
+              .filter((key) => {
+                return !(
+                  !data[key] ||
+                  data[key] === "" ||
+                  data[key].length === 0
+                );
+              })
+              .forEach((item) => {
+                changes[item] = {
+                  old: null,
+                  new: data[item],
+                };
+              });
             fetch(process.env.REACT_APP_API_URI + "/editor-log", {
               method: "POST",
               headers: {
@@ -150,6 +165,7 @@ export default function CreateOutline() {
                 editNum: 1,
                 timeLastEdited: moment().format("MMMM Do YYYY, h:mm:ss a"),
                 editor: user.uwoId,
+                changes: changes,
               }),
             });
           });

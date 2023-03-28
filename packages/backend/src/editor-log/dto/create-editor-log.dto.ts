@@ -11,4 +11,6 @@ export class CreateEditorLogDto {
   timeLastEdited: string;
   @ApiProperty()
   editor: string;
+  @ApiProperty()
+  changes: string;
 }
