@@ -24,6 +24,7 @@ import PreviousOutlines from "./PreviousOutlines";
 import ViewPrevOutline from "./ViewPrevOutline";
 import InstructorCourses from "./InstructorCourses";
 import EditOutline from "./EditOutline";
+import RemoveInstructor from "./RemoveInstructor";
 
 function App() {
   return (
@@ -84,13 +85,18 @@ function App() {
               <Route element={<AdminGuard />}>
                 <Route
                   exact
-                  path="/admin-home"
+                  path="/courses"
                   element={<AdminHome></AdminHome>}
                 />
                 <Route
                   exact
                   path="/admin-add"
                   element={<AddInstructor></AddInstructor>}
+                />
+                <Route
+                  exact
+                  path="/remove-instructor"
+                  element={<RemoveInstructor></RemoveInstructor>}
                 />
                 <Route path="/courses">
                   <Route path="" element={<Courses />}></Route>

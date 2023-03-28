@@ -38,9 +38,9 @@ model Course {
 }
 
 model InstructorCourse {
-  user    User  @relation(fields: [uwoId], references: [uwoId])
+  user    User  @relation(fields: [uwoId], references: [uwoId], onDelete: Cascade)
   uwoId   String
-  course  Course  @relation(fields: [courseUuid], references: [courseUuid])
+  course  Course  @relation(fields: [courseUuid], references: [courseUuid], onDelete: Cascade)
   courseUuid  String 
   @@id([uwoId, courseUuid])
 }

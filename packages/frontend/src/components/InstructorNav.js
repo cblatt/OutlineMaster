@@ -17,6 +17,7 @@ export default function InstructorNav() {
 
   return (
     <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
+      <Navbar.Text className="text-white mx-4"> INSTRUCTOR </Navbar.Text>
       <Navbar.Toggle
         aria-controls="navbarScroll"
         data-bs-target="#navbarScroll"
