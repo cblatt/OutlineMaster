@@ -84,7 +84,7 @@ function App() {
               <Route element={<AdminGuard />}>
                 <Route
                   exact
-                  path="/admin-home"
+                  path="/courses"
                   element={<AdminHome></AdminHome>}
                 />
                 <Route

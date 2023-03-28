@@ -33,7 +33,7 @@ export default function Login() {
           setUser(user);
           localStorage.setItem("user", JSON.stringify(user));
           if (user.role === "ADMINISTRATOR") {
-            navigate("/admin-home", { replace: true });
+            navigate("/courses", { replace: true });
           } else if (user.role === "DEPARTMENT_CHAIR") {
             navigate("/dptChair-home", { replace: true });
           } else if (user.role === "ASSOCIATE_CHAIR") {

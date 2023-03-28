@@ -99,7 +99,6 @@ export default function InstructorTable() {
       }
     );
     const data = await res.json();
-    console.log("data", data);
     setCourses(data);
   }, [user.user.uwoId]);
 
@@ -126,8 +125,6 @@ export default function InstructorTable() {
 
     const courseOutlines = item.course.courseOutlines;
 
-    console.log("outlines array", courseOutlines);
-
     courseOutlines.map((outline) => {
       courseOutlinesByCourse[courseCode].push({
         courseUuid: outline.courseUuid,
@@ -137,11 +134,6 @@ export default function InstructorTable() {
       });
     });
   });
-
-  console.log("COURSEOUTLINESBYCOURSE", courseOutlinesByCourse);
-
-  const oneExpandedRow = Object.entries(courseOutlinesByCourse)[0];
-  console.log("EXPAND", oneExpandedRow);
 
   return (
     <div className="mx-20">
