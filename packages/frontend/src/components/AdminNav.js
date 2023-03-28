@@ -36,6 +36,9 @@ export default function AdminNav() {
           <NavLink eventKey="7" as={Link} to="/departments">
             Departments
           </NavLink>
+          <NavLink eventKey="8" as={Link} to="/remove-instructor">
+            View Instructors
+          </NavLink>
         </Nav>
         <Nav>
           <NavLink eventKey="8" as={Link} to="/">
