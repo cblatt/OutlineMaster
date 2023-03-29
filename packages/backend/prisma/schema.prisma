@@ -74,7 +74,7 @@ model CourseOutline {
   course        Course    @relation(fields: [courseUuid], references: [courseUuid])
   versionNum    Int       //this values are set manually
   editLogs      EditLog[]
-  isApproved    String  @default("WORKING")
+  isApproved    String  @default("PENDING")
   year          String?
   instructors   CourseOutlineInstructor[]
   courseTopics   CourseOutlineTopic[]
