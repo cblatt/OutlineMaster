@@ -84,12 +84,8 @@ export class CourseOutlineService {
         course: true,
         department: true,
         editLogs: {
-          take: 1,
           orderBy: {
             editNum: 'desc',
-          },
-          select: {
-            editNum: true,
           },
         },
       },

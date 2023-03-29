@@ -80,11 +80,11 @@ const Courses = () => {
                 <Th>Department Name</Th>
                 <Th>Course Name</Th>
                 <Th>Course Code</Th>
-                <Th>Instructors</Th>
               </Tr>
             </Thead>
             <Tbody>
               {courses.map((course) => {
+                console.log(course);
                 return (
                   <Tr
                     key={course.courseUuid}
@@ -97,7 +97,6 @@ const Courses = () => {
                       {course.department.departmentCode}
                       {course.courseCode}
                     </Td>
-                    <Td>John Smith</Td>
                   </Tr>
                 );
               })}

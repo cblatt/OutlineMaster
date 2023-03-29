@@ -1,23 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { BrowserRouter, Route, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import OutlineComments from "./OutlineComments";
-import { useNavigate } from "react-router-dom";
 
-import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-  Box,
-  Flex,
-  Button,
-  SimpleGrid,
-  Checkbox,
-  VStack,
-  HStack,
-} from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
-import AdminNav from "./AdminNav";
+import { Box, Button, HStack, Text, VStack } from "@chakra-ui/react";
 import ChairNav from "./ChairNav";
 import { PreviewOutline } from "./PreviewOutline";
 
@@ -70,23 +55,6 @@ export default function ReviewCourseOutline() {
     navigate(`/review`);
   };
 
-  const handleDeny = async () => {
-    await fetch(
-      process.env.REACT_APP_API_URI + `/course-outline/${id}/${version}`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          isApproved: "REJECTED",
-        }),
-      }
-    );
-
-    navigate(`/review`);
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-r from-purple-500 to-purple-300 ... text-gray-500">
       <ChairNav />
@@ -119,13 +87,6 @@ export default function ReviewCourseOutline() {
           <HStack>
             <Button
               style={{ margin: "12px" }}
-              colorScheme="red"
-              onClick={handleDeny}
-            >
-              Deny
-            </Button>
-            <Button
-              style={{ margin: "12px" }}
               colorScheme="purple"
               onClick={handleApprove}
             >
@@ -134,6 +95,74 @@ export default function ReviewCourseOutline() {
           </HStack>
           <OutlineComments />
         </VStack>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          paddingBottom: "24px",
+        }}
+      >
+        {courseOutline && (
+          <Box
+            style={{
+              background: "white",
+              width: "50%",
+              padding: 24,
+              borderRadius: "8px",
+              margin: "0 24px",
+            }}
+          >
+            <h2 className="font-bold text-lg mb-3">Edit Log:</h2>
+            <VStack spacing={6}>
+              <VStack maxHeight="400px" overflow="auto" spacing="12px">
+                {courseOutline.editLogs.map((log) => {
+                  return (
+                    <VStack
+                      width="100%"
+                      backgroundColor="#f5f5f5"
+                      border="1px solid #dcdcdc"
+                      borderRadius="8px"
+                      padding="12px"
+                    >
+                      <Text color="black" fontSize="xl">
+                        User: {log.editor}
+                      </Text>
+                      <Text color="black" fontSize="lg">
+                        Time: {log.timeLastEdited}
+                      </Text>
+                      {Object.keys(log.changes).map((key) => {
+                        const oldValue = log.changes[key].old;
+                        const newValue = log.changes[key].new;
+                        const result = key.replace(/([A-Z])/g, " $1");
+                        const changeTitle =
+                          result.charAt(0).toUpperCase() + result.slice(1);
+                        return (
+                          <VStack
+                            width="100%"
+                            alignItems="flex-start"
+                            spacing={1}
+                          >
+                            <Text color="black" fontSize="lg">
+                              {changeTitle}
+                            </Text>
+                            <Text fontSize="sm">
+                              Old value: {oldValue ? oldValue.toString() : ""}
+                            </Text>
+                            <Text fontSize="sm">
+                              New Value:{" "}
+                              {newValue ? JSON.stringify(newValue) : ""}
+                            </Text>
+                          </VStack>
+                        );
+                      })}
+                    </VStack>
+                  );
+                })}
+              </VStack>
+            </VStack>
+          </Box>
+        )}
       </div>
     </div>
   );

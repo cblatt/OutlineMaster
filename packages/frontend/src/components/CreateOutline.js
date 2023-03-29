@@ -23,17 +23,11 @@ import { Select as MultiSelect } from "chakra-react-select";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 
 import useAuth from "../hooks/useAuth";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { PreviewOutline } from "./PreviewOutline";
 
 export default function CreateOutline() {
-  const {
-    register,
-    handleSubmit,
-    control,
-    getValues,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, control, getValues } = useForm();
   const { user } = useAuth();
   const { fields, append, remove } = useFieldArray({
     control,
@@ -57,6 +51,7 @@ export default function CreateOutline() {
   });
 
   const location = useLocation();
+  const navigate = useNavigate();
   const courseUrl = location.pathname.split("/")[2];
 
   const [course, setCourse] = useState();
@@ -113,6 +108,9 @@ export default function CreateOutline() {
           return 0;
         }
       })
+      .catch(() => {
+        return 0;
+      })
       .then((currentVersionNum) => {
         if (currentVersionNum === undefined) {
           currentVersionNum = 0;
@@ -167,6 +165,10 @@ export default function CreateOutline() {
                 editor: user.uwoId,
                 changes: changes,
               }),
+            }).then((res) => {
+              if (res.status === 201) {
+                navigate("/create-outline");
+              }
             });
           });
       });
@@ -192,9 +194,9 @@ export default function CreateOutline() {
       <InstructorNav />
       <div className="min-h-screen flex flex-col pt-20 pb-20 ">
         <center>
-        <h2 className="text-6xl text-center text-white font-bold uppercase tracking-[5px]">
-          Create Course Outline
-        </h2>
+          <h2 className="text-6xl text-center text-white font-bold uppercase tracking-[5px]">
+            Create Course Outline
+          </h2>
           <br />
           <br />
         </center>
@@ -510,11 +512,12 @@ export default function CreateOutline() {
                 <FormControl>
                   <FormLabel>Knowledge Base</FormLabel>
                   <Select
-                    placeholder="Select Multiple Co-Requisites"
                     focusBorderColor="purple.500"
                     {...register("knowledgeBase")}
                   >
-                    <option value="">N/A</option>
+                    <option selected value="">
+                      N/A
+                    </option>
                     <option value="I">I</option>
                     <option value="D">D</option>
                     <option value="A">A</option>
@@ -523,11 +526,12 @@ export default function CreateOutline() {
                 <FormControl>
                   <FormLabel>Problem Analysis</FormLabel>
                   <Select
-                    placeholder="Select Multiple Co-Requisites"
                     focusBorderColor="purple.500"
                     {...register("problemAnalysis")}
                   >
-                    <option value="">N/A</option>
+                    <option selected value="">
+                      N/A
+                    </option>
                     <option value="I">I</option>
                     <option value="D">D</option>
                     <option value="A">A</option>
@@ -536,11 +540,12 @@ export default function CreateOutline() {
                 <FormControl>
                   <FormLabel>Investigation</FormLabel>
                   <Select
-                    placeholder="Select Multiple Co-Requisites"
                     focusBorderColor="purple.500"
                     {...register("investigation")}
                   >
-                    <option value="">N/A</option>
+                    <option selected value="">
+                      N/A
+                    </option>
                     <option value="I">I</option>
                     <option value="D">D</option>
                     <option value="A">A</option>
@@ -548,12 +553,10 @@ export default function CreateOutline() {
                 </FormControl>
                 <FormControl>
                   <FormLabel>Design</FormLabel>
-                  <Select
-                    placeholder="Select Multiple Co-Requisites"
-                    focusBorderColor="purple.500"
-                    {...register("design")}
-                  >
-                    <option value="">N/A</option>
+                  <Select focusBorderColor="purple.500" {...register("design")}>
+                    <option selected value="">
+                      N/A
+                    </option>
                     <option value="I">I</option>
                     <option value="D">D</option>
                     <option value="A">A</option>
@@ -562,11 +565,12 @@ export default function CreateOutline() {
                 <FormControl>
                   <FormLabel>Use of Engineering</FormLabel>
                   <Select
-                    placeholder="Select Multiple Co-Requisites"
                     focusBorderColor="purple.500"
                     {...register("useOfEngineering")}
                   >
-                    <option value="">N/A</option>
+                    <option selected value="">
+                      N/A
+                    </option>
                     <option value="I">I</option>
                     <option value="D">D</option>
                     <option value="A">A</option>
@@ -575,11 +579,12 @@ export default function CreateOutline() {
                 <FormControl>
                   <FormLabel>Individual and Team Work</FormLabel>
                   <Select
-                    placeholder="Select Multiple Co-Requisites"
                     focusBorderColor="purple.500"
                     {...register("individualAndTeamWork")}
                   >
-                    <option value="">N/A</option>
+                    <option selected value="">
+                      N/A
+                    </option>
                     <option value="I">I</option>
                     <option value="D">D</option>
                     <option value="A">A</option>
@@ -588,11 +593,12 @@ export default function CreateOutline() {
                 <FormControl>
                   <FormLabel>Communication Skills</FormLabel>
                   <Select
-                    placeholder="Select Multiple Co-Requisites"
                     focusBorderColor="purple.500"
                     {...register("communicationSkills")}
                   >
-                    <option value="">N/A</option>
+                    <option selected value="">
+                      N/A
+                    </option>
                     <option value="I">I</option>
                     <option value="D">D</option>
                     <option value="A">A</option>
@@ -601,11 +607,12 @@ export default function CreateOutline() {
                 <FormControl>
                   <FormLabel>Professionalism</FormLabel>
                   <Select
-                    placeholder="Select Multiple Co-Requisites"
                     focusBorderColor="purple.500"
                     {...register("professionalism")}
                   >
-                    <option value="">N/A</option>
+                    <option selected value="">
+                      N/A
+                    </option>
                     <option value="I">I</option>
                     <option value="D">D</option>
                     <option value="A">A</option>
@@ -614,11 +621,12 @@ export default function CreateOutline() {
                 <FormControl>
                   <FormLabel>Impact on Society and the Environment</FormLabel>
                   <Select
-                    placeholder="Select Multiple Co-Requisites"
                     focusBorderColor="purple.500"
                     {...register("impactOnSocietyAndEnvironment")}
                   >
-                    <option value="">N/A</option>
+                    <option selected value="">
+                      N/A
+                    </option>
                     <option value="I">I</option>
                     <option value="D">D</option>
                     <option value="A">A</option>
@@ -627,11 +635,12 @@ export default function CreateOutline() {
                 <FormControl>
                   <FormLabel>Ethics and Equity</FormLabel>
                   <Select
-                    placeholder="Select Multiple Co-Requisites"
                     focusBorderColor="purple.500"
                     {...register("ethicsAndEquity")}
                   >
-                    <option value="">N/A</option>
+                    <option selected value="">
+                      N/A
+                    </option>
                     <option value="I">I</option>
                     <option value="D">D</option>
                     <option value="A">A</option>
@@ -640,11 +649,12 @@ export default function CreateOutline() {
                 <FormControl>
                   <FormLabel>Economics and Project Management</FormLabel>
                   <Select
-                    placeholder="Select Multiple Co-Requisites"
                     focusBorderColor="purple.500"
                     {...register("economicAndProjectManagement")}
                   >
-                    <option value="">N/A</option>
+                    <option selected value="">
+                      N/A
+                    </option>
                     <option value="I">I</option>
                     <option value="D">D</option>
                     <option value="A">A</option>
@@ -653,11 +663,12 @@ export default function CreateOutline() {
                 <FormControl>
                   <FormLabel>Life-Long Learning</FormLabel>
                   <Select
-                    placeholder="Select Multiple Co-Requisites"
                     focusBorderColor="purple.500"
                     {...register("lifeLongLearning")}
                   >
-                    <option value="">N/A</option>
+                    <option selected value="">
+                      N/A
+                    </option>
                     <option value="I">I</option>
                     <option value="D">D</option>
                     <option value="A">A</option>
@@ -670,7 +681,9 @@ export default function CreateOutline() {
               <Button
                 colorScheme="purple"
                 onClick={() =>
-                  window.open('https://drive.google.com/file/d/1gjAavmwivUPquS0nSTFDMFU8wUwDS1aq/view?usp=sharing')
+                  window.open(
+                    "https://drive.google.com/file/d/1gjAavmwivUPquS0nSTFDMFU8wUwDS1aq/view?usp=sharing"
+                  )
                 }
               >
                 Assessing GA Indicators

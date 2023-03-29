@@ -1,13 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { Button, FormControl, Stack } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  FormControl,
-  Input,
-  Stack,
-  InputGroup,
-  InputRightElement,
-  Button,
-} from "@chakra-ui/react";
 import ChairNav from "./ChairNav";
 
 export default function ReviewCourses() {
@@ -17,7 +10,7 @@ export default function ReviewCourses() {
   useEffect(() => {
     async function fetchData() {
       const res = await fetch(
-        process.env.REACT_APP_API_URI + "/course-outline/PENDING",
+        process.env.REACT_APP_API_URI + "/course-outline/SUBMITTED",
         {
           method: "GET",
           headers: {

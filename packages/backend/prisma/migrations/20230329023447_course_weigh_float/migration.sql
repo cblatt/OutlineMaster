@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "CourseOutline" ALTER COLUMN "courseCredits" SET DATA TYPE DOUBLE PRECISION;
