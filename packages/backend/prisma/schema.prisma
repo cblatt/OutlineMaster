@@ -38,9 +38,9 @@ model Course {
 }
 
 model InstructorCourse {
-  user    User  @relation(fields: [uwoId], references: [uwoId])
+  user    User  @relation(fields: [uwoId], references: [uwoId], onDelete: Cascade)
   uwoId   String
-  course  Course  @relation(fields: [courseUuid], references: [courseUuid])
+  course  Course  @relation(fields: [courseUuid], references: [courseUuid], onDelete: Cascade)
   courseUuid  String 
   @@id([uwoId, courseUuid])
 }
@@ -56,7 +56,7 @@ enum Role {
 enum Status {
   APPROVED
   PENDING
-  REJECTED
+  SUBMITTED
 }
 
 model Comments{
@@ -84,7 +84,7 @@ model CourseOutline {
   lectureHours Int?
   labHours Int?
   tutorialHours Int? 
-  courseCredits Int?
+  courseCredits Float?
   prerequisites String? 
   antirequisites String? 
   corequisites String?
@@ -200,6 +200,7 @@ model EditLog {
   timeLastEdited String
   editor String 
   courseOutline  CourseOutline     @relation(fields: [courseUuid,versionNum], references: [courseUuid, versionNum])
+  changes       Json
   @@id([courseUuid, versionNum, editNum])
 }
 

@@ -54,29 +54,10 @@ const OutlineForm = ({ courseOutline, department, course, previewOutline }) => {
     name: "courseEvaluations",
   });
 
-  // Sets outline to pending after an edit
-  const handleApprove = async () => {
-    await fetch(
-      process.env.REACT_APP_API_URI +
-        `/course-outline/${courseOutline.courseUuid}/${courseOutline.versionNum}`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          isApproved: "PENDING",
-        }),
-      }
-    );
-    navigate(`/review`);
-  };
-
   function submitChanges(data) {
     delete data["course"];
     delete data["department"];
     delete data["editLogs"];
-    console.log(data);
     fetch(
       process.env.REACT_APP_API_URI +
         `/course-outline/${course.courseUuid}/${courseOutline.versionNum}`,
@@ -87,10 +68,11 @@ const OutlineForm = ({ courseOutline, department, course, previewOutline }) => {
           Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
         },
         body: JSON.stringify({
+          ...data,
           courseUuid: course.courseUuid,
           departmentUuid: department.departmentUuid,
           versionNum: courseOutline.versionNum,
-          ...data,
+          isApproved: "PENDING",
         }),
       }
     )
@@ -100,6 +82,27 @@ const OutlineForm = ({ courseOutline, department, course, previewOutline }) => {
         }
       })
       .then((res) => {
+        const changes = {};
+        Object.keys(data)
+          .filter((item) => {
+            if (
+              item === "instructors" ||
+              item === "courseTopics" ||
+              item === "courseEvaluations"
+            ) {
+              return (
+                JSON.stringify(data[item]) !==
+                JSON.stringify(courseOutline[item])
+              );
+            }
+            return data[item] !== courseOutline[item];
+          })
+          .forEach((item) => {
+            changes[item] = {
+              old: courseOutline[item],
+              new: data[item],
+            };
+          });
         fetch(process.env.REACT_APP_API_URI + "/editor-log", {
           method: "POST",
           headers: {
@@ -113,6 +116,7 @@ const OutlineForm = ({ courseOutline, department, course, previewOutline }) => {
             editNum: courseOutline.editLogs[0].editNum + 1,
             timeLastEdited: moment().format("MMMM Do YYYY, h:mm:ss a"),
             editor: user.uwoId,
+            changes: changes,
           }),
         })
           .then((res) => {
@@ -639,13 +643,15 @@ const OutlineForm = ({ courseOutline, department, course, previewOutline }) => {
                   Course Topics and Specific Learning Outcomes
                 </Text>
                 <Button
-                colorScheme="purple"
-                onClick={() =>
-                  window.open('https://drive.google.com/file/d/1gjAavmwivUPquS0nSTFDMFU8wUwDS1aq/view?usp=sharing')
-                }
-              >
-                Assessing GA Indicators
-              </Button>
+                  colorScheme="purple"
+                  onClick={() =>
+                    window.open(
+                      "https://drive.google.com/file/d/1gjAavmwivUPquS0nSTFDMFU8wUwDS1aq/view?usp=sharing"
+                    )
+                  }
+                >
+                  Assessing GA Indicators
+                </Button>
                 <SimpleGrid
                   width="100%"
                   columns={2}
@@ -902,10 +908,7 @@ const OutlineForm = ({ courseOutline, department, course, previewOutline }) => {
                     colorScheme="green"
                     size="lg"
                     width="80"
-                    onClick={() => {
-                      handleSubmit(submitChanges);
-                      handleApprove();
-                    }}
+                    onClick={handleSubmit(submitChanges)}
                   >
                     Save
                   </Button>

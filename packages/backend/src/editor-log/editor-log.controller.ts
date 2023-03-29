@@ -1,16 +1,7 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
-import { EditorLogService } from './editor-log.service';
-import { CreateEditorLogDto } from './dto/create-editor-log.dto';
-import { UpdateEditorLogDto } from './dto/update-editor-log.dto';
+import { Body, Controller, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { CreateEditorLogDto } from './dto/create-editor-log.dto';
+import { EditorLogService } from './editor-log.service';
 
 @Controller('editor-log')
 @ApiTags('editor-log')
@@ -20,28 +11,5 @@ export class EditorLogController {
   @Post()
   create(@Body() createEditorLogDto: CreateEditorLogDto) {
     return this.editorLogService.create(createEditorLogDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.editorLogService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.editorLogService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateEditorLogDto: UpdateEditorLogDto,
-  ) {
-    return this.editorLogService.update(+id, updateEditorLogDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.editorLogService.remove(+id);
   }
 }
