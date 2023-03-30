@@ -7,6 +7,7 @@ import {
   InputRightElement,
   Button,
   Select,
+  FormErrorMessage
 } from "@chakra-ui/react";
 import AdminNav from "./AdminNav";
 import { useForm } from "react-hook-form";
@@ -21,27 +22,31 @@ export default function AddInstructor() {
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
+  const [isError, setIsError] = useState(false);
 
   async function onSubmit(data) {
-    fetch(process.env.REACT_APP_API_URI + "/users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Content-length": 7,
-        Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
-      },
-      body: JSON.stringify({ ...data }),
-    })
-      .then((res) => {
-        if (res.status === 201) {
-          return res.json();
-        }
-      })
-      .then((user) => {
+    try {
+      const res = await fetch(process.env.REACT_APP_API_URI + "/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Content-length": 7,
+          Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
+        },
+        body: JSON.stringify({ ...data }),
+      });
+      if (res.status === 201) {
+        const user = await res.json();
         if (user) {
           navigate("/admin-home", { replace: true });
         }
-      });
+      } else {
+        setIsError(true);
+        throw new Error("Failed to add user");
+      }
+    } catch (err) {
+      setIsError(true);
+    }
   }
 
   return (
@@ -52,7 +57,7 @@ export default function AddInstructor() {
           <h4 className="text-4xl text-gray-700 font-semibold text-center py-5">
             Add a User
           </h4>
-          <FormControl isRequired={errors}>
+          <FormControl isInvalid={isError}>
             <Stack spacing={5}>
               <Input
                 type="text"
@@ -110,6 +115,7 @@ export default function AddInstructor() {
                 {...register("role", { required: true })}
               >
                 <option value="INSTRUCTOR">Instructor</option>
+                <option value="INSTRUCTOR">Instructor</option>
                 <option value="ADMINISTRATOR">Administrator</option>
                 <option value="DEPARTMENT_CHAIR">Department Chair</option>
                 <option value="ASSOCIATE_CHAIR">Associate Chair</option>
@@ -122,8 +128,11 @@ export default function AddInstructor() {
                 Add User
               </Button>
             </Stack>
+            <FormErrorMessage>Invalid Credentials</FormErrorMessage>
           </FormControl>
+
         </div>
+
       </div>
     </div>
   );
