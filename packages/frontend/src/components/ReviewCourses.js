@@ -76,7 +76,11 @@ export default function ReviewCourses() {
               <span className="flex justify-center">
                 <Button
                   className="text-gray-700 rounded-md hover:opacity-100 flex justify-center"
-                  onClick={() => navigate(`${courseUuid}/${versionNum}`)}
+                  onClick={() => {
+                    if (courseUuid !== "" || versionNum !== "") {
+                      navigate(`${courseUuid}/${versionNum}`);
+                    }
+                  }}
                 >
                   Review
                 </Button>
