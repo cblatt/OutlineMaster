@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   FormControl,
   Input,
@@ -11,16 +10,38 @@ import {
 import AdminNav from "./AdminNav";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import React, { useCallback, useEffect, useState } from "react";
 
 export default function AddInstructor() {
+  const [departments, setDepartments] = useState([]);
+  const fetchDepartments = useCallback(async () => {
+    const res = await fetch(process.env.REACT_APP_API_URI + "/departments", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Content-length": 7,
+        Origin: "https://frontend-wlc5epzecq-uc.a.run.app",
+      },
+    });
+    const data = await res.json();
+    setDepartments(data);
+  }, []);
+
+  useEffect(() => {
+    fetchDepartments();
+  }, [fetchDepartments]);
+
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
+
+  const role = watch("role");
 
   async function onSubmit(data) {
     fetch(process.env.REACT_APP_API_URI + "/users", {
@@ -39,7 +60,7 @@ export default function AddInstructor() {
       })
       .then((user) => {
         if (user) {
-          navigate("/admin-home", { replace: true });
+          navigate("/courses", { replace: true });
         }
       });
   }
@@ -102,7 +123,9 @@ export default function AddInstructor() {
                 placeholder="Last Name"
                 {...register("lastName", { required: true })}
               />
-              <select
+
+              <Select
+                focusBorderColor="purple.400"
                 size="lg"
                 variant="outline"
                 name="course"
@@ -114,7 +137,30 @@ export default function AddInstructor() {
                 <option value="DEPARTMENT_CHAIR">Department Chair</option>
                 <option value="ASSOCIATE_CHAIR">Associate Chair</option>
                 <option value="PROGRAM_DIRECTOR">Program Director</option>
-              </select>
+              </Select>
+
+              {(role === "DEPARTMENT_CHAIR" ||
+                role === "ASSOCIATE_CHAIR" ||
+                role === "PROGRAM_DIRECTOR") && (
+                <Select
+                  focusBorderColor="purple.400"
+                  placeholder="Department"
+                  {...register("departmentUuid", { required: true })}
+                >
+                  {departments.map((department) => {
+                    return (
+                      <option
+                        value={department.departmentUuid}
+                        key={department.departmentUuid}
+                      >
+                        {department.departmentCode} -{" "}
+                        {department.departmentName}
+                      </option>
+                    );
+                  })}
+                </Select>
+              )}
+
               <Button
                 className="text-gray-700 rounded-md hover:opacity-100"
                 onClick={handleSubmit(onSubmit)}
