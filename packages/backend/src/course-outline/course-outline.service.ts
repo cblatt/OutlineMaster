@@ -155,11 +155,10 @@ export class CourseOutlineService {
   }
 
   //Return outlines depending on status
-  async findCourseOutlinesForReview(departmentId: string) {
+  async findCourseOutlinesForReview() {
     const courseOutlines = await this.prisma.courseOutline.findMany({
       where: {
         isApproved: 'SUBMITTED',
-        departmentUuid: departmentId,
       },
       include: {
         course: true,

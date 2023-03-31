@@ -22,11 +22,6 @@ export class CourseOutlineController {
     return this.courseOutlineService.create(createCourseOutlineDto);
   }
 
-  @Get(':isApproved')
-  findAllByApprovalStatus(@Param('isApproved') isApproved: string) {
-    return this.courseOutlineService.findAllByStatus(isApproved);
-  }
-
   @Get()
   findAll() {
     return this.courseOutlineService.findAll();
@@ -40,9 +35,9 @@ export class CourseOutlineController {
     return this.courseOutlineService.findOne(courseUuid, +versionNum);
   }
 
-  @Get('review/:departmentId')
-  findCourseOutlinesForReview(@Param('departmentId') departmentId: string) {
-    return this.courseOutlineService.findCourseOutlinesForReview(departmentId);
+  @Get('review')
+  findCourseOutlinesForReview() {
+    return this.courseOutlineService.findCourseOutlinesForReview();
   }
 
   @Patch(':courseUuid/:versionNum')

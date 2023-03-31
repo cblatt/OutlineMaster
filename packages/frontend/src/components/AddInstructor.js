@@ -6,7 +6,7 @@ import {
   InputRightElement,
   Button,
   Select,
-  FormErrorMessage
+  FormErrorMessage,
 } from "@chakra-ui/react";
 import AdminNav from "./AdminNav";
 import { useForm } from "react-hook-form";
@@ -138,19 +138,17 @@ export default function AddInstructor() {
                 {...register("role", { required: true })}
               >
                 <option value="INSTRUCTOR">Instructor</option>
-                <option value="INSTRUCTOR">Instructor</option>
                 <option value="ADMINISTRATOR">Administrator</option>
                 <option value="DEPARTMENT_CHAIR">Department Chair</option>
                 <option value="ASSOCIATE_CHAIR">Associate Chair</option>
                 <option value="PROGRAM_DIRECTOR">Program Director</option>
               </Select>
 
-              {(role === "DEPARTMENT_CHAIR" ||
-                role === "ASSOCIATE_CHAIR" ||
-                role === "PROGRAM_DIRECTOR") && (
+              {(role === "ASSOCIATE_CHAIR" || role === "PROGRAM_DIRECTOR") && (
                 <Select
                   focusBorderColor="purple.400"
                   placeholder="Department"
+                  size="lg"
                   {...register("departmentUuid", { required: true })}
                 >
                   {departments.map((department) => {
@@ -176,9 +174,7 @@ export default function AddInstructor() {
             </Stack>
             <FormErrorMessage>Invalid Credentials</FormErrorMessage>
           </FormControl>
-
         </div>
-
       </div>
     </div>
   );

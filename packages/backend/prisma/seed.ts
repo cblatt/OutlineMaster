@@ -28,6 +28,20 @@ async function main() {
     },
   });
 
+  const electrical = await prisma.department.create({
+    data: {
+      departmentName: 'Electrical Engineering',
+      departmentCode: 'ECE',
+    },
+  });
+
+  const software = await prisma.department.create({
+    data: {
+      departmentName: 'Software Engineering',
+      departmentCode: 'SE',
+    },
+  });
+
   const dptchair = await prisma.user.create({
     data: {
       uwoId: 'dptchair',
@@ -46,6 +60,7 @@ async function main() {
       firstName: 'John',
       lastName: 'Smith',
       role: 'ASSOCIATE_CHAIR',
+      departmentUuid: electrical.departmentUuid,
     },
   });
 
@@ -57,14 +72,7 @@ async function main() {
       firstName: 'John',
       lastName: 'Smith',
       role: 'PROGRAM_DIRECTOR',
-    },
-  });
-
-  const electrical = await prisma.department.create({
-    data: {
-      departmentUuid: '6cff969f-2051-49d7-9433-84827debfff5',
-      departmentName: 'Electrical',
-      departmentCode: 'ECE',
+      departmentUuid: software.departmentUuid,
     },
   });
 
@@ -75,6 +83,7 @@ async function main() {
     associate,
     pdirector,
     electrical,
+    software,
   });
 }
 

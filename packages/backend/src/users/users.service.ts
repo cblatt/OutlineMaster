@@ -24,7 +24,17 @@ export class UsersService {
   }
 
   findAll() {
-    return this.prisma.user.findMany();
+    return this.prisma.user.findMany({
+      select: {
+        uwoId: true,
+        email: true,
+        firstName: true,
+        lastName: true,
+        role: true,
+        departmentUuid: true,
+        department: true,
+      },
+    });
   }
 
   findOne(id: string) {

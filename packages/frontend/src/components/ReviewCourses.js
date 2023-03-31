@@ -12,8 +12,7 @@ export default function ReviewCourses() {
   useEffect(() => {
     async function fetchData() {
       const res = await fetch(
-        process.env.REACT_APP_API_URI +
-          `/course-outline/${user.departmentUuid}`,
+        process.env.REACT_APP_API_URI + `/course-outline/review`,
         {
           method: "GET",
           headers: {
@@ -24,11 +23,19 @@ export default function ReviewCourses() {
         }
       );
       const data = await res.json();
-      console.log(data);
-      setCourseOutlines(data);
+      if (user.role === "PROGRAM_DIRECTOR" || user.role === "ASSOCIATE_CHAIR") {
+        setCourseOutlines(
+          data.filter(
+            (courseOutline) =>
+              courseOutline.departmentUuid === user.departmentUuid
+          )
+        );
+      } else {
+        setCourseOutlines(data);
+      }
     }
     fetchData();
-  }, [user.departmentUuid]);
+  }, [user.departmentUuid, user.role]);
 
   const [courseUuid, setCourseUuid] = useState("");
   const [versionNum, setVersionNum] = useState("");

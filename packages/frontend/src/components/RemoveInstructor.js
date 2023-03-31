@@ -78,7 +78,7 @@ const RemoveInstructor = () => {
           }}
         >
           <Heading size="lg" colorScheme="purple">
-            Instructors
+            Users
           </Heading>
         </div>
         <TableContainer background="whitesmoke" borderRadius="8px">
@@ -89,6 +89,9 @@ const RemoveInstructor = () => {
                 <Th>Email</Th>
                 <Th>First Name</Th>
                 <Th>Last Name</Th>
+                <Th>Role</Th>
+                <Th>Department</Th>
+                <Th>Remove User</Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -99,9 +102,13 @@ const RemoveInstructor = () => {
                     <Td>{course.email}</Td>
                     <Td>{course.firstName}</Td>
                     <Td>{course.lastName}</Td>
-                    <Button onClick={() => deleteUser(course.uwoId)}>
-                      Remove User
-                    </Button>
+                    <Td>{course.role.replace("_", " ")}</Td>
+                    <Td>{course.department?.departmentName}</Td>
+                    <Td>
+                      <Button onClick={() => deleteUser(course.uwoId)}>
+                        Remove User
+                      </Button>
+                    </Td>
                   </Tr>
                 );
               })}
