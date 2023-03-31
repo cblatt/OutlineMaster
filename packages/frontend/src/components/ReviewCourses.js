@@ -1,16 +1,19 @@
 import { Button, FormControl, Stack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 import ChairNav from "./ChairNav";
 
 export default function ReviewCourses() {
   const navigate = useNavigate();
   const [courseOutlines, setCourseOutlines] = useState([]);
+  const { user } = useAuth();
 
   useEffect(() => {
     async function fetchData() {
       const res = await fetch(
-        process.env.REACT_APP_API_URI + "/course-outline/SUBMITTED",
+        process.env.REACT_APP_API_URI +
+          `/course-outline/${user.departmentUuid}`,
         {
           method: "GET",
           headers: {
@@ -25,7 +28,7 @@ export default function ReviewCourses() {
       setCourseOutlines(data);
     }
     fetchData();
-  }, []);
+  }, [user.departmentUuid]);
 
   const [courseUuid, setCourseUuid] = useState("");
   const [versionNum, setVersionNum] = useState("");

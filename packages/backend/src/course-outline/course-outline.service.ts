@@ -154,10 +154,19 @@ export class CourseOutlineService {
     });
   }
 
-  findAllOutlinesByCourse(id: string) {
-    return this.prisma.courseOutline.findMany({
-      where: { courseUuid: id },
+  //Return outlines depending on status
+  async findCourseOutlinesForReview(departmentId: string) {
+    const courseOutlines = await this.prisma.courseOutline.findMany({
+      where: {
+        isApproved: 'SUBMITTED',
+        departmentUuid: departmentId,
+      },
+      include: {
+        course: true,
+        department: true,
+      },
     });
+    return courseOutlines;
   }
 
   remove(courseUuid: string) {

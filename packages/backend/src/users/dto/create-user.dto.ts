@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Role } from '@prisma/client';
 
 export class CreateUserDto {
@@ -19,4 +19,7 @@ export class CreateUserDto {
 
   @ApiProperty()
   role: Role;
+
+  @ApiPropertyOptional()
+  departmentUuid: string;
 }

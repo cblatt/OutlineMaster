@@ -48,6 +48,7 @@ export class UsersService {
       firstName: user.firstName,
       lastName: user.lastName,
       role: user.role,
+      departmentUuid: user.departmentUuid,
     };
   }
 

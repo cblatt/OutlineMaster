@@ -13,6 +13,8 @@ model User {
   password  String
   firstName String
   lastName  String
+  departmentUuid String?
+  department Department? @relation(fields: [departmentUuid], references: [departmentUuid])
   role      Role
   InstructorCourse InstructorCourse[]
 }
@@ -21,6 +23,7 @@ model Department {
   departmentUuid  String    @id @default(uuid())
   departmentName  String    @unique
   departmentCode String @unique
+  users           User[]
   courses Course[]
   courseOutlines  CourseOutline[]
 }
